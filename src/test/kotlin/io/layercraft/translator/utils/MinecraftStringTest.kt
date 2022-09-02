@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
 
-const val MINECRAFT_MAX_STRING_LENGTH = 32767
-
 internal class MinecraftStringTest {
 
     @Test
