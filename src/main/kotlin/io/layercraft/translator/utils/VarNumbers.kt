@@ -1,8 +1,5 @@
 package io.layercraft.translator.utils
 
-import kotlin.experimental.and
-import kotlin.experimental.or
-
 const val SEGMENT_BITS = 0x7F
 const val CONTINUE_BIT = 0x80
 
@@ -35,40 +32,6 @@ object MinecraftVarInt {
             buffer[size++] = (value and SEGMENT_BITS or CONTINUE_BIT).toByte()
             value = value ushr 7
         }
-    }
-
-    inline fun readVarInt(
-        readByte: () -> Byte,
-    ): Int {
-        var numRead = 0
-        var result = 0
-        var read: Byte
-        do {
-            read = readByte()
-            val value = (read.toInt() and SEGMENT_BITS)
-            result = result or (value shl 7 * numRead)
-            numRead++
-            if (numRead > 5) {
-                throw RuntimeException("VarInt is too big")
-            }
-        } while (read and 128.toByte() != 0.toByte())
-        return result
-    }
-
-    inline fun writeVarInt(
-        value: Int,
-        writeByte: (Byte) -> Unit,
-    ) {
-        var value = value
-        do {
-            var temp = (value and SEGMENT_BITS).toByte()
-            // Note: >>> means that the sign bit is shifted with the rest of the number rather than being left alone
-            value = value ushr 7
-            if (value != 0) {
-                temp = temp or 128.toByte()
-            }
-            writeByte(temp)
-        } while (value != 0)
     }
 
     fun varIntBytesCount(
@@ -113,40 +76,6 @@ object MinecraftVarLong {
             buffer[size++] = (value and SEGMENT_BITS.toLong() or CONTINUE_BIT.toLong()).toByte()
             value = value ushr 7
         }
-    }
-
-    inline fun readVarLong(
-        readByte: () -> Byte,
-    ): Long {
-        var numRead = 0
-        var result: Long = 0
-        var read: Byte
-        do {
-            read = readByte()
-            val value = (read and 127).toLong()
-            result = result or (value shl 7 * numRead)
-            numRead++
-            if (numRead > 10) {
-                throw RuntimeException("VarLong is too big")
-            }
-        } while (read and 128.toByte() != 0.toByte())
-        return result
-    }
-
-    inline fun writeVarLong(
-        value: Long,
-        writeByte: (Byte) -> Unit,
-    ) {
-        var value = value
-        do {
-            var temp = (value and 127).toByte()
-            // Note: >>> means that the sign bit is shifted with the rest of the number rather than being left alone
-            value = value ushr 7
-            if (value != 0L) {
-                temp = temp or 128.toByte()
-            }
-            writeByte(temp)
-        } while (value != 0L)
     }
 
     fun varLongBytesCount(
