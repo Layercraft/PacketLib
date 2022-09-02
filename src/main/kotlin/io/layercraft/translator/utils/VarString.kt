@@ -13,7 +13,7 @@ object MinecraftString {
         bytes: ByteArray
     ): String {
         val length: Int = fromVarInt(bytes)
-        val string = bytes.sliceArray(1 until length).toString(Charsets.UTF_8)
+        val string = bytes.sliceArray(1 until length + 1).toString(Charsets.UTF_8)
 
         if (length > maxLength * 4) {
             //throw MinecraftProtocolDecodingException("The received encoded string buffer length is longer than maximum allowed (" + length + " > " + maxLength * 4 + ")")
