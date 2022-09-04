@@ -13,7 +13,8 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.4.0")
+    implementation("io.ktor:ktor-io-jvm:2.1.0")
 
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit5"))
