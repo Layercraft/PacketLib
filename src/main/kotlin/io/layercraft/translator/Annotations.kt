@@ -38,6 +38,8 @@ enum class MinecraftArraySizeType {
     VARINT
 }
 
+@SerialInfo
+@Target(AnnotationTarget.PROPERTY)
 annotation class MinecraftArray(
     val sizeType: MinecraftArraySizeType = MinecraftArraySizeType.VARINT
 )
