@@ -7,8 +7,9 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 internal fun extractParameters(descriptor: SerialDescriptor, index: Int): ProtocolDesc {
     val format = descriptor.findElementAnnotation<MinecraftNumber>(index)?.type ?: MinecraftNumberType.DEFAULT
     val stringMaxLength = descriptor.findElementAnnotation<MinecraftString>(index)?.maxLength ?: MINECRAFT_MAX_STRING_LENGTH
+    val arraySizeType = descriptor.findElementAnnotation<MinecraftArray>(index)?.sizeType ?: MinecraftArraySizeType.READ_AVAILABLE
 
-    return ProtocolDesc(format, stringMaxLength)
+    return ProtocolDesc(format, stringMaxLength, arraySizeType)
 }
 
 internal fun extractEnumParameters(descriptor: SerialDescriptor): ProtocolEnumDesc {

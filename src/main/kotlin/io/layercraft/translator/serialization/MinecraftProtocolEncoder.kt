@@ -1,12 +1,16 @@
 package io.layercraft.translator.serialization
 
 import io.ktor.utils.io.core.*
+import io.layercraft.translator.MinecraftArray
+import io.layercraft.translator.MinecraftArraySizeType
 import io.layercraft.translator.MinecraftEnumType
 import io.layercraft.translator.MinecraftNumberType
 import io.layercraft.translator.utils.minecraft
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.StructureKind
+import kotlinx.serialization.descriptors.elementDescriptors
+import kotlinx.serialization.descriptors.elementNames
 import kotlinx.serialization.encoding.CompositeEncoder
 import kotlinx.serialization.encoding.Encoder
 
@@ -63,11 +67,21 @@ open class MinecraftProtocolEncoder(output: Output) : AbstractMinecraftProtocolE
         }
     }
 
+
+    override fun beginCollection(descriptor: SerialDescriptor, collectionSize: Int): CompositeEncoder {
+        when (currentTagOrNull?.arrayType) {
+            MinecraftArraySizeType.VARINT -> encodeVarInt(collectionSize)
+            MinecraftArraySizeType.READ_AVAILABLE -> {}
+            else -> {}
+        }
+        return this
+    }
+
     //TODO
     override fun beginStructure(descriptor: SerialDescriptor): CompositeEncoder =
         when (descriptor.kind) {
-            StructureKind.CLASS -> MinecraftProtocolEncoder(output)
-            StructureKind.LIST -> TODO() //super.beginStructure(descriptor)
+            StructureKind.CLASS -> this
+            StructureKind.LIST -> this
             StructureKind.MAP -> TODO()
             else -> super.beginStructure(descriptor)
         }

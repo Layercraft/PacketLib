@@ -12,6 +12,8 @@ value class MinecraftByteInput(private val buffer: Input) {
     fun readVarInt(): Int = MinecraftVarIntUtils.readVarInt(buffer::readByte)
 
     fun readVarLong(): Long = MinecraftVarLongUtils.readVarLong(buffer::readByte)
+
+    fun readByteArrayWithPrefixLengthAsVarInt(): ByteArray = ByteArrayUtils.readByteArray(buffer::readByte, buffer::readBytes)
 }
 
 @JvmInline
@@ -21,4 +23,6 @@ value class MinecraftByteOutput(private val buffer: Output) {
     fun writeVarInt(value: Int) = MinecraftVarIntUtils.writeVarInt(value, buffer::writeByte)
 
     fun writeVarLong(value: Long) = MinecraftVarLongUtils.writeVarLong(value, buffer::writeByte)
+
+    fun writeByteArrayWithPrefixLengthAsVarInt(value: ByteArray) = ByteArrayUtils.writeByteArray(value, buffer::writeByte, buffer::writeFully)
 }

@@ -1,6 +1,8 @@
 package io.layercraft.translator.serialization
 
 import io.ktor.utils.io.core.*
+import io.layercraft.translator.MinecraftArray
+import io.layercraft.translator.MinecraftArraySizeType
 import io.layercraft.translator.MinecraftEnumType
 import io.layercraft.translator.MinecraftNumberType
 import io.layercraft.translator.exceptions.MinecraftProtocolDecodingException
@@ -11,11 +13,20 @@ import kotlinx.serialization.descriptors.StructureKind
 import kotlinx.serialization.encoding.CompositeDecoder
 import kotlinx.serialization.encoding.CompositeDecoder.Companion.DECODE_DONE
 import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.internal.NamedValueDecoder
 
 open class MinecraftProtocolDecoder(input: Input) : AbstractMinecraftProtocolDecoder(input) {
     private var currentIndex = 0
+    private var elementsCount: Int = -100
 
-    override fun decodeElementIndex(descriptor: SerialDescriptor): Int = if (descriptor.elementsCount == currentIndex) DECODE_DONE else currentIndex++
+    constructor(input: Input, elementCount: Int) : this(input) {
+        this.elementsCount = elementCount
+    }
+
+    override fun decodeElementIndex(descriptor: SerialDescriptor): Int {
+        if (elementsCount == -100) elementsCount = descriptor.elementsCount
+        return if (elementsCount == currentIndex) DECODE_DONE else currentIndex++
+    }
 
     override fun decodeTaggedBoolean(tag: ProtocolDesc): Boolean =
         when (val i = input.readByte()) {
@@ -75,12 +86,24 @@ open class MinecraftProtocolDecoder(input: Input) : AbstractMinecraftProtocolDec
 
     override fun SerialDescriptor.getTag(index: Int) = extractParameters(this, index)
 
+    override fun decodeCollectionSize(descriptor: SerialDescriptor): Int =
+        when (currentTagOrNull?.arrayType) {
+            MinecraftArraySizeType.VARINT -> decodeVarInt()
+            MinecraftArraySizeType.READ_AVAILABLE -> input.remaining.toInt()
+            else -> -1
+        }
+
     //TODO
     override fun beginStructure(descriptor: SerialDescriptor): CompositeDecoder =
         when (descriptor.kind) {
-            StructureKind.CLASS -> MinecraftProtocolDecoder(input)
-            StructureKind.LIST -> TODO() //super.beginStructure(descriptor)
+            StructureKind.CLASS -> this
+            StructureKind.LIST -> {
+                val size = decodeCollectionSize(descriptor)
+                val byteArray = ByteArray(size)
+                input.readFully(byteArray)
+                MinecraftProtocolDecoder(ByteReadPacket(byteArray), size)
+            }
             StructureKind.MAP -> TODO()
-            else -> TODO()
+            else -> super.beginStructure(descriptor)
         }
 }
