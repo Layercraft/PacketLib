@@ -10,7 +10,6 @@ import io.layercraft.translator.packets.server.status.PingResponse
  *
  * @property payload Maybe any number. Notchian clients use a system-dependent time value which is counted in milliseconds.
 
- * @constructor Create Ping request
  * @see <a href="https://wiki.vg/Protocol#Ping_Request">https://wiki.vg/Protocol#Ping_Request</a>
  */
 @Serializable
