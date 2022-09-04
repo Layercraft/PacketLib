@@ -1,7 +1,6 @@
 package io.layercraft.translator.packets.server.status
 
-import io.layercraft.translator.MinecraftNumber
-import io.layercraft.translator.MinecraftNumberType
+import io.layercraft.translator.serialization.*
 import io.layercraft.translator.packets.ServerPacket
 import kotlinx.serialization.Serializable
 import io.layercraft.translator.packets.client.status.PingRequest

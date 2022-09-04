@@ -1,6 +1,6 @@
 package io.layercraft.translator.packets.server.login
 
-import io.layercraft.translator.*
+import io.layercraft.translator.serialization.*
 import kotlinx.serialization.Serializable
 
 /**

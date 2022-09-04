@@ -1,4 +1,4 @@
-package io.layercraft.translator
+package io.layercraft.translator.serialization
 
 import kotlinx.serialization.SerialInfo
 

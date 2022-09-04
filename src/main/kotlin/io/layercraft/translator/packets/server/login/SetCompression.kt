@@ -1,7 +1,6 @@
 package io.layercraft.translator.packets.server.login
 
-import io.layercraft.translator.MinecraftArray
-import io.layercraft.translator.MinecraftArraySizeType
+import io.layercraft.translator.serialization.*
 import kotlinx.serialization.Serializable
 
 /**

@@ -1,6 +1,6 @@
 package io.layercraft.translator.packets.server.status
 
-import io.layercraft.translator.MinecraftString
+import io.layercraft.translator.serialization.MinecraftString
 import io.layercraft.translator.packets.ServerPacket
 import kotlinx.serialization.Serializable
 import io.layercraft.translator.packets.client.status.StatusRequest

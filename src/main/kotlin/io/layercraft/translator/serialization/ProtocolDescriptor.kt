@@ -1,10 +1,5 @@
 package io.layercraft.translator.serialization
 
-
-import io.layercraft.translator.MinecraftArraySizeType
-import io.layercraft.translator.MinecraftEnumType
-import io.layercraft.translator.MinecraftNumberType
-
 data class ProtocolDescriptor(
     val type: MinecraftNumberType,
     val stringMaxLength: Int,

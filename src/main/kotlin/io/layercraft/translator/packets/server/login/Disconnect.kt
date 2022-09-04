@@ -1,6 +1,6 @@
 package io.layercraft.translator.packets.server.login
 
-import io.layercraft.translator.MinecraftString
+import io.layercraft.translator.serialization.MinecraftString
 import io.layercraft.translator.utils.MINECRAFT_MAX_CHAT_LENGTH
 import kotlinx.serialization.Serializable
 

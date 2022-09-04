@@ -1,9 +1,6 @@
 package io.layercraft.translator.serialization
 
 import io.ktor.utils.io.core.*
-import io.layercraft.translator.MinecraftArraySizeType
-import io.layercraft.translator.MinecraftEnumType
-import io.layercraft.translator.MinecraftNumberType
 import io.layercraft.translator.utils.minecraft
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.StructureKind

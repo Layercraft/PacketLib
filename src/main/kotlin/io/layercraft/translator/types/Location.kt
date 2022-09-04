@@ -1,8 +1,6 @@
 package io.layercraft.translator.types
 
-
-import io.layercraft.translator.MinecraftNumber
-import io.layercraft.translator.MinecraftNumberType
+import io.layercraft.translator.serialization.*
 import kotlinx.serialization.Serializable
 
 @Serializable
