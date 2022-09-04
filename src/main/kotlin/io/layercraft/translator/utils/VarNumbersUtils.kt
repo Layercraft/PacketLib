@@ -3,13 +3,13 @@ package io.layercraft.translator.utils
 const val SEGMENT_BITS = 0x7F
 const val CONTINUE_BIT = 0x80
 
-object MinecraftVarInt {
-    fun fromVarInt(bytes: ByteArray, offset: Int = 0): Int {
+object MinecraftVarIntUtils {
+    inline fun readVarInt(readByte: () -> Byte): Int {
         var numRead = 0
         var result = 0
         var read: Byte
         do {
-            read = bytes[offset + numRead]
+            read = readByte()
             val value = (read.toInt() and SEGMENT_BITS)
             result = result or (value shl (7 * numRead))
             numRead++
@@ -20,23 +20,19 @@ object MinecraftVarInt {
         return result
     }
 
-    fun toVarInt(value: Int): ByteArray {
+    inline fun writeVarInt(value: Int, writeByte: (Byte) -> Unit) {
         var value = value
-        val buffer = ByteArray(5)
-        var size = 0
         while (true) {
-            if (value and -CONTINUE_BIT == 0) {
-                buffer[size++] = value.toByte()
-                return buffer.copyOf(size)
+            if (value and -0x80 == 0) {
+                writeByte(value.toByte())
+                return
             }
-            buffer[size++] = (value and SEGMENT_BITS or CONTINUE_BIT).toByte()
+            writeByte((value and 0x7F or 0x80).toByte())
             value = value ushr 7
         }
     }
 
-    fun varIntBytesCount(
-        value: Int,
-    ): Int {
+    fun varIntBytesCount(value: Int): Int {
         return when {
             value and -0x80 == 0 -> 1
             value and -0x4000 == 0 -> 2
@@ -47,13 +43,13 @@ object MinecraftVarInt {
     }
 }
 
-object MinecraftVarLong {
-    fun fromVarLong(bytes: ByteArray, offset: Int = 0): Long {
+object MinecraftVarLongUtils {
+    inline fun readVarLong(readByte: () -> Byte): Long {
         var numRead = 0
         var result: Long = 0
         var read: Byte
         do {
-            read = bytes[offset + numRead]
+            read = readByte()
             val value = (read.toLong() and SEGMENT_BITS.toLong())
             result = result or (value shl (7 * numRead))
             numRead++
@@ -64,24 +60,20 @@ object MinecraftVarLong {
         return result
     }
 
-    fun toVarLong(value: Long): ByteArray {
+    inline fun writeVarLong(value: Long, writeByte: (Byte) -> Unit) {
         var value = value
-        val buffer = ByteArray(10)
-        var size = 0
         while (true) {
-            if (value and -CONTINUE_BIT.toLong() == 0L) {
-                buffer[size++] = value.toByte()
-                return buffer.copyOf(size)
+            if (value and -0x80L == 0L) {
+                writeByte(value.toByte())
+                return
             }
-            buffer[size++] = (value and SEGMENT_BITS.toLong() or CONTINUE_BIT.toLong()).toByte()
+            writeByte((value and 0x7FL or 0x80L).toByte())
             value = value ushr 7
         }
     }
 
-    fun varLongBytesCount(
-        value: Long,
-    ): Int {
-        return when(value){
+    fun varLongBytesCount(value: Long, ): Int {
+        return when (value) {
             in 0..127 -> 1
             in 128..16383 -> 2
             in 16384..2097151 -> 3
