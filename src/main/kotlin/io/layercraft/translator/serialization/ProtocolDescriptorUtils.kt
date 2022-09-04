@@ -1,6 +1,5 @@
 package io.layercraft.translator.serialization
 
-import io.layercraft.translator.*
 import io.layercraft.translator.utils.MINECRAFT_MAX_STRING_LENGTH
 import kotlinx.serialization.descriptors.SerialDescriptor
 

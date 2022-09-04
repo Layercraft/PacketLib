@@ -3,8 +3,8 @@ package io.layercraft.translator.packets.client
 import io.layercraft.translator.ProtocolVersion
 import io.layercraft.translator.TranslatorAPI
 import io.layercraft.translator.packets.server.login.EncryptionRequest
-import io.layercraft.translator.utils.MinecraftVarIntUtils
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertArrayEquals
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
 internal class HandshakeTest{

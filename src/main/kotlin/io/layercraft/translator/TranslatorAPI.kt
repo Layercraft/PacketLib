@@ -5,7 +5,6 @@ import io.layercraft.translator.serialization.MinecraftProtocolDecoder
 import io.layercraft.translator.serialization.MinecraftProtocolEncoder
 import kotlinx.serialization.BinaryFormat
 import kotlinx.serialization.DeserializationStrategy
-import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.modules.EmptySerializersModule
 import kotlinx.serialization.modules.SerializersModule

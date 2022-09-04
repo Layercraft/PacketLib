@@ -1,7 +1,12 @@
 package io.layercraft.translator.types
 
-import kotlinx.serialization.*
-import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.descriptors.buildClassSerialDescriptor
+import kotlinx.serialization.descriptors.element
 import kotlinx.serialization.encoding.*
 
 internal fun Double.toPositionInt(): Int = (this * 32.0).toInt()
@@ -17,10 +22,15 @@ fun Position(
     z.toPositionInt()
 )
 
-/**
- * @see https://wiki.vg/Protocol#Position
- */
 
+/**
+ * Position
+ *
+ * @property x
+ * @property y
+ * @property z
+ * @see <a href="https://wiki.vg/Protocol#Position">https://wiki.vg/Protocol#Position</a>
+ */
 @Serializable
 data class Position(
     val x: Int,

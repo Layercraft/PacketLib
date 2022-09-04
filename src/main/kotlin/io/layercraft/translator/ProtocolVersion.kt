@@ -41,6 +41,8 @@ enum class ProtocolVersion (val protocolNumber: Int) {
     V_1_19_1(760),
     V_1_19_2(760);
 
+    val v: Int get() = protocolNumber
+
     companion object {
         val LATEST = V_1_19_2
 

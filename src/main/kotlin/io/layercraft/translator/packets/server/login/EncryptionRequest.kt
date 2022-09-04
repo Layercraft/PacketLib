@@ -4,7 +4,7 @@ import io.layercraft.translator.serialization.*
 import kotlinx.serialization.Serializable
 
 /**
- * Encryption request | client-bound | Packet ID 0x01 | State: Login | Answer with [EncryptionResponse].
+ * Encryption request | client-bound | Packet ID 0x01 | State: Login | Answer with [EncryptionResponse]. //TODO
  *
  * @property serverId Appears to be empty.
  * @property publicKey The server's public key, in bytes. Length before as a VarInt.
