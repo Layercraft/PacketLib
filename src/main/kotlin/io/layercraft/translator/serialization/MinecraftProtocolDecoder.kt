@@ -15,11 +15,7 @@ import kotlinx.serialization.encoding.Decoder
 open class MinecraftProtocolDecoder(input: Input) : AbstractMinecraftProtocolDecoder(input) {
     private var currentIndex = 0
 
-    override fun decodeElementIndex(descriptor: SerialDescriptor): Int {
-        return if (descriptor.elementsCount == currentIndex)
-            DECODE_DONE
-        else currentIndex++
-    }
+    override fun decodeElementIndex(descriptor: SerialDescriptor): Int = if (descriptor.elementsCount == currentIndex) DECODE_DONE else currentIndex++
 
     override fun decodeTaggedBoolean(tag: ProtocolDesc): Boolean =
         when (val i = input.readByte()) {
@@ -69,8 +65,7 @@ open class MinecraftProtocolDecoder(input: Input) : AbstractMinecraftProtocolDec
             MinecraftEnumType.BYTE -> input.readByte().toInt()
             MinecraftEnumType.UNSIGNED_BYTE -> decodeUByte().toInt()
             MinecraftEnumType.INT -> input.readInt()
-            MinecraftEnumType.STRING ->
-                enumDescriptor.getElementIndex(input.minecraft.readString(enumTag.stringMaxLength))
+            MinecraftEnumType.STRING -> enumDescriptor.getElementIndex(input.minecraft.readString(enumTag.stringMaxLength))
         }
 
         return findEnumIndexByTag(enumDescriptor, ordinal)
@@ -78,27 +73,14 @@ open class MinecraftProtocolDecoder(input: Input) : AbstractMinecraftProtocolDec
 
     override fun <T> decodeSerializableValue(deserializer: DeserializationStrategy<T>): T = deserializer.deserialize(this)
 
-    override fun decodeCollectionSize(descriptor: SerialDescriptor): Int {
-        currentTag.type
-        return super.decodeCollectionSize(descriptor)
-    }
-
     override fun SerialDescriptor.getTag(index: Int) = extractParameters(this, index)
 
+    //TODO
     override fun beginStructure(descriptor: SerialDescriptor): CompositeDecoder =
         when (descriptor.kind) {
-            is StructureKind.CLASS -> {
-                // TODO
-                MinecraftProtocolDecoder(input)
-            }
-
-            is StructureKind.LIST -> {
-                // TODO
-                super.beginStructure(descriptor)
-            }
-
-            else -> {
-                super.beginStructure(descriptor)
-            }
+            StructureKind.CLASS -> MinecraftProtocolDecoder(input)
+            StructureKind.LIST -> TODO() //super.beginStructure(descriptor)
+            StructureKind.MAP -> TODO()
+            else -> TODO()
         }
 }

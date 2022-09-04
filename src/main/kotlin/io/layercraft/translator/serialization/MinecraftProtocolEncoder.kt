@@ -10,9 +10,7 @@ import kotlinx.serialization.descriptors.StructureKind
 import kotlinx.serialization.encoding.CompositeEncoder
 import kotlinx.serialization.encoding.Encoder
 
-open class MinecraftProtocolEncoder(
-    output: Output
-) : AbstractMinecraftProtocolEncoder(output) {
+open class MinecraftProtocolEncoder(output: Output) : AbstractMinecraftProtocolEncoder(output) {
 
     override fun shouldEncodeElementDefault(descriptor: SerialDescriptor, index: Int): Boolean = true
 
@@ -55,17 +53,13 @@ open class MinecraftProtocolEncoder(
     override fun encodeTaggedString(tag: ProtocolDesc, value: String) = output.minecraft.writeString(value, tag.stringMaxLength)
 
     override fun encodeTaggedEnum(tag: ProtocolDesc, enumDescriptor: SerialDescriptor, ordinal: Int) {
-        val enumTag = extractEnumElementParameters(
-            enumDescriptor,
-            ordinal
-        )
+        val enumTag = extractEnumElementParameters(enumDescriptor, ordinal)
         when (extractEnumParameters(enumDescriptor).type) {
             MinecraftEnumType.VARINT -> encodeVarInt(enumTag.ordinal)
             MinecraftEnumType.BYTE -> output.writeByte(enumTag.ordinal.toByte())
             MinecraftEnumType.UNSIGNED_BYTE -> encodeUByte(enumTag.ordinal.toUByte())
             MinecraftEnumType.INT -> output.writeInt(enumTag.ordinal)
-            MinecraftEnumType.STRING ->
-                output.minecraft.writeString(enumDescriptor.getElementName(ordinal), tag.stringMaxLength)
+            MinecraftEnumType.STRING -> output.minecraft.writeString(enumDescriptor.getElementName(ordinal), tag.stringMaxLength)
         }
     }
 
