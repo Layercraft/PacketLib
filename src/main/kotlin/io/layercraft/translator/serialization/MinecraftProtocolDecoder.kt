@@ -1,7 +1,6 @@
 package io.layercraft.translator.serialization
 
 import io.ktor.utils.io.core.*
-import io.layercraft.translator.MinecraftArray
 import io.layercraft.translator.MinecraftArraySizeType
 import io.layercraft.translator.MinecraftEnumType
 import io.layercraft.translator.MinecraftNumberType
@@ -12,8 +11,6 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.StructureKind
 import kotlinx.serialization.encoding.CompositeDecoder
 import kotlinx.serialization.encoding.CompositeDecoder.Companion.DECODE_DONE
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.internal.NamedValueDecoder
 
 open class MinecraftProtocolDecoder(input: Input) : AbstractMinecraftProtocolDecoder(input) {
     private var currentIndex = 0
@@ -28,48 +25,48 @@ open class MinecraftProtocolDecoder(input: Input) : AbstractMinecraftProtocolDec
         return if (elementsCount == currentIndex) DECODE_DONE else currentIndex++
     }
 
-    override fun decodeTaggedBoolean(tag: ProtocolDesc): Boolean =
+    override fun decodeTaggedBoolean(tag: ProtocolDescriptor): Boolean =
         when (val i = input.readByte()) {
             0x00.toByte() -> false
             0x01.toByte() -> true
             else -> throw MinecraftProtocolDecodingException("Expected boolean value (0 or 1), found $i")
         }
 
-    override fun decodeTaggedByte(tag: ProtocolDesc): Byte =
+    override fun decodeTaggedByte(tag: ProtocolDescriptor): Byte =
         when (tag.type) {
             MinecraftNumberType.DEFAULT -> input.readByte()
             MinecraftNumberType.UNSIGNED -> decodeUByte().toByte()
             MinecraftNumberType.VAR -> error("Byte can only be encoded as default or unsigned")
         }
 
-    override fun decodeTaggedShort(tag: ProtocolDesc): Short =
+    override fun decodeTaggedShort(tag: ProtocolDescriptor): Short =
         when (tag.type) {
             MinecraftNumberType.DEFAULT -> input.readShort()
             MinecraftNumberType.UNSIGNED -> decodeUShort().toShort()
             MinecraftNumberType.VAR -> error("Short can only be encoded as default or unsigned")
         }
 
-    override fun decodeTaggedInt(tag: ProtocolDesc): Int =
+    override fun decodeTaggedInt(tag: ProtocolDescriptor): Int =
         when (tag.type) {
             MinecraftNumberType.DEFAULT -> input.readInt()
             MinecraftNumberType.VAR -> decodeVarInt()
             MinecraftNumberType.UNSIGNED -> decodeUInt().toInt()
         }
 
-    override fun decodeTaggedLong(tag: ProtocolDesc): Long =
+    override fun decodeTaggedLong(tag: ProtocolDescriptor): Long =
         when (tag.type) {
             MinecraftNumberType.DEFAULT -> input.readLong()
             MinecraftNumberType.VAR -> decodeVarLong()
             MinecraftNumberType.UNSIGNED -> decodeULong().toLong()
         }
 
-    override fun decodeTaggedFloat(tag: ProtocolDesc): Float = input.readFloat()
+    override fun decodeTaggedFloat(tag: ProtocolDescriptor): Float = input.readFloat()
 
-    override fun decodeTaggedDouble(tag: ProtocolDesc): Double = input.readDouble()
+    override fun decodeTaggedDouble(tag: ProtocolDescriptor): Double = input.readDouble()
 
-    override fun decodeTaggedString(tag: ProtocolDesc): String = input.minecraft.readString(tag.stringMaxLength)
+    override fun decodeTaggedString(tag: ProtocolDescriptor): String = input.minecraft.readString(tag.stringMaxLength)
 
-    override fun decodeTaggedEnum(tag: ProtocolDesc, enumDescriptor: SerialDescriptor): Int {
+    override fun decodeTaggedEnum(tag: ProtocolDescriptor, enumDescriptor: SerialDescriptor): Int {
         val enumTag = extractEnumParameters(enumDescriptor)
         val ordinal = when (enumTag.type) {
             MinecraftEnumType.VARINT -> decodeVarInt()
@@ -99,9 +96,7 @@ open class MinecraftProtocolDecoder(input: Input) : AbstractMinecraftProtocolDec
             StructureKind.CLASS -> this
             StructureKind.LIST -> {
                 val size = decodeCollectionSize(descriptor)
-                val byteArray = ByteArray(size)
-                input.readFully(byteArray)
-                MinecraftProtocolDecoder(ByteReadPacket(byteArray), size)
+                MinecraftProtocolDecoder(input, size)
             }
             StructureKind.MAP -> TODO()
             else -> super.beginStructure(descriptor)

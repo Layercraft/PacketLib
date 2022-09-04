@@ -5,17 +5,17 @@ import io.layercraft.translator.MinecraftArraySizeType
 import io.layercraft.translator.MinecraftEnumType
 import io.layercraft.translator.MinecraftNumberType
 
-data class ProtocolDesc(
+data class ProtocolDescriptor(
     val type: MinecraftNumberType,
     val stringMaxLength: Int,
     val arrayType: MinecraftArraySizeType,
 )
 
-data class ProtocolEnumDesc(
+data class ProtocolEnumDescriptor(
     val type: MinecraftEnumType,
     val stringMaxLength: Int
 )
 
-data class ProtocolEnumElementDesc(
+data class ProtocolEnumElementDescriptor(
     val ordinal: Int
 )
