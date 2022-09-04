@@ -72,7 +72,7 @@ object MinecraftVarLongUtils {
         }
     }
 
-    fun varLongBytesCount(value: Long, ): Int {
+    fun varLongBytesCount(value: Long): Int {
         return when (value) {
             in 0..127 -> 1
             in 128..16383 -> 2
