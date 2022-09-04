@@ -9,9 +9,6 @@ internal class MinecraftVarIntUtilsTest {
 
     @Test
     fun testVarInt() {
-
-
-
         testNumber(0)
         testNumber(1)
         testNumber(127)
