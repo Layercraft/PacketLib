@@ -7,7 +7,7 @@ import java.util.UUID
 
 @OptIn(ExperimentalSerializationApi::class)
 @Serializer(forClass = UUID::class)
-object UuidSerializer : KSerializer<UUID> {
+object UUIDSerializer : KSerializer<UUID> {
 
     override val descriptor: SerialDescriptor =
         buildClassSerialDescriptor("java.util.UUID:Binary") {
@@ -47,7 +47,7 @@ object UuidSerializer : KSerializer<UUID> {
 }
 
 @Serializer(forClass = UUID::class)
-object UuidStringSerializer : KSerializer<UUID> {
+object UUIDStringSerializer : KSerializer<UUID> {
     override val descriptor: SerialDescriptor =
         buildClassSerialDescriptor("java.util.UUID:String") {
             element<String>("uuid")
@@ -64,10 +64,10 @@ object UuidStringSerializer : KSerializer<UUID> {
             var uuid: String? = null
 
             if (decodeSequentially()) { // sequential decoding protocol
-                uuid = decodeStringElement(UuidSerializer.descriptor, 0)
+                uuid = decodeStringElement(UUIDSerializer.descriptor, 0)
             } else while (true) {
-                when (val index = decodeElementIndex(UuidSerializer.descriptor)) {
-                    0 -> uuid = decodeStringElement(UuidSerializer.descriptor, 0)
+                when (val index = decodeElementIndex(UUIDSerializer.descriptor)) {
+                    0 -> uuid = decodeStringElement(UUIDSerializer.descriptor, 0)
                     CompositeDecoder.DECODE_DONE -> break
                     else -> error("Unexpected index: $index")
                 }
