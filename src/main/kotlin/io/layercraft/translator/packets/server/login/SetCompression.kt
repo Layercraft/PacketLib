@@ -1,6 +1,8 @@
 package io.layercraft.translator.packets.server.login
 
-import io.layercraft.translator.serialization.*
+import io.layercraft.translator.packets.ServerPacket
+import io.layercraft.translator.serialization.processing.MinecraftNumber
+import io.layercraft.translator.serialization.processing.MinecraftNumberType
 import kotlinx.serialization.Serializable
 
 /**
@@ -11,6 +13,6 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class SetCompression(
-    @MinecraftArray(MinecraftArraySizeType.VARINT)
+    @MinecraftNumber(MinecraftNumberType.VAR)
     val threshold: Int
-)
+): ServerPacket

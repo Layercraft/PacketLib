@@ -23,4 +23,4 @@ data class EncryptionRequest(
     val publicKey: ByteArray,
     @MinecraftArray(MinecraftArraySizeType.VARINT)
     val verifyToken: ByteArray
-)
+): ServerPacket

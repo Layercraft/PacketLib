@@ -25,7 +25,7 @@ data class LoginSuccess(
     val username: String,
     @MinecraftArray(MinecraftArraySizeType.VARINT)
     val properties: Array<LoginProperty>
-)
+): ServerPacket
 
 
 /**
