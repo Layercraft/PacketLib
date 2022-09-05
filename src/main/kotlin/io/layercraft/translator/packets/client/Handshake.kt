@@ -33,8 +33,7 @@ data class Handshake(
     @MinecraftString(255)
     val address: String,
 
-    @MinecraftNumber(MinecraftNumberType.UNSIGNED)
-    val port: Short,
+    val port: UShort,
 
     val nextState: HandshakeNextState
 ) : ClientPacket
