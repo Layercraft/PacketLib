@@ -1,9 +1,9 @@
-package io.layercraft.translator.serialization
+package io.layercraft.translator.serialization.processing
 
 import kotlinx.serialization.SerialInfo
 
 enum class MinecraftNumberType {
-    DEFAULT, UNSIGNED, VAR
+    DEFAULT, VAR
 }
 
 @SerialInfo

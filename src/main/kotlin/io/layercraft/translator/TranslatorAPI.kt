@@ -1,8 +1,8 @@
 package io.layercraft.translator
 
 import io.ktor.utils.io.core.*
-import io.layercraft.translator.serialization.MinecraftProtocolDecoder
-import io.layercraft.translator.serialization.MinecraftProtocolEncoder
+import io.layercraft.translator.serialization.processing.MinecraftProtocolDecoder
+import io.layercraft.translator.serialization.processing.MinecraftProtocolEncoder
 import kotlinx.serialization.BinaryFormat
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerializationStrategy
