@@ -1,9 +1,10 @@
 package io.layercraft.translator.packets.client.status
 
-import io.layercraft.translator.MinecraftNumber
-import io.layercraft.translator.MinecraftNumberType
-import kotlinx.serialization.Serializable
+import io.layercraft.translator.packets.ClientPacket
 import io.layercraft.translator.packets.server.status.PingResponse
+import io.layercraft.translator.serialization.processing.MinecraftNumber
+import io.layercraft.translator.serialization.processing.MinecraftNumberType
+import kotlinx.serialization.Serializable
 
 /**
  * Ping request | server-bound | Packet ID: 0x01 | State: Status | Answers with [PingResponse].
@@ -16,4 +17,4 @@ import io.layercraft.translator.packets.server.status.PingResponse
 data class PingRequest(
     @MinecraftNumber(MinecraftNumberType.DEFAULT)
     val payload: Long
-)
+): ClientPacket

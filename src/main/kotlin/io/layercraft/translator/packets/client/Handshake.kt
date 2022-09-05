@@ -1,11 +1,12 @@
 package io.layercraft.translator.packets.client
 
 
-import io.layercraft.translator.MinecraftNumber
-import io.layercraft.translator.MinecraftNumberType
-import io.layercraft.translator.MinecraftString
-import io.layercraft.translator.SerialOrdinal
+
 import io.layercraft.translator.packets.ClientPacket
+import io.layercraft.translator.serialization.processing.MinecraftNumber
+import io.layercraft.translator.serialization.processing.MinecraftNumberType
+import io.layercraft.translator.serialization.processing.MinecraftString
+import io.layercraft.translator.serialization.processing.SerialOrdinal
 import kotlinx.serialization.Serializable
 
 

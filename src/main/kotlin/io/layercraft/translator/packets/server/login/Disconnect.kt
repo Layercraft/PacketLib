@@ -1,6 +1,7 @@
 package io.layercraft.translator.packets.server.login
 
-import io.layercraft.translator.serialization.MinecraftString
+import io.layercraft.translator.packets.ServerPacket
+import io.layercraft.translator.serialization.processing.MinecraftString
 import io.layercraft.translator.utils.MINECRAFT_MAX_CHAT_LENGTH
 import kotlinx.serialization.Serializable
 
@@ -14,4 +15,4 @@ import kotlinx.serialization.Serializable
 data class Disconnect(
     @MinecraftString(MINECRAFT_MAX_CHAT_LENGTH)
     val reason: String
-)
+): ServerPacket
