@@ -72,11 +72,11 @@ data class Position(
             }
         }
 
-        private fun positionToLong(position: Position): Long = with(position) {
+        fun positionToLong(position: Position): Long = with(position) {
             x.toLong() and 0x3FFFFFF shl 38 or (z.toLong() and 0x3FFFFFF shl 12) or (y.toLong() and 0xFFF)
         }
 
-        private fun longToPosition(long: Long): Position = Position(
+        fun longToPosition(long: Long): Position = Position(
             (long shr 38).toInt(),
             (long and 0xFFF).toInt(),
             (long shl 26 shr 38).toInt()
