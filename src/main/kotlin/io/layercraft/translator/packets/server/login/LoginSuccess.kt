@@ -46,4 +46,26 @@ data class LoginProperty(
     val signed: Boolean,
     @MinecraftString(32767)
     val signature: String?,
-)
+){
+    @Serializer(forClass = LoginProperty::class)
+    companion object : MinecraftPacketSerializer<LoginProperty> {
+        override val descriptor: SerialDescriptor
+            get() = LoginProperty.serializer().descriptor
+
+        override fun deserialize(decoder: MinecraftProtocolDecoder): LoginProperty {
+            val name = decoder.decodeTaggedString(32767)
+            val value = decoder.decodeTaggedString(32767)
+            val signed = decoder.decodeTaggedBoolean(ProtocolDescriptor.DEFAULT)
+            val signature = if (signed) decoder.decodeString() else null
+
+            return LoginProperty(name, value, signed, signature)
+        }
+
+        override fun serialize(encoder: MinecraftProtocolEncoder, value: LoginProperty) {
+            encoder.encodeTaggedString(value.name, 32767)
+            encoder.encodeTaggedString(value.value, 32767)
+            encoder.encodeTaggedBoolean(ProtocolDescriptor.DEFAULT, value.signed)
+            if (value.signed) encoder.encodeTaggedString(value.signature!!, 32767)
+        }
+    }
+}
