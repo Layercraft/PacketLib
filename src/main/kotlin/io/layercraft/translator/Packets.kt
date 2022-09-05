@@ -21,19 +21,29 @@ enum class Packets(
         server = listOf()
     ),
     STATUS(
-        client = listOf(),
-        server = listOf()
+        client = listOf(
+
+        ),
+        server = listOf(
+
+        )
     ),
     LOGIN(
-        client = listOf(),
-        server = listOf()
+        client = listOf(
+
+        ),
+        server = listOf(
+
+        )
     ),
     PLAY(
-        client = listOf(),
-        server = listOf()
-    );
+        client = listOf(
 
-    companion object
+        ),
+        server = listOf(
+
+        )
+    );
 }
 
 data class PacketType<T : Packet>(
