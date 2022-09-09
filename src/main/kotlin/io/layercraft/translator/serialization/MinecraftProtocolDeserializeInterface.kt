@@ -8,33 +8,36 @@ interface MinecraftProtocolDeserializeInterface {
 
     //ALL Datatypes: https://wiki.vg/Protocol#Data_types
 
-    fun readBoolean(input: Input): Boolean
+    fun readBoolean(): Boolean
 
-    fun readByte(input: Input): Byte
-    fun readUByte(input: Input): UByte
+    fun readByte(): Byte
+    fun readUByte(): UByte
 
-    fun readShort(input: Input): Short
-    fun readUShort(input: Input): UShort
+    fun readShort(): Short
+    fun readUShort(): UShort
 
-    fun readInt(input: Input): Int
-    fun readVarInt(input: Input): Int
+    fun readInt(): Int
+    fun readVarInt(): Int
 
-    fun readLong(input: Input): Long
-    fun readVarLong(input: Input): Long
+    fun readLong(): Long
+    fun readVarLong(): Long
 
-    fun readFloat(input: Input): Float
-    fun readDouble(input: Input): Double
+    fun readFloat(): Float
+    fun readDouble(): Double
 
-    fun readString(input: Input, n: Int): String
-    fun readChat(input: Input): String
-    fun readIdentifier(input: Input): String
+    fun readString(n: Int): String
+    fun readChat(): String
+    fun readIdentifier(): String
 
-    fun readVarIntByteArray(input: Input): ByteArray
-    fun <T> readVarIntArray(input: Input, decoder: (input: Input) -> Unit): Array<T>
+    fun readVarIntByteArray(): ByteArray
+    fun <T> readVarIntArray(decoder: (input: Input) -> Unit): Array<T>
 
-    fun readPosition(input: Input): Position
-    fun readUUID(input: Input): UUID
-    //fun readAngle(input: Input): Float
+    fun readRemainingByteArray(): ByteArray
+    fun <T> readRemainingArray(decoder: (input: Input) -> Unit): Array<T>
 
-    //fun readEnum(input: Input, enum: Enum<*>, type: MinecraftEnumType): Enum<*>
+    fun readPosition(): Position
+    fun readUUID(): UUID
+    //fun readAngle(): Float
+
+    //fun readEnum(, enum: Enum<*>, type: MinecraftEnumType): Enum<*>
 }

@@ -14,37 +14,40 @@ import java.util.*
  */
 interface MinecraftProtocolSerializeInterface {
 
-    fun writeBoolean(input: Boolean, output: Output)
+    fun writeBoolean(input: Boolean)
 
-    fun writeByte(input: Byte, output: Output)
+    fun writeByte(input: Byte)
 
-    fun writeUByte(input: UByte, output: Output)
+    fun writeUByte(input: UByte)
 
-    fun writeShort(input: Short, output: Output)
+    fun writeShort(input: Short)
 
-    fun writeUShort(input: UShort, output: Output)
+    fun writeUShort(input: UShort)
 
-    fun writeInt(input: Int, output: Output)
+    fun writeInt(input: Int)
 
-    fun writeVarInt(input: Int, output: Output)
+    fun writeVarInt(input: Int)
 
-    fun writeLong(input: Long, output: Output)
+    fun writeLong(input: Long)
 
-    fun writeVarLong(input: Long, output: Output)
+    fun writeVarLong(input: Long)
 
-    fun writeFloat(input: Float, output: Output)
-    fun writeDouble(input: Double, output: Output)
+    fun writeFloat(input: Float)
+    fun writeDouble(input: Double)
 
-    fun writeString(input: String, n: Int = MINECRAFT_MAX_STRING_LENGTH, output: Output)
-    fun writeChat(input: String, output: Output)
-    fun writeIdentifier(input: String, output: Output)
+    fun writeString(input: String, n: Int = MINECRAFT_MAX_STRING_LENGTH)
+    fun writeChat(input: String)
+    fun writeIdentifier(input: String)
 
-    fun writeVarIntByteArray(input: ByteArray, output: Output)
-    fun <T> writeVarIntArray(input: Array<T>, output: Output, encoder: (value: T, output: Output) -> Unit)
+    fun writeVarIntByteArray(input: ByteArray)
+    fun <T> writeVarIntArray(input: Array<T>, encoder: (value: T, output: Output) -> Unit)
 
-    fun writePosition(input: Position, output: Output)
-    fun writeUUID(input: UUID, output: Output)
-    //fun writeAngle(input: Input, output: Output): Float
+    fun writeRemainingByteArray(input: ByteArray)
+    fun <T> writeRemainingArray(input: Array<T>, encoder: (value: T, output: Output) -> Unit)
 
-    //fun writeEnum(input: Input, enum: Enum<*>, type: MinecraftEnumType, output: Output): Enum<*>
+    fun writePosition(input: Position)
+    fun writeUUID(input: UUID)
+    //fun writeAngle(input: Input): Float
+
+    //fun writeEnum(input: Input, enum: Enum<*>, type: MinecraftEnumType): Enum<*>
 }
