@@ -5,7 +5,6 @@ import io.layercraft.translator.types.Position
 import io.layercraft.translator.utils.MINECRAFT_MAX_STRING_LENGTH
 import java.util.*
 
-
 /**
  * Minecraft protocol serialize interface
  *
@@ -40,14 +39,14 @@ interface MinecraftProtocolSerializeInterface {
     fun writeIdentifier(input: String)
 
     fun writeVarIntByteArray(input: ByteArray)
-    fun <T> writeVarIntArray(input: Array<T>, encoder: (value: T, output: Output) -> Unit)
+    fun <T> writeVarIntArray(input: List<T>, encoder: (value: T, output: Output) -> Unit)
 
     fun writeRemainingByteArray(input: ByteArray)
-    fun <T> writeRemainingArray(input: Array<T>, encoder: (value: T, output: Output) -> Unit)
+    fun <T> writeRemainingArray(input: List<T>, encoder: (value: T, output: Output) -> Unit)
 
     fun writePosition(input: Position)
     fun writeUUID(input: UUID)
-    //fun writeAngle(input: Input): Float
+    fun writeAngle(input: Int)
 
     //fun writeEnum(input: Input, enum: Enum<*>, type: MinecraftEnumType): Enum<*>
 }

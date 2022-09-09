@@ -37,30 +37,28 @@ value class MinecraftByteInput(private val buffer: Input): MinecraftProtocolDese
 
     override fun readVarIntByteArray(): ByteArray = buffer.readBytes(readVarInt())
 
-    override fun <T> readVarIntArray(decoder: (input: Input) -> Unit): Array<T> {
+    override fun <T> readVarIntArray(decoder: (input: Input) -> T): ArrayList<T> {
         val size = readVarInt()
-        val array = arrayOfNulls<Any>(size)
+        val arrayList = ArrayList<T>(size)
 
         for (i in 0 until size) {
-            array[i] = decoder(buffer)
+            arrayList.add(decoder(buffer))
         }
 
-        @Suppress("UNCHECKED_CAST")
-        return array as Array<T>
+        return arrayList
+
     }
 
     override fun readRemainingByteArray(): ByteArray = buffer.readBytes()
 
-    override fun <T> readRemainingArray(decoder: (input: Input) -> Unit): Array<T> {
-        val size = buffer.remaining.toInt()
-        val array = arrayOfNulls<Any>(size)
+    override fun <T> readRemainingArray(decoder: (input: Input) -> T): ArrayList<T> {
+        val arrayList = ArrayList<T>()
 
-        for (i in 0 until size) {
-            array[i] = decoder(buffer)
+        while (buffer.remaining > 0) {
+            arrayList.add(decoder(buffer))
         }
 
-        @Suppress("UNCHECKED_CAST")
-        return array as Array<T>
+        return arrayList
     }
 
     override fun readPosition(): Position = Position.longToPosition(buffer.readLong())
@@ -70,5 +68,11 @@ value class MinecraftByteInput(private val buffer: Input): MinecraftProtocolDese
         val least = buffer.readLong()
 
         return UUID(most, least)
+    }
+
+    override fun readAngle(): Int {
+        val angle = buffer.readByte()
+
+        return angle.toInt()
     }
 }

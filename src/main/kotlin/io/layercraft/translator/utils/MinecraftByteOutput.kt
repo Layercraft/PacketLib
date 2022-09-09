@@ -40,19 +40,24 @@ value class MinecraftByteOutput(private val buffer: Output): MinecraftProtocolSe
         buffer.writeFully(input)
     }
 
-    override fun <T> writeVarIntArray(input: Array<T>, encoder: (value: T, output: Output) -> Unit) {
+    override fun <T> writeVarIntArray(input: List<T>, encoder: (value: T, output: Output) -> Unit) {
         buffer.mc.writeVarInt(input.size)
         input.forEach { encoder(it, buffer) }
     }
 
     override fun writeRemainingByteArray(input: ByteArray) = buffer.writeFully(input)
 
-    override fun <T> writeRemainingArray(input: Array<T>, encoder: (value: T, output: Output) -> Unit) = input.forEach { encoder(it, buffer) }
+    override fun <T> writeRemainingArray(input: List<T>, encoder: (value: T, output: Output) -> Unit) = input.forEach { encoder(it, buffer) }
 
     override fun writePosition(input: Position) = buffer.writeLong(Position.positionToLong(input))
 
     override fun writeUUID(input: UUID) {
         buffer.writeLong(input.mostSignificantBits)
         buffer.writeLong(input.leastSignificantBits)
+    }
+
+    override fun writeAngle(input: Int) {
+        if (input < 0 || input > 256) throw IllegalArgumentException("Angle must be between 0 and 256")
+        buffer.writeByte(input.toByte())
     }
 }
