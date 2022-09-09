@@ -1,8 +1,7 @@
 # Translator-API
 
 
-Special Thanks to [kt-mc-packet](https://github.com/DevSrSouza/kt-mc-packet) for the original idea for working with kotlin serialize and the implementation.
-And to [wiki.vg](https://wiki.vg) for the protocol documentation.
+Special to [wiki.vg](https://wiki.vg) for the protocol documentation.
 
 ## Usage
 Serialize a packet to a byte array:
