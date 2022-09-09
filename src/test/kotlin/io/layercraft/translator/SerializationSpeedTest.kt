@@ -8,7 +8,7 @@ import kotlin.test.assertEquals
 
 internal class SerializationSpeedTest {
 
-    val testObject = LoginPluginResponse(
+    private val testObject = LoginPluginResponse(
         Int.MAX_VALUE,
         true,
         ByteArray(2) { 10 },
