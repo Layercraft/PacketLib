@@ -1,13 +1,20 @@
 package io.layercraft.translator.packets.client.status
 
-import io.layercraft.translator.packets.ClientPacket
-import kotlinx.serialization.Serializable
-import io.layercraft.translator.packets.server.status.StatusResponse
+import io.ktor.utils.io.core.*
+import io.layercraft.translator.packets.*
 
 /**
- * Status request | server-bound | Packet ID: 0x00 | State: Status | Answers with [StatusResponse].
+ * Status request | 0x00 | status | server-bound
  *
  * @see <a href="https://wiki.vg/Protocol#Status_Request">https://wiki.vg/Protocol#Status_Request</a>
  */
-@Serializable
-class StatusRequest: ClientPacket
+@MinecraftPacket(packetId = 0x00, state = PacketState.STATUS, direction = PacketDirection.SERVERBOUND)
+class StatusRequest: ClientPacket {
+    companion object: PacketSerializer<StatusRequest> {
+        override fun serialize(input: Input): StatusRequest {
+            return StatusRequest()
+        }
+
+        override fun deserialize(output: Output, value: StatusRequest) {}
+    }
+}
