@@ -12,7 +12,8 @@ internal class MinecraftStringTest {
 
         val str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#\$%^&*()-=_+[]{};':\",./<>?`~"
 
-        MinecraftStringUtils.writeString(MINECRAFT_MAX_STRING_LENGTH,
+        MinecraftStringUtils.writeString(
+            MINECRAFT_MAX_STRING_LENGTH,
             str,
             packetWrite::writeByte,
             packetWrite::writeFully
@@ -20,7 +21,8 @@ internal class MinecraftStringTest {
 
         val packetRead = packetWrite.build()
 
-        MinecraftStringUtils.readString(MINECRAFT_MAX_STRING_LENGTH,
+        MinecraftStringUtils.readString(
+            MINECRAFT_MAX_STRING_LENGTH,
             packetRead::readByte,
             packetRead::readBytes
         ).let {

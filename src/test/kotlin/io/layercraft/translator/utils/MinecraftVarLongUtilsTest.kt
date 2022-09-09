@@ -18,14 +18,14 @@ internal class MinecraftVarLongUtilsTest {
         testNumber(2147483647)
         testNumber(2147483648)
         testNumber(9223372036854775807)
-        
+
         for (i in 0..100) {
             val random = (Math.random() * Long.MAX_VALUE).toLong()
             testNumber(random)
         }
     }
 
-    private fun testNumber(number: Long){
+    private fun testNumber(number: Long) {
         val packetWrite = BytePacketBuilder()
 
 

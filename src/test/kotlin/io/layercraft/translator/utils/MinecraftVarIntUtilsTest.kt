@@ -26,8 +26,8 @@ internal class MinecraftVarIntUtilsTest {
             testNumber(random)
         }
     }
-    
-    private fun testNumber(number: Int){
+
+    private fun testNumber(number: Int) {
         val packetWrite = BytePacketBuilder()
 
 
@@ -37,13 +37,13 @@ internal class MinecraftVarIntUtilsTest {
 
         assertEquals(number, MinecraftVarIntUtils.readVarInt(packetRead::readByte))
     }
-    
+
     private fun numberToBytes(number: Int): ByteArray {
         val packetWrite = BytePacketBuilder()
 
 
         MinecraftVarIntUtils.writeVarInt(number, packetWrite::writeByte)
-        
+
         return packetWrite.build().readBytes()
     }
 
