@@ -23,7 +23,7 @@ data class LoginSuccess(
         override fun serialize(input: Input): LoginSuccess {
             val uuid = input.mc.readUUID()
             val username = input.mc.readString(16)
-            val properties = input.mc.readVarIntArray<LoginProperty> {
+            val properties = input.mc.readVarIntArray {
                 val name = it.mc.readString(32767)
                 val value = it.mc.readString(32767)
                 val isSigned = it.mc.readBoolean()

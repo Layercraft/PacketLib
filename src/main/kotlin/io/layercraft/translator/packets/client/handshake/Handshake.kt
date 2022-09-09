@@ -31,20 +31,20 @@ data class Handshake(
     companion object: PacketSerializer<Handshake> {
 
         override fun serialize(input: Input): Handshake {
-            val version = input.readInt()
+            val version = input.mc.readVarInt()
             val address = input.mc.readString(255)
-            val port = input.readUShort()
-            val nextState = HandshakeNextState.values()[input.readInt() + 1]
+            val port = input.mc.readUShort()
+            val nextState = HandshakeNextState.values()[input.mc.readVarInt() - 1]
 
 
             return Handshake(version, address, port, nextState)
         }
 
         override fun deserialize(output: Output, value: Handshake) {
-            output.writeInt(value.version)
+            output.mc.writeVarInt(value.version)
             output.mc.writeString(value.address, 255)
-            output.writeUShort(value.port)
-            output.writeInt(value.nextState.ordinal - 1)
+            output.mc.writeUShort(value.port)
+            output.mc.writeVarInt(value.nextState.ordinal + 1)
         }
     }
 }

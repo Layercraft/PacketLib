@@ -49,6 +49,7 @@ data class LoginStart(
                 output.mc.writeVarIntByteArray(value.publicKey!!)
                 output.mc.writeVarIntByteArray(value.signature!!)
             }
+            output.mc.writeBoolean(value.hasPlayerUUID)
             if (value.hasPlayerUUID) output.mc.writeUUID(value.playerUUID!!)
         }
     }

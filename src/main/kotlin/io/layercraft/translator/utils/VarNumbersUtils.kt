@@ -20,8 +20,8 @@ object MinecraftVarIntUtils {
         return result
     }
 
-    inline fun writeVarInt(value: Int, writeByte: (Byte) -> Unit) {
-        var value = value
+    inline fun writeVarInt(valueC: Int, writeByte: (Byte) -> Unit) {
+        var value = valueC
         while (true) {
             if (value and -0x80 == 0) {
                 writeByte(value.toByte())
