@@ -15,7 +15,7 @@ interface PacketSerializer<T> where T: Packet {
     fun deserialize(output: Output, value: T)
 }
 
-
+@Target(AnnotationTarget.CLASS)
 annotation class MinecraftPacket(val packetId: Int, val state: PacketState, val direction: PacketDirection)
 
 enum class PacketDirection {
