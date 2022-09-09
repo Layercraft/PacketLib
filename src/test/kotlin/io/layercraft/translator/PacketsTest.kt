@@ -13,7 +13,6 @@ internal class PacketsTest{
         for (packet in packets){
             println(packet)
 
-            val klass = packet.kclass
         }
     }
 }
