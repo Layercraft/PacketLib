@@ -1,42 +1,29 @@
 package io.layercraft.translator
 
 import io.ktor.utils.io.core.*
-import io.layercraft.translator.serialization.processing.MinecraftProtocolDecoder
-import io.layercraft.translator.serialization.processing.MinecraftProtocolEncoder
-import kotlinx.serialization.BinaryFormat
-import kotlinx.serialization.DeserializationStrategy
-import kotlinx.serialization.SerializationStrategy
-import kotlinx.serialization.modules.EmptySerializersModule
-import kotlinx.serialization.modules.SerializersModule
+import io.layercraft.translator.packets.Packet
+import io.layercraft.translator.packets.PacketSerializer
 
-@Suppress("MemberVisibilityCanBePrivate")
-class TranslatorAPI (
-    override val serializersModule: SerializersModule = EmptySerializersModule()
-) : BinaryFormat {
+object TranslatorAPI{
 
-    companion object Default : BinaryFormat by TranslatorAPI()
-
-    override fun <T> decodeFromByteArray(deserializer: DeserializationStrategy<T>, bytes: ByteArray): T {
+    inline fun <reified T : Packet>decodeFromByteArray(bytes: ByteArray, serializer: PacketSerializer<T>): T {
         val packetRead = ByteReadPacket(bytes)
-
-        return decodeFromInput(deserializer, packetRead)
+        return decodeFromInput(packetRead, serializer)
     }
 
-    override fun <T> encodeToByteArray(serializer: SerializationStrategy<T>, value: T): ByteArray {
+    inline fun <reified T : Packet> encodeToByteArray(value: T, serializer: PacketSerializer<T>): ByteArray {
         val packetWrite = BytePacketBuilder()
 
-        encodeToOutput(serializer, value, packetWrite)
-
+        encodeToOutput(value, packetWrite, serializer)
         return packetWrite.build().readBytes()
     }
 
-    fun <T> decodeFromInput(deserializer: DeserializationStrategy<T>, input: Input): T {
-        val decoder = MinecraftProtocolDecoder(input)
-        return decoder.decodeSerializableValue(deserializer)
+    fun <T: Packet> decodeFromInput(input: Input, serializer: PacketSerializer<T>): T {
+
+        return serializer.serialize(input)
     }
 
-    fun <T> encodeToOutput(serializer: SerializationStrategy<T>, value: T, output: Output) {
-        val encoder = MinecraftProtocolEncoder(output)
-        encoder.encodeSerializableValue(serializer, value)
+    fun <T: Packet> encodeToOutput(value: T, output: Output, serializer: PacketSerializer<T>) {
+        serializer.deserialize(output, value)
     }
 }
