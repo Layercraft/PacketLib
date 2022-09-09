@@ -1,18 +1,30 @@
 package io.layercraft.translator.packets.server.login
 
-import io.layercraft.translator.packets.ServerPacket
-import io.layercraft.translator.serialization.processing.MinecraftNumber
-import io.layercraft.translator.serialization.processing.MinecraftNumberType
-import kotlinx.serialization.Serializable
+import io.ktor.utils.io.core.*
+import io.layercraft.translator.packets.*
+import io.layercraft.translator.utils.mc
 
 /**
- * (Optional) Set compression | client-bound | Packet ID 0x03 | State: Login | Answer with nothing
+ * (Optional) Set compression | 0x03 | login | client-bound
  *
- * @property threshold Maximum size of a packet before it is compressed.
+ * @property threshold VarInt - Maximum size of a packet before it is compressed.
  * @see <a href="https://wiki.vg/Protocol#Set_Compression">https://wiki.vg/Protocol#Set_Compression</a>
  */
-@Serializable
+@MinecraftPacket(packetId = 0x03, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class SetCompression(
-    @MinecraftNumber(MinecraftNumberType.VAR)
     val threshold: Int
-): ServerPacket
+): ServerPacket {
+
+    companion object: PacketSerializer<SetCompression> {
+
+        override fun serialize(input: Input): SetCompression {
+            val threshold = input.mc.readVarInt()
+
+            return SetCompression(threshold)
+        }
+
+        override fun deserialize(output: Output, value: SetCompression) {
+            output.mc.writeVarInt(value.threshold)
+        }
+    }
+}

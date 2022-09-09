@@ -1,71 +1,66 @@
 package io.layercraft.translator.packets.server.login
 
-import io.layercraft.translator.packets.ServerPacket
-import io.layercraft.translator.serialization.MinecraftPacketSerializer
-import io.layercraft.translator.serialization.processing.*
-import io.layercraft.translator.types.UUIDSerializer
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Serializer
-import kotlinx.serialization.descriptors.SerialDescriptor
+import io.ktor.utils.io.core.*
+import io.layercraft.translator.packets.*
+import io.layercraft.translator.utils.mc
 import java.util.*
 
 /**
- * Login success | client-bound | Packet ID: 0x02 | State: Login | Answer to [LoginStartPacket]. //TODO
+ * Login success | 0x02 | login | client-bound
  *
- * @property uuid
- * @property username
- * @property properties [Arrays] of [LoginProperty]s
+ * @property uuid UUID
+ * @property username String (16)
+ * @property properties [Arrays] of [LoginProperty]s Array of [LoginProperty]s
  * @see <a href="https://wiki.vg/Protocol#Login_Success">Login Success</a>
  */
-@Serializable
+@MinecraftPacket(packetId = 0x02, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class LoginSuccess(
-    @Serializable(with = UUIDSerializer::class)
     val uuid: UUID,
-    @MinecraftString(16)
     val username: String,
-    @MinecraftArray(MinecraftArraySizeType.VARINT)
     val properties: Array<LoginProperty>
-): ServerPacket
+): ServerPacket {
+    companion object: PacketSerializer<LoginSuccess> {
+        override fun serialize(input: Input): LoginSuccess {
+            val uuid = input.mc.readUUID()
+            val username = input.mc.readString(16)
+            val properties = input.mc.readVarIntArray<LoginProperty> {
+                val name = it.mc.readString(32767)
+                val value = it.mc.readString(32767)
+                val isSigned = it.mc.readBoolean()
+                val signature = if (isSigned) it.mc.readString(32767) else null
+                LoginProperty(name, value, isSigned, signature)
+            }
+            return LoginSuccess(uuid, username, properties)
+        }
+
+        override fun deserialize(output: Output, value: LoginSuccess) {
+            output.mc.writeUUID(value.uuid)
+            output.mc.writeString(value.username, 16)
+            output.mc.writeVarIntArray(value.properties) { arrayValue, arrayOutput ->
+                arrayOutput.mc.writeString(arrayValue.name, 32767)
+                arrayOutput.mc.writeString(arrayValue.value, 32767)
+                arrayOutput.mc.writeBoolean(arrayValue.signed)
+                if (arrayValue.signed) arrayOutput.mc.writeString(arrayValue.signature!!, 32767)
+            }
+        }
+    }
+
+
+}
 
 
 /**
  * Login property
  *
- * @property name
- * @property value
- * @property signed
- * @property signature [Optional] signature
+ * @property name String (32767) -
+ * @property value String (32767) -
+ * @property signed Boolean -
+ * @property signature [Optional] - String (32767) - Only if Is Signed is true.
  * @see <a href="https://wiki.vg/Protocol#Login_Success">Login Success</a>
  */
-@Serializable
 data class LoginProperty(
-    @MinecraftString(32767)
     val name: String,
-    @MinecraftString(32767)
     val value: String,
     val signed: Boolean,
-    @MinecraftString(32767)
     val signature: String?,
-){
-    @Serializer(forClass = LoginProperty::class)
-    companion object : MinecraftPacketSerializer<LoginProperty> {
-        override val descriptor: SerialDescriptor
-            get() = LoginProperty.serializer().descriptor
-
-        override fun deserialize(decoder: MinecraftProtocolDecoder): LoginProperty {
-            val name = decoder.decodeTaggedString(32767)
-            val value = decoder.decodeTaggedString(32767)
-            val signed = decoder.decodeTaggedBoolean(ProtocolDescriptor.DEFAULT)
-            val signature = if (signed) decoder.decodeString() else null
-
-            return LoginProperty(name, value, signed, signature)
-        }
-
-        override fun serialize(encoder: MinecraftProtocolEncoder, value: LoginProperty) {
-            encoder.encodeTaggedString(value.name, 32767)
-            encoder.encodeTaggedString(value.value, 32767)
-            encoder.encodeTaggedBoolean(ProtocolDescriptor.DEFAULT, value.signed)
-            if (value.signed) encoder.encodeTaggedString(value.signature!!, 32767)
-        }
-    }
-}
+)

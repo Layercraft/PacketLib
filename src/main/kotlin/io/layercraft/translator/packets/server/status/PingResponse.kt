@@ -1,19 +1,29 @@
 package io.layercraft.translator.packets.server.status
 
-import io.layercraft.translator.packets.ServerPacket
-import io.layercraft.translator.packets.client.status.PingRequest
-import io.layercraft.translator.serialization.processing.MinecraftNumber
-import io.layercraft.translator.serialization.processing.MinecraftNumberType
-import kotlinx.serialization.Serializable
+import io.ktor.utils.io.core.*
+import io.layercraft.translator.packets.*
 
 /**
- * Ping response | client-bound | Packet ID: 0x01 | State: Status | Answer to [PingRequest]
+ * Ping response | 0x01 | status | client-bound
  *
- * @property payload Should be the same as sent by the client.
+ * @property payload Long - Should be the same as sent by the client.
  * @see <a href="https://wiki.vg/Protocol#Ping_Response">https://wiki.vg/Protocol#Ping_Response</a>
  */
-@Serializable
+@MinecraftPacket(packetId = 0x01, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
+
 data class PingResponse(
-    @MinecraftNumber(MinecraftNumberType.DEFAULT)
     val payload: Long
-) : ServerPacket
+) : ServerPacket {
+    companion object : PacketSerializer<PingResponse> {
+
+        override fun serialize(input: Input): PingResponse {
+            val payload = input.readLong()
+
+            return PingResponse(payload)
+        }
+
+        override fun deserialize(output: Output, value: PingResponse) {
+            output.writeLong(value.payload)
+        }
+    }
+}

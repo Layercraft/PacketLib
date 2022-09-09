@@ -1,18 +1,31 @@
 package io.layercraft.translator.packets.server.login
 
-import io.layercraft.translator.packets.ServerPacket
-import io.layercraft.translator.serialization.processing.MinecraftString
-import io.layercraft.translator.utils.MINECRAFT_MAX_CHAT_LENGTH
-import kotlinx.serialization.Serializable
+import io.ktor.utils.io.core.*
+import io.layercraft.translator.packets.*
+import io.layercraft.translator.utils.mc
+
 
 /**
- * Disconnect (login) | client-bound | Packet ID 0x00 | State: Login | Answer to any login packet.
+ * Disconnect | 0x00 | login | client-bound
  *
- * @property reason The reason why the player was disconnected.
- * @see <a href="https://wiki.vg/Protocol#Disconnect_.28login.29">https://wiki.vg/Protocol#Disconnect_.28login.29</a>
+ * @property reason Chat - The reason why the player was disconnected.
+ * @see <a href="https://wiki.vg/Protocol#Disconnect">https://wiki.vg/Protocol#Disconnect</a>
  */
-@Serializable
+@MinecraftPacket(packetId = 0x00, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class Disconnect(
-    @MinecraftString(MINECRAFT_MAX_CHAT_LENGTH)
     val reason: String
-): ServerPacket
+): ServerPacket {
+    companion object : PacketSerializer<Disconnect>{
+
+        override fun serialize(input: Input): Disconnect {
+            val reason = input.mc.readChat()
+
+            return Disconnect(reason)
+        }
+
+        override fun deserialize(output: Output, value: Disconnect) {
+            output.mc.writeChat(value.reason)
+        }
+
+    }
+}

@@ -1,18 +1,29 @@
 package io.layercraft.translator.packets.server.status
 
-import io.layercraft.translator.packets.ServerPacket
-import io.layercraft.translator.packets.client.status.StatusRequest
-import io.layercraft.translator.serialization.processing.MinecraftString
-import kotlinx.serialization.Serializable
+import io.ktor.utils.io.core.*
+import io.layercraft.translator.packets.*
+import io.layercraft.translator.utils.mc
 
 /**
- * Status response | client-bound | Packet ID: 0x00 | State: Status | Answer to [StatusRequest]
+ * Status response | 0x00 | status | client-bound
  *
- * @property jsonResponse See Server List Ping#Response; as with all strings this is prefixed by its length as a VarInt.
+ * @property jsonResponse String (32767) - See Server List Ping#Response; as with all strings this is prefixed by its length as a VarInt.
  * @see <a href="https://wiki.vg/Protocol#Status_Response">https://wiki.vg/Protocol#Status_Response</a>
  */
-@Serializable
+@MinecraftPacket(packetId = 0x00, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class StatusResponse(
-    @MinecraftString(32767)
     val jsonResponse: String
-): ServerPacket
+): ServerPacket {
+    companion object: PacketSerializer<StatusResponse> {
+
+        override fun serialize(input: Input): StatusResponse {
+            val jsonResponse = input.mc.readString(32767)
+
+            return StatusResponse(jsonResponse)
+        }
+
+        override fun deserialize(output: Output, value: StatusResponse) {
+            output.mc.writeString(value.jsonResponse, 32767)
+        }
+    }
+}
