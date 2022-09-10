@@ -39,7 +39,7 @@ jobs:
           tar \
             --dereference --hard-dereference \
             --directory "$INPUT_PATH" \
-            -cvf "$RUNNER_TEMP/artifact-page.tar" \
+            -cvf "artifact-page.tar" \
             --exclude=.git \
             --exclude=.github \
             .
