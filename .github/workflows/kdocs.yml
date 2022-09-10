@@ -44,12 +44,18 @@ jobs:
             --exclude=.github \
             .
         env:
-          INPUT_PATH: $RUNNER_TEMP/build/dokka/html
+          INPUT_PATH: build/dokka/html
+
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          path: artifact-page.tar
+          if-no-files-found: error
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ${{ runner.temp }}/artifact-page.tar
+          path: artifact-page.tar
 
   # Deployment job
   deploy:
