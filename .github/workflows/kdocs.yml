@@ -39,17 +39,17 @@ jobs:
           tar \
             --dereference --hard-dereference \
             --directory "$INPUT_PATH" \
-            -cvf "$RUNNER_TEMP/artifact.tar" \
+            -cvf "$RUNNER_TEMP/artifact-page.tar" \
             --exclude=.git \
             --exclude=.github \
             .
         env:
-          INPUT_PATH: build/dokka/html
+          INPUT_PATH: $RUNNER_TEMP/build/dokka/html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: ${{ runner.temp }}/artifact.tar
+          path: ${{ runner.temp }}/artifact-page.tar
 
   # Deployment job
   deploy:
