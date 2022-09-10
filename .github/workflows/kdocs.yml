@@ -33,29 +33,10 @@ jobs:
         with:
           arguments: dokkaHtml
 
-      - name: Archive artifact
-        shell: bash
-        run: |
-          tar \
-            --dereference --hard-dereference \
-            --directory "$INPUT_PATH" \
-            -cvf "artifact-page.tar" \
-            --exclude=.git \
-            --exclude=.github \
-            .
-        env:
-          INPUT_PATH: build/dokka/html
-
-      - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v3.1.0
-        with:
-          path: artifact-page.tar
-          if-no-files-found: error
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: artifact-page.tar
+          path: build/dokka/html
 
   # Deployment job
   deploy:
