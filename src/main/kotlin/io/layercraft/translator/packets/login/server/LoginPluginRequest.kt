@@ -1,4 +1,4 @@
-package io.layercraft.translator.packets.server.login
+package io.layercraft.translator.packets.login.server
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
@@ -17,7 +17,7 @@ data class LoginPluginRequest(
     val messageId: Int,
     val channel: String,
     val data: ByteArray
-): ServerPacket {
+): ClientBoundPacket {
     companion object: PacketSerializer<LoginPluginRequest> {
 
         override fun serialize(input: Input): LoginPluginRequest {

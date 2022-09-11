@@ -1,18 +1,9 @@
-package io.layercraft.translator.packets.server.play
+package io.layercraft.translator.packets.play.server
 
 import io.ktor.utils.io.core.*
+import io.layercraft.translator.data.entity.EntityAnimationType
 import io.layercraft.translator.packets.*
 import io.layercraft.translator.utils.mc
-
-
-enum class EntityAnimationType(val id: Int) {
-    SWING_MAIN_HAND(0),
-    TAKE_DAMAGE(1),
-    LEAVE_BED(2),
-    SWING_OFF_HAND(3),
-    CRITICAL_EFFECT(4),
-    MAGIC_CRITICAL_EFFECT(5)
-}
 
 
 /**
@@ -27,7 +18,7 @@ enum class EntityAnimationType(val id: Int) {
 data class EntityAnimation(
     val entityId: Int,
     val animation: EntityAnimationType
-) : ServerPacket {
+) : ClientBoundPacket {
     companion object : PacketSerializer<EntityAnimation> {
         override fun serialize(input: Input): EntityAnimation {
             val entityId = input.mc.readVarInt()

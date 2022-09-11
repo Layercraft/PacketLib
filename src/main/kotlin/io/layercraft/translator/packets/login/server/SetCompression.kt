@@ -1,4 +1,4 @@
-package io.layercraft.translator.packets.server.login
+package io.layercraft.translator.packets.login.server
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
@@ -13,7 +13,7 @@ import io.layercraft.translator.utils.mc
 @MinecraftPacket(packetId = 0x03, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class SetCompression(
     val threshold: Int
-): ServerPacket {
+): ClientBoundPacket {
 
     companion object: PacketSerializer<SetCompression> {
 

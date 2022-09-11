@@ -1,4 +1,4 @@
-package io.layercraft.translator.packets.server.login
+package io.layercraft.translator.packets.login.server
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
@@ -18,7 +18,7 @@ data class LoginSuccess(
     val uuid: UUID,
     val username: String,
     val properties: ArrayList<LoginProperty>
-): ServerPacket {
+): ClientBoundPacket {
     companion object: PacketSerializer<LoginSuccess> {
         override fun serialize(input: Input): LoginSuccess {
             val uuid = input.mc.readUUID()
@@ -44,8 +44,6 @@ data class LoginSuccess(
             }
         }
     }
-
-
 }
 
 

@@ -1,4 +1,4 @@
-package io.layercraft.translator.packets.client.login
+package io.layercraft.translator.packets.login.client
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
@@ -26,7 +26,7 @@ data class LoginStart(
     val signature: ByteArray?,
     val hasPlayerUUID: Boolean,
     val playerUUID: UUID?
-) : ClientPacket {
+) : ServerBoundPacket {
     companion object: PacketSerializer<LoginStart> {
 
         override fun serialize(input: Input): LoginStart {

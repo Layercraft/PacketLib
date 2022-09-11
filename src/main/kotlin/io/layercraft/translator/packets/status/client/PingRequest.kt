@@ -1,4 +1,4 @@
-package io.layercraft.translator.packets.client.status
+package io.layercraft.translator.packets.status.client
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
@@ -14,7 +14,7 @@ import io.layercraft.translator.packets.*
 @MinecraftPacket(packetId = 0x01, state = PacketState.STATUS, direction = PacketDirection.SERVERBOUND)
 data class PingRequest(
     val payload: Long
-): ClientPacket {
+): ServerBoundPacket {
     companion object: PacketSerializer<PingRequest> {
         override fun serialize(input: Input): PingRequest {
             val payload = input.readLong()

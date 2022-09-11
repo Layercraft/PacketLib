@@ -1,4 +1,4 @@
-package io.layercraft.translator.packets.client.login
+package io.layercraft.translator.packets.login.client
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
@@ -23,7 +23,7 @@ data class EncryptionResponse(
     val verifyToken: ByteArray?,
     val salt: Long?,
     val messageSignature: ByteArray?,
-) : ClientPacket {
+) : ServerBoundPacket {
     companion object: PacketSerializer<EncryptionResponse> {
 
         override fun serialize(input: Input): EncryptionResponse {

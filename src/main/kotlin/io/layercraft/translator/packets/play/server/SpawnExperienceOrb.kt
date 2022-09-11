@@ -1,4 +1,4 @@
-package io.layercraft.translator.packets.server.play
+package io.layercraft.translator.packets.play.server
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
@@ -22,7 +22,7 @@ data class SpawnExperienceOrb(
     val y: Double,
     val z: Double,
     val count: Short
-) : ServerPacket {
+) : ClientBoundPacket {
     companion object: PacketSerializer<SpawnExperienceOrb> {
         override fun serialize(input: Input): SpawnExperienceOrb {
             val entityId = input.mc.readVarInt()

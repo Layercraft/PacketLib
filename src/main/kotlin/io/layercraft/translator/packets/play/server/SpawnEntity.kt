@@ -1,6 +1,7 @@
-package io.layercraft.translator.packets.server.play
+package io.layercraft.translator.packets.play.server
 
 import io.ktor.utils.io.core.*
+import io.layercraft.translator.data.entity.EntityType
 import io.layercraft.translator.packets.*
 import io.layercraft.translator.utils.mc
 import java.util.*
@@ -27,44 +28,47 @@ import java.util.*
 data class SpawnEntity(
     val entityId: Int,
     val uuid: UUID,
-    val type: Int, //TODO MOBTYPE AS ENUM
+    val type: EntityType,
     val x: Double,
     val y: Double,
     val z: Double,
-    val pitch: Int,
-    val yaw: Int,
+    val pitch: Float,
+    val yaw: Float,
+    val headYaw: Float,
     val data: Int,
     val velocityX: Short,
     val velocityY: Short,
     val velocityZ: Short
-) : ServerPacket{
-    companion object: PacketSerializer<SpawnEntity> {
+) : ClientBoundPacket {
+    companion object : PacketSerializer<SpawnEntity> {
         override fun serialize(input: Input): SpawnEntity {
             val entityId = input.mc.readVarInt()
             val uuid = input.mc.readUUID()
-            val type =input.mc.readVarInt()
+            val type = EntityType.byType(input.mc.readVarInt()) ?: throw IllegalArgumentException("Invalid entity type")
             val x = input.mc.readDouble()
             val y = input.mc.readDouble()
             val z = input.mc.readDouble()
             val pitch = input.mc.readAngle()
             val yaw = input.mc.readAngle()
+            val headYaw = input.mc.readAngle()
             val data = input.mc.readVarInt()
             val velocityX = input.mc.readShort()
             val velocityY = input.mc.readShort()
             val velocityZ = input.mc.readShort()
 
-            return SpawnEntity(entityId, uuid, type, x, y, z, pitch, yaw, data, velocityX, velocityY, velocityZ)
+            return SpawnEntity(entityId, uuid, type, x, y, z, pitch, yaw, headYaw, data, velocityX, velocityY, velocityZ)
         }
 
         override fun deserialize(output: Output, value: SpawnEntity) {
             output.mc.writeVarInt(value.entityId)
             output.mc.writeUUID(value.uuid)
-            output.mc.writeVarInt(value.type)
+            output.mc.writeVarInt(value.type.type)
             output.mc.writeDouble(value.x)
             output.mc.writeDouble(value.y)
             output.mc.writeDouble(value.z)
             output.mc.writeAngle(value.pitch)
             output.mc.writeAngle(value.yaw)
+            output.mc.writeAngle(value.headYaw)
             output.mc.writeVarInt(value.data)
             output.mc.writeShort(value.velocityX)
             output.mc.writeShort(value.velocityY)

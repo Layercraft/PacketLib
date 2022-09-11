@@ -1,4 +1,4 @@
-package io.layercraft.translator.packets.client.status
+package io.layercraft.translator.packets.status.client
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
@@ -9,7 +9,7 @@ import io.layercraft.translator.packets.*
  * @see <a href="https://wiki.vg/Protocol#Status_Request">https://wiki.vg/Protocol#Status_Request</a>
  */
 @MinecraftPacket(packetId = 0x00, state = PacketState.STATUS, direction = PacketDirection.SERVERBOUND)
-class StatusRequest: ClientPacket {
+class StatusRequest: ServerBoundPacket {
     companion object: PacketSerializer<StatusRequest> {
         override fun serialize(input: Input): StatusRequest {
             return StatusRequest()

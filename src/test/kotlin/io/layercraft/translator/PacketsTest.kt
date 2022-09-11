@@ -11,8 +11,7 @@ internal class PacketsTest{
     fun `test all packets in enum`(){
         val packets: Array<PacketType<*>> = Packets.getAll()
         for (packet in packets){
-            println(packet)
-
+            //println(packet)
         }
     }
 }

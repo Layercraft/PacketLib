@@ -5,8 +5,8 @@ import io.ktor.utils.io.core.*
 
 interface Packet
 
-interface ClientPacket: Packet
-interface ServerPacket: Packet
+interface ServerBoundPacket: Packet
+interface ClientBoundPacket: Packet
 
 
 interface PacketSerializer<T> where T: Packet {

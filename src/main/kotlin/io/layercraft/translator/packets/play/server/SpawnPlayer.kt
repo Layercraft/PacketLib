@@ -1,4 +1,4 @@
-package io.layercraft.translator.packets.server.play
+package io.layercraft.translator.packets.play.server
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
@@ -25,9 +25,9 @@ data class SpawnPlayer(
     val x: Double,
     val y: Double,
     val z: Double,
-    val yaw: Int,
-    val pitch: Int,
-) : ServerPacket {
+    val yaw: Float,
+    val pitch: Float,
+) : ClientBoundPacket {
     companion object:  PacketSerializer<SpawnPlayer>{
         override fun serialize(input: Input): SpawnPlayer {
             val entityId = input.mc.readVarInt()

@@ -1,16 +1,13 @@
-package io.layercraft.translator.packets.client.handshake
+package io.layercraft.translator.packets.handshake.client
 
 
 
 import io.ktor.utils.io.core.*
+import io.layercraft.translator.data.ProtocolVersion
 import io.layercraft.translator.packets.*
+import io.layercraft.translator.packets.handshake.data.HandshakeNextState
 import io.layercraft.translator.utils.mc
 
-
-enum class HandshakeNextState {
-    STATUS,
-    LOGIN
-}
 
 /**
  * Handshake | server-bound | Packet ID: 0x00 | State: Handshaking | Answer with nothing.
@@ -23,11 +20,11 @@ enum class HandshakeNextState {
  */
 @MinecraftPacket(packetId = 0x00, state = PacketState.HANDSHAKE, direction = PacketDirection.SERVERBOUND)
 data class Handshake(
-    val version: Int,
+    val protocolVersion: ProtocolVersion,
     val address: String,
     val port: UShort,
     val nextState: HandshakeNextState
-) : ClientPacket {
+) : ServerBoundPacket {
     companion object: PacketSerializer<Handshake> {
 
         override fun serialize(input: Input): Handshake {
@@ -37,11 +34,11 @@ data class Handshake(
             val nextState = HandshakeNextState.values()[input.mc.readVarInt() - 1]
 
 
-            return Handshake(version, address, port, nextState)
+            return Handshake(ProtocolVersion.fromProtocolNumber(version), address, port, nextState)
         }
 
         override fun deserialize(output: Output, value: Handshake) {
-            output.mc.writeVarInt(value.version)
+            output.mc.writeVarInt(value.protocolVersion.protocolNumber)
             output.mc.writeString(value.address, 255)
             output.mc.writeUShort(value.port)
             output.mc.writeVarInt(value.nextState.ordinal + 1)

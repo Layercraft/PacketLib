@@ -1,4 +1,4 @@
-package io.layercraft.translator.packets.server.login
+package io.layercraft.translator.packets.login.server
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
@@ -14,7 +14,7 @@ import io.layercraft.translator.utils.mc
 @MinecraftPacket(packetId = 0x00, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class Disconnect(
     val reason: String
-): ServerPacket {
+): ClientBoundPacket {
     companion object : PacketSerializer<Disconnect>{
 
         override fun serialize(input: Input): Disconnect {

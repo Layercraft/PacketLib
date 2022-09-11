@@ -1,4 +1,4 @@
-package io.layercraft.translator.packets.server.status
+package io.layercraft.translator.packets.status.server
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
@@ -13,7 +13,7 @@ import io.layercraft.translator.utils.mc
 @MinecraftPacket(packetId = 0x00, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class StatusResponse(
     val jsonResponse: String
-): ServerPacket {
+): ClientBoundPacket {
     companion object: PacketSerializer<StatusResponse> {
 
         override fun serialize(input: Input): StatusResponse {
