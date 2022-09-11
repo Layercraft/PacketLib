@@ -14,7 +14,7 @@ import kotlin.test.assertEquals
 internal class SerializationTest {
     @Test
     fun `test normal serialization`() {
-        val packet = Handshake(ProtocolVersion.V_1_19_2.protocolNumber, "localhost", (25565).toUShort(), HandshakeNextState.LOGIN)
+        val packet = Handshake(ProtocolVersion.V_1_19_2, "localhost", (25565).toUShort(), HandshakeNextState.LOGIN)
 
         val bytes = TranslatorAPI.encodeToByteArray(packet, Handshake)
 
@@ -29,7 +29,7 @@ internal class SerializationTest {
 
         val decoded: Handshake = TranslatorAPI.decodeFromByteArray(rawPacket, Handshake)
 
-        Assertions.assertEquals(ProtocolVersion.V_1_19_2.protocolNumber, decoded.version)
+        Assertions.assertEquals(ProtocolVersion.V_1_19_2, decoded.protocolVersion)
         Assertions.assertEquals("localhost", decoded.address)
         Assertions.assertEquals(25565, decoded.port.toInt())
         Assertions.assertEquals(HandshakeNextState.LOGIN, decoded.nextState)
