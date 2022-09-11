@@ -12,7 +12,7 @@ import io.layercraft.translator.utils.mc
  * Sent whenever an entity should change animation.
  * @property entityId VarInt - Player ID.
  * @property animation Unsigned Byte - Animation ID (see [EntityAnimationType]).
- * @see <a href="https://wiki.vg/Protocol#Entity_Animation_.28clientbound.29">Entity Animation (clientbound)/a>
+ * @see <a href="https://wiki.vg/Protocol#Entity_Animation_.28clientbound.29">Entity Animation (clientbound)</a>
  */
 @MinecraftPacket(0x03, PacketState.PLAY, PacketDirection.CLIENTBOUND)
 data class EntityAnimation(
