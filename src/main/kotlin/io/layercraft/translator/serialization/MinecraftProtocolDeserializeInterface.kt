@@ -37,7 +37,7 @@ interface MinecraftProtocolDeserializeInterface {
 
     fun readPosition(): Position
     fun readUUID(): UUID
-    fun readAngle(): Int
+    fun readAngle(): Float
 
     //fun readEnum(, enum: Enum<*>, type: MinecraftEnumType): Enum<*>
 }

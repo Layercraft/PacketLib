@@ -46,7 +46,7 @@ interface MinecraftProtocolSerializeInterface {
 
     fun writePosition(input: Position)
     fun writeUUID(input: UUID)
-    fun writeAngle(input: Int)
+    fun writeAngle(input: Float)
 
     //fun writeEnum(input: Input, enum: Enum<*>, type: MinecraftEnumType): Enum<*>
 }

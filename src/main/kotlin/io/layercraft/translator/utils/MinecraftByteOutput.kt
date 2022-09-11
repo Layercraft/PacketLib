@@ -56,8 +56,7 @@ value class MinecraftByteOutput(private val buffer: Output): MinecraftProtocolSe
         buffer.writeLong(input.leastSignificantBits)
     }
 
-    override fun writeAngle(input: Int) {
-        if (input < 0 || input > 256) throw IllegalArgumentException("Angle must be between 0 and 256")
-        buffer.writeByte(input.toByte())
+    override fun writeAngle(input: Float) {
+        buffer.writeByte((input * 256.0f / 360.0f).toInt().toByte())
     }
 }

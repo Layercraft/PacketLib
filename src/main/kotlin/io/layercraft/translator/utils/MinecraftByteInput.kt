@@ -70,9 +70,7 @@ value class MinecraftByteInput(private val buffer: Input): MinecraftProtocolDese
         return UUID(most, least)
     }
 
-    override fun readAngle(): Int {
-        val angle = buffer.readByte()
-
-        return angle.toInt()
+    override fun readAngle(): Float {
+        return buffer.readByte() * 360 / 256f
     }
 }
