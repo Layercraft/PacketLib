@@ -15,16 +15,31 @@ class MinecraftCodec private constructor(
     val packetVersionAsString: String
         get() = protocolVersion.name
 
+    private val list: List<MinecraftCodecPacket<out Packet>>
+        get() = packets.values.flatMap { it.clientPacketMap.values }.toList() + packets.values.flatMap { it.serverPacketMap.values }.toList()
+
     fun registerPacketRegistry(state: PacketState, registry: MinecraftCodecRegistry) = apply {
         packets[state] = registry
     }
 
-    fun getClientBoundPacket(packetState: PacketState, packetId: Int): MinecraftServerCodecPacket? {
+    fun getClientBoundCodecPacket(packetState: PacketState, packetId: Int): MinecraftServerCodecPacket<*>? {
         return packets[packetState]?.serverPacketMap?.get(packetId)
     }
 
-    fun getServerBoundPacket(packetState: PacketState, packetId: Int): MinecraftClientCodecPacket? {
+    fun getServerBoundCodecPacket(packetState: PacketState, packetId: Int): MinecraftClientCodecPacket<*>? {
         return packets[packetState]?.clientPacketMap?.get(packetId)
+    }
+
+    fun getCodecPacket(packetDirection: PacketDirection, packetState: PacketState, packetId: Int): MinecraftCodecPacket<*>? {
+        return when (packetDirection) {
+            PacketDirection.CLIENTBOUND -> getClientBoundCodecPacket(packetState, packetId)
+            PacketDirection.SERVERBOUND -> getServerBoundCodecPacket(packetState, packetId)
+        }
+    }
+
+
+    fun <T: Packet> getCodecPacketFromPacket(packet: T): MinecraftCodecPacket<T>? {
+        return list.find { it.packet == packet::class } as MinecraftCodecPacket<T>?
     }
 
 
@@ -35,15 +50,15 @@ class MinecraftCodec private constructor(
 }
 
 class MinecraftCodecRegistry private constructor(
-    val clientPacketMap: HashMap<Int, MinecraftClientCodecPacket> = HashMap(),
-    val serverPacketMap: HashMap<Int, MinecraftServerCodecPacket> = HashMap()
+    val clientPacketMap: HashMap<Int, MinecraftClientCodecPacket<out ServerBoundPacket>> = HashMap(),
+    val serverPacketMap: HashMap<Int, MinecraftServerCodecPacket<out ClientBoundPacket>> = HashMap()
 ) {
-    fun registerClientBoundPacket(packetId: Int, packet: KClass<out ClientBoundPacket>, packetSerializer: PacketSerializer<out ClientBoundPacket>) =
+    fun <T: ClientBoundPacket> registerClientBoundPacket(packetId: Int, packet: KClass<T>, packetSerializer: PacketSerializer<T>) =
         apply {
             serverPacketMap[packetId] = MinecraftServerCodecPacket(packetId, packet, packetSerializer)
         }
 
-    fun registerServerBoundPacket(packetId: Int, packet: KClass<out ServerBoundPacket>, packetSerializer: PacketSerializer<out ServerBoundPacket>) =
+    fun <T: ServerBoundPacket> registerServerBoundPacket(packetId: Int, packet: KClass<T>, packetSerializer: PacketSerializer<T>) =
         apply {
             clientPacketMap[packetId] = MinecraftClientCodecPacket(packetId, packet, packetSerializer)
         }
@@ -53,20 +68,20 @@ class MinecraftCodecRegistry private constructor(
     }
 }
 
-interface MinecraftCodecPacket {
+interface MinecraftCodecPacket<T: Packet> {
     val packetId: Int
-    val packet: KClass<out Packet>
-    val packetSerializer: PacketSerializer<out Packet>
+    val packet: KClass<T>
+    val packetSerializer: PacketSerializer<T>
 }
 
-data class MinecraftServerCodecPacket(
+data class MinecraftServerCodecPacket<T: ClientBoundPacket>(
     override val packetId: Int,
-    override val packet: KClass<out ClientBoundPacket>,
-    override val packetSerializer: PacketSerializer<out ClientBoundPacket>
-) : MinecraftCodecPacket
+    override val packet: KClass<T>,
+    override val packetSerializer: PacketSerializer<T>
+) : MinecraftCodecPacket<T>
 
-data class MinecraftClientCodecPacket(
+data class MinecraftClientCodecPacket<T: ServerBoundPacket>(
     override val packetId: Int,
-    override val packet: KClass<out ServerBoundPacket>,
-    override val packetSerializer: PacketSerializer<out ServerBoundPacket>
-): MinecraftCodecPacket
+    override val packet: KClass<T>,
+    override val packetSerializer: PacketSerializer<T>
+): MinecraftCodecPacket<T>
