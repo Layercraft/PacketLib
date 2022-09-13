@@ -3,14 +3,16 @@ package io.layercraft.translator.packets
 import io.ktor.utils.io.core.*
 
 
-interface Packet
+interface Packet{
+    val direction: PacketDirection
+}
 
 interface ServerBoundPacket: Packet {
-    val direction: PacketDirection
+    override val direction: PacketDirection
         get() = PacketDirection.SERVERBOUND
 }
 interface ClientBoundPacket: Packet {
-    val direction: PacketDirection
+    override val direction: PacketDirection
         get() = PacketDirection.CLIENTBOUND
 }
 
