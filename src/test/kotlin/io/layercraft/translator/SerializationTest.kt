@@ -1,10 +1,10 @@
 package io.layercraft.translator
 
 import io.layercraft.translator.data.ProtocolVersion
-import io.layercraft.translator.packets.handshake.client.Handshake
+import io.layercraft.translator.packets.handshake.serverbound.Handshake
 import io.layercraft.translator.packets.handshake.data.HandshakeNextState
-import io.layercraft.translator.packets.login.client.LoginStart
-import io.layercraft.translator.packets.login.server.EncryptionRequest
+import io.layercraft.translator.packets.login.serverbound.LoginStart
+import io.layercraft.translator.packets.login.clientbound.EncryptionRequest
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import java.util.*

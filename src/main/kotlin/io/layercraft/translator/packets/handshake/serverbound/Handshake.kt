@@ -1,4 +1,4 @@
-package io.layercraft.translator.packets.handshake.client
+package io.layercraft.translator.packets.handshake.serverbound
 
 
 

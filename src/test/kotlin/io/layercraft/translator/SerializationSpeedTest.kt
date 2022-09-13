@@ -1,6 +1,6 @@
 package io.layercraft.translator
 
-import io.layercraft.translator.packets.login.client.LoginPluginResponse
+import io.layercraft.translator.packets.login.serverbound.LoginPluginResponse
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import kotlin.system.measureTimeMillis

@@ -1,4 +1,4 @@
-package io.layercraft.translator.packets.login.client
+package io.layercraft.translator.packets.login.serverbound
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*

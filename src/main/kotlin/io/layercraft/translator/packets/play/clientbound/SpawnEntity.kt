@@ -1,4 +1,4 @@
-package io.layercraft.translator.packets.play.server
+package io.layercraft.translator.packets.play.clientbound
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.data.entity.EntityType

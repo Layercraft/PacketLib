@@ -1,4 +1,4 @@
-package io.layercraft.translator.packets.status.client
+package io.layercraft.translator.packets.status.serverbound
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*

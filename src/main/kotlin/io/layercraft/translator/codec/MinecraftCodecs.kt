@@ -2,11 +2,11 @@ package io.layercraft.translator.codec
 
 import io.layercraft.translator.data.ProtocolVersion
 import io.layercraft.translator.packets.PacketState
-import io.layercraft.translator.packets.handshake.client.Handshake
-import io.layercraft.translator.packets.login.client.EncryptionResponse
-import io.layercraft.translator.packets.login.client.LoginPluginResponse
-import io.layercraft.translator.packets.login.client.LoginStart
-import io.layercraft.translator.packets.login.server.*
+import io.layercraft.translator.packets.handshake.serverbound.Handshake
+import io.layercraft.translator.packets.login.serverbound.EncryptionResponse
+import io.layercraft.translator.packets.login.serverbound.LoginPluginResponse
+import io.layercraft.translator.packets.login.serverbound.LoginStart
+import io.layercraft.translator.packets.login.clientbound.*
 
 object MinecraftCodecs {
     val V_1_19_2: MinecraftCodec =

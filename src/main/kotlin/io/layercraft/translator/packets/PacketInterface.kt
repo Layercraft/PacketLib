@@ -5,8 +5,14 @@ import io.ktor.utils.io.core.*
 
 interface Packet
 
-interface ServerBoundPacket: Packet
-interface ClientBoundPacket: Packet
+interface ServerBoundPacket: Packet {
+    val direction: PacketDirection
+        get() = PacketDirection.SERVERBOUND
+}
+interface ClientBoundPacket: Packet {
+    val direction: PacketDirection
+        get() = PacketDirection.CLIENTBOUND
+}
 
 
 interface PacketSerializer<T> where T: Packet {
