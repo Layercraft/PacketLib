@@ -28,7 +28,7 @@ data class SpawnPlayer(
     val yaw: Float,
     val pitch: Float,
 ) : ClientBoundPacket {
-    companion object:  PacketSerializer<SpawnPlayer>{
+    companion object : PacketSerializer<SpawnPlayer> {
         override fun serialize(input: Input): SpawnPlayer {
             val entityId = input.mc.readVarInt()
             val playerUUID = input.mc.readUUID()
