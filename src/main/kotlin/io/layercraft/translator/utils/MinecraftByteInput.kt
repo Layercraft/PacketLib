@@ -11,19 +11,21 @@ value class MinecraftByteInput(private val buffer: Input): MinecraftProtocolDese
 
     override fun readByte(): Byte = buffer.readByte()
 
+    @OptIn(ExperimentalUnsignedTypes::class)
     override fun readUByte(): UByte = buffer.readUByte()
 
     override fun readShort(): Short = buffer.readShort()
 
+    @OptIn(ExperimentalUnsignedTypes::class)
     override fun readUShort(): UShort = buffer.readUShort()
 
     override fun readInt(): Int = buffer.readInt()
 
-    override fun readVarInt(): Int = MinecraftVarIntUtils.readVarInt(buffer::readByte)
+    override fun readVarInt(): Int = MinecraftVarIntUtils.readVarInt(buffer)
 
     override fun readLong(): Long = buffer.readLong()
 
-    override fun readVarLong(): Long = MinecraftVarLongUtils.readVarLong(buffer::readByte)
+    override fun readVarLong(): Long = MinecraftVarLongUtils.readVarLong(buffer)
 
     override fun readFloat(): Float = buffer.readFloat()
 

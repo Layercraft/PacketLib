@@ -1,15 +1,19 @@
 package io.layercraft.translator.utils
 
+import io.ktor.utils.io.core.*
+import java.io.EOFException
+
 const val SEGMENT_BITS = 0x7F
 const val CONTINUE_BIT = 0x80
 
 object MinecraftVarIntUtils {
-    inline fun readVarInt(readByte: () -> Byte): Int {
+    fun readVarInt(input: Input): Int {
+        if (input.endOfInput) throw EOFException("Premature end of stream")
         var numRead = 0
         var result = 0
         var read: Byte
         do {
-            read = readByte()
+            read = input.readByte()
             val value = (read.toInt() and SEGMENT_BITS)
             result = result or (value shl (7 * numRead))
             numRead++
@@ -20,14 +24,14 @@ object MinecraftVarIntUtils {
         return result
     }
 
-    inline fun writeVarInt(valueC: Int, writeByte: (Byte) -> Unit) {
+    fun writeVarInt(valueC: Int, output: Output) {
         var value = valueC
         while (true) {
-            if (value and -0x80 == 0) {
-                writeByte(value.toByte())
+            if (value and -CONTINUE_BIT == 0) {
+                output.writeByte(value.toByte())
                 return
             }
-            writeByte((value and 0x7F or 0x80).toByte())
+            output.writeByte((value and 0x7F or 0x80).toByte())
             value = value ushr 7
         }
     }
@@ -44,12 +48,13 @@ object MinecraftVarIntUtils {
 }
 
 object MinecraftVarLongUtils {
-    inline fun readVarLong(readByte: () -> Byte): Long {
+    fun readVarLong(input: Input): Long {
+        if (input.endOfInput) throw EOFException("Premature end of stream")
         var numRead = 0
         var result: Long = 0
         var read: Byte
         do {
-            read = readByte()
+            read = input.readByte()
             val value = (read.toLong() and SEGMENT_BITS.toLong())
             result = result or (value shl (7 * numRead))
             numRead++
@@ -60,15 +65,15 @@ object MinecraftVarLongUtils {
         return result
     }
 
-    inline fun writeVarLong(value: Long, writeByte: (Byte) -> Unit) {
-        var value = value
+    fun writeVarLong(value: Long, output: Output) {
+        var write = value
         while (true) {
-            if (value and -0x80L == 0L) {
-                writeByte(value.toByte())
+            if (write and -CONTINUE_BIT.toLong() == 0L) {
+                output.writeByte(write.toByte())
                 return
             }
-            writeByte((value and 0x7FL or 0x80L).toByte())
-            value = value ushr 7
+            output.writeByte((write and SEGMENT_BITS.toLong() or CONTINUE_BIT.toLong()).toByte())
+            write = write ushr 7
         }
     }
 

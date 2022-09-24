@@ -1,9 +1,8 @@
 package io.layercraft.translator.utils
 
 import io.ktor.utils.io.core.*
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
 
 internal class MinecraftVarLongUtilsTest {
 
@@ -29,18 +28,18 @@ internal class MinecraftVarLongUtilsTest {
         val packetWrite = BytePacketBuilder()
 
 
-        MinecraftVarLongUtils.writeVarLong(number, packetWrite::writeByte)
+        MinecraftVarLongUtils.writeVarLong(number, packetWrite)
 
         val packetRead = packetWrite.build()
 
-        assertEquals(number, MinecraftVarLongUtils.readVarLong(packetRead::readByte))
+        assertEquals(number, MinecraftVarLongUtils.readVarLong(packetRead))
     }
 
     private fun numberToBytes(number: Long): ByteArray {
         val packetWrite = BytePacketBuilder()
 
 
-        MinecraftVarLongUtils.writeVarLong(number, packetWrite::writeByte)
+        MinecraftVarLongUtils.writeVarLong(number, packetWrite)
 
         return packetWrite.build().readBytes()
     }

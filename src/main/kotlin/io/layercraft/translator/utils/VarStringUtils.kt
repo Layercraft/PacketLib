@@ -3,6 +3,7 @@ package io.layercraft.translator.utils
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.exceptions.MinecraftProtocolDecodingException
 import io.layercraft.translator.exceptions.MinecraftProtocolEncodingException
+import java.io.EOFException
 import kotlin.text.toByteArray
 
 const val MINECRAFT_MAX_STRING_LENGTH = 32767
@@ -13,6 +14,8 @@ const val MINECRAFT_MAX_IDENTIFIER_LENGTH = 32767
 object MinecraftStringUtils {
 
     fun readString(maxLength: Int = MINECRAFT_MAX_STRING_LENGTH, input: Input): String {
+        if (input.endOfInput) throw EOFException("Premature end of stream")
+
         val length: Int = input.mc.readVarInt()
 
         if (length > maxLength * 4) throw MinecraftProtocolDecodingException("The received encoded string buffer length is longer than maximum allowed ($length > ${maxLength * 4})")

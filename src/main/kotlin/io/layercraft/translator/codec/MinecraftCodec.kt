@@ -9,10 +9,10 @@ class MinecraftCodec private constructor(
     val protocolVersion: ProtocolVersion,
     val packets: EnumMap<PacketState, MinecraftCodecRegistry> = EnumMap(PacketState::class.java)
 ) {
-    val packetVersionAsInt: Int
+    val protocolVersionAsInt: Int
         get() = protocolVersion.v
 
-    val packetVersionAsString: String
+    val protocolVersionAsString: String
         get() = protocolVersion.name
 
     private val list: List<MinecraftCodecPacket<out Packet>>

@@ -19,11 +19,11 @@ value class MinecraftByteOutput(private val buffer: Output): MinecraftProtocolSe
 
     override fun writeInt(input: Int) = buffer.writeInt(input)
 
-    override fun writeVarInt(input: Int) = MinecraftVarIntUtils.writeVarInt(input, buffer::writeByte)
+    override fun writeVarInt(input: Int) = MinecraftVarIntUtils.writeVarInt(input, buffer)
 
     override fun writeLong(input: Long) = buffer.writeLong(input)
 
-    override fun writeVarLong(input: Long) = MinecraftVarLongUtils.writeVarLong(input, buffer::writeByte)
+    override fun writeVarLong(input: Long) = MinecraftVarLongUtils.writeVarLong(input, buffer)
 
     override fun writeFloat(input: Float) = buffer.writeFloat(input)
 
