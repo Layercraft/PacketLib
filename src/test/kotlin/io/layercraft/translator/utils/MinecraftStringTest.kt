@@ -15,16 +15,14 @@ internal class MinecraftStringTest {
         MinecraftStringUtils.writeString(
             MINECRAFT_MAX_STRING_LENGTH,
             str,
-            packetWrite::writeByte,
-            packetWrite::writeFully
+            packetWrite
         )
 
         val packetRead = packetWrite.build()
 
         MinecraftStringUtils.readString(
             MINECRAFT_MAX_STRING_LENGTH,
-            packetRead::readByte,
-            packetRead::readBytes
+            packetRead
         ).let {
             assertEquals(str, it)
         }

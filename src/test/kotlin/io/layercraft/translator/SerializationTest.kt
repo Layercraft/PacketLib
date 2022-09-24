@@ -1,10 +1,10 @@
 package io.layercraft.translator
 
 import io.layercraft.translator.data.ProtocolVersion
-import io.layercraft.translator.packets.handshake.serverbound.Handshake
 import io.layercraft.translator.packets.handshake.data.HandshakeNextState
-import io.layercraft.translator.packets.login.serverbound.LoginStart
+import io.layercraft.translator.packets.handshake.serverbound.Handshake
 import io.layercraft.translator.packets.login.clientbound.EncryptionRequest
+import io.layercraft.translator.packets.login.serverbound.LoginStart
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import java.util.*
@@ -25,14 +25,14 @@ internal class SerializationTest {
 
     @Test
     fun `test normal serialization from raw bytes`() {
-        val rawPacket = byteArrayOf(-0x08, 0x05, 0x09, 0x6C, 0x6F, 0x63, 0x61, 0x6C, 0x68, 0x6F, 0x73, 0x74, 0x63, -0x23, 0x02) //export from wireshark
+        val rawPacket = byteArrayOf(-0x08, 0x05, 0x09, 0x6C, 0x6F, 0x63, 0x61, 0x6C, 0x68, 0x6F, 0x73, 0x74, 0x63, -0x23, 0x01) //export from wireshark
 
         val decoded: Handshake = TranslatorAPI.decodeFromByteArray(rawPacket, Handshake)
 
         Assertions.assertEquals(ProtocolVersion.V_1_19_2, decoded.protocolVersion)
         Assertions.assertEquals("localhost", decoded.address)
         Assertions.assertEquals(25565, decoded.port.toInt())
-        Assertions.assertEquals(HandshakeNextState.LOGIN, decoded.nextState)
+        Assertions.assertEquals(HandshakeNextState.STATUS, decoded.nextState)
     }
 
     @Test

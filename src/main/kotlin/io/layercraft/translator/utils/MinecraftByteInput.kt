@@ -29,7 +29,7 @@ value class MinecraftByteInput(private val buffer: Input): MinecraftProtocolDese
 
     override fun readDouble(): Double = buffer.readDouble()
 
-    override fun readString(n: Int): String = MinecraftStringUtils.readString(n, buffer::readByte, buffer::readBytes)
+    override fun readString(n: Int): String = MinecraftStringUtils.readString(n, buffer)
 
     override fun readChat(): String = readString(MINECRAFT_MAX_CHAT_LENGTH)
 

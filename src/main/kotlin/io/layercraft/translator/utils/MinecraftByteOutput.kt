@@ -29,7 +29,7 @@ value class MinecraftByteOutput(private val buffer: Output): MinecraftProtocolSe
 
     override fun writeDouble(input: Double) = buffer.writeDouble(input)
 
-    override fun writeString(input: String, n: Int) = MinecraftStringUtils.writeString(n, input, buffer::writeByte, buffer::writeFully)
+    override fun writeString(input: String, n: Int) = MinecraftStringUtils.writeString(n, input, buffer)
 
     override fun writeChat(input: String) = writeString(input, MINECRAFT_MAX_CHAT_LENGTH)
 

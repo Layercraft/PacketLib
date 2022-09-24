@@ -3,10 +3,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.7.10"
     id("org.jetbrains.dokka") version "1.7.10"
+    `maven-publish`
 }
 
-group = "io.layercraft.translator"
-version = "1.0-SNAPSHOT"
+group = "io.layercraft.connector"
+version = "0.0.7"
 
 repositories {
     mavenCentral()
@@ -26,4 +27,22 @@ tasks.test {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "18"
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "repo"
+            url = uri("https://maven.pkg.github.com/Layercraft/repo")
+            credentials {
+                username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+            }
+        }
+    }
+    publications {
+        register<MavenPublication>("gpr") {
+            from(components["java"])
+        }
+    }
 }

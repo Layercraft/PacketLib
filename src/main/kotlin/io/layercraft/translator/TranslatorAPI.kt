@@ -9,35 +9,23 @@ import io.layercraft.translator.packets.PacketState
 
 object TranslatorAPI{
 
-    fun <T : Packet>decodeFromByteArray(bytes: ByteArray, serializer: PacketSerializer<T>): T {
+    fun <T : Packet> decodeFromByteArray(bytes: ByteArray, serializer: PacketSerializer<T>): T {
         val packetRead = ByteReadPacket(bytes)
-        return decodeFromInput(packetRead, serializer)
+        return serializer.serialize(packetRead as Input)
     }
 
     fun <T : Packet> encodeToByteArray(value: T, serializer: PacketSerializer<T>): ByteArray {
         val packetWrite = BytePacketBuilder()
 
-        encodeToOutput(value, packetWrite, serializer)
+        serializer.deserialize(packetWrite as Output, value)
         return packetWrite.build().readBytes()
     }
 
-    fun <T: Packet> decodeFromInput(input: Input, serializer: PacketSerializer<T>): T {
-
-        return serializer.serialize(input)
+    fun decodeFromInputWithCodec(input: Input, codec: MinecraftCodec, packetDirection: PacketDirection, packetState: PacketState, packetId: Int): Packet? {
+        return codec.getCodecPacket(packetDirection, packetState, packetId)?.packetSerializer?.serialize(input)
     }
 
-    fun <T: Packet> encodeToOutput(value: T, output: Output, serializer: PacketSerializer<T>) {
-        serializer.deserialize(output, value)
+    fun encodeToOutputWithCodec(value: Packet, codec: MinecraftCodec, output: Output) {
+        codec.getCodecPacketFromPacket(value)?.packetSerializer!!.deserialize(output, value)
     }
-
-    fun decodeFromByteArray(input: ByteArray, codec: MinecraftCodec, packetDirection: PacketDirection, packetState: PacketState, packetId: Int): Packet? {
-        return codec.getCodecPacket(packetDirection, packetState, packetId)?.let { decodeFromByteArray(input, it.packetSerializer) }
-    }
-
-    fun encodeToByteArray(value: Packet, codec: MinecraftCodec): ByteArray {
-       return encodeToByteArray(value, codec.getCodecPacketFromPacket(value)?.packetSerializer!!)
-    }
-
-
-
 }
