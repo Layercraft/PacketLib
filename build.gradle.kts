@@ -33,7 +33,7 @@ publishing {
     repositories {
         maven {
             name = "repo"
-            url = uri("https://maven.pkg.github.com/Layercraft/repo")
+            url = uri("https://maven.pkg.github.com/Layercraft/Translator-API")
             credentials {
                 username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
                 password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
