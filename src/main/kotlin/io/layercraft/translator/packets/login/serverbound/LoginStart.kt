@@ -20,13 +20,17 @@ import java.util.*
 @MinecraftPacket(packetId = 0x00, state = PacketState.LOGIN, direction = PacketDirection.SERVERBOUND)
 data class LoginStart(
     val name: String,
-    val hasSigData: Boolean,
     val timestamp: Long?,
     val publicKey: ByteArray?,
     val signature: ByteArray?,
-    val hasPlayerUUID: Boolean,
     val playerUUID: UUID?
 ) : ServerBoundPacket {
+
+    val hasSigData: Boolean
+        get() = timestamp != null && publicKey != null && signature != null
+
+    val hasPlayerUUID: Boolean
+        get() = playerUUID != null
     companion object: PacketSerializer<LoginStart> {
 
         override fun serialize(input: Input): LoginStart {
@@ -38,19 +42,21 @@ data class LoginStart(
             val hasPlayerUUID = input.mc.readBoolean()
             val playerUUID = if (hasPlayerUUID) input.mc.readUUID() else null
 
-            return LoginStart(name, hasSigData, timestamp, publicKey, signature, hasPlayerUUID, playerUUID)
+            return LoginStart(name, timestamp, publicKey, signature, playerUUID)
         }
 
         override fun deserialize(output: Output, value: LoginStart) {
             output.mc.writeString(value.name, 16)
-            output.mc.writeBoolean(value.hasSigData)
-            if (value.hasSigData) {
+            val hasSigData = value.timestamp != null && value.publicKey != null && value.signature != null
+            output.mc.writeBoolean(hasSigData)
+            if (hasSigData) {
                 output.mc.writeLong(value.timestamp!!)
                 output.mc.writeVarIntByteArray(value.publicKey!!)
                 output.mc.writeVarIntByteArray(value.signature!!)
             }
-            output.mc.writeBoolean(value.hasPlayerUUID)
-            if (value.hasPlayerUUID) output.mc.writeUUID(value.playerUUID!!)
+            val hasPlayerUUID = value.playerUUID != null
+            output.mc.writeBoolean(hasPlayerUUID)
+            if (hasPlayerUUID) output.mc.writeUUID(value.playerUUID!!)
         }
     }
 }
