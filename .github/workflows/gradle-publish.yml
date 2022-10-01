@@ -2,18 +2,19 @@ name: Gradle Publish
 
 on:
   release:
-    types: [published]
+    types: [ published ]
   workflow_dispatch:
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
-  build:
+  publish-github:
+    name: Publish to GitHub Packages
     runs-on: ubuntu-latest
-    env:
-      VERSION: ${{ github.sha }}
     steps:
       - uses: actions/checkout@v3
-        with:
-          submodules: true
 
       - name: Set up JDK 18
         uses: actions/setup-java@v3
