@@ -62,11 +62,9 @@ internal class SerializationTest {
 
         val packet = LoginStart(
             "Newspicel",
-            true,
             0x7F000001,
             exampleByteArray,
             exampleByteArray,
-            true,
             UUID.randomUUID()
         )
 
