@@ -5,9 +5,7 @@ on:
     types: [ published ]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  packages: write
+permissions: write-all
 
 jobs:
   publish-github:
@@ -24,17 +22,13 @@ jobs:
           cache: 'gradle'
 
       - name: Test with Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: test
+        run: ./gradlew test
         env:
           USERNAME: ${{ github.repository_owner }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish to GitHub Packages
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: publish
+        run: ./gradlew publish
         env:
           USERNAME: ${{ github.repository_owner }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}

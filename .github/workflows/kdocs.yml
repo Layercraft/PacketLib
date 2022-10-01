@@ -29,14 +29,13 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Gradle and Dokka
-        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-        with:
-          arguments: dokkaHtml
+        run: ./gradlew dokkaHtml
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: build/dokka/html
+          if-no-files-found: error
 
   # Deployment job
   deploy:
