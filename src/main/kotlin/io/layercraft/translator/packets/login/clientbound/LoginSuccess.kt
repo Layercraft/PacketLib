@@ -28,7 +28,7 @@ data class LoginSuccess(
                 val value = it.mc.readString(32767)
                 val isSigned = it.mc.readBoolean()
                 val signature = if (isSigned) it.mc.readString(32767) else null
-                LoginProperty(name, value, isSigned, signature)
+                LoginProperty(name, value, signature)
             }
             return LoginSuccess(uuid, username, properties)
         }
@@ -59,6 +59,8 @@ data class LoginSuccess(
 data class LoginProperty(
     val name: String,
     val value: String,
-    val signed: Boolean,
     val signature: String?,
-)
+){
+    val signed
+        get() = signature != null
+}
