@@ -29,10 +29,14 @@ data class EncryptionResponse(
         override fun serialize(input: Input): EncryptionResponse {
             val sharedSecret = input.mc.readVarIntByteArray()
             val hasVerifyToken = input.mc.readBoolean()
-            val verifyToken = if (hasVerifyToken) input.mc.readVarIntByteArray() else null
-            val salt = if (!hasVerifyToken) null else input.readLong()
-            val messageSignature = if (!hasVerifyToken) input.mc.readVarIntByteArray() else null
-            return EncryptionResponse(sharedSecret, hasVerifyToken, verifyToken, salt, messageSignature)
+            return if (hasVerifyToken) {
+                val verifyToken = input.mc.readVarIntByteArray()
+                EncryptionResponse(sharedSecret, true, verifyToken, null, null)
+            } else {
+                val salt = input.mc.readLong()
+                val messageSignature = input.mc.readVarIntByteArray()
+                EncryptionResponse(sharedSecret, false, null, salt, messageSignature)
+            }
         }
 
         override fun deserialize(output: Output, value: EncryptionResponse) {
@@ -43,8 +47,6 @@ data class EncryptionResponse(
             }
             if (!value.hasVerifyToken) {
                 output.mc.writeLong(value.salt!!)
-            }
-            if (!value.hasVerifyToken) {
                 output.mc.writeVarIntByteArray(value.messageSignature!!)
             }
         }

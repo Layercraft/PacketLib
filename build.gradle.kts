@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "io.layercraft.connector"
-version = "0.0.10"
+version = "0.0.12"
 
 repositories {
     mavenCentral()
