@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "io.layercraft.connector"
-version = "0.0.12"
+version = "0.0.13"
 
 repositories {
     mavenCentral()
@@ -26,7 +26,7 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "18"
+    kotlinOptions.jvmTarget = "17"
 }
 
 publishing {
