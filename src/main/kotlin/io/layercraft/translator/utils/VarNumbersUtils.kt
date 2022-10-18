@@ -24,15 +24,15 @@ object MinecraftVarIntUtils {
         return result
     }
 
-    fun writeVarInt(valueC: Int, output: Output) {
-        var value = valueC
+    fun writeVarInt(value: Int, output: Output) {
+        var write = value
         while (true) {
-            if (value and -CONTINUE_BIT == 0) {
-                output.writeByte(value.toByte())
+            if (write and -CONTINUE_BIT == 0) {
+                output.writeByte(write.toByte())
                 return
             }
-            output.writeByte((value and 0x7F or 0x80).toByte())
-            value = value ushr 7
+            output.writeByte((write and 0x7F or 0x80).toByte())
+            write = write ushr 7
         }
     }
 

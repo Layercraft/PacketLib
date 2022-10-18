@@ -39,28 +39,22 @@ value class MinecraftByteInput(private val buffer: Input): MinecraftProtocolDese
 
     override fun readVarIntByteArray(): ByteArray = buffer.readBytes(readVarInt())
 
-    override fun <T> readVarIntArray(decoder: (input: Input) -> T): ArrayList<T> {
+    override fun <T> readVarIntArray(decoder: (input: Input) -> T): List<T> {
         val size = readVarInt()
-        val arrayList = ArrayList<T>(size)
 
-        for (i in 0 until size) {
-            arrayList.add(decoder(buffer))
-        }
-
-        return arrayList
-
+        return (1..size).map { decoder(buffer) }.toList()
     }
 
     override fun readRemainingByteArray(): ByteArray = buffer.readBytes()
 
-    override fun <T> readRemainingArray(decoder: (input: Input) -> T): ArrayList<T> {
-        val arrayList = ArrayList<T>()
+    override fun <T> readRemainingArray(decoder: (input: Input) -> T): List<T> {
+        val list: MutableList<T> = mutableListOf()
 
         while (buffer.remaining > 0) {
-            arrayList.add(decoder(buffer))
+            list.add(decoder(buffer))
         }
 
-        return arrayList
+        return list.toList()
     }
 
     override fun readPosition(): Position = Position.longToPosition(buffer.readLong())

@@ -17,7 +17,7 @@ import java.util.*
 data class LoginSuccess(
     val uuid: UUID,
     val username: String,
-    val properties: ArrayList<LoginProperty>
+    val properties: List<LoginProperty>
 ): ClientBoundPacket {
     companion object: PacketSerializer<LoginSuccess> {
         override fun serialize(input: Input): LoginSuccess {

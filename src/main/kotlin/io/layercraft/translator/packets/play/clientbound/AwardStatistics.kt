@@ -15,7 +15,7 @@ import io.layercraft.translator.utils.mc
  */
 @MinecraftPacket(0x04, PacketState.PLAY, PacketDirection.CLIENTBOUND)
 data class AwardStatistics(
-    val statistics: ArrayList<Statistic>
+    val statistics: List<Statistic>
 ) : ClientBoundPacket {
     companion object : PacketSerializer<AwardStatistics> {
         override fun serialize(input: Input): AwardStatistics {

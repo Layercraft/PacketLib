@@ -5,10 +5,13 @@ import io.layercraft.translator.types.Position
 import io.layercraft.translator.utils.MINECRAFT_MAX_CHAT_LENGTH
 import java.util.*
 
+/**
+ * Minecraft protocol serialize interface
+ *
+ * @constructor Create empty Minecraft protocol serialize interface
+ * @see <a href="https://wiki.vg/Protocol#Data_types">https://wiki.vg/Protocol#Data_types</a>
+ */
 interface MinecraftProtocolDeserializeInterface {
-
-    //ALL Datatypes: https://wiki.vg/Protocol#Data_types
-
     fun readBoolean(): Boolean
     fun readByte(): Byte
     fun readUByte(): UByte
@@ -38,6 +41,4 @@ interface MinecraftProtocolDeserializeInterface {
     fun readPosition(): Position
     fun readUUID(): UUID
     fun readAngle(): Float
-
-    //fun readEnum(, enum: Enum<*>, type: MinecraftEnumType): Enum<*>
 }

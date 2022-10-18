@@ -7,14 +7,14 @@ plugins {
 }
 
 group = "io.layercraft.connector"
-version = "0.0.13"
+version = "0.0.14"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation("io.ktor:ktor-io-jvm:2.1.1")
+    implementation("io.ktor:ktor-io-jvm:2.1.2")
 
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit5"))
@@ -27,6 +27,7 @@ tasks.test {
 
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "17"
+    kotlinOptions.freeCompilerArgs = listOf("-Xuse-k2")
 }
 
 publishing {
