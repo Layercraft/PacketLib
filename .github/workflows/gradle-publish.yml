@@ -27,8 +27,18 @@ jobs:
           USERNAME: ${{ github.repository_owner }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Build with Gradle
+        run: ./gradlew build
+
       - name: Publish to GitHub Packages
-        run: ./gradlew publish --Dorg.gradle.project.version=${{ github.event.release.tag_name }}
+        run: ./gradlew publish -Dorg.gradle.project.version=${{ github.event.release.tag_name }}
         env:
           USERNAME: ${{ github.repository_owner }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload a Build Artifact
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/libs/*.jar
+
+
