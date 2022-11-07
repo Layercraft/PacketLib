@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "io.layercraft.connector"
-version = "0.0.14"
+version = properties["version"] as String
 
 repositories {
     mavenCentral()

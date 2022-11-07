@@ -1,7 +1,7 @@
 # Translator-API
 
 
-Special to [wiki.vg](https://wiki.vg) for the protocol documentation.
+Special Thanks to [wiki.vg](https://wiki.vg) for the protocol documentation.
 
 ## Usage
 Serialize a packet to a byte array:
