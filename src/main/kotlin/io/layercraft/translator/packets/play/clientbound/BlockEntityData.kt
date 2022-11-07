@@ -2,8 +2,10 @@ package io.layercraft.translator.packets.play.clientbound
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.translator.types.Position
-import io.layercraft.translator.utils.mc
+import io.layercraft.translator.utils.minecraft
 
 /**
  * Block entity data | 0x07 | play | client-bound
@@ -22,18 +24,18 @@ data class BlockEntityData(
     val nbtData: ByteArray
 ) : ClientBoundPacket {
     companion object : PacketSerializer<BlockEntityData> {
-        override fun serialize(input: Input): BlockEntityData {
-            val location = input.mc.readPosition()
-            val type = input.mc.readVarInt()
-            val nbt = input.mc.readRemainingByteArray()
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): BlockEntityData {
+            val location = input.readPosition()
+            val type = input.readVarInt()
+            val nbt = input.readRemainingByteArray()
 
             return BlockEntityData(location, type, nbt)
         }
 
-        override fun deserialize(output: Output, value: BlockEntityData) {
-            output.mc.writePosition(value.location)
-            output.mc.writeVarInt(value.type)
-            output.mc.writeRemainingByteArray(value.nbtData)
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: BlockEntityData) {
+            output.writePosition(value.location)
+            output.writeVarInt(value.type)
+            output.writeRemainingByteArray(value.nbtData)
         }
     }
 }

@@ -11,7 +11,10 @@ import java.util.*
  * @constructor Create empty Minecraft protocol serialize interface
  * @see <a href="https://wiki.vg/Protocol#Data_types">https://wiki.vg/Protocol#Data_types</a>
  */
-interface MinecraftProtocolDeserializeInterface {
+interface MinecraftProtocolDeserializeInterface<I> {
+
+    val input: I
+
     fun readBoolean(): Boolean
     fun readByte(): Byte
     fun readUByte(): UByte
@@ -33,10 +36,10 @@ interface MinecraftProtocolDeserializeInterface {
     fun readIdentifier(): String
 
     fun readVarIntByteArray(): ByteArray
-    fun <T> readVarIntArray(decoder: (input: Input) -> T): List<T>
+    fun <T> readVarIntArray(decoder: (input: MinecraftProtocolDeserializeInterface<I>) -> T): List<T>
 
     fun readRemainingByteArray(): ByteArray
-    fun <T> readRemainingArray(decoder: (input: Input) -> T): List<T>
+    fun <T> readRemainingArray(decoder: (input: MinecraftProtocolDeserializeInterface<I>) -> T): List<T>
 
     fun readPosition(): Position
     fun readUUID(): UUID

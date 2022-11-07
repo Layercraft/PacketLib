@@ -4,69 +4,71 @@ import io.ktor.utils.io.core.*
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.translator.types.Position
 import java.util.*
+import kotlin.math.roundToInt
 
 @JvmInline
-value class MinecraftByteInput(private val buffer: Input): MinecraftProtocolDeserializeInterface {
-    override fun readBoolean(): Boolean = buffer.readByte() != 0.toByte()
+value class MinecraftByteInput(override val input: Input): MinecraftProtocolDeserializeInterface<Input> {
 
-    override fun readByte(): Byte = buffer.readByte()
+    override fun readBoolean(): Boolean = input.readByte() != 0.toByte()
 
-    @OptIn(ExperimentalUnsignedTypes::class)
-    override fun readUByte(): UByte = buffer.readUByte()
-
-    override fun readShort(): Short = buffer.readShort()
+    override fun readByte(): Byte = input.readByte()
 
     @OptIn(ExperimentalUnsignedTypes::class)
-    override fun readUShort(): UShort = buffer.readUShort()
+    override fun readUByte(): UByte = input.readUByte()
 
-    override fun readInt(): Int = buffer.readInt()
+    override fun readShort(): Short = input.readShort()
 
-    override fun readVarInt(): Int = MinecraftVarIntUtils.readVarInt(buffer)
+    @OptIn(ExperimentalUnsignedTypes::class)
+    override fun readUShort(): UShort = input.readUShort()
 
-    override fun readLong(): Long = buffer.readLong()
+    override fun readInt(): Int = input.readInt()
 
-    override fun readVarLong(): Long = MinecraftVarLongUtils.readVarLong(buffer)
+    override fun readVarInt(): Int = MinecraftVarIntUtils.readVarInt(input)
 
-    override fun readFloat(): Float = buffer.readFloat()
+    override fun readLong(): Long = input.readLong()
 
-    override fun readDouble(): Double = buffer.readDouble()
+    override fun readVarLong(): Long = MinecraftVarLongUtils.readVarLong(input)
 
-    override fun readString(n: Int): String = MinecraftStringUtils.readString(n, buffer)
+    override fun readFloat(): Float = input.readFloat()
+
+    override fun readDouble(): Double = input.readDouble()
+
+    override fun readString(n: Int): String = MinecraftStringUtils.readString(n, input)
 
     override fun readChat(): String = readString(MINECRAFT_MAX_CHAT_LENGTH)
 
     override fun readIdentifier(): String = readString(MINECRAFT_MAX_IDENTIFIER_LENGTH)
 
-    override fun readVarIntByteArray(): ByteArray = buffer.readBytes(readVarInt())
+    override fun readVarIntByteArray(): ByteArray = input.readBytes(readVarInt())
 
-    override fun <T> readVarIntArray(decoder: (input: Input) -> T): List<T> {
+    override fun <T> readVarIntArray(decoder: (input: MinecraftProtocolDeserializeInterface<Input>) -> T): List<T> {
         val size = readVarInt()
 
-        return (1..size).map { decoder(buffer) }.toList()
+        return (1..size).map { decoder(this) }.toList()
     }
 
-    override fun readRemainingByteArray(): ByteArray = buffer.readBytes()
+    override fun readRemainingByteArray(): ByteArray = input.readBytes()
 
-    override fun <T> readRemainingArray(decoder: (input: Input) -> T): List<T> {
+    override fun <T> readRemainingArray(decoder: (input: MinecraftProtocolDeserializeInterface<Input>) -> T): List<T> {
         val list: MutableList<T> = mutableListOf()
 
-        while (buffer.remaining > 0) {
-            list.add(decoder(buffer))
+        while (input.remaining > 0) {
+            list.add(decoder(this))
         }
 
         return list.toList()
     }
 
-    override fun readPosition(): Position = Position.longToPosition(buffer.readLong())
+    override fun readPosition(): Position = Position.longToPosition(input.readLong())
 
     override fun readUUID(): UUID {
-        val most = buffer.readLong()
-        val least = buffer.readLong()
+        val most = input.readLong()
+        val least = input.readLong()
 
         return UUID(most, least)
     }
 
     override fun readAngle(): Float {
-        return buffer.readByte() * 360 / 256f
+        return (input.readByte() * 360.0f / 256f)
     }
 }

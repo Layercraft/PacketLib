@@ -16,7 +16,7 @@ object MinecraftStringUtils {
     fun readString(maxLength: Int = MINECRAFT_MAX_STRING_LENGTH, input: Input): String {
         if (input.endOfInput) throw EOFException("Premature end of stream")
 
-        val length: Int = input.mc.readVarInt()
+        val length: Int = input.minecraft.readVarInt()
 
         if (length > maxLength * 4) throw MinecraftProtocolDecodingException("The received encoded string buffer length is longer than maximum allowed ($length > ${maxLength * 4})")
         if (length < 0) throw MinecraftProtocolDecodingException("The received encoded string buffer length is less than zero! Weird string!")
@@ -32,7 +32,7 @@ object MinecraftStringUtils {
         val bytes = string.toByteArray(Charsets.UTF_8)
         if (bytes.size > MINECRAFT_MAX_STRING_LENGTH) throw MinecraftProtocolEncodingException("String too big (was ${bytes.size} bytes encoded, max $MINECRAFT_MAX_STRING_LENGTH)")
         if (string.length > maxLength) throw MinecraftProtocolEncodingException("String too big (was ${string.length} characters, max $maxLength)")
-        output.mc.writeVarInt(bytes.size)
+        output.minecraft.writeVarInt(bytes.size)
         output.writeFully(bytes)
     }
 }

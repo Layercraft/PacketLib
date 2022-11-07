@@ -2,8 +2,10 @@ package io.layercraft.translator.packets.play.clientbound
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.translator.types.Position
-import io.layercraft.translator.utils.mc
+import io.layercraft.translator.utils.minecraft
 
 /**
  * Block action | 0x08 | play | client-bound
@@ -24,20 +26,20 @@ data class BlockAction(
 ) : ClientBoundPacket {
 
     companion object : PacketSerializer<BlockAction> {
-        override fun serialize(input: Input): BlockAction {
-            val location = input.mc.readPosition()
-            val actionId = input.mc.readUByte()
-            val actionParameter = input.mc.readUByte()
-            val blockType = input.mc.readVarInt()
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): BlockAction {
+            val location = input.readPosition()
+            val actionId = input.readUByte()
+            val actionParameter = input.readUByte()
+            val blockType = input.readVarInt()
 
             return BlockAction(location, actionId, actionParameter, blockType)
         }
 
-        override fun deserialize(output: Output, value: BlockAction) {
-            output.mc.writePosition(value.location)
-            output.mc.writeUByte(value.actionId)
-            output.mc.writeUByte(value.actionParameter)
-            output.mc.writeVarInt(value.blockType)
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: BlockAction) {
+            output.writePosition(value.location)
+            output.writeUByte(value.actionId)
+            output.writeUByte(value.actionParameter)
+            output.writeVarInt(value.blockType)
         }
 
     }

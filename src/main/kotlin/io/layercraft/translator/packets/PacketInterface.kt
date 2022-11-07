@@ -1,6 +1,10 @@
 package io.layercraft.translator.packets
 
 import io.ktor.utils.io.core.*
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.translator.utils.MinecraftByteInput
+import io.layercraft.translator.utils.MinecraftByteOutput
 
 
 interface Packet{
@@ -17,10 +21,10 @@ interface ClientBoundPacket: Packet {
 }
 
 
-interface PacketSerializer<T> where T: Packet {
-    fun serialize(input: Input): T
+interface PacketSerializer<T> where T:Packet {
+    fun serialize(input: MinecraftProtocolDeserializeInterface<*>): T
 
-    fun deserialize(output: Output, value: T)
+    fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: T)
 }
 
 @Target(AnnotationTarget.CLASS)

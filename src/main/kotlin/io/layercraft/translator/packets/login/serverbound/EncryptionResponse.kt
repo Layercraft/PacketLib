@@ -2,7 +2,9 @@ package io.layercraft.translator.packets.login.serverbound
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
-import io.layercraft.translator.utils.mc
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.translator.utils.minecraft
 
 
 /**
@@ -26,28 +28,28 @@ data class EncryptionResponse(
 ) : ServerBoundPacket {
     companion object: PacketSerializer<EncryptionResponse> {
 
-        override fun serialize(input: Input): EncryptionResponse {
-            val sharedSecret = input.mc.readVarIntByteArray()
-            val hasVerifyToken = input.mc.readBoolean()
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EncryptionResponse {
+            val sharedSecret = input.readVarIntByteArray()
+            val hasVerifyToken = input.readBoolean()
             return if (hasVerifyToken) {
-                val verifyToken = input.mc.readVarIntByteArray()
+                val verifyToken = input.readVarIntByteArray()
                 EncryptionResponse(sharedSecret, true, verifyToken, null, null)
             } else {
-                val salt = input.mc.readLong()
-                val messageSignature = input.mc.readVarIntByteArray()
+                val salt = input.readLong()
+                val messageSignature = input.readVarIntByteArray()
                 EncryptionResponse(sharedSecret, false, null, salt, messageSignature)
             }
         }
 
-        override fun deserialize(output: Output, value: EncryptionResponse) {
-            output.mc.writeVarIntByteArray(value.sharedSecret)
-            output.mc.writeBoolean(value.hasVerifyToken)
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EncryptionResponse) {
+            output.writeVarIntByteArray(value.sharedSecret)
+            output.writeBoolean(value.hasVerifyToken)
             if (value.hasVerifyToken) {
-                output.mc.writeVarIntByteArray(value.verifyToken!!)
+                output.writeVarIntByteArray(value.verifyToken!!)
             }
             if (!value.hasVerifyToken) {
-                output.mc.writeLong(value.salt!!)
-                output.mc.writeVarIntByteArray(value.messageSignature!!)
+                output.writeLong(value.salt!!)
+                output.writeVarIntByteArray(value.messageSignature!!)
             }
         }
     }

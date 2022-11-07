@@ -2,7 +2,9 @@ package io.layercraft.translator.packets.play.clientbound
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
-import io.layercraft.translator.utils.mc
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.translator.utils.minecraft
 
 /**
  * Spawn experience orb | 0x01 | play | client-bound
@@ -24,22 +26,22 @@ data class SpawnExperienceOrb(
     val count: Short
 ) : ClientBoundPacket {
     companion object: PacketSerializer<SpawnExperienceOrb> {
-        override fun serialize(input: Input): SpawnExperienceOrb {
-            val entityId = input.mc.readVarInt()
-            val x = input.mc.readDouble()
-            val y = input.mc.readDouble()
-            val z = input.mc.readDouble()
-            val count = input.mc.readShort()
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnExperienceOrb {
+            val entityId = input.readVarInt()
+            val x = input.readDouble()
+            val y = input.readDouble()
+            val z = input.readDouble()
+            val count = input.readShort()
 
             return SpawnExperienceOrb(entityId, x, y, z, count)
         }
 
-        override fun deserialize(output: Output, value: SpawnExperienceOrb) {
-            output.mc.writeVarInt(value.entityId)
-            output.mc.writeDouble(value.x)
-            output.mc.writeDouble(value.y)
-            output.mc.writeDouble(value.z)
-            output.mc.writeShort(value.count)
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SpawnExperienceOrb) {
+            output.writeVarInt(value.entityId)
+            output.writeDouble(value.x)
+            output.writeDouble(value.y)
+            output.writeDouble(value.z)
+            output.writeShort(value.count)
         }
     }
 }

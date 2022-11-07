@@ -2,7 +2,9 @@ package io.layercraft.translator.packets.login.clientbound
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
-import io.layercraft.translator.utils.mc
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.translator.utils.minecraft
 
 
 /**
@@ -17,14 +19,14 @@ data class Disconnect(
 ): ClientBoundPacket {
     companion object : PacketSerializer<Disconnect>{
 
-        override fun serialize(input: Input): Disconnect {
-            val reason = input.mc.readChat()
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): Disconnect {
+            val reason = input.readChat()
 
             return Disconnect(reason)
         }
 
-        override fun deserialize(output: Output, value: Disconnect) {
-            output.mc.writeChat(value.reason)
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: Disconnect) {
+            output.writeChat(value.reason)
         }
 
     }

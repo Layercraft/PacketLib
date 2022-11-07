@@ -2,7 +2,9 @@ package io.layercraft.translator.packets.login.serverbound
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
-import io.layercraft.translator.utils.mc
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.translator.utils.minecraft
 
 /**
  * Login plugin response | 0x02 | login | server-bound
@@ -20,18 +22,18 @@ data class LoginPluginResponse(
 ): ServerBoundPacket {
     companion object: PacketSerializer<LoginPluginResponse> {
 
-        override fun serialize(input: Input): LoginPluginResponse {
-            val messageId = input.mc.readVarInt()
-            val successful = input.mc.readBoolean()
-            val data = input.mc.readRemainingByteArray()
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LoginPluginResponse {
+            val messageId = input.readVarInt()
+            val successful = input.readBoolean()
+            val data = input.readRemainingByteArray()
 
             return LoginPluginResponse(messageId, successful, data)
         }
 
-        override fun deserialize(output: Output, value: LoginPluginResponse) {
-            output.mc.writeVarInt(value.messageId)
-            output.mc.writeBoolean(value.successful)
-            output.mc.writeRemainingByteArray(value.data)
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LoginPluginResponse) {
+            output.writeVarInt(value.messageId)
+            output.writeBoolean(value.successful)
+            output.writeRemainingByteArray(value.data)
         }
     }
 }

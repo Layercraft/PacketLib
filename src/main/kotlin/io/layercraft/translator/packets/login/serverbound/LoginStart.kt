@@ -2,7 +2,9 @@ package io.layercraft.translator.packets.login.serverbound
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
-import io.layercraft.translator.utils.mc
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.translator.utils.minecraft
 import java.util.*
 
 /**
@@ -33,30 +35,30 @@ data class LoginStart(
         get() = playerUUID != null
     companion object: PacketSerializer<LoginStart> {
 
-        override fun serialize(input: Input): LoginStart {
-            val name = input.mc.readString(16)
-            val hasSigData = input.mc.readBoolean()
-            val timestamp = if (hasSigData) input.mc.readLong() else null
-            val publicKey = if (hasSigData) input.mc.readVarIntByteArray() else null
-            val signature = if (hasSigData) input.mc.readVarIntByteArray() else null
-            val hasPlayerUUID = input.mc.readBoolean()
-            val playerUUID = if (hasPlayerUUID) input.mc.readUUID() else null
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LoginStart {
+            val name = input.readString(16)
+            val hasSigData = input.readBoolean()
+            val timestamp = if (hasSigData) input.readLong() else null
+            val publicKey = if (hasSigData) input.readVarIntByteArray() else null
+            val signature = if (hasSigData) input.readVarIntByteArray() else null
+            val hasPlayerUUID = input.readBoolean()
+            val playerUUID = if (hasPlayerUUID) input.readUUID() else null
 
             return LoginStart(name, timestamp, publicKey, signature, playerUUID)
         }
 
-        override fun deserialize(output: Output, value: LoginStart) {
-            output.mc.writeString(value.name, 16)
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LoginStart) {
+            output.writeString(value.name, 16)
             val hasSigData = value.timestamp != null && value.publicKey != null && value.signature != null
-            output.mc.writeBoolean(hasSigData)
+            output.writeBoolean(hasSigData)
             if (hasSigData) {
-                output.mc.writeLong(value.timestamp!!)
-                output.mc.writeVarIntByteArray(value.publicKey!!)
-                output.mc.writeVarIntByteArray(value.signature!!)
+                output.writeLong(value.timestamp!!)
+                output.writeVarIntByteArray(value.publicKey!!)
+                output.writeVarIntByteArray(value.signature!!)
             }
             val hasPlayerUUID = value.playerUUID != null
-            output.mc.writeBoolean(hasPlayerUUID)
-            if (hasPlayerUUID) output.mc.writeUUID(value.playerUUID!!)
+            output.writeBoolean(hasPlayerUUID)
+            if (hasPlayerUUID) output.writeUUID(value.playerUUID!!)
         }
     }
 }

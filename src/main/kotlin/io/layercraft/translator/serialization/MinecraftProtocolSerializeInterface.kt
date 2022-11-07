@@ -11,24 +11,21 @@ import java.util.*
  * @constructor Create empty Minecraft protocol serialize interface
  * @see <a href="https://wiki.vg/Protocol#Data_types">https://wiki.vg/Protocol#Data_types</a>
  */
-interface MinecraftProtocolSerializeInterface {
+interface MinecraftProtocolSerializeInterface<O> {
+
+    val output: O
 
     fun writeBoolean(input: Boolean)
-
     fun writeByte(input: Byte)
-
     fun writeUByte(input: UByte)
 
     fun writeShort(input: Short)
-
     fun writeUShort(input: UShort)
 
     fun writeInt(input: Int)
-
     fun writeVarInt(input: Int)
 
     fun writeLong(input: Long)
-
     fun writeVarLong(input: Long)
 
     fun writeFloat(input: Float)
@@ -39,14 +36,12 @@ interface MinecraftProtocolSerializeInterface {
     fun writeIdentifier(input: String)
 
     fun writeVarIntByteArray(input: ByteArray)
-    fun <T> writeVarIntArray(input: List<T>, encoder: (value: T, output: Output) -> Unit)
+    fun <T> writeVarIntArray(input: List<T>, encoder: (value: T, output: MinecraftProtocolSerializeInterface<O>) -> Unit)
 
     fun writeRemainingByteArray(input: ByteArray)
-    fun <T> writeRemainingArray(input: List<T>, encoder: (value: T, output: Output) -> Unit)
+    fun <T> writeRemainingArray(input: List<T>, encoder: (value: T, output: MinecraftProtocolSerializeInterface<O>) -> Unit)
 
     fun writePosition(input: Position)
     fun writeUUID(input: UUID)
     fun writeAngle(input: Float)
-
-    //fun writeEnum(input: Input, enum: Enum<*>, type: MinecraftEnumType): Enum<*>
 }

@@ -2,6 +2,8 @@ package io.layercraft.translator.packets.status.serverbound
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
 
 /**
  * Ping request | 0x01 | status | server-bound
@@ -16,12 +18,12 @@ data class PingRequest(
     val payload: Long
 ): ServerBoundPacket {
     companion object: PacketSerializer<PingRequest> {
-        override fun serialize(input: Input): PingRequest {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): PingRequest {
             val payload = input.readLong()
             return PingRequest(payload)
         }
 
-        override fun deserialize(output: Output, value: PingRequest) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: PingRequest) {
             output.writeLong(value.payload)
         }
     }

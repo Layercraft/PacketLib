@@ -2,8 +2,10 @@ package io.layercraft.translator.packets.play.clientbound
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.translator.types.Position
-import io.layercraft.translator.utils.mc
+import io.layercraft.translator.utils.minecraft
 
 /**
  * Set block destroy stage | 0x06 | play | client-bound
@@ -25,18 +27,18 @@ data class SetBlockDestroyStage(
     val destroyStage: Byte,
 ): ClientBoundPacket {
     companion object: PacketSerializer<SetBlockDestroyStage> {
-        override fun serialize(input: Input): SetBlockDestroyStage {
-            val entityId = input.mc.readVarInt()
-            val location = input.mc.readPosition()
-            val destroyStage = input.mc.readByte()
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SetBlockDestroyStage {
+            val entityId = input.readVarInt()
+            val location = input.readPosition()
+            val destroyStage = input.readByte()
 
             return SetBlockDestroyStage(entityId, location, destroyStage)
         }
 
-        override fun deserialize(output: Output, value: SetBlockDestroyStage) {
-            output.mc.writeVarInt(value.entityId)
-            output.mc.writePosition(value.location)
-            output.mc.writeByte(value.destroyStage)
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SetBlockDestroyStage) {
+            output.writeVarInt(value.entityId)
+            output.writePosition(value.location)
+            output.writeByte(value.destroyStage)
         }
     }
 }

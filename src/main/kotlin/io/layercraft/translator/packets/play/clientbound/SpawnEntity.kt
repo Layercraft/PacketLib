@@ -3,7 +3,9 @@ package io.layercraft.translator.packets.play.clientbound
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.data.entity.EntityType
 import io.layercraft.translator.packets.*
-import io.layercraft.translator.utils.mc
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.translator.utils.minecraft
 import java.util.*
 
 /**
@@ -42,38 +44,38 @@ data class SpawnEntity(
     val velocityZ: Short
 ) : ClientBoundPacket {
     companion object : PacketSerializer<SpawnEntity> {
-        override fun serialize(input: Input): SpawnEntity {
-            val entityId = input.mc.readVarInt()
-            val uuid = input.mc.readUUID()
-            val type = EntityType.byType(input.mc.readVarInt()) ?: throw IllegalArgumentException("Invalid entity type")
-            val x = input.mc.readDouble()
-            val y = input.mc.readDouble()
-            val z = input.mc.readDouble()
-            val pitch = input.mc.readAngle()
-            val yaw = input.mc.readAngle()
-            val headYaw = input.mc.readAngle()
-            val data = input.mc.readVarInt()
-            val velocityX = input.mc.readShort()
-            val velocityY = input.mc.readShort()
-            val velocityZ = input.mc.readShort()
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnEntity {
+            val entityId = input.readVarInt()
+            val uuid = input.readUUID()
+            val type = EntityType.byType(input.readVarInt()) ?: throw IllegalArgumentException("Invalid entity type")
+            val x = input.readDouble()
+            val y = input.readDouble()
+            val z = input.readDouble()
+            val pitch = input.readAngle()
+            val yaw = input.readAngle()
+            val headYaw = input.readAngle()
+            val data = input.readVarInt()
+            val velocityX = input.readShort()
+            val velocityY = input.readShort()
+            val velocityZ = input.readShort()
 
             return SpawnEntity(entityId, uuid, type, x, y, z, pitch, yaw, headYaw, data, velocityX, velocityY, velocityZ)
         }
 
-        override fun deserialize(output: Output, value: SpawnEntity) {
-            output.mc.writeVarInt(value.entityId)
-            output.mc.writeUUID(value.uuid)
-            output.mc.writeVarInt(value.type.type)
-            output.mc.writeDouble(value.x)
-            output.mc.writeDouble(value.y)
-            output.mc.writeDouble(value.z)
-            output.mc.writeAngle(value.pitch)
-            output.mc.writeAngle(value.yaw)
-            output.mc.writeAngle(value.headYaw)
-            output.mc.writeVarInt(value.data)
-            output.mc.writeShort(value.velocityX)
-            output.mc.writeShort(value.velocityY)
-            output.mc.writeShort(value.velocityZ)
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SpawnEntity) {
+            output.writeVarInt(value.entityId)
+            output.writeUUID(value.uuid)
+            output.writeVarInt(value.type.type)
+            output.writeDouble(value.x)
+            output.writeDouble(value.y)
+            output.writeDouble(value.z)
+            output.writeAngle(value.pitch)
+            output.writeAngle(value.yaw)
+            output.writeAngle(value.headYaw)
+            output.writeVarInt(value.data)
+            output.writeShort(value.velocityX)
+            output.writeShort(value.velocityY)
+            output.writeShort(value.velocityZ)
         }
 
     }

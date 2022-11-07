@@ -2,7 +2,9 @@ package io.layercraft.translator.packets.play.clientbound
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
-import io.layercraft.translator.utils.mc
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.translator.utils.minecraft
 
 /**
  * Acknowledge block change | 0x05 | play | client-bound
@@ -15,14 +17,14 @@ data class AcknowledgeBlockChange(
     val sequenceId: Int, //varint
 ): ClientBoundPacket {
     companion object: PacketSerializer<AcknowledgeBlockChange> {
-        override fun serialize(input: Input): AcknowledgeBlockChange {
-            val sequenceId = input.mc.readVarInt()
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): AcknowledgeBlockChange {
+            val sequenceId = input.readVarInt()
 
             return AcknowledgeBlockChange(sequenceId)
         }
 
-        override fun deserialize(output: Output, value: AcknowledgeBlockChange) {
-            output.mc.writeVarInt(value.sequenceId)
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: AcknowledgeBlockChange) {
+            output.writeVarInt(value.sequenceId)
         }
     }
 }

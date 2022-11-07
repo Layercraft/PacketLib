@@ -3,6 +3,8 @@ package io.layercraft.translator.packets.handshake.serverbound
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.data.ProtocolVersion
 import io.layercraft.translator.packets.*
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
 
 @MinecraftPacket(packetId = 0xFE, state = PacketState.HANDSHAKE, direction = PacketDirection.SERVERBOUND)
 data class LegacyServerListPing(
@@ -12,11 +14,11 @@ data class LegacyServerListPing(
 ): ServerBoundPacket {
     companion object: PacketSerializer<LegacyServerListPing> {
 
-        override fun serialize(input: Input): LegacyServerListPing {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LegacyServerListPing {
             TODO("Not yet implemented")
         }
 
-        override fun deserialize(output: Output, value: LegacyServerListPing) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LegacyServerListPing) {
             TODO("Not yet implemented")
         }
     }

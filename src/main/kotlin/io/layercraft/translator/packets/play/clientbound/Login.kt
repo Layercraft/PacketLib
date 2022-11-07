@@ -2,16 +2,15 @@ package io.layercraft.translator.packets.play.clientbound
 
 import io.ktor.utils.io.core.Input
 import io.ktor.utils.io.core.Output
-import io.ktor.utils.io.core.readDouble
-import io.ktor.utils.io.core.readLong
-import io.ktor.utils.io.core.readUByte
 import io.layercraft.translator.packets.ClientBoundPacket
 import io.layercraft.translator.packets.MinecraftPacket
 import io.layercraft.translator.packets.PacketDirection
 import io.layercraft.translator.packets.PacketSerializer
 import io.layercraft.translator.packets.PacketState
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.translator.types.Position
-import io.layercraft.translator.utils.mc
+import io.layercraft.translator.utils.minecraft
 
 
 /**
@@ -61,26 +60,26 @@ data class Login(
     val deathPosition: Position?, //optional
 ): ClientBoundPacket {
     companion object: PacketSerializer<Login>{
-        override fun serialize(input: Input): Login {
-            val entityId = input.mc.readVarInt()
-            val isHardcore = input.mc.readBoolean()
-            val gameMode = input.mc.readUByte()
-            val previousGameMode = input.mc.readUByte()
-            val dimensionNames = input.mc.readVarIntArray { input.mc.readIdentifier() }
-            val registryCodec = input.mc.readVarIntByteArray()
-            val dimensionType = input.mc.readIdentifier()
-            val dimensionName = input.mc.readIdentifier()
-            val hashedSeed = input.mc.readLong()
-            val maxPlayers = input.mc.readVarInt()
-            val viewDistance = input.mc.readVarInt()
-            val simulationDistance = input.mc.readVarInt()
-            val reducedDebugInfo = input.mc.readBoolean()
-            val enableRespawnScreen = input.mc.readBoolean()
-            val isDebug = input.mc.readBoolean()
-            val isFlat = input.mc.readBoolean()
-            val hasDeathLocation = input.mc.readBoolean()
-            val deathDimensionName = if (hasDeathLocation) input.mc.readIdentifier() else null
-            val deathPosition = if (hasDeathLocation) input.mc.readPosition() else null
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): Login {
+            val entityId = input.readVarInt()
+            val isHardcore = input.readBoolean()
+            val gameMode = input.readUByte()
+            val previousGameMode = input.readUByte()
+            val dimensionNames = input.readVarIntArray { input.readIdentifier() }
+            val registryCodec = input.readVarIntByteArray()
+            val dimensionType = input.readIdentifier()
+            val dimensionName = input.readIdentifier()
+            val hashedSeed = input.readLong()
+            val maxPlayers = input.readVarInt()
+            val viewDistance = input.readVarInt()
+            val simulationDistance = input.readVarInt()
+            val reducedDebugInfo = input.readBoolean()
+            val enableRespawnScreen = input.readBoolean()
+            val isDebug = input.readBoolean()
+            val isFlat = input.readBoolean()
+            val hasDeathLocation = input.readBoolean()
+            val deathDimensionName = if (hasDeathLocation) input.readIdentifier() else null
+            val deathPosition = if (hasDeathLocation) input.readPosition() else null
 
             return Login(
                 entityId = entityId,
@@ -106,27 +105,27 @@ data class Login(
 
         }
 
-        override fun deserialize(output: Output, value: Login) {
-            output.mc.writeVarInt(value.entityId)
-            output.mc.writeBoolean(value.isHardcore)
-            output.mc.writeUByte(value.gameMode)
-            output.mc.writeUByte(value.previousGameMode)
-            output.mc.writeVarIntArray(value.dimensionNames) { str, outputArray ->  outputArray.mc.writeIdentifier(str) }
-            output.mc.writeVarIntByteArray(value.registryCodec)
-            output.mc.writeIdentifier(value.dimensionType)
-            output.mc.writeIdentifier(value.dimensionName)
-            output.mc.writeLong(value.hashedSeed)
-            output.mc.writeVarInt(value.maxPlayers)
-            output.mc.writeVarInt(value.viewDistance)
-            output.mc.writeVarInt(value.simulationDistance)
-            output.mc.writeBoolean(value.reducedDebugInfo)
-            output.mc.writeBoolean(value.enableRespawnScreen)
-            output.mc.writeBoolean(value.isDebug)
-            output.mc.writeBoolean(value.isFlat)
-            output.mc.writeBoolean(value.hasDeathLocation)
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: Login) {
+            output.writeVarInt(value.entityId)
+            output.writeBoolean(value.isHardcore)
+            output.writeUByte(value.gameMode)
+            output.writeUByte(value.previousGameMode)
+            output.writeVarIntArray(value.dimensionNames) { str, outputArray ->  outputArray.writeIdentifier(str) }
+            output.writeVarIntByteArray(value.registryCodec)
+            output.writeIdentifier(value.dimensionType)
+            output.writeIdentifier(value.dimensionName)
+            output.writeLong(value.hashedSeed)
+            output.writeVarInt(value.maxPlayers)
+            output.writeVarInt(value.viewDistance)
+            output.writeVarInt(value.simulationDistance)
+            output.writeBoolean(value.reducedDebugInfo)
+            output.writeBoolean(value.enableRespawnScreen)
+            output.writeBoolean(value.isDebug)
+            output.writeBoolean(value.isFlat)
+            output.writeBoolean(value.hasDeathLocation)
             if (value.hasDeathLocation) {
-                output.mc.writeIdentifier(value.deathDimensionName!!)
-                output.mc.writePosition(value.deathPosition!!)
+                output.writeIdentifier(value.deathDimensionName!!)
+                output.writePosition(value.deathPosition!!)
             }
         }
     }

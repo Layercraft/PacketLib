@@ -6,57 +6,58 @@ import io.layercraft.translator.types.Position
 import java.util.*
 
 @JvmInline
-value class MinecraftByteOutput(private val buffer: Output): MinecraftProtocolSerializeInterface {
-    override fun writeBoolean(input: Boolean) = buffer.writeByte(if (input) 1 else 0)
+value class MinecraftByteOutput(override val output: Output): MinecraftProtocolSerializeInterface<Output> {
 
-    override fun writeByte(input: Byte) = buffer.writeByte(input)
+    override fun writeBoolean(input: Boolean) = output.writeByte(if (input) 1 else 0)
 
-    override fun writeUByte(input: UByte) = buffer.writeByte(input.toByte())
+    override fun writeByte(input: Byte) = output.writeByte(input)
 
-    override fun writeShort(input: Short) = buffer.writeShort(input)
+    override fun writeUByte(input: UByte) = output.writeByte(input.toByte())
 
-    override fun writeUShort(input: UShort) = buffer.writeShort(input.toShort())
+    override fun writeShort(input: Short) = output.writeShort(input)
 
-    override fun writeInt(input: Int) = buffer.writeInt(input)
+    override fun writeUShort(input: UShort) = output.writeShort(input.toShort())
 
-    override fun writeVarInt(input: Int) = MinecraftVarIntUtils.writeVarInt(input, buffer)
+    override fun writeInt(input: Int) = output.writeInt(input)
 
-    override fun writeLong(input: Long) = buffer.writeLong(input)
+    override fun writeVarInt(input: Int) = MinecraftVarIntUtils.writeVarInt(input, output)
 
-    override fun writeVarLong(input: Long) = MinecraftVarLongUtils.writeVarLong(input, buffer)
+    override fun writeLong(input: Long) = output.writeLong(input)
 
-    override fun writeFloat(input: Float) = buffer.writeFloat(input)
+    override fun writeVarLong(input: Long) = MinecraftVarLongUtils.writeVarLong(input, output)
 
-    override fun writeDouble(input: Double) = buffer.writeDouble(input)
+    override fun writeFloat(input: Float) = output.writeFloat(input)
 
-    override fun writeString(input: String, n: Int) = MinecraftStringUtils.writeString(n, input, buffer)
+    override fun writeDouble(input: Double) = output.writeDouble(input)
+
+    override fun writeString(input: String, n: Int) = MinecraftStringUtils.writeString(n, input, output)
 
     override fun writeChat(input: String) = writeString(input, MINECRAFT_MAX_CHAT_LENGTH)
 
     override fun writeIdentifier(input: String) = writeString(input, MINECRAFT_MAX_IDENTIFIER_LENGTH)
 
     override fun writeVarIntByteArray(input: ByteArray) {
-        buffer.mc.writeVarInt(input.size)
-        buffer.writeFully(input)
+        writeVarInt(input.size)
+        output.writeFully(input)
     }
 
-    override fun <T> writeVarIntArray(input: List<T>, encoder: (value: T, output: Output) -> Unit) {
-        buffer.mc.writeVarInt(input.size)
-        input.forEach { encoder(it, buffer) }
+    override fun <T> writeVarIntArray(input: List<T>, encoder: (value: T, output: MinecraftProtocolSerializeInterface<Output>) -> Unit) {
+        writeVarInt(input.size)
+        input.forEach { encoder(it, this) }
     }
 
-    override fun writeRemainingByteArray(input: ByteArray) = buffer.writeFully(input)
+    override fun writeRemainingByteArray(input: ByteArray) = output.writeFully(input)
 
-    override fun <T> writeRemainingArray(input: List<T>, encoder: (value: T, output: Output) -> Unit) = input.forEach { encoder(it, buffer) }
+    override fun <T> writeRemainingArray(input: List<T>, encoder: (value: T, output: MinecraftProtocolSerializeInterface<Output>) -> Unit) = input.forEach { encoder(it, this) }
 
-    override fun writePosition(input: Position) = buffer.writeLong(Position.positionToLong(input))
+    override fun writePosition(input: Position) = output.writeLong(Position.positionToLong(input))
 
     override fun writeUUID(input: UUID) {
-        buffer.writeLong(input.mostSignificantBits)
-        buffer.writeLong(input.leastSignificantBits)
+        output.writeLong(input.mostSignificantBits)
+        output.writeLong(input.leastSignificantBits)
     }
 
     override fun writeAngle(input: Float) {
-        buffer.writeByte((input * 256.0f / 360.0f).toInt().toByte())
+        output.writeByte((input * 256f / 360f).toInt().toByte())
     }
 }

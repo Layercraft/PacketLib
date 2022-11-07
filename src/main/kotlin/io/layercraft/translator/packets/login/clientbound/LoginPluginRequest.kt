@@ -2,7 +2,9 @@ package io.layercraft.translator.packets.login.clientbound
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
-import io.layercraft.translator.utils.mc
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.translator.utils.minecraft
 
 /**
  * Login plugin request | 0x04 | login | client-bound
@@ -20,18 +22,18 @@ data class LoginPluginRequest(
 ): ClientBoundPacket {
     companion object: PacketSerializer<LoginPluginRequest> {
 
-        override fun serialize(input: Input): LoginPluginRequest {
-            val messageId = input.mc.readVarInt()
-            val channel = input.mc.readIdentifier()
-            val data = input.mc.readRemainingByteArray()
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LoginPluginRequest {
+            val messageId = input.readVarInt()
+            val channel = input.readIdentifier()
+            val data = input.readRemainingByteArray()
 
             return LoginPluginRequest(messageId, channel, data)
         }
 
-        override fun deserialize(output: Output, value: LoginPluginRequest) {
-            output.mc.writeVarInt(value.messageId)
-            output.mc.writeIdentifier(value.channel)
-            output.mc.writeRemainingByteArray(value.data)
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LoginPluginRequest) {
+            output.writeVarInt(value.messageId)
+            output.writeIdentifier(value.channel)
+            output.writeRemainingByteArray(value.data)
         }
     }
 }

@@ -2,7 +2,9 @@ package io.layercraft.translator.packets.login.clientbound
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
-import io.layercraft.translator.utils.mc
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.translator.utils.minecraft
 
 /**
  * Encryption request | 0x01 | login | client-bound
@@ -21,18 +23,18 @@ data class EncryptionRequest(
 ): ClientBoundPacket {
     companion object: PacketSerializer<EncryptionRequest> {
 
-        override fun serialize(input: Input): EncryptionRequest {
-            val serverId = input.mc.readString(20)
-            val publicKey = input.mc.readVarIntByteArray()
-            val verifyToken = input.mc.readVarIntByteArray()
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EncryptionRequest {
+            val serverId = input.readString(20)
+            val publicKey = input.readVarIntByteArray()
+            val verifyToken = input.readVarIntByteArray()
 
             return EncryptionRequest(serverId, publicKey, verifyToken)
         }
 
-        override fun deserialize(output: Output, value: EncryptionRequest) {
-            output.mc.writeString(value.serverId, 20)
-            output.mc.writeVarIntByteArray(value.publicKey)
-            output.mc.writeVarIntByteArray(value.verifyToken)
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EncryptionRequest) {
+            output.writeString(value.serverId, 20)
+            output.writeVarIntByteArray(value.publicKey)
+            output.writeVarIntByteArray(value.verifyToken)
         }
     }
 }

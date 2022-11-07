@@ -6,7 +6,9 @@ import io.ktor.utils.io.core.*
 import io.layercraft.translator.data.ProtocolVersion
 import io.layercraft.translator.packets.*
 import io.layercraft.translator.packets.handshake.data.HandshakeNextState
-import io.layercraft.translator.utils.mc
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.translator.utils.minecraft
 
 
 /**
@@ -27,21 +29,21 @@ data class Handshake(
 ) : ServerBoundPacket {
     companion object: PacketSerializer<Handshake> {
 
-        override fun serialize(input: Input): Handshake {
-            val version = input.mc.readVarInt()
-            val address = input.mc.readString(255)
-            val port = input.mc.readUShort()
-            val nextState = HandshakeNextState.values()[input.mc.readVarInt() - 1]
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): Handshake {
+            val version = input.readVarInt()
+            val address = input.readString(255)
+            val port = input.readUShort()
+            val nextState = HandshakeNextState.values()[input.readVarInt() - 1]
 
 
             return Handshake(ProtocolVersion.fromProtocolNumber(version), address, port, nextState)
         }
 
-        override fun deserialize(output: Output, value: Handshake) {
-            output.mc.writeVarInt(value.protocolVersion.protocolNumber)
-            output.mc.writeString(value.address, 255)
-            output.mc.writeUShort(value.port)
-            output.mc.writeVarInt(value.nextState.ordinal + 1)
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: Handshake) {
+            output.writeVarInt(value.protocolVersion.protocolNumber)
+            output.writeString(value.address, 255)
+            output.writeUShort(value.port)
+            output.writeVarInt(value.nextState.ordinal + 1)
         }
     }
 }

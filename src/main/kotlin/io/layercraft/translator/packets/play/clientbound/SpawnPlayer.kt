@@ -2,7 +2,9 @@ package io.layercraft.translator.packets.play.clientbound
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
-import io.layercraft.translator.utils.mc
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.translator.utils.minecraft
 import java.util.*
 
 /**
@@ -29,26 +31,26 @@ data class SpawnPlayer(
     val pitch: Float,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<SpawnPlayer> {
-        override fun serialize(input: Input): SpawnPlayer {
-            val entityId = input.mc.readVarInt()
-            val playerUUID = input.mc.readUUID()
-            val x = input.mc.readDouble()
-            val y = input.mc.readDouble()
-            val z = input.mc.readDouble()
-            val yaw = input.mc.readAngle()
-            val pitch = input.mc.readAngle()
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnPlayer {
+            val entityId = input.readVarInt()
+            val playerUUID = input.readUUID()
+            val x = input.readDouble()
+            val y = input.readDouble()
+            val z = input.readDouble()
+            val yaw = input.readAngle()
+            val pitch = input.readAngle()
 
             return SpawnPlayer(entityId, playerUUID, x, y, z, yaw, pitch)
         }
 
-        override fun deserialize(output: Output, value: SpawnPlayer) {
-            output.mc.writeVarInt(value.entityId)
-            output.mc.writeUUID(value.playerUUID)
-            output.mc.writeDouble(value.x)
-            output.mc.writeDouble(value.y)
-            output.mc.writeDouble(value.z)
-            output.mc.writeAngle(value.yaw)
-            output.mc.writeAngle(value.pitch)
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SpawnPlayer) {
+            output.writeVarInt(value.entityId)
+            output.writeUUID(value.playerUUID)
+            output.writeDouble(value.x)
+            output.writeDouble(value.y)
+            output.writeDouble(value.z)
+            output.writeAngle(value.yaw)
+            output.writeAngle(value.pitch)
         }
 
     }

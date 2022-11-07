@@ -2,7 +2,9 @@ package io.layercraft.translator.packets.status.clientbound
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
-import io.layercraft.translator.utils.mc
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.translator.utils.minecraft
 
 /**
  * Status response | 0x00 | status | client-bound
@@ -16,14 +18,14 @@ data class StatusResponse(
 ): ClientBoundPacket {
     companion object: PacketSerializer<StatusResponse> {
 
-        override fun serialize(input: Input): StatusResponse {
-            val jsonResponse = input.mc.readString(32767)
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): StatusResponse {
+            val jsonResponse = input.readString(32767)
 
             return StatusResponse(jsonResponse)
         }
 
-        override fun deserialize(output: Output, value: StatusResponse) {
-            output.mc.writeString(value.jsonResponse, 32767)
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: StatusResponse) {
+            output.writeString(value.jsonResponse, 32767)
         }
     }
 }

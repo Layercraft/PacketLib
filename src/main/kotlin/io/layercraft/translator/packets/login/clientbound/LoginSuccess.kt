@@ -2,7 +2,9 @@ package io.layercraft.translator.packets.login.clientbound
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
-import io.layercraft.translator.utils.mc
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.translator.utils.minecraft
 import java.util.*
 
 /**
@@ -20,27 +22,27 @@ data class LoginSuccess(
     val properties: List<LoginProperty>, //varint array of login properties
 ): ClientBoundPacket {
     companion object: PacketSerializer<LoginSuccess> {
-        override fun serialize(input: Input): LoginSuccess {
-            val uuid = input.mc.readUUID()
-            val username = input.mc.readString(16)
-            val properties = input.mc.readVarIntArray {
-                val name = it.mc.readString(32767)
-                val value = it.mc.readString(32767)
-                val isSigned = it.mc.readBoolean()
-                val signature = if (isSigned) it.mc.readString(32767) else null
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LoginSuccess {
+            val uuid = input.readUUID()
+            val username = input.readString(16)
+            val properties = input.readVarIntArray {
+                val name = it.readString(32767)
+                val value = it.readString(32767)
+                val isSigned = it.readBoolean()
+                val signature = if (isSigned) it.readString(32767) else null
                 LoginProperty(name, value, signature)
             }
             return LoginSuccess(uuid, username, properties)
         }
 
-        override fun deserialize(output: Output, value: LoginSuccess) {
-            output.mc.writeUUID(value.uuid)
-            output.mc.writeString(value.username, 16)
-            output.mc.writeVarIntArray(value.properties) { arrayValue, arrayOutput ->
-                arrayOutput.mc.writeString(arrayValue.name, 32767)
-                arrayOutput.mc.writeString(arrayValue.value, 32767)
-                arrayOutput.mc.writeBoolean(arrayValue.signed)
-                if (arrayValue.signed) arrayOutput.mc.writeString(arrayValue.signature!!, 32767)
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LoginSuccess) {
+            output.writeUUID(value.uuid)
+            output.writeString(value.username, 16)
+            output.writeVarIntArray(value.properties) { arrayValue, arrayOutput ->
+                arrayOutput.writeString(arrayValue.name, 32767)
+                arrayOutput.writeString(arrayValue.value, 32767)
+                arrayOutput.writeBoolean(arrayValue.signed)
+                if (arrayValue.signed) arrayOutput.writeString(arrayValue.signature!!, 32767)
             }
         }
     }
