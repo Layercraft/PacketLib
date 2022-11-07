@@ -14,8 +14,10 @@ repositories {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-io-jvm:2.1.2")
+    implementation("io.ktor:ktor-io-jvm:2.1.3")
 
+    //test with kotlin reflection
+    testImplementation(kotlin("reflect"))
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")
