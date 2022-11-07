@@ -36,9 +36,16 @@ jobs:
           USERNAME: ${{ github.repository_owner }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@v3
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Upload a Build Artifact
         uses: softprops/action-gh-release@v1
         with:
           files: build/libs/*.jar
+          body: ${{steps.github_release.outputs.changelog}}
 
 
