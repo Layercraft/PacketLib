@@ -49,6 +49,9 @@ object MinecraftCodecs {
                     .registerClientBoundPacket(0x06, SetBlockDestroyStage::class, SetBlockDestroyStage)
                     .registerClientBoundPacket(0x07, BlockEntityData::class, BlockEntityData)
                     .registerClientBoundPacket(0x08, BlockAction::class, BlockAction)
+                    .registerClientBoundPacket(0x0A, BossBar::class, BossBar)
+                    .registerClientBoundPacket(0x25, Login::class, Login)
+
 
             )
 }
