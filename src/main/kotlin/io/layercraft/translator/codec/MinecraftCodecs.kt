@@ -7,6 +7,7 @@ import io.layercraft.translator.packets.login.clientbound.*
 import io.layercraft.translator.packets.login.serverbound.EncryptionResponse
 import io.layercraft.translator.packets.login.serverbound.LoginPluginResponse
 import io.layercraft.translator.packets.login.serverbound.LoginStart
+import io.layercraft.translator.packets.play.clientbound.*
 import io.layercraft.translator.packets.status.clientbound.PingResponse
 import io.layercraft.translator.packets.status.clientbound.StatusResponse
 import io.layercraft.translator.packets.status.serverbound.PingRequest
@@ -39,5 +40,15 @@ object MinecraftCodecs {
             )
             .registerPacketRegistry(
                 PacketState.PLAY, MinecraftCodecRegistry.create()
+                    .registerClientBoundPacket(0x00, SpawnEntity::class, SpawnEntity)
+                    .registerClientBoundPacket(0x01, SpawnExperienceOrb::class, SpawnExperienceOrb)
+                    .registerClientBoundPacket(0x02, SpawnPlayer::class, SpawnPlayer)
+                    .registerClientBoundPacket(0x03, EntityAnimation::class, EntityAnimation)
+                    .registerClientBoundPacket(0x04, AwardStatistics::class, AwardStatistics)
+                    .registerClientBoundPacket(0x05, AcknowledgeBlockChange::class, AcknowledgeBlockChange)
+                    .registerClientBoundPacket(0x06, SetBlockDestroyStage::class, SetBlockDestroyStage)
+                    .registerClientBoundPacket(0x07, BlockEntityData::class, BlockEntityData)
+                    .registerClientBoundPacket(0x08, BlockAction::class, BlockAction)
+
             )
 }

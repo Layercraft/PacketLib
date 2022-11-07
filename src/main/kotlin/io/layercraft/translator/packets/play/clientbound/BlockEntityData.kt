@@ -20,8 +20,8 @@ data class BlockEntityData(
     val location: Position,
     val type: Int,
     val nbtData: ByteArray //TODO TO OWN NBT
-): ClientBoundPacket{
-    companion object: PacketSerializer<BlockEntityData>{
+) : ClientBoundPacket {
+    companion object : PacketSerializer<BlockEntityData> {
         override fun serialize(input: Input): BlockEntityData {
             val location = input.mc.readPosition()
             val type = input.mc.readVarInt()
