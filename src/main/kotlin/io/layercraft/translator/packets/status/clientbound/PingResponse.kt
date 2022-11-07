@@ -9,7 +9,7 @@ import io.layercraft.translator.packets.*
  * @property payload Long - Should be the same as sent by the client.
  * @see <a href="https://wiki.vg/Protocol#Ping_Response">https://wiki.vg/Protocol#Ping_Response</a>
  */
-@MinecraftPacket(packetId = 0x01, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(packetId = 0x01, state = PacketState.STATUS, direction = PacketDirection.CLIENTBOUND)
 
 data class PingResponse(
     val payload: Long
