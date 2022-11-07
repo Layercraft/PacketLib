@@ -8,22 +8,22 @@ import java.util.*
 /**
  * Login start | 0x00 | login | server-bound
  *
- * @property name String (16) - Player's Username.
- * @property hasSigData Boolean - Whether the next 3 fields should be sent.
- * @property timestamp Long - When the key data will expire. Optional. Only sent if Has Sig Data is true.
- * @property publicKey VarInt ByteArray - The encoded bytes of the public key the client received from Mojang. Optional. Only sent if Has Sig Data is true.
- * @property signature VarInt ByteArray - The bytes of the public key signature the client received from Mojang. Optional. Only sent if Has Sig Data is true.
- * @property hasPlayerUUID Boolean - Whether the next field should be sent.
- * @property playerUUID UUID - The UUID of the player logging in. Optional. Only sent if Has Player UUID is true.
+ * @property name Player's Username.
+ * @property hasSigData Whether the next 3 fields should be sent.
+ * @property timestamp When the key data will expire. Optional. Only sent if Has Sig Data is true.
+ * @property publicKey The encoded bytes of the public key the client received from Mojang. Optional. Only sent if Has Sig Data is true.
+ * @property signature The bytes of the public key signature the client received from Mojang. Optional. Only sent if Has Sig Data is true.
+ * @property hasPlayerUUID Whether the next field should be sent.
+ * @property playerUUID The UUID of the player logging in. Optional. Only sent if Has Player UUID is true.
  * @see <a href="https://wiki.vg/Protocol#Login_Start">https://wiki.vg/Protocol#Login_Start</a>
  */
 @MinecraftPacket(packetId = 0x00, state = PacketState.LOGIN, direction = PacketDirection.SERVERBOUND)
 data class LoginStart(
-    val name: String,
-    val timestamp: Long?,
-    val publicKey: ByteArray?,
-    val signature: ByteArray?,
-    val playerUUID: UUID?
+    val name: String, //string (16)
+    val timestamp: Long?, //optional when hasSigData is true
+    val publicKey: ByteArray?, //optional when hasSigData is true
+    val signature: ByteArray?, //optional when hasSigData is true
+    val playerUUID: UUID? //optional when hasPlayerUUID is true
 ) : ServerBoundPacket {
 
     val hasSigData: Boolean

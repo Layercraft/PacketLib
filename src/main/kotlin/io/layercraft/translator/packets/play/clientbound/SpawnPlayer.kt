@@ -9,8 +9,8 @@ import java.util.*
  * Spawn player | 0x02 | play | clientbound
  *
  * This packet is sent by the server when a player comes into visible range, not when a player joins.
- * @property entityId VarInt - A unique integer ID mostly used in the protocol to identify the player.
- * @property playerUUID UUID - See below for notes on offline mode and NPCs.
+ * @property entityId A unique integer ID mostly used in the protocol to identify the player.
+ * @property playerUUID See below for notes on offline mode and NPCs.
  * @property x
  * @property y
  * @property z
@@ -20,7 +20,7 @@ import java.util.*
  */
 @MinecraftPacket(0x02, PacketState.PLAY, PacketDirection.CLIENTBOUND)
 data class SpawnPlayer(
-    val entityId: Int,
+    val entityId: Int, //varint
     val playerUUID: UUID,
     val x: Double,
     val y: Double,

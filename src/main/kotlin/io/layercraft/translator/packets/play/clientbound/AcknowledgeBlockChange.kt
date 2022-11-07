@@ -8,11 +8,11 @@ import io.layercraft.translator.utils.mc
  * Acknowledge block change | 0x05 | play | client-bound
  *
  * @property sequenceId Represents the sequence to acknowledge, this is used for properly syncing block changes to the client after interactions.
- * @constructor Create empty Acknowledge block change
+ * @see <a href="https://wiki.vg/Protocol#Acknowledge_Block_Change">https://wiki.vg/Protocol#Acknowledge_Block_Change</a>
  */
 @MinecraftPacket(0x05, PacketState.PLAY, PacketDirection.CLIENTBOUND)
 data class AcknowledgeBlockChange(
-    val sequenceId: Int
+    val sequenceId: Int, //varint
 ): ClientBoundPacket {
     companion object: PacketSerializer<AcknowledgeBlockChange> {
         override fun serialize(input: Input): AcknowledgeBlockChange {

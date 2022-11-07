@@ -7,16 +7,16 @@ import io.layercraft.translator.utils.mc
 /**
  * Login plugin response | 0x02 | login | server-bound
  *
- * @property messageId VarInt - Should match ID from server.
- * @property successful Boolean - true if the client understood the request, false otherwise. When false, no payload follows.
- * @property data Optional Byte Array - Any data, depending on the channel. The length of this array must be inferred from the packet length.
+ * @property messageId Should match ID from server.
+ * @property successful true if the client understood the request, false otherwise. When false, no payload follows.
+ * @property data Any data, depending on the channel. The length of this array must be inferred from the packet length.
  * @see <a href="https://wiki.vg/Protocol#Login_Plugin_Response">https://wiki.vg/Protocol#Login_Plugin_Response</a>
  */
 @MinecraftPacket(packetId = 0x02, state = PacketState.LOGIN, direction = PacketDirection.SERVERBOUND)
 data class LoginPluginResponse(
-    val messageId: Int,
+    val messageId: Int, //varint
     val successful: Boolean,
-    val data: ByteArray
+    val data: ByteArray, //byte array remaining
 ): ServerBoundPacket {
     companion object: PacketSerializer<LoginPluginResponse> {
 

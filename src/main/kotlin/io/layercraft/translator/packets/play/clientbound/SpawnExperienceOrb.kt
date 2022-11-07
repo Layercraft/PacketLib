@@ -8,16 +8,16 @@ import io.layercraft.translator.utils.mc
  * Spawn experience orb | 0x01 | play | client-bound
  *
  * Spawns one or more experience orbs.
- * @property entityId VarInt -
- * @property x Double -
- * @property y Double -
- * @property z Double -
- * @property count Short - The amount of experience this orb will reward once collected.
+ * @property entityId
+ * @property x
+ * @property y
+ * @property z
+ * @property count The amount of experience this orb will reward once collected.
  * @see <a href="https://wiki.vg/Protocol#Spawn_Experience_Orb">https://wiki.vg/Protocol#Spawn_Experience_Orb</a>
  */
 @MinecraftPacket(0x01, PacketState.PLAY, PacketDirection.CLIENTBOUND)
 data class SpawnExperienceOrb(
-    val entityId: Int,
+    val entityId: Int, //varint
     val x: Double,
     val y: Double,
     val z: Double,

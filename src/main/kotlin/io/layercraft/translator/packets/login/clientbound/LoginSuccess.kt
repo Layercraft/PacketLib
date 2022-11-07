@@ -8,7 +8,7 @@ import java.util.*
 /**
  * Login success | 0x02 | login | client-bound
  *
- * @property uuid UUID
+ * @property uuid
  * @property username String (16)
  * @property properties [Arrays] of [LoginProperty]s Array of [LoginProperty]s
  * @see <a href="https://wiki.vg/Protocol#Login_Success">Login Success</a>
@@ -16,8 +16,8 @@ import java.util.*
 @MinecraftPacket(packetId = 0x02, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class LoginSuccess(
     val uuid: UUID,
-    val username: String,
-    val properties: List<LoginProperty>
+    val username: String, //string(16)
+    val properties: List<LoginProperty>, //varint array of login properties
 ): ClientBoundPacket {
     companion object: PacketSerializer<LoginSuccess> {
         override fun serialize(input: Input): LoginSuccess {

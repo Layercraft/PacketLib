@@ -17,7 +17,7 @@ import java.util.UUID
  *
  * Send a boss bar to the player.
  *
- * @see <a href="https://wiki.vg/Protocol#Block_Action">https://wiki.vg/Protocol#Block_Action</a>
+ * @see <a href="https://wiki.vg/Protocol#Boss_Bar">https://wiki.vg/Protocol#Boss_Bar</a>
  */
 @MinecraftPacket(0x0A, PacketState.PLAY, PacketDirection.CLIENTBOUND)
 data class BossBar(
@@ -53,7 +53,7 @@ data class BossBar(
                 UPDATE_FLAGS -> TODO()
             }
 
-
+            throw UnsupportedOperationException("Boss bar action $action is not supported yet.")
         }
 
         override fun deserialize(output: Output, value: BossBar) {

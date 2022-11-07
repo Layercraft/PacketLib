@@ -7,12 +7,12 @@ import io.layercraft.translator.utils.mc
 /**
  * (Optional) Set compression | 0x03 | login | client-bound
  *
- * @property threshold VarInt - Maximum size of a packet before it is compressed.
+ * @property threshold Maximum size of a packet before it is compressed.
  * @see <a href="https://wiki.vg/Protocol#Set_Compression">https://wiki.vg/Protocol#Set_Compression</a>
  */
 @MinecraftPacket(packetId = 0x03, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class SetCompression(
-    val threshold: Int
+    val threshold: Int, //varint
 ): ClientBoundPacket {
 
     companion object: PacketSerializer<SetCompression> {

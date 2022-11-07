@@ -20,9 +20,9 @@ import io.layercraft.translator.utils.mc
  */
 @MinecraftPacket(0x06, PacketState.PLAY, PacketDirection.CLIENTBOUND)
 data class SetBlockDestroyStage(
-    val entityId: Int,
+    val entityId: Int, //varint
     val location: Position,
-    val destroyStage: Byte
+    val destroyStage: Byte,
 ): ClientBoundPacket {
     companion object: PacketSerializer<SetBlockDestroyStage> {
         override fun serialize(input: Input): SetBlockDestroyStage {

@@ -10,15 +10,16 @@ import java.util.*
  * Spawn entity | 0x00 | play | client-bound
  *
  * Sent by the server when a vehicle or other non-living entity is created.
- * @property entityId Varint - A unique integer ID mostly used in the protocol to identify the entity.
- * @property uuid UUID - A unique identifier that is mostly used in persistence and places where the uniqueness matters more.
- * @property type VarInt - The type of the entity (see "type" field of the list of Mob types).
+ * @property entityId A unique integer ID mostly used in the protocol to identify the entity.
+ * @property uuid A unique identifier that is mostly used in persistence and places where the uniqueness matters more.
+ * @property type The type of the entity (see "type" field of the list of Mob types).
  * @property x
  * @property y
  * @property z
- * @property pitch Angle - To get the real pitch, you must divide this by (256.0F / 360.0F)
- * @property yaw Angele - To get the real pitch, you must divide this by (256.0F / 360.0F)
- * @property data Varint - Meaning dependent on the value of the Type field, see Object Data for details.
+ * @property pitch To get the real pitch, you must divide this by (256.0F / 360.0F)
+ * @property yaw To get the real pitch, you must divide this by (256.0F / 360.0F)
+ * @property headYaw
+ * @property data Meaning dependent on the value of the Type field, see Object Data for details.
  * @property velocityX
  * @property velocityY
  * @property velocityZ
@@ -26,16 +27,16 @@ import java.util.*
  */
 @MinecraftPacket(0x00, PacketState.PLAY, PacketDirection.CLIENTBOUND)
 data class SpawnEntity(
-    val entityId: Int,
+    val entityId: Int, //varint
     val uuid: UUID,
-    val type: EntityType,
+    val type: EntityType, //varint
     val x: Double,
     val y: Double,
     val z: Double,
-    val pitch: Float,
-    val yaw: Float,
+    val pitch: Float, //angle
+    val yaw: Float, //angle
     val headYaw: Float,
-    val data: Int,
+    val data: Int, //varint
     val velocityX: Short,
     val velocityY: Short,
     val velocityZ: Short

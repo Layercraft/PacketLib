@@ -8,6 +8,7 @@ import io.layercraft.translator.utils.mc
 
 /**
  * Award statistics | 0x04 | play | client-bound
+ *
  * Sent as a response to Client Command (id 1). Will only send the changed values if previously requested.
  *
  * @property statistics Array of [AwardStatistic]
@@ -15,7 +16,7 @@ import io.layercraft.translator.utils.mc
  */
 @MinecraftPacket(0x04, PacketState.PLAY, PacketDirection.CLIENTBOUND)
 data class AwardStatistics(
-    val statistics: List<AwardStatistic>
+    val statistics: List<AwardStatistic>,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<AwardStatistics> {
         override fun serialize(input: Input): AwardStatistics {
