@@ -2,9 +2,8 @@ package io.layercraft.translator.codec
 
 import io.layercraft.translator.data.ProtocolVersion
 import io.layercraft.translator.packets.*
-import java.util.*
+import java.util.EnumMap
 import kotlin.reflect.KClass
-
 class MinecraftCodec private constructor(
     val protocolVersion: ProtocolVersion,
     val packets: EnumMap<PacketState, MinecraftCodecRegistry> = EnumMap(PacketState::class.java)

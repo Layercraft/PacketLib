@@ -1,11 +1,9 @@
 package io.layercraft.translator.packets.play.clientbound
 
-import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.translator.types.Position
-import io.layercraft.translator.utils.minecraft
 
 /**
  * Set block destroy stage | 0x06 | play | client-bound

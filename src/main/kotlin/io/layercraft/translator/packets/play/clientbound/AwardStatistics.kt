@@ -1,12 +1,10 @@
 package io.layercraft.translator.packets.play.clientbound
 
-import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
 import io.layercraft.translator.packets.play.data.statistic.AwardStatistic
 import io.layercraft.translator.packets.play.data.statistic.StatisticCategories
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
-import io.layercraft.translator.utils.minecraft
 
 /**
  * Award statistics | 0x04 | play | client-bound

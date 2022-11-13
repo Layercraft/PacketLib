@@ -1,10 +1,8 @@
 package io.layercraft.translator.packets.login.clientbound
 
-import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
-import io.layercraft.translator.utils.minecraft
 
 /**
  * Login plugin request | 0x04 | login | client-bound

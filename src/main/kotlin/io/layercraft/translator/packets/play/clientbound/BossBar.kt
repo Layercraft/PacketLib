@@ -1,6 +1,5 @@
 package io.layercraft.translator.packets.play.clientbound
 
-import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
 import io.layercraft.translator.packets.play.data.bossbar.BossBarAction
 import io.layercraft.translator.packets.play.data.bossbar.BossBarAction.*
@@ -9,7 +8,6 @@ import io.layercraft.translator.packets.play.data.bossbar.BossBarDivision
 import io.layercraft.translator.packets.play.data.bossbar.BossBarFlag
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
-import io.layercraft.translator.utils.minecraft
 import java.util.UUID
 
 /**

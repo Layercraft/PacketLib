@@ -1,12 +1,9 @@
 package io.layercraft.translator.packets.play.clientbound
 
-import io.ktor.utils.io.core.*
 import io.layercraft.translator.data.entity.EntityAnimationType
 import io.layercraft.translator.packets.*
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
-import io.layercraft.translator.utils.minecraft
-
 
 /**
  * Entity Animation (clientbound) | 0x03 | play | client-bound

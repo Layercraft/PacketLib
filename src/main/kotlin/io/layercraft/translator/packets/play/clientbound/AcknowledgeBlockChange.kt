@@ -1,10 +1,8 @@
 package io.layercraft.translator.packets.play.clientbound
 
-import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
-import io.layercraft.translator.utils.minecraft
 
 /**
  * Acknowledge block change | 0x05 | play | client-bound

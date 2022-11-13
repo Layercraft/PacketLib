@@ -1,6 +1,5 @@
 package io.layercraft.translator.packets.handshake.serverbound
 
-import io.ktor.utils.io.core.*
 import io.layercraft.translator.data.ProtocolVersion
 import io.layercraft.translator.packets.*
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface

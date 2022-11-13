@@ -2,12 +2,9 @@ package io.layercraft.translator.utils
 
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.translator.types.Position
 import java.util.*
-import kotlin.math.roundToInt
 
-@JvmInline
-value class MinecraftByteInput(override val input: Input): MinecraftProtocolDeserializeInterface<Input> {
+class MinecraftByteInput(override val input: Input): MinecraftProtocolDeserializeInterface<Input> {
     override val remaining: Long get() = input.remaining
 
     override fun readByte(): Byte = input.readByte()

@@ -1,11 +1,11 @@
 package io.layercraft.translator.packets.login.clientbound
 
-import io.ktor.utils.io.core.*
 import io.layercraft.translator.packets.*
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
-import io.layercraft.translator.utils.minecraft
-import java.util.*
+import java.util.Arrays
+import java.util.Optional
+import java.util.UUID
 
 /**
  * Login success | 0x02 | login | client-bound

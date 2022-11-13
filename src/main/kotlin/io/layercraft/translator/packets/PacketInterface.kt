@@ -3,8 +3,6 @@ package io.layercraft.translator.packets
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
-import io.layercraft.translator.utils.MinecraftByteInput
-import io.layercraft.translator.utils.MinecraftByteOutput
 
 
 interface Packet{

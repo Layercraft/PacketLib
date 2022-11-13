@@ -3,6 +3,8 @@
 
 Special Thanks to [wiki.vg](https://wiki.vg) for the protocol documentation.
 
+Docs: [Translator-API KDocs](https://translator-api.kdocs.layercraft.io/)
+
 ## Usage
 Serialize a packet to a byte array:
 ```kotlin

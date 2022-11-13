@@ -1,14 +1,8 @@
 package io.layercraft.translator.serialization
 
-import io.ktor.utils.io.core.*
 import io.layercraft.translator.types.Position
-import io.layercraft.translator.utils.MINECRAFT_MAX_CHAT_LENGTH
-import io.layercraft.translator.utils.MINECRAFT_MAX_IDENTIFIER_LENGTH
-import io.layercraft.translator.utils.MINECRAFT_MAX_STRING_LENGTH
-import io.layercraft.translator.utils.MinecraftStringUtils
-import io.layercraft.translator.utils.MinecraftVarIntUtils
-import io.layercraft.translator.utils.MinecraftVarLongUtils
-import java.util.*
+import io.layercraft.translator.utils.*
+import java.util.UUID
 
 /**
  * Minecraft protocol serialize interface

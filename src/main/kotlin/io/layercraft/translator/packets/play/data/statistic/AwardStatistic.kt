@@ -1,8 +1,5 @@
 package io.layercraft.translator.packets.play.data.statistic
 
-import io.layercraft.translator.packets.play.data.statistic.CustomStatisticType
-import io.layercraft.translator.packets.play.data.statistic.StatisticCategories
-
 /**
  * Statistic
  *
