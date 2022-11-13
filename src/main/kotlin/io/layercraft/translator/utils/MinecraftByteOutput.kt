@@ -3,7 +3,8 @@ package io.layercraft.translator.utils
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
 
-class MinecraftByteOutput(override val output: Output) : MinecraftProtocolSerializeInterface<Output> {
+@JvmInline
+value class MinecraftByteOutput(override val output: Output) : MinecraftProtocolSerializeInterface<Output> {
     override fun writeByte(input: Byte) = output.writeByte(input)
     override fun writeBytes(input: ByteArray) = output.writeFully(input)
 

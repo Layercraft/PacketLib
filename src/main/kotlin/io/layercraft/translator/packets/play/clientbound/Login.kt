@@ -5,7 +5,6 @@ import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterf
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.translator.types.Position
 
-
 /**
  * Login (play) | 0x25 | play | client-bound
  *

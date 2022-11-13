@@ -1,13 +1,10 @@
 package io.layercraft.translator.packets.handshake.serverbound
 
-
-
 import io.layercraft.translator.data.ProtocolVersion
 import io.layercraft.translator.packets.*
 import io.layercraft.translator.packets.handshake.data.HandshakeNextState
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
-
 
 /**
  * Handshake | server-bound | Packet ID: 0x00 | State: Handshaking | Answer with nothing.

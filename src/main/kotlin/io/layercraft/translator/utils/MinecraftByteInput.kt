@@ -4,7 +4,8 @@ import io.ktor.utils.io.core.*
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import java.util.*
 
-class MinecraftByteInput(override val input: Input): MinecraftProtocolDeserializeInterface<Input> {
+@JvmInline
+value class MinecraftByteInput(override val input: Input): MinecraftProtocolDeserializeInterface<Input> {
     override val remaining: Long get() = input.remaining
 
     override fun readByte(): Byte = input.readByte()

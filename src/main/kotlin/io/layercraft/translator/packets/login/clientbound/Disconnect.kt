@@ -4,7 +4,6 @@ import io.layercraft.translator.packets.*
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
 
-
 /**
  * Disconnect | 0x00 | login | client-bound
  *

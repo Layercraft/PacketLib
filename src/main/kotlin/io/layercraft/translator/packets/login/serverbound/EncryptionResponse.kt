@@ -4,7 +4,6 @@ import io.layercraft.translator.packets.*
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
 
-
 /**
  * Encryption response | 0x01 | login | server-bound
  *
