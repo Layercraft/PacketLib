@@ -3,6 +3,11 @@ package io.layercraft.translator.serialization
 import io.ktor.utils.io.core.*
 import io.layercraft.translator.types.Position
 import io.layercraft.translator.utils.MINECRAFT_MAX_CHAT_LENGTH
+import io.layercraft.translator.utils.MINECRAFT_MAX_IDENTIFIER_LENGTH
+import io.layercraft.translator.utils.MINECRAFT_MAX_STRING_LENGTH
+import io.layercraft.translator.utils.MinecraftStringUtils
+import io.layercraft.translator.utils.MinecraftVarIntUtils
+import io.layercraft.translator.utils.MinecraftVarLongUtils
 import java.util.*
 
 /**
@@ -15,33 +20,47 @@ interface MinecraftProtocolDeserializeInterface<I> {
 
     val input: I
 
-    fun readBoolean(): Boolean
+    val remaining: Long
+
+
     fun readByte(): Byte
-    fun readUByte(): UByte
+    fun readBytes(): ByteArray
+    fun readBytes(n: Int): ByteArray
 
-    fun readShort(): Short
-    fun readUShort(): UShort
-
+    fun readBoolean(): Boolean
     fun readInt(): Int
-    fun readVarInt(): Int
-
     fun readLong(): Long
-    fun readVarLong(): Long
-
+    fun readShort(): Short
     fun readFloat(): Float
     fun readDouble(): Double
 
-    fun readString(n: Int = MINECRAFT_MAX_CHAT_LENGTH): String
-    fun readChat(): String
-    fun readIdentifier(): String
+    fun readUByte(): UByte
+    fun readUShort(): UShort
 
-    fun readVarIntByteArray(): ByteArray
-    fun <T> readVarIntArray(decoder: (input: MinecraftProtocolDeserializeInterface<I>) -> T): List<T>
 
-    fun readRemainingByteArray(): ByteArray
-    fun <T> readRemainingArray(decoder: (input: MinecraftProtocolDeserializeInterface<I>) -> T): List<T>
+    fun readVarInt(): Int = MinecraftVarIntUtils.readVarInt(this)
+    fun readVarLong(): Long = MinecraftVarLongUtils.readVarLong(this)
 
-    fun readPosition(): Position
-    fun readUUID(): UUID
-    fun readAngle(): Float
+    fun readString(n: Int = MINECRAFT_MAX_STRING_LENGTH): String = MinecraftStringUtils.readString(n, this)
+    fun readChat(): String = readString(MINECRAFT_MAX_CHAT_LENGTH)
+    fun readIdentifier(): String = readString(MINECRAFT_MAX_IDENTIFIER_LENGTH)
+
+    fun readVarIntByteArray(): ByteArray = readBytes(readVarInt())
+    fun <T> readVarIntArray(decoder: (input: MinecraftProtocolDeserializeInterface<I>) -> T): List<T> =
+        (1..readVarInt()).map { decoder(this) }.toList()
+
+    fun readRemainingByteArray(): ByteArray = readBytes()
+    fun <T> readRemainingArray(decoder: (input: MinecraftProtocolDeserializeInterface<I>) -> T): List<T> {
+        val list: MutableList<T> = mutableListOf()
+
+        while (remaining > 0) {
+            list.add(decoder(this))
+        }
+
+        return list.toList()
+    }
+
+    fun readPosition(): Position = Position.longToPosition(readLong())
+    fun readUUID(): UUID =UUID(readLong(), readLong())
+    fun readAngle(): Float = (readByte() * 360.0f / 256f)
 }

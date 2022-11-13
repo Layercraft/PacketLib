@@ -2,10 +2,12 @@ package io.layercraft.translator
 
 import io.layercraft.translator.packets.login.serverbound.LoginPluginResponse
 import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import kotlin.system.measureTimeMillis
 import kotlin.test.assertEquals
 
+@Disabled
 internal class SerializationSpeedTest {
 
     private val testObject = LoginPluginResponse(
@@ -29,7 +31,7 @@ internal class SerializationSpeedTest {
     }
 
 
-    fun onlyInputSerializer(): Long {
+    private fun onlyInputSerializer(): Long {
         var obj: LoginPluginResponse
 
         val time = measureTimeMillis {

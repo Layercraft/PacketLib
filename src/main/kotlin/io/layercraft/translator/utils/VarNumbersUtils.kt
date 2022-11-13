@@ -1,14 +1,15 @@
 package io.layercraft.translator.utils
 
-import io.ktor.utils.io.core.*
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
 import java.io.EOFException
 
 const val SEGMENT_BITS = 0x7F
 const val CONTINUE_BIT = 0x80
 
 object MinecraftVarIntUtils {
-    fun readVarInt(input: Input): Int {
-        if (input.endOfInput) throw EOFException("Premature end of stream")
+    fun readVarInt(input: MinecraftProtocolDeserializeInterface<*>): Int {
+        if (input.remaining <= 0) throw EOFException("Premature end of stream")
         var numRead = 0
         var result = 0
         var read: Byte
@@ -24,7 +25,7 @@ object MinecraftVarIntUtils {
         return result
     }
 
-    fun writeVarInt(value: Int, output: Output) {
+    fun writeVarInt(value: Int, output: MinecraftProtocolSerializeInterface<*>) {
         var write = value
         while (true) {
             if (write and -CONTINUE_BIT == 0) {
@@ -48,8 +49,8 @@ object MinecraftVarIntUtils {
 }
 
 object MinecraftVarLongUtils {
-    fun readVarLong(input: Input): Long {
-        if (input.endOfInput) throw EOFException("Premature end of stream")
+    fun readVarLong(input: MinecraftProtocolDeserializeInterface<*>): Long {
+        if (input.remaining <= 0) throw EOFException("Premature end of stream")
         var numRead = 0
         var result: Long = 0
         var read: Byte
@@ -65,7 +66,7 @@ object MinecraftVarLongUtils {
         return result
     }
 
-    fun writeVarLong(value: Long, output: Output) {
+    fun writeVarLong(value: Long, output: MinecraftProtocolSerializeInterface<*>) {
         var write = value
         while (true) {
             if (write and -CONTINUE_BIT.toLong() == 0L) {

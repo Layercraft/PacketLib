@@ -1,8 +1,9 @@
 package io.layercraft.translator.utils
 
-import io.ktor.utils.io.core.*
 import io.layercraft.translator.exceptions.MinecraftProtocolDecodingException
 import io.layercraft.translator.exceptions.MinecraftProtocolEncodingException
+import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
+import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
 import java.io.EOFException
 import kotlin.text.toByteArray
 
@@ -13,10 +14,10 @@ const val MINECRAFT_MAX_IDENTIFIER_LENGTH = 32767
 
 object MinecraftStringUtils {
 
-    fun readString(maxLength: Int = MINECRAFT_MAX_STRING_LENGTH, input: Input): String {
-        if (input.endOfInput) throw EOFException("Premature end of stream")
+    fun readString(maxLength: Int = MINECRAFT_MAX_STRING_LENGTH, input: MinecraftProtocolDeserializeInterface<*>): String {
+        if (input.remaining <= 0) throw EOFException("Premature end of stream")
 
-        val length: Int = input.minecraft.readVarInt()
+        val length: Int = input.readVarInt()
 
         if (length > maxLength * 4) throw MinecraftProtocolDecodingException("The received encoded string buffer length is longer than maximum allowed ($length > ${maxLength * 4})")
         if (length < 0) throw MinecraftProtocolDecodingException("The received encoded string buffer length is less than zero! Weird string!")
@@ -28,11 +29,11 @@ object MinecraftStringUtils {
         return string
     }
 
-    fun writeString(maxLength: Int = MINECRAFT_MAX_STRING_LENGTH, string: String, output: Output) {
+    fun writeString(maxLength: Int = MINECRAFT_MAX_STRING_LENGTH, string: String, output: MinecraftProtocolSerializeInterface<*>) {
         val bytes = string.toByteArray(Charsets.UTF_8)
         if (bytes.size > MINECRAFT_MAX_STRING_LENGTH) throw MinecraftProtocolEncodingException("String too big (was ${bytes.size} bytes encoded, max $MINECRAFT_MAX_STRING_LENGTH)")
         if (string.length > maxLength) throw MinecraftProtocolEncodingException("String too big (was ${string.length} characters, max $maxLength)")
-        output.minecraft.writeVarInt(bytes.size)
-        output.writeFully(bytes)
+        output.writeVarInt(bytes.size)
+        output.writeBytes(bytes)
     }
 }
