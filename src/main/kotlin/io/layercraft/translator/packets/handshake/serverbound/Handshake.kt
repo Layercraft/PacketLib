@@ -30,7 +30,6 @@ data class Handshake(
             val port = input.readUShort()
             val nextState = HandshakeNextState.values()[input.readVarInt() - 1]
 
-
             return Handshake(ProtocolVersion.fromProtocolNumber(version), address, port, nextState)
         }
 

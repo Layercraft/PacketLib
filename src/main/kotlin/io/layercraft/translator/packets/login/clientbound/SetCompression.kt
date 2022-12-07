@@ -14,7 +14,6 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
 data class SetCompression(
     val threshold: Int, //varint
 ): ClientBoundPacket {
-
     companion object: PacketSerializer<SetCompression> {
 
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SetCompression {
