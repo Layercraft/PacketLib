@@ -18,7 +18,7 @@ data class ChatPreviewPacket(
     val isPresent: Boolean,
     val message: String?,
 ) : ClientBoundPacket {
-    companion object: PacketSerializer<ChatPreviewPacket> {
+    companion object : PacketSerializer<ChatPreviewPacket> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ChatPreviewPacket {
             val queryId = input.readVarInt()
             val isPresent = input.readBoolean()
@@ -32,6 +32,5 @@ data class ChatPreviewPacket(
             output.writeBoolean(value.isPresent)
             if (value.isPresent) output.writeChat(value.message!!)
         }
-
     }
 }

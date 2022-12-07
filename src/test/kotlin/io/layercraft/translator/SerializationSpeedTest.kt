@@ -1,6 +1,6 @@
 package io.layercraft.translator
 
-import io.layercraft.translator.packets.login.serverbound.LoginPluginResponse
+import io.layercraft.translator.packets.login.serverbound.LoginPluginResponsePacket
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
@@ -10,7 +10,7 @@ import kotlin.test.assertEquals
 @Disabled
 internal class SerializationSpeedTest {
 
-    private val testObject = LoginPluginResponse(
+    private val testObject = LoginPluginResponsePacket(
         Int.MAX_VALUE,
         true,
         ByteArray(2) { 10 },
@@ -31,11 +31,11 @@ internal class SerializationSpeedTest {
     }
 
     private fun onlyInputSerializer(): Long {
-        var obj: LoginPluginResponse
+        var obj: LoginPluginResponsePacket
 
         val time = measureTimeMillis {
-            val bytes = TranslatorAPI.encodeToByteArray(testObject, LoginPluginResponse)
-            obj = TranslatorAPI.decodeFromByteArray(bytes, LoginPluginResponse)
+            val bytes = TranslatorAPI.encodeToByteArray(testObject, LoginPluginResponsePacket)
+            obj = TranslatorAPI.decodeFromByteArray(bytes, LoginPluginResponsePacket)
         }
 
         assertEquals(testObject.messageId, obj.messageId)

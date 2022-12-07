@@ -19,7 +19,7 @@ object MinecraftCodecs {
             .registerPacketRegistry(
                 PacketState.HANDSHAKE,
                 MinecraftCodecRegistry.create()
-                    .registerServerBoundPacket(0x00, HandshakePacket::class, HandshakePacket)
+                    .registerServerBoundPacket(0x00, HandshakePacket::class, HandshakePacket),
             )
             .registerPacketRegistry(
                 PacketState.LOGIN,
@@ -31,7 +31,7 @@ object MinecraftCodecs {
                     .registerClientBoundPacket(0x01, EncryptionRequestPacket::class, EncryptionRequestPacket)
                     .registerClientBoundPacket(0x02, LoginSuccess::class, LoginSuccess)
                     .registerClientBoundPacket(0x03, SetCompressionPacket::class, SetCompressionPacket)
-                    .registerClientBoundPacket(0x04, LoginPluginRequestPacket::class, LoginPluginRequestPacket)
+                    .registerClientBoundPacket(0x04, LoginPluginRequestPacket::class, LoginPluginRequestPacket),
             )
             .registerPacketRegistry(
                 PacketState.STATUS,
@@ -39,7 +39,7 @@ object MinecraftCodecs {
                     .registerServerBoundPacket(0x00, StatusRequestPacket::class, StatusRequestPacket)
                     .registerServerBoundPacket(0x01, PingRequestPacket::class, PingRequestPacket)
                     .registerClientBoundPacket(0x00, StatusResponsePacket::class, StatusResponsePacket)
-                    .registerClientBoundPacket(0x01, PingResponsePacket::class, PingResponsePacket)
+                    .registerClientBoundPacket(0x01, PingResponsePacket::class, PingResponsePacket),
             )
             .registerPacketRegistry(
                 PacketState.PLAY,
@@ -54,7 +54,7 @@ object MinecraftCodecs {
                     .registerClientBoundPacket(0x07, BlockEntityDataPacket::class, BlockEntityDataPacket)
                     .registerClientBoundPacket(0x08, BlockActionPacket::class, BlockActionPacket)
                     .registerClientBoundPacket(0x0A, BossBarPacket::class, BossBarPacket)
-                    .registerClientBoundPacket(0x25, LoginPacket::class, LoginPacket)
+                    .registerClientBoundPacket(0x25, LoginPacket::class, LoginPacket),
 
             )
 }
