@@ -30,7 +30,7 @@ import io.layercraft.translator.types.Position
  * @see <a href="https://wiki.vg/Protocol#Login">https://wiki.vg/Protocol#Login</a>
  */
 @MinecraftPacket(0x25, PacketState.PLAY, PacketDirection.CLIENTBOUND)
-data class Login(
+data class LoginPacket(
     val entityId: Int, // varint
     val isHardcore: Boolean,
     val gameMode: UByte,
@@ -51,8 +51,8 @@ data class Login(
     val deathDimensionName: String?, // optional, identifier
     val deathPosition: Position?, // optional
 ) : ClientBoundPacket {
-    companion object : PacketSerializer<Login> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): Login {
+    companion object : PacketSerializer<LoginPacket> {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LoginPacket {
             val entityId = input.readVarInt()
             val isHardcore = input.readBoolean()
             val gameMode = input.readUByte()
@@ -73,7 +73,7 @@ data class Login(
             val deathDimensionName = if (hasDeathLocation) input.readIdentifier() else null
             val deathPosition = if (hasDeathLocation) input.readPosition() else null
 
-            return Login(
+            return LoginPacket(
                 entityId = entityId,
                 isHardcore = isHardcore,
                 gameMode = gameMode,
@@ -96,7 +96,7 @@ data class Login(
             )
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: Login) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LoginPacket) {
             output.writeVarInt(value.entityId)
             output.writeBoolean(value.isHardcore)
             output.writeUByte(value.gameMode)

@@ -23,7 +23,7 @@ import java.util.*
  * @see <a href="https://wiki.vg/Protocol#Boss_Bar">https://wiki.vg/Protocol#Boss_Bar</a>
  */
 @MinecraftPacket(0x0A, PacketState.PLAY, PacketDirection.CLIENTBOUND)
-data class BossBar(
+data class BossBarPacket(
     val uuid: UUID,
     val action: BossBarAction,
     val title: String?,
@@ -32,8 +32,8 @@ data class BossBar(
     val division: BossBarDivision?,
     val flags: Set<BossBarFlag>?,
 ) : ClientBoundPacket {
-    companion object : PacketSerializer<BossBar> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): BossBar {
+    companion object : PacketSerializer<BossBarPacket> {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): BossBarPacket {
             val uuid = input.readUUID()
 
             return when (val action = BossBarAction.byId(input.readVarInt())) {
@@ -44,38 +44,38 @@ data class BossBar(
                     val division = BossBarDivision.byId(input.readVarInt())
                     val flags = BossBarFlag.fromUByteBitmask(input.readUByte())
 
-                    BossBar(uuid, action, title, health, color, division, flags)
+                    BossBarPacket(uuid, action, title, health, color, division, flags)
                 }
 
                 REMOVE -> {
-                    BossBar(uuid, action, null, null, null, null, null)
+                    BossBarPacket(uuid, action, null, null, null, null, null)
                 }
                 UPDATE_HEALTH -> {
                     val health = input.readFloat()
 
-                    BossBar(uuid, action, null, health, null, null, null)
+                    BossBarPacket(uuid, action, null, health, null, null, null)
                 }
                 UPDATE_TITLE -> {
                     val title = input.readChat()
 
-                    BossBar(uuid, action, title, null, null, null, null)
+                    BossBarPacket(uuid, action, title, null, null, null, null)
                 }
                 UPDATE_STYLE -> {
                     val color = BossBarColor.byId(input.readVarInt())
                     val division = BossBarDivision.byId(input.readVarInt())
 
-                    BossBar(uuid, action, null, null, color, division, null)
+                    BossBarPacket(uuid, action, null, null, color, division, null)
                 }
                 UPDATE_FLAGS -> {
                     val flags = BossBarFlag.fromUByteBitmask(input.readUByte())
 
-                    BossBar(uuid, action, null, null, null, null, flags)
+                    BossBarPacket(uuid, action, null, null, null, null, flags)
                 }
                 else -> throw IllegalArgumentException("Unknown boss bar action: $action")
             }
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: BossBar) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: BossBarPacket) {
             output.writeUUID(value.uuid)
             output.writeVarInt(value.action.id)
 

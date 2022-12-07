@@ -13,22 +13,22 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
  * @see <a href="https://wiki.vg/Protocol#Login_Plugin_Response">https://wiki.vg/Protocol#Login_Plugin_Response</a>
  */
 @MinecraftPacket(packetId = 0x02, state = PacketState.LOGIN, direction = PacketDirection.SERVERBOUND)
-data class LoginPluginResponse(
+data class LoginPluginResponsePacket(
     val messageId: Int, // varint
     val successful: Boolean,
     val data: ByteArray, // byte array remaining
 ) : ServerBoundPacket {
-    companion object : PacketSerializer<LoginPluginResponse> {
+    companion object : PacketSerializer<LoginPluginResponsePacket> {
 
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LoginPluginResponse {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LoginPluginResponsePacket {
             val messageId = input.readVarInt()
             val successful = input.readBoolean()
             val data = input.readRemainingByteArray()
 
-            return LoginPluginResponse(messageId, successful, data)
+            return LoginPluginResponsePacket(messageId, successful, data)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LoginPluginResponse) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LoginPluginResponsePacket) {
             output.writeVarInt(value.messageId)
             output.writeBoolean(value.successful)
             output.writeRemainingByteArray(value.data)

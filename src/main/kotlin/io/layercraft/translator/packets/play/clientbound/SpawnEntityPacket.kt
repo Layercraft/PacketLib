@@ -4,7 +4,7 @@ import io.layercraft.translator.data.entity.EntityType
 import io.layercraft.translator.packets.*
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
-import java.util.UUID
+import java.util.*
 
 /**
  * Spawn entity | 0x00 | play | client-bound
@@ -26,7 +26,7 @@ import java.util.UUID
  * @see <a href="https://wiki.vg/Protocol#Spawn_Entity">https://wiki.vg/Protocol#Spawn_Entity</a>
  */
 @MinecraftPacket(0x00, PacketState.PLAY, PacketDirection.CLIENTBOUND)
-data class SpawnEntity(
+data class SpawnEntityPacket(
     val entityId: Int, // varint
     val uuid: UUID,
     val type: EntityType, // varint
@@ -41,8 +41,8 @@ data class SpawnEntity(
     val velocityY: Short,
     val velocityZ: Short,
 ) : ClientBoundPacket {
-    companion object : PacketSerializer<SpawnEntity> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnEntity {
+    companion object : PacketSerializer<SpawnEntityPacket> {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnEntityPacket {
             val entityId = input.readVarInt()
             val uuid = input.readUUID()
             val type = EntityType.byType(input.readVarInt()) ?: throw IllegalArgumentException("Invalid entity type")
@@ -57,10 +57,10 @@ data class SpawnEntity(
             val velocityY = input.readShort()
             val velocityZ = input.readShort()
 
-            return SpawnEntity(entityId, uuid, type, x, y, z, pitch, yaw, headYaw, data, velocityX, velocityY, velocityZ)
+            return SpawnEntityPacket(entityId, uuid, type, x, y, z, pitch, yaw, headYaw, data, velocityX, velocityY, velocityZ)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SpawnEntity) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SpawnEntityPacket) {
             output.writeVarInt(value.entityId)
             output.writeUUID(value.uuid)
             output.writeVarInt(value.type.type)

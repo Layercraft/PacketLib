@@ -15,17 +15,17 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
  * @see <a href="https://wiki.vg/Protocol#Award_Statistics">https://wiki.vg/Protocol#Award_Statistics</a>
  */
 @MinecraftPacket(0x04, PacketState.PLAY, PacketDirection.CLIENTBOUND)
-data class AwardStatistics(
+data class AwardStatisticsPacket(
     val statistics: List<AwardStatistic>,
 ) : ClientBoundPacket {
-    companion object : PacketSerializer<AwardStatistics> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): AwardStatistics {
-            val statistics = input.readVarIntArray { AwardStatistic(StatisticCategories.fromId(it.readVarInt()), it.readVarInt(), it.readVarInt()) }
+    companion object : PacketSerializer<AwardStatisticsPacket> {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): AwardStatisticsPacket {
+            val statistics = input.readVarIntArray { AwardStatistic(StatisticCategories.byId(it.readVarInt()), it.readVarInt(), it.readVarInt()) }
 
-            return AwardStatistics(statistics)
+            return AwardStatisticsPacket(statistics)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: AwardStatistics) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: AwardStatisticsPacket) {
             output.writeVarIntArray(value.statistics) { it, arrayOutput ->
                 arrayOutput.writeVarInt(it.categoryId.id)
                 arrayOutput.writeVarInt(it.statisticId)

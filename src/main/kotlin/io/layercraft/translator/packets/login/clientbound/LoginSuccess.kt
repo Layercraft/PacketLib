@@ -3,8 +3,7 @@ package io.layercraft.translator.packets.login.clientbound
 import io.layercraft.translator.packets.*
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
-import java.util.Arrays
-import java.util.UUID
+import java.util.*
 
 /**
  * Login success | 0x02 | login | client-bound
@@ -15,13 +14,13 @@ import java.util.UUID
  * @see <a href="https://wiki.vg/Protocol#Login_Success">Login Success</a>
  */
 @MinecraftPacket(packetId = 0x02, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
-data class LoginSuccess(
+data class LoginSuccessPacket(
     val uuid: UUID,
     val username: String, // string(16)
     val properties: List<LoginProperty>, // varint array of login properties
 ) : ClientBoundPacket {
-    companion object : PacketSerializer<LoginSuccess> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LoginSuccess {
+    companion object : PacketSerializer<LoginSuccessPacket> {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LoginSuccessPacket {
             val uuid = input.readUUID()
             val username = input.readString(16)
             val properties = input.readVarIntArray {
@@ -31,10 +30,10 @@ data class LoginSuccess(
                 val signature = if (isSigned) it.readString(32767) else null
                 LoginProperty(name, value, isSigned, signature)
             }
-            return LoginSuccess(uuid, username, properties)
+            return LoginSuccessPacket(uuid, username, properties)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LoginSuccess) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LoginSuccessPacket) {
             output.writeUUID(value.uuid)
             output.writeString(value.username, 16)
             output.writeVarIntArray(value.properties) { arrayValue, arrayOutput ->

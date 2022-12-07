@@ -13,21 +13,21 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
  * @see <a href="https://wiki.vg/Protocol#Chat_Preview">https://wiki.vg/Protocol#Chat_Preview</a>
  */
 @MinecraftPacket(0x0C, PacketState.PLAY, PacketDirection.CLIENTBOUND)
-data class ChatPreview(
+data class ChatPreviewPacket(
     val queryId: Int,
     val isPresent: Boolean,
     val message: String?,
 ) : ClientBoundPacket {
-    companion object: PacketSerializer<ChatPreview> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ChatPreview {
+    companion object: PacketSerializer<ChatPreviewPacket> {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ChatPreviewPacket {
             val queryId = input.readVarInt()
             val isPresent = input.readBoolean()
             val message = if (isPresent) input.readChat() else null
 
-            return ChatPreview(queryId, isPresent, message)
+            return ChatPreviewPacket(queryId, isPresent, message)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: ChatPreview) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: ChatPreviewPacket) {
             output.writeVarInt(value.queryId)
             output.writeBoolean(value.isPresent)
             if (value.isPresent) output.writeChat(value.message!!)

@@ -16,29 +16,29 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
  */
 
 @MinecraftPacket(packetId = 0x01, state = PacketState.LOGIN, direction = PacketDirection.SERVERBOUND)
-data class EncryptionResponse(
+data class EncryptionResponsePacket(
     val sharedSecret: ByteArray, // varint byte array
     val hasVerifyToken: Boolean,
     val verifyToken: ByteArray?, // optional, varint byte array
     val salt: Long?, // optional
     val messageSignature: ByteArray?, // optional
 ) : ServerBoundPacket {
-    companion object : PacketSerializer<EncryptionResponse> {
+    companion object : PacketSerializer<EncryptionResponsePacket> {
 
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EncryptionResponse {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EncryptionResponsePacket {
             val sharedSecret = input.readVarIntByteArray()
             val hasVerifyToken = input.readBoolean()
             return if (hasVerifyToken) {
                 val verifyToken = input.readVarIntByteArray()
-                EncryptionResponse(sharedSecret, true, verifyToken, null, null)
+                EncryptionResponsePacket(sharedSecret, true, verifyToken, null, null)
             } else {
                 val salt = input.readLong()
                 val messageSignature = input.readVarIntByteArray()
-                EncryptionResponse(sharedSecret, false, null, salt, messageSignature)
+                EncryptionResponsePacket(sharedSecret, false, null, salt, messageSignature)
             }
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EncryptionResponse) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EncryptionResponsePacket) {
             output.writeVarIntByteArray(value.sharedSecret)
             output.writeBoolean(value.hasVerifyToken)
             if (value.hasVerifyToken) {

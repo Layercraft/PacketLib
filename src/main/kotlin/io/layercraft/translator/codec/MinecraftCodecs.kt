@@ -2,16 +2,16 @@ package io.layercraft.translator.codec
 
 import io.layercraft.translator.data.ProtocolVersion
 import io.layercraft.translator.packets.PacketState
-import io.layercraft.translator.packets.handshake.serverbound.Handshake
+import io.layercraft.translator.packets.handshake.serverbound.HandshakePacket
 import io.layercraft.translator.packets.login.clientbound.*
-import io.layercraft.translator.packets.login.serverbound.EncryptionResponse
-import io.layercraft.translator.packets.login.serverbound.LoginPluginResponse
-import io.layercraft.translator.packets.login.serverbound.LoginStart
+import io.layercraft.translator.packets.login.serverbound.EncryptionResponsePacket
+import io.layercraft.translator.packets.login.serverbound.LoginPluginResponsePacket
+import io.layercraft.translator.packets.login.serverbound.LoginStartPacket
 import io.layercraft.translator.packets.play.clientbound.*
-import io.layercraft.translator.packets.status.clientbound.PingResponse
-import io.layercraft.translator.packets.status.clientbound.StatusResponse
-import io.layercraft.translator.packets.status.serverbound.PingRequest
-import io.layercraft.translator.packets.status.serverbound.StatusRequest
+import io.layercraft.translator.packets.status.clientbound.PingResponsePacket
+import io.layercraft.translator.packets.status.clientbound.StatusResponsePacket
+import io.layercraft.translator.packets.status.serverbound.PingRequestPacket
+import io.layercraft.translator.packets.status.serverbound.StatusRequestPacket
 
 object MinecraftCodecs {
     val V_1_19_2: MinecraftCodec =
@@ -19,42 +19,42 @@ object MinecraftCodecs {
             .registerPacketRegistry(
                 PacketState.HANDSHAKE,
                 MinecraftCodecRegistry.create()
-                    .registerServerBoundPacket(0x00, Handshake::class, Handshake),
+                    .registerServerBoundPacket(0x00, HandshakePacket::class, HandshakePacket)
             )
             .registerPacketRegistry(
                 PacketState.LOGIN,
                 MinecraftCodecRegistry.create()
-                    .registerServerBoundPacket(0x00, LoginStart::class, LoginStart)
-                    .registerServerBoundPacket(0x01, EncryptionResponse::class, EncryptionResponse)
-                    .registerServerBoundPacket(0x02, LoginPluginResponse::class, LoginPluginResponse)
-                    .registerClientBoundPacket(0x00, Disconnect::class, Disconnect)
-                    .registerClientBoundPacket(0x01, EncryptionRequest::class, EncryptionRequest)
+                    .registerServerBoundPacket(0x00, LoginStartPacket::class, LoginStartPacket)
+                    .registerServerBoundPacket(0x01, EncryptionResponsePacket::class, EncryptionResponsePacket)
+                    .registerServerBoundPacket(0x02, LoginPluginResponsePacket::class, LoginPluginResponsePacket)
+                    .registerClientBoundPacket(0x00, DisconnectPacket::class, DisconnectPacket)
+                    .registerClientBoundPacket(0x01, EncryptionRequestPacket::class, EncryptionRequestPacket)
                     .registerClientBoundPacket(0x02, LoginSuccess::class, LoginSuccess)
-                    .registerClientBoundPacket(0x03, SetCompression::class, SetCompression)
-                    .registerClientBoundPacket(0x04, LoginPluginRequest::class, LoginPluginRequest),
+                    .registerClientBoundPacket(0x03, SetCompressionPacket::class, SetCompressionPacket)
+                    .registerClientBoundPacket(0x04, LoginPluginRequestPacket::class, LoginPluginRequestPacket)
             )
             .registerPacketRegistry(
                 PacketState.STATUS,
                 MinecraftCodecRegistry.create()
-                    .registerServerBoundPacket(0x00, StatusRequest::class, StatusRequest)
-                    .registerServerBoundPacket(0x01, PingRequest::class, PingRequest)
-                    .registerClientBoundPacket(0x00, StatusResponse::class, StatusResponse)
-                    .registerClientBoundPacket(0x01, PingResponse::class, PingResponse),
+                    .registerServerBoundPacket(0x00, StatusRequestPacket::class, StatusRequestPacket)
+                    .registerServerBoundPacket(0x01, PingRequestPacket::class, PingRequestPacket)
+                    .registerClientBoundPacket(0x00, StatusResponsePacket::class, StatusResponsePacket)
+                    .registerClientBoundPacket(0x01, PingResponsePacket::class, PingResponsePacket)
             )
             .registerPacketRegistry(
                 PacketState.PLAY,
                 MinecraftCodecRegistry.create()
-                    .registerClientBoundPacket(0x00, SpawnEntity::class, SpawnEntity)
-                    .registerClientBoundPacket(0x01, SpawnExperienceOrb::class, SpawnExperienceOrb)
-                    .registerClientBoundPacket(0x02, SpawnPlayer::class, SpawnPlayer)
-                    .registerClientBoundPacket(0x03, EntityAnimation::class, EntityAnimation)
-                    .registerClientBoundPacket(0x04, AwardStatistics::class, AwardStatistics)
-                    .registerClientBoundPacket(0x05, AcknowledgeBlockChange::class, AcknowledgeBlockChange)
-                    .registerClientBoundPacket(0x06, SetBlockDestroyStage::class, SetBlockDestroyStage)
-                    .registerClientBoundPacket(0x07, BlockEntityData::class, BlockEntityData)
-                    .registerClientBoundPacket(0x08, BlockAction::class, BlockAction)
-                    .registerClientBoundPacket(0x0A, BossBar::class, BossBar)
-                    .registerClientBoundPacket(0x25, Login::class, Login),
+                    .registerClientBoundPacket(0x00, SpawnEntityPacket::class, SpawnEntityPacket)
+                    .registerClientBoundPacket(0x01, SpawnExperienceOrbPacket::class, SpawnExperienceOrbPacket)
+                    .registerClientBoundPacket(0x02, SpawnPlayerPacket::class, SpawnPlayerPacket)
+                    .registerClientBoundPacket(0x03, EntityAnimationPacket::class, EntityAnimationPacket)
+                    .registerClientBoundPacket(0x04, AwardStatisticsPacket::class, AwardStatisticsPacket)
+                    .registerClientBoundPacket(0x05, AcknowledgeBlockChangePacket::class, AcknowledgeBlockChangePacket)
+                    .registerClientBoundPacket(0x06, SetBlockDestroyStagePacket::class, SetBlockDestroyStagePacket)
+                    .registerClientBoundPacket(0x07, BlockEntityDataPacket::class, BlockEntityDataPacket)
+                    .registerClientBoundPacket(0x08, BlockActionPacket::class, BlockActionPacket)
+                    .registerClientBoundPacket(0x0A, BossBarPacket::class, BossBarPacket)
+                    .registerClientBoundPacket(0x25, LoginPacket::class, LoginPacket)
 
             )
 }

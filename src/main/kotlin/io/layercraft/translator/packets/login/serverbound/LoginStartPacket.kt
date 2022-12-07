@@ -3,7 +3,7 @@ package io.layercraft.translator.packets.login.serverbound
 import io.layercraft.translator.packets.*
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
-import java.util.UUID
+import java.util.*
 
 /**
  * Login start | 0x00 | login | server-bound
@@ -18,7 +18,7 @@ import java.util.UUID
  * @see <a href="https://wiki.vg/Protocol#Login_Start">https://wiki.vg/Protocol#Login_Start</a>
  */
 @MinecraftPacket(packetId = 0x00, state = PacketState.LOGIN, direction = PacketDirection.SERVERBOUND)
-data class LoginStart(
+data class LoginStartPacket(
     val name: String, // string (16)
     val hasSigData: Boolean,
     val timestamp: Long?, // optional when hasSigData is true
@@ -28,9 +28,9 @@ data class LoginStart(
     val playerUUID: UUID?, // optional when hasPlayerUUID is true
 ) : ServerBoundPacket {
 
-    companion object : PacketSerializer<LoginStart> {
+    companion object : PacketSerializer<LoginStartPacket> {
 
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LoginStart {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LoginStartPacket {
             val name = input.readString(16)
             val hasSigData = input.readBoolean()
             val timestamp = if (hasSigData) input.readLong() else null
@@ -39,10 +39,10 @@ data class LoginStart(
             val hasPlayerUUID = input.readBoolean()
             val playerUUID = if (hasPlayerUUID) input.readUUID() else null
 
-            return LoginStart(name, hasSigData, timestamp, publicKey, signature, hasPlayerUUID, playerUUID)
+            return LoginStartPacket(name, hasSigData, timestamp, publicKey, signature, hasPlayerUUID, playerUUID)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LoginStart) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LoginStartPacket) {
             output.writeString(value.name, 16)
             val hasSigData = value.timestamp != null && value.publicKey != null && value.signature != null
             output.writeBoolean(hasSigData)

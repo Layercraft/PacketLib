@@ -12,18 +12,18 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
  */
 @MinecraftPacket(packetId = 0x01, state = PacketState.STATUS, direction = PacketDirection.CLIENTBOUND)
 
-data class PingResponse(
+data class PingResponsePacket(
     val payload: Long,
 ) : ClientBoundPacket {
-    companion object : PacketSerializer<PingResponse> {
+    companion object : PacketSerializer<PingResponsePacket> {
 
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): PingResponse {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): PingResponsePacket {
             val payload = input.readLong()
 
-            return PingResponse(payload)
+            return PingResponsePacket(payload)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: PingResponse) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: PingResponsePacket) {
             output.writeLong(value.payload)
         }
     }

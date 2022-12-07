@@ -14,19 +14,19 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
  * @see <a href="https://wiki.vg/Protocol#Entity_Animation_.28clientbound.29">Entity Animation (clientbound)</a>
  */
 @MinecraftPacket(0x03, PacketState.PLAY, PacketDirection.CLIENTBOUND)
-data class EntityAnimation(
+data class EntityAnimationPacket(
     val entityId: Int, // varint
     val animation: EntityAnimationType, // unsigned byte
 ) : ClientBoundPacket {
-    companion object : PacketSerializer<EntityAnimation> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EntityAnimation {
+    companion object : PacketSerializer<EntityAnimationPacket> {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EntityAnimationPacket {
             val entityId = input.readVarInt()
             val animation = EntityAnimationType.values()[input.readUByte().toInt()]
 
-            return EntityAnimation(entityId, animation)
+            return EntityAnimationPacket(entityId, animation)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityAnimation) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityAnimationPacket) {
             output.writeVarInt(value.entityId)
             output.writeUByte(value.animation.id.toUByte())
         }

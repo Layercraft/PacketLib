@@ -16,24 +16,24 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
  * @see <a href="https://wiki.vg/Protocol#Handshake">https://wiki.vg/Protocol#Handshake</a>
  */
 @MinecraftPacket(packetId = 0x00, state = PacketState.HANDSHAKE, direction = PacketDirection.SERVERBOUND)
-data class Handshake(
+data class HandshakePacket(
     val protocolVersion: ProtocolVersion, // varint
     val address: String, // string(255)
     val port: UShort,
     val nextState: HandshakeNextState, // varint enum
 ) : ServerBoundPacket {
-    companion object : PacketSerializer<Handshake> {
+    companion object : PacketSerializer<HandshakePacket> {
 
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): Handshake {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): HandshakePacket {
             val version = input.readVarInt()
             val address = input.readString(255)
             val port = input.readUShort()
             val nextState = HandshakeNextState.values()[input.readVarInt() - 1]
 
-            return Handshake(ProtocolVersion.fromProtocolNumber(version), address, port, nextState)
+            return HandshakePacket(ProtocolVersion.fromProtocolNumber(version), address, port, nextState)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: Handshake) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: HandshakePacket) {
             output.writeVarInt(value.protocolVersion.protocolNumber)
             output.writeString(value.address, 255)
             output.writeUShort(value.port)

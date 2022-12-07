@@ -11,18 +11,18 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
  * @see <a href="https://wiki.vg/Protocol#Status_Response">https://wiki.vg/Protocol#Status_Response</a>
  */
 @MinecraftPacket(packetId = 0x00, state = PacketState.STATUS, direction = PacketDirection.CLIENTBOUND)
-data class StatusResponse(
+data class StatusResponsePacket(
     val jsonResponse: String,
 ) : ClientBoundPacket {
-    companion object : PacketSerializer<StatusResponse> {
+    companion object : PacketSerializer<StatusResponsePacket> {
 
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): StatusResponse {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): StatusResponsePacket {
             val jsonResponse = input.readString(32767)
 
-            return StatusResponse(jsonResponse)
+            return StatusResponsePacket(jsonResponse)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: StatusResponse) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: StatusResponsePacket) {
             output.writeString(value.jsonResponse, 32767)
         }
     }

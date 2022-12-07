@@ -13,19 +13,19 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
  * @see <a href="https://wiki.vg/Protocol#Change_Difficulty">https://wiki.vg/Protocol#Change_Difficulty</a>
  */
 @MinecraftPacket(0x0B, PacketState.PLAY, PacketDirection.CLIENTBOUND)
-data class ChangeDifficulty(
+data class ChangeDifficultyPacket(
     val difficulty: Difficulty, // Unsigned byte
     val locked: Boolean,
 ) : ClientBoundPacket {
-    companion object : PacketSerializer<ChangeDifficulty> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ChangeDifficulty {
+    companion object : PacketSerializer<ChangeDifficultyPacket> {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ChangeDifficultyPacket {
             val difficulty = Difficulty.byId(input.readVarInt())!!
             val locked = input.readBoolean()
 
-            return ChangeDifficulty(difficulty, locked)
+            return ChangeDifficultyPacket(difficulty, locked)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: ChangeDifficulty) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: ChangeDifficultyPacket) {
             output.writeVarInt(value.difficulty.id)
             output.writeBoolean(value.locked)
         }

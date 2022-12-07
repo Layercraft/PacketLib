@@ -11,18 +11,18 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
  * @see <a href="https://wiki.vg/Protocol#Set_Compression">https://wiki.vg/Protocol#Set_Compression</a>
  */
 @MinecraftPacket(packetId = 0x03, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
-data class SetCompression(
+data class SetCompressionPacket(
     val threshold: Int, // varint
 ) : ClientBoundPacket {
-    companion object : PacketSerializer<SetCompression> {
+    companion object : PacketSerializer<SetCompressionPacket> {
 
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SetCompression {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SetCompressionPacket {
             val threshold = input.readVarInt()
 
-            return SetCompression(threshold)
+            return SetCompressionPacket(threshold)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SetCompression) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SetCompressionPacket) {
             output.writeVarInt(value.threshold)
         }
     }

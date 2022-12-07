@@ -3,7 +3,7 @@ package io.layercraft.translator.packets.play.clientbound
 import io.layercraft.translator.packets.*
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
-import java.util.UUID
+import java.util.*
 
 /**
  * Spawn player | 0x02 | play | clientbound
@@ -19,7 +19,7 @@ import java.util.UUID
  * @see <a href="https://wiki.vg/Protocol#Spawn_Player">https://wiki.vg/Protocol#Spawn_Player</a>
  */
 @MinecraftPacket(0x02, PacketState.PLAY, PacketDirection.CLIENTBOUND)
-data class SpawnPlayer(
+data class SpawnPlayerPacket(
     val entityId: Int, // varint
     val playerUUID: UUID,
     val x: Double,
@@ -28,8 +28,8 @@ data class SpawnPlayer(
     val yaw: Float,
     val pitch: Float,
 ) : ClientBoundPacket {
-    companion object : PacketSerializer<SpawnPlayer> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnPlayer {
+    companion object : PacketSerializer<SpawnPlayerPacket> {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnPlayerPacket {
             val entityId = input.readVarInt()
             val playerUUID = input.readUUID()
             val x = input.readDouble()
@@ -38,10 +38,10 @@ data class SpawnPlayer(
             val yaw = input.readAngle()
             val pitch = input.readAngle()
 
-            return SpawnPlayer(entityId, playerUUID, x, y, z, yaw, pitch)
+            return SpawnPlayerPacket(entityId, playerUUID, x, y, z, yaw, pitch)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SpawnPlayer) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SpawnPlayerPacket) {
             output.writeVarInt(value.entityId)
             output.writeUUID(value.playerUUID)
             output.writeDouble(value.x)

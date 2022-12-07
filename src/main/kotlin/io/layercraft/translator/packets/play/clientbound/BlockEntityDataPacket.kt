@@ -16,21 +16,21 @@ import io.layercraft.translator.types.Position
  * @see <a href="https://wiki.vg/Protocol#Block_Entity_Data">https://wiki.vg/Protocol#Block_Entity_Data</a>
  */
 @MinecraftPacket(0x07, PacketState.PLAY, PacketDirection.CLIENTBOUND)
-data class BlockEntityData(
+data class BlockEntityDataPacket(
     val location: Position,
     val type: Int,
     val nbtData: ByteArray,
 ) : ClientBoundPacket {
-    companion object : PacketSerializer<BlockEntityData> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): BlockEntityData {
+    companion object : PacketSerializer<BlockEntityDataPacket> {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): BlockEntityDataPacket {
             val location = input.readPosition()
             val type = input.readVarInt()
             val nbt = input.readRemainingByteArray()
 
-            return BlockEntityData(location, type, nbt)
+            return BlockEntityDataPacket(location, type, nbt)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: BlockEntityData) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: BlockEntityDataPacket) {
             output.writePosition(value.location)
             output.writeVarInt(value.type)
             output.writeRemainingByteArray(value.nbtData)

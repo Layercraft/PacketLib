@@ -10,12 +10,12 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
  * @see <a href="https://wiki.vg/Protocol#Status_Request">https://wiki.vg/Protocol#Status_Request</a>
  */
 @MinecraftPacket(packetId = 0x00, state = PacketState.STATUS, direction = PacketDirection.SERVERBOUND)
-class StatusRequest : ServerBoundPacket {
-    companion object : PacketSerializer<StatusRequest> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): StatusRequest {
-            return StatusRequest()
+class StatusRequestPacket : ServerBoundPacket {
+    companion object : PacketSerializer<StatusRequestPacket> {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): StatusRequestPacket {
+            return StatusRequestPacket()
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: StatusRequest) {}
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: StatusRequestPacket) {}
     }
 }

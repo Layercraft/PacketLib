@@ -6,18 +6,18 @@ import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterf
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
 
 @MinecraftPacket(packetId = 0xFE, state = PacketState.HANDSHAKE, direction = PacketDirection.SERVERBOUND)
-data class LegacyServerListPing(
+data class LegacyServerListPingPacket(
     val protocolVersion: ProtocolVersion,
     val hostname: String,
     val port: Int,
 ) : ServerBoundPacket {
-    companion object : PacketSerializer<LegacyServerListPing> {
+    companion object : PacketSerializer<LegacyServerListPingPacket> {
 
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LegacyServerListPing {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LegacyServerListPingPacket {
             TODO("Not yet implemented")
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LegacyServerListPing) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LegacyServerListPingPacket) {
             TODO("Not yet implemented")
         }
     }

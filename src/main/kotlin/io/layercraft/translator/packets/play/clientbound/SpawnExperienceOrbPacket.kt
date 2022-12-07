@@ -16,25 +16,25 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
  * @see <a href="https://wiki.vg/Protocol#Spawn_Experience_Orb">https://wiki.vg/Protocol#Spawn_Experience_Orb</a>
  */
 @MinecraftPacket(0x01, PacketState.PLAY, PacketDirection.CLIENTBOUND)
-data class SpawnExperienceOrb(
+data class SpawnExperienceOrbPacket(
     val entityId: Int, // varint
     val x: Double,
     val y: Double,
     val z: Double,
     val count: Short,
 ) : ClientBoundPacket {
-    companion object : PacketSerializer<SpawnExperienceOrb> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnExperienceOrb {
+    companion object : PacketSerializer<SpawnExperienceOrbPacket> {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnExperienceOrbPacket {
             val entityId = input.readVarInt()
             val x = input.readDouble()
             val y = input.readDouble()
             val z = input.readDouble()
             val count = input.readShort()
 
-            return SpawnExperienceOrb(entityId, x, y, z, count)
+            return SpawnExperienceOrbPacket(entityId, x, y, z, count)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SpawnExperienceOrb) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SpawnExperienceOrbPacket) {
             output.writeVarInt(value.entityId)
             output.writeDouble(value.x)
             output.writeDouble(value.y)

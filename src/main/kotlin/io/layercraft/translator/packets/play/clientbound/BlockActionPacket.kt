@@ -16,24 +16,24 @@ import io.layercraft.translator.types.Position
  * @see <a href="https://wiki.vg/Protocol#Block_Action">https://wiki.vg/Protocol#Block_Action</a>
  */
 @MinecraftPacket(0x08, PacketState.PLAY, PacketDirection.CLIENTBOUND)
-data class BlockAction(
+data class BlockActionPacket(
     val location: Position,
     val actionId: UByte,
     val actionParameter: UByte,
     val blockType: Int,
 ) : ClientBoundPacket {
 
-    companion object : PacketSerializer<BlockAction> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): BlockAction {
+    companion object : PacketSerializer<BlockActionPacket> {
+        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): BlockActionPacket {
             val location = input.readPosition()
             val actionId = input.readUByte()
             val actionParameter = input.readUByte()
             val blockType = input.readVarInt()
 
-            return BlockAction(location, actionId, actionParameter, blockType)
+            return BlockActionPacket(location, actionId, actionParameter, blockType)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: BlockAction) {
+        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: BlockActionPacket) {
             output.writePosition(value.location)
             output.writeUByte(value.actionId)
             output.writeUByte(value.actionParameter)
