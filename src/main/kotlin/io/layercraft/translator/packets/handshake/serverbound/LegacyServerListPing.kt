@@ -9,7 +9,7 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
 data class LegacyServerListPing(
     val protocolVersion: ProtocolVersion,
     val hostname: String,
-    val port: Int
+    val port: Int,
 ) : ServerBoundPacket {
     companion object : PacketSerializer<LegacyServerListPing> {
 

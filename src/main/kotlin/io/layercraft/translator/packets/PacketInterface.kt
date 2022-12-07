@@ -28,12 +28,12 @@ annotation class MinecraftPacket(val packetId: Int, val state: PacketState, val 
 
 enum class PacketDirection {
     SERVERBOUND,
-    CLIENTBOUND
+    CLIENTBOUND,
 }
 
 enum class PacketState {
     HANDSHAKE,
     STATUS,
     LOGIN,
-    PLAY
+    PLAY,
 }

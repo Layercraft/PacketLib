@@ -39,7 +39,8 @@ enum class ProtocolVersion(val protocolNumber: Int, val version: String) {
     V1_18_2(758, "1.18.2"),
     V_1_19(759, "1.19"),
     V_1_19_1(760, "1.19.1"),
-    V_1_19_2(760, "1.19.2");
+    V_1_19_2(760, "1.19.2"),
+    ;
 
     val v: Int get() = protocolNumber
 

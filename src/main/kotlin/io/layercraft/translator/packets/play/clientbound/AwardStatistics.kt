@@ -16,7 +16,7 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
  */
 @MinecraftPacket(0x04, PacketState.PLAY, PacketDirection.CLIENTBOUND)
 data class AwardStatistics(
-    val statistics: List<AwardStatistic>
+    val statistics: List<AwardStatistic>,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<AwardStatistics> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): AwardStatistics {

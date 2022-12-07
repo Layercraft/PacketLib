@@ -16,7 +16,7 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
 data class LoginPluginRequest(
     val messageId: Int, // varint
     val channel: String, // identifier
-    val data: ByteArray // byte array remaining
+    val data: ByteArray, // byte array remaining
 ) : ClientBoundPacket {
     companion object : PacketSerializer<LoginPluginRequest> {
 

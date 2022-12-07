@@ -12,7 +12,7 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
  */
 @MinecraftPacket(packetId = 0x03, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class SetCompression(
-    val threshold: Int // varint
+    val threshold: Int, // varint
 ) : ClientBoundPacket {
     companion object : PacketSerializer<SetCompression> {
 

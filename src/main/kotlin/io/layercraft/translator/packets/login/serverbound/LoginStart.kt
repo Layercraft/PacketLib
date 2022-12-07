@@ -25,7 +25,7 @@ data class LoginStart(
     val publicKey: ByteArray?, // optional when hasSigData is true
     val signature: ByteArray?, // optional when hasSigData is true
     val hasPlayerUUID: Boolean,
-    val playerUUID: UUID? // optional when hasPlayerUUID is true
+    val playerUUID: UUID?, // optional when hasPlayerUUID is true
 ) : ServerBoundPacket {
 
     companion object : PacketSerializer<LoginStart> {

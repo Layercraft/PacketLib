@@ -21,7 +21,7 @@ data class EncryptionResponse(
     val hasVerifyToken: Boolean,
     val verifyToken: ByteArray?, // optional, varint byte array
     val salt: Long?, // optional
-    val messageSignature: ByteArray? // optional
+    val messageSignature: ByteArray?, // optional
 ) : ServerBoundPacket {
     companion object : PacketSerializer<EncryptionResponse> {
 

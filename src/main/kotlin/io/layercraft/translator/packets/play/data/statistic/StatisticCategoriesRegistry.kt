@@ -1,10 +1,10 @@
 package io.layercraft.translator.packets.play.data.statistic
 
 enum class StatisticCategoriesRegistry(
-    val value: String
+    val value: String,
 ) {
     BLOCKS("Blocks"),
     ITEMS("Items"),
     ENTITIES("Entities"),
-    CUSTOM("Custom")
+    CUSTOM("Custom"),
 }

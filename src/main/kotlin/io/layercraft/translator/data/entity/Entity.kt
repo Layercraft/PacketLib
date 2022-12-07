@@ -8,11 +8,11 @@ abstract class Entity(
     val silent: Boolean = false,
     val noGravity: Boolean = false,
     val pose: EntityPose = EntityPose.STANDING,
-    val snowTicks: Int = 0
+    val snowTicks: Int = 0,
 )
 
 enum class EntityState(
-    val bitmask: Int
+    val bitmask: Int,
 ) {
     IS_ON_FIRE(0x01),
     IS_CROUCHED(0x02),
@@ -20,7 +20,8 @@ enum class EntityState(
     IS_SWIMMING(0x10),
     IS_INVISIBLE(0x20),
     IS_GLOWING(0x40),
-    IS_FLYING_WITH_ELYTRA(0x80);
+    IS_FLYING_WITH_ELYTRA(0x80),
+    ;
 
     companion object {
         fun fromBitmask(bitmask: Byte): Set<EntityState> {
@@ -34,7 +35,7 @@ enum class EntityState(
 }
 
 enum class EntityPose(
-    val bitmask: Int
+    val bitmask: Int,
 ) {
     STANDING(0),
     FALL_FLYING(1),
@@ -49,5 +50,5 @@ enum class EntityPose(
     ROARING(10),
     SNIFFING(11),
     EMERGING(12),
-    DIGGING(13)
+    DIGGING(13),
 }

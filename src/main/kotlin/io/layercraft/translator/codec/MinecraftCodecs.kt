@@ -19,7 +19,7 @@ object MinecraftCodecs {
             .registerPacketRegistry(
                 PacketState.HANDSHAKE,
                 MinecraftCodecRegistry.create()
-                    .registerServerBoundPacket(0x00, Handshake::class, Handshake)
+                    .registerServerBoundPacket(0x00, Handshake::class, Handshake),
             )
             .registerPacketRegistry(
                 PacketState.LOGIN,
@@ -31,7 +31,7 @@ object MinecraftCodecs {
                     .registerClientBoundPacket(0x01, EncryptionRequest::class, EncryptionRequest)
                     .registerClientBoundPacket(0x02, LoginSuccess::class, LoginSuccess)
                     .registerClientBoundPacket(0x03, SetCompression::class, SetCompression)
-                    .registerClientBoundPacket(0x04, LoginPluginRequest::class, LoginPluginRequest)
+                    .registerClientBoundPacket(0x04, LoginPluginRequest::class, LoginPluginRequest),
             )
             .registerPacketRegistry(
                 PacketState.STATUS,
@@ -39,7 +39,7 @@ object MinecraftCodecs {
                     .registerServerBoundPacket(0x00, StatusRequest::class, StatusRequest)
                     .registerServerBoundPacket(0x01, PingRequest::class, PingRequest)
                     .registerClientBoundPacket(0x00, StatusResponse::class, StatusResponse)
-                    .registerClientBoundPacket(0x01, PingResponse::class, PingResponse)
+                    .registerClientBoundPacket(0x01, PingResponse::class, PingResponse),
             )
             .registerPacketRegistry(
                 PacketState.PLAY,
@@ -54,7 +54,7 @@ object MinecraftCodecs {
                     .registerClientBoundPacket(0x07, BlockEntityData::class, BlockEntityData)
                     .registerClientBoundPacket(0x08, BlockAction::class, BlockAction)
                     .registerClientBoundPacket(0x0A, BossBar::class, BossBar)
-                    .registerClientBoundPacket(0x25, Login::class, Login)
+                    .registerClientBoundPacket(0x25, Login::class, Login),
 
             )
 }

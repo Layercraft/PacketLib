@@ -3,7 +3,7 @@ package io.layercraft.translator.packets.play.data.statistic
 enum class StatisticCategories(
     val id: Int,
     val identifier: String,
-    val registry: StatisticCategoriesRegistry
+    val registry: StatisticCategoriesRegistry,
 ) {
     MINED(0, "minecraft.mined", StatisticCategoriesRegistry.BLOCKS),
     CRAFTED(1, "minecraft.crafted", StatisticCategoriesRegistry.ITEMS),
@@ -13,11 +13,14 @@ enum class StatisticCategories(
     DROPPED(5, "minecraft.dropped", StatisticCategoriesRegistry.ITEMS),
     KILLED(6, "minecraft.killed", StatisticCategoriesRegistry.ENTITIES),
     KILLED_BY(7, "minecraft.killed_by", StatisticCategoriesRegistry.ENTITIES),
-    CUSTOM(8, "minecraft.custom", StatisticCategoriesRegistry.CUSTOM);
+    CUSTOM(8, "minecraft.custom", StatisticCategoriesRegistry.CUSTOM),
+    ;
 
     companion object {
-        fun fromId(id: Int): StatisticCategories {
-            return values().first { it.id == id }
-        }
+        private val BY_ID = values().associateBy(StatisticCategories::id)
+        private val BY_IDENTIFIER = values().associateBy(StatisticCategories::identifier)
+
+        fun byId(id: Int) = BY_ID[id] ?: throw IllegalArgumentException("Unknown statistic category id: $id")
+        fun byIdentifier(identifier: String) = BY_IDENTIFIER[identifier] ?: throw IllegalArgumentException("Unknown statistic category identifier: $identifier")
     }
 }

@@ -13,7 +13,7 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
 @MinecraftPacket(packetId = 0x01, state = PacketState.STATUS, direction = PacketDirection.CLIENTBOUND)
 
 data class PingResponse(
-    val payload: Long
+    val payload: Long,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<PingResponse> {
 

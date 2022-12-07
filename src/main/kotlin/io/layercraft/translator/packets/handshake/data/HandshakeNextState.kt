@@ -4,7 +4,8 @@ import io.layercraft.translator.packets.PacketState
 
 enum class HandshakeNextState {
     STATUS,
-    LOGIN;
+    LOGIN,
+    ;
 
     companion object {
         fun fromPacketState(packetState: PacketState): HandshakeNextState {

@@ -12,7 +12,7 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
  */
 @MinecraftPacket(packetId = 0x00, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class Disconnect(
-    val reason: String // chat
+    val reason: String, // chat
 ) : ClientBoundPacket {
     companion object : PacketSerializer<Disconnect> {
 

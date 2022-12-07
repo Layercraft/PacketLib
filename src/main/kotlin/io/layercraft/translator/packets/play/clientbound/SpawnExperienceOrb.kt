@@ -21,7 +21,7 @@ data class SpawnExperienceOrb(
     val x: Double,
     val y: Double,
     val z: Double,
-    val count: Short
+    val count: Short,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<SpawnExperienceOrb> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnExperienceOrb {

@@ -16,7 +16,7 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
 @MinecraftPacket(0x03, PacketState.PLAY, PacketDirection.CLIENTBOUND)
 data class EntityAnimation(
     val entityId: Int, // varint
-    val animation: EntityAnimationType // unsigned byte
+    val animation: EntityAnimationType, // unsigned byte
 ) : ClientBoundPacket {
     companion object : PacketSerializer<EntityAnimation> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EntityAnimation {

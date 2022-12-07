@@ -26,7 +26,7 @@ data class SpawnPlayer(
     val y: Double,
     val z: Double,
     val yaw: Float,
-    val pitch: Float
+    val pitch: Float,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<SpawnPlayer> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnPlayer {

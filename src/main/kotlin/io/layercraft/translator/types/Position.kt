@@ -6,11 +6,11 @@ internal fun Int.toPositionDouble(): Double = this / 32.0
 fun Position(
     x: Double,
     y: Double,
-    z: Double
+    z: Double,
 ) = Position(
     x.toPositionInt(),
     y.toPositionInt(),
-    z.toPositionInt()
+    z.toPositionInt(),
 )
 
 /**
@@ -24,7 +24,7 @@ fun Position(
 data class Position(
     val x: Int,
     val y: Int,
-    val z: Int
+    val z: Int,
 ) {
 
     companion object {
@@ -35,7 +35,7 @@ data class Position(
         fun longToPosition(long: Long): Position = Position(
             (long shr 38).toInt(),
             (long and 0xFFF).toInt(),
-            (long shl 26 shr 38).toInt()
+            (long shl 26 shr 38).toInt(),
         )
     }
 }

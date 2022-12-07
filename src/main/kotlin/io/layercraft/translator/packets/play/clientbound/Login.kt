@@ -49,7 +49,7 @@ data class Login(
     val isFlat: Boolean,
     val hasDeathLocation: Boolean,
     val deathDimensionName: String?, // optional, identifier
-    val deathPosition: Position? // optional
+    val deathPosition: Position?, // optional
 ) : ClientBoundPacket {
     companion object : PacketSerializer<Login> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): Login {
@@ -92,7 +92,7 @@ data class Login(
                 isFlat = isFlat,
                 hasDeathLocation = hasDeathLocation,
                 deathDimensionName = deathDimensionName,
-                deathPosition = deathPosition
+                deathPosition = deathPosition,
             )
         }
 

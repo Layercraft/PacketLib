@@ -43,7 +43,7 @@ internal class SerializationTest {
             EncryptionRequest(
                 "",
                 exampleByteArray,
-                exampleByteArray
+                exampleByteArray,
             )
 
         val bytes = TranslatorAPI.encodeToByteArray(packet, EncryptionRequest)
@@ -66,7 +66,7 @@ internal class SerializationTest {
             exampleByteArray,
             exampleByteArray,
             true,
-            UUID.randomUUID()
+            UUID.randomUUID(),
         )
 
         val bytes = TranslatorAPI.encodeToByteArray(packet, LoginStart)

@@ -8,13 +8,18 @@ import io.layercraft.translator.packets.play.data.bossbar.BossBarDivision
 import io.layercraft.translator.packets.play.data.bossbar.BossBarFlag
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
-import java.util.UUID
+import java.util.*
 
 /**
- * Block bar | 0x0A | play | client-bound
+ * Boss bar
  *
- * Send a boss bar to the player.
- *
+ * @property uuid Unique ID for this bar.
+ * @property action Determines the layout of the remaining packet.
+ * @property title
+ * @property health From 0 to 1. Values greater than 1 do not crash a Notchian client, and start rendering part of a second health bar at around 1.5.
+ * @property color Color ID (see below).
+ * @property division Type of division (see below).
+ * @property flags Bit mask. 0x1: should darken sky, 0x2: is dragon bar (used to play end music), 0x04: create fog (previously was also controlled by 0x02).
  * @see <a href="https://wiki.vg/Protocol#Boss_Bar">https://wiki.vg/Protocol#Boss_Bar</a>
  */
 @MinecraftPacket(0x0A, PacketState.PLAY, PacketDirection.CLIENTBOUND)
@@ -25,32 +30,78 @@ data class BossBar(
     val health: Float?,
     val color: BossBarColor?,
     val division: BossBarDivision?,
-    val flags: List<BossBarFlag>?
+    val flags: Set<BossBarFlag>?,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<BossBar> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): BossBar {
             val uuid = input.readUUID()
-            val action = BossBarAction.fromActionId(input.readVarInt())
 
-            when (action) {
+            return when (val action = BossBarAction.byId(input.readVarInt())) {
                 ADD -> {
-                    val title = input.readString()
+                    val title = input.readChat()
                     val health = input.readFloat()
-                    val color = BossBarColor.fromColorId(input.readVarInt())
-                    val division = BossBarDivision.fromDivisionId(input.readVarInt())
+                    val color = BossBarColor.byId(input.readVarInt())
+                    val division = BossBarDivision.byId(input.readVarInt())
+                    val flags = BossBarFlag.fromUByteBitmask(input.readUByte())
+
+                    BossBar(uuid, action, title, health, color, division, flags)
                 }
 
-                REMOVE -> TODO()
-                UPDATE_HEALTH -> TODO()
-                UPDATE_TITLE -> TODO()
-                UPDATE_STYLE -> TODO()
-                UPDATE_FLAGS -> TODO()
-            }
+                REMOVE -> {
+                    BossBar(uuid, action, null, null, null, null, null)
+                }
+                UPDATE_HEALTH -> {
+                    val health = input.readFloat()
 
-            throw UnsupportedOperationException("Boss bar action $action is not supported yet.")
+                    BossBar(uuid, action, null, health, null, null, null)
+                }
+                UPDATE_TITLE -> {
+                    val title = input.readChat()
+
+                    BossBar(uuid, action, title, null, null, null, null)
+                }
+                UPDATE_STYLE -> {
+                    val color = BossBarColor.byId(input.readVarInt())
+                    val division = BossBarDivision.byId(input.readVarInt())
+
+                    BossBar(uuid, action, null, null, color, division, null)
+                }
+                UPDATE_FLAGS -> {
+                    val flags = BossBarFlag.fromUByteBitmask(input.readUByte())
+
+                    BossBar(uuid, action, null, null, null, null, flags)
+                }
+                else -> throw IllegalArgumentException("Unknown boss bar action: $action")
+            }
         }
 
         override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: BossBar) {
+            output.writeUUID(value.uuid)
+            output.writeVarInt(value.action.id)
+
+            when (value.action) {
+                ADD -> {
+                    output.writeChat(value.title!!)
+                    output.writeFloat(value.health!!)
+                    output.writeVarInt(value.color!!.id)
+                    output.writeVarInt(value.division!!.id)
+                    output.writeUByte(BossBarFlag.toUByteBitmask(value.flags!!))
+                }
+                REMOVE -> {}
+                UPDATE_HEALTH -> {
+                    output.writeFloat(value.health!!)
+                }
+                UPDATE_TITLE -> {
+                    output.writeChat(value.title!!)
+                }
+                UPDATE_STYLE -> {
+                    output.writeVarInt(value.color!!.id)
+                    output.writeVarInt(value.division!!.id)
+                }
+                UPDATE_FLAGS -> {
+                    output.writeUByte(BossBarFlag.toUByteBitmask(value.flags!!))
+                }
+            }
         }
     }
 }

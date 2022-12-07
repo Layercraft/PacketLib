@@ -11,7 +11,7 @@ package io.layercraft.translator.packets.play.data.statistic
 data class AwardStatistic(
     val categoryId: StatisticCategories,
     val statisticId: Int,
-    val value: Int
+    val value: Int,
 ) {
     constructor(customStatisticType: CustomStatisticType, value: Int) : this(StatisticCategories.CUSTOM, customStatisticType.id, value)
 }

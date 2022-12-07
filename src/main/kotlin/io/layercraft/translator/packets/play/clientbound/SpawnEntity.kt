@@ -39,7 +39,7 @@ data class SpawnEntity(
     val data: Int, // varint
     val velocityX: Short,
     val velocityY: Short,
-    val velocityZ: Short
+    val velocityZ: Short,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<SpawnEntity> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnEntity {

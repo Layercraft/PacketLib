@@ -2,8 +2,8 @@ package io.layercraft.translator.packets.play.data.statistic
 
 enum class CustomStatisticType(
     val id: Int,
-    val indentifier: String,
-    val unit: CustomStatisticTypeUnit
+    val identifier: String,
+    val unit: CustomStatisticTypeUnit,
 ) {
     LEAVE_GAME(0, "minecraft.leave_game", CustomStatisticTypeUnit.NONE),
     PLAY_ONE_MINUTE(1, "minecraft.play_one_minute", CustomStatisticTypeUnit.TIME),
@@ -78,5 +78,14 @@ enum class CustomStatisticType(
     INTERACT_WITH_ANVIL(70, "minecraft.interact_with_anvil", CustomStatisticTypeUnit.NONE),
     INTERACT_WITH_GRINDSTONE(71, "minecraft.interact_with_grindstone", CustomStatisticTypeUnit.NONE),
     TARGET_HIT(72, "minecraft.target_hit", CustomStatisticTypeUnit.NONE),
-    INTERACT_WITH_SMITHING_TABLE(73, "minecraft.interact_with_smithing_table", CustomStatisticTypeUnit.NONE)
+    INTERACT_WITH_SMITHING_TABLE(73, "minecraft.interact_with_smithing_table", CustomStatisticTypeUnit.NONE),
+    ;
+
+    companion object {
+        private val BY_ID = values().associateBy(CustomStatisticType::id)
+        private val BY_IDENTIFIER = values().associateBy(CustomStatisticType::identifier)
+
+        fun byId(id: Int) = BY_ID[id] ?: throw IllegalArgumentException("Unknown custom statistic type id $id")
+        fun byIdentifier(name: String) = BY_IDENTIFIER[name] ?: throw IllegalArgumentException("Unknown custom statistic type identifier $name")
+    }
 }

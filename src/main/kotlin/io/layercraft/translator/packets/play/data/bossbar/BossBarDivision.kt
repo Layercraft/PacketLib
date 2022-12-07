@@ -1,23 +1,19 @@
 package io.layercraft.translator.packets.play.data.bossbar
 
-enum class BossBarDivision {
+enum class BossBarDivision(
+    val id: Int,
+) {
 
-    NO,
-    NOTCHES_6,
-    NOTCHES_10,
-    NOTCHES_12,
-    NOTCHES_20;
+    NO(0),
+    NOTCHES_6(1),
+    NOTCHES_10(2),
+    NOTCHES_12(3),
+    NOTCHES_20(4),
+    ;
 
     companion object {
-        fun fromDivisionId(division: Int): BossBarDivision {
-            return when (division) {
-                0 -> NO
-                1 -> NOTCHES_6
-                2 -> NOTCHES_10
-                3 -> NOTCHES_12
-                4 -> NOTCHES_20
-                else -> throw IllegalArgumentException("Invalid division id: $division")
-            }
-        }
+        private val BY_ID = values().associateBy(BossBarDivision::id)
+
+        fun byId(id: Int) = BY_ID[id] ?: throw IllegalArgumentException("Unknown boss bar division id: $id")
     }
 }

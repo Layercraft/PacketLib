@@ -233,7 +233,7 @@ internal class MinecraftByteTest {
     data class TestDataType(
         val int: Int,
         val float: Float,
-        val string: String
+        val string: String,
     )
 
     @Test
@@ -251,7 +251,7 @@ internal class MinecraftByteTest {
             TestDataType(
                 arrayInput.readVarInt(),
                 arrayInput.readFloat(),
-                arrayInput.readString()
+                arrayInput.readString(),
             )
         }
 
@@ -273,7 +273,7 @@ internal class MinecraftByteTest {
             TestDataType(
                 arrayInput.readInt(),
                 arrayInput.readFloat(),
-                arrayInput.readString()
+                arrayInput.readString(),
             )
         }
         assertEquals(result, data)

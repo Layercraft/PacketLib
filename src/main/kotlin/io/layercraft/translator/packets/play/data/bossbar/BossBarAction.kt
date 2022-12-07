@@ -1,25 +1,20 @@
 package io.layercraft.translator.packets.play.data.bossbar
 
-enum class BossBarAction {
+enum class BossBarAction(
+    val id: Int,
+) {
 
-    ADD,
-    REMOVE,
-    UPDATE_HEALTH,
-    UPDATE_TITLE,
-    UPDATE_STYLE,
-    UPDATE_FLAGS;
+    ADD(0),
+    REMOVE(1),
+    UPDATE_HEALTH(2),
+    UPDATE_TITLE(3),
+    UPDATE_STYLE(4),
+    UPDATE_FLAGS(5),
+    ;
 
     companion object {
-        fun fromActionId(id: Int): BossBarAction {
-            return when (id) {
-                0 -> ADD
-                1 -> REMOVE
-                2 -> UPDATE_HEALTH
-                3 -> UPDATE_TITLE
-                4 -> UPDATE_STYLE
-                5 -> UPDATE_FLAGS
-                else -> throw IllegalArgumentException("Invalid action id: $id")
-            }
-        }
+        private val BY_ID = values().associateBy(BossBarAction::id)
+
+        fun byId(id: Int) = BY_ID[id] ?: throw IllegalArgumentException("Unknown boss bar action id: $id")
     }
 }

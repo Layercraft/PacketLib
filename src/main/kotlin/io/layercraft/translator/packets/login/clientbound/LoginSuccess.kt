@@ -18,7 +18,7 @@ import java.util.UUID
 data class LoginSuccess(
     val uuid: UUID,
     val username: String, // string(16)
-    val properties: List<LoginProperty> // varint array of login properties
+    val properties: List<LoginProperty>, // varint array of login properties
 ) : ClientBoundPacket {
     companion object : PacketSerializer<LoginSuccess> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LoginSuccess {
@@ -60,5 +60,5 @@ data class LoginProperty(
     val name: String, // string(32767)
     val value: String, // string(32767)
     val signed: Boolean,
-    val signature: String? // string(32767) - only if signed is true
+    val signature: String?, // string(32767) - only if signed is true
 )

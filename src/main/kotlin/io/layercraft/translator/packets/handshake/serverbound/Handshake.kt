@@ -20,7 +20,7 @@ data class Handshake(
     val protocolVersion: ProtocolVersion, // varint
     val address: String, // string(255)
     val port: UShort,
-    val nextState: HandshakeNextState // varint enum
+    val nextState: HandshakeNextState, // varint enum
 ) : ServerBoundPacket {
     companion object : PacketSerializer<Handshake> {
 

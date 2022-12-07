@@ -20,7 +20,7 @@ data class BlockAction(
     val location: Position,
     val actionId: UByte,
     val actionParameter: UByte,
-    val blockType: Int
+    val blockType: Int,
 ) : ClientBoundPacket {
 
     companion object : PacketSerializer<BlockAction> {

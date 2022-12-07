@@ -11,5 +11,5 @@ enum class CustomStatisticTypeUnit(val value: String) {
     NONE("None"),
     TIME("Time"),
     DISTANCE("Distance"),
-    DAMAGE("Damage")
+    DAMAGE("Damage"),
 }

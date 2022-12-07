@@ -13,7 +13,7 @@ internal class SerializationSpeedTest {
     private val testObject = LoginPluginResponse(
         Int.MAX_VALUE,
         true,
-        ByteArray(2) { 10 }
+        ByteArray(2) { 10 },
     )
 
     @Test

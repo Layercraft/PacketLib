@@ -6,7 +6,7 @@ import java.util.EnumMap
 import kotlin.reflect.KClass
 class MinecraftCodec private constructor(
     val protocolVersion: ProtocolVersion,
-    val packets: EnumMap<PacketState, MinecraftCodecRegistry> = EnumMap(PacketState::class.java)
+    val packets: EnumMap<PacketState, MinecraftCodecRegistry> = EnumMap(PacketState::class.java),
 ) {
     val protocolVersionAsInt: Int
         get() = protocolVersion.v
@@ -47,7 +47,7 @@ class MinecraftCodec private constructor(
 
 class MinecraftCodecRegistry private constructor(
     val clientPacketMap: HashMap<Int, MinecraftClientCodecPacket<out ServerBoundPacket>> = HashMap(),
-    val serverPacketMap: HashMap<Int, MinecraftServerCodecPacket<out ClientBoundPacket>> = HashMap()
+    val serverPacketMap: HashMap<Int, MinecraftServerCodecPacket<out ClientBoundPacket>> = HashMap(),
 ) {
     fun <T : ClientBoundPacket> registerClientBoundPacket(packetId: Int, packet: KClass<T>, packetSerializer: PacketSerializer<T>) =
         apply {
@@ -73,11 +73,11 @@ interface MinecraftCodecPacket<T : Packet> {
 data class MinecraftServerCodecPacket<T : ClientBoundPacket>(
     override val packetId: Int,
     override val packet: KClass<T>,
-    override val packetSerializer: PacketSerializer<T>
+    override val packetSerializer: PacketSerializer<T>,
 ) : MinecraftCodecPacket<T>
 
 data class MinecraftClientCodecPacket<T : ServerBoundPacket>(
     override val packetId: Int,
     override val packet: KClass<T>,
-    override val packetSerializer: PacketSerializer<T>
+    override val packetSerializer: PacketSerializer<T>,
 ) : MinecraftCodecPacket<T>

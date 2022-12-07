@@ -4,7 +4,7 @@ package io.layercraft.translator.data.entity
 enum class EntityType(
     val type: Int,
     val entityName: String,
-    val indentifier: String
+    val indentifier: String,
 ) {
     ALLAY(0, "Allay", "minecraft:allay"),
     AREA_EFFECT_CLOUD(1, "Area Effect Cloud", "minecraft:area_effect_cloud"),
@@ -123,15 +123,16 @@ enum class EntityType(
     ZOMBIE_VILLAGER(114, "Zombie Villager", "minecraft:zombie_villager"),
     ZOMBIFIED_PIGLIN(115, "Zombified Piglin", "minecraft:zombified_piglin"),
     PLAYER(116, "Player", "minecraft:player"),
-    FISHING_BOBBER(117, "Fishing Bobber", "minecraft:fishing_bobber");
+    FISHING_BOBBER(117, "Fishing Bobber", "minecraft:fishing_bobber"),
+    ;
 
     companion object {
         private val BY_TYPE = values().associateBy(EntityType::type)
         private val BY_NAME = values().associateBy(EntityType::entityName)
         private val BY_INDENTFIER = values().associateBy(EntityType::indentifier)
 
-        fun byType(id: Int) = BY_TYPE[id]
-        fun byEntityName(name: String) = BY_NAME[name]
-        fun byIndentifier(key: String) = BY_INDENTFIER[key]
+        fun byType(id: Int) = BY_TYPE[id] ?: throw IllegalArgumentException("Unknown entity type id $id")
+        fun byEntityName(name: String) = BY_NAME[name] ?: throw IllegalArgumentException("Unknown entity type name $name")
+        fun byIndentifier(key: String) = BY_INDENTFIER[key] ?: throw IllegalArgumentException("Unknown entity type indentifier $key")
     }
 }

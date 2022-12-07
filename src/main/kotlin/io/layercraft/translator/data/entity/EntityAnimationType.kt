@@ -6,5 +6,5 @@ enum class EntityAnimationType(val id: Int) {
     LEAVE_BED(2),
     SWING_OFF_HAND(3),
     CRITICAL_EFFECT(4),
-    MAGIC_CRITICAL_EFFECT(5)
+    MAGIC_CRITICAL_EFFECT(5),
 }

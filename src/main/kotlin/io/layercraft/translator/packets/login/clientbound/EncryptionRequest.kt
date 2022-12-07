@@ -17,7 +17,7 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
 data class EncryptionRequest(
     val serverId: String, // string(20)
     val publicKey: ByteArray, // varint byte array
-    val verifyToken: ByteArray // varint byte array
+    val verifyToken: ByteArray, // varint byte array
 ) : ClientBoundPacket {
     companion object : PacketSerializer<EncryptionRequest> {
 

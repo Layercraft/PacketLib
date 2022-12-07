@@ -22,7 +22,7 @@ import io.layercraft.translator.types.Position
 data class SetBlockDestroyStage(
     val entityId: Int, // varint
     val location: Position,
-    val destroyStage: Byte
+    val destroyStage: Byte,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<SetBlockDestroyStage> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SetBlockDestroyStage {
