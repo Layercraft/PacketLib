@@ -13,14 +13,14 @@ internal class SerializationSpeedTest {
     private val testObject = LoginPluginResponse(
         Int.MAX_VALUE,
         true,
-        ByteArray(2) { 10 },
+        ByteArray(2) { 10 }
     )
 
     @Test
     fun `compare different serialization methods`() {
         val runs = 1000000
 
-        //Run basic serialization
+        // Run basic serialization
         var basicTime = 0.0
         for (i in 0..runs) {
             basicTime += onlyInputSerializer()
@@ -29,7 +29,6 @@ internal class SerializationSpeedTest {
 
         println("Basic serialization time: $basicTime milliseconds")
     }
-
 
     private fun onlyInputSerializer(): Long {
         var obj: LoginPluginResponse

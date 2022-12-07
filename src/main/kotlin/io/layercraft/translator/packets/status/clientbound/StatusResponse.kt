@@ -13,8 +13,8 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
 @MinecraftPacket(packetId = 0x00, state = PacketState.STATUS, direction = PacketDirection.CLIENTBOUND)
 data class StatusResponse(
     val jsonResponse: String
-): ClientBoundPacket {
-    companion object: PacketSerializer<StatusResponse> {
+) : ClientBoundPacket {
+    companion object : PacketSerializer<StatusResponse> {
 
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): StatusResponse {
             val jsonResponse = input.readString(32767)

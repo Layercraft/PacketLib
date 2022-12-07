@@ -17,11 +17,13 @@ object MinecraftCodecs {
     val V_1_19_2: MinecraftCodec =
         MinecraftCodec.create(ProtocolVersion.V_1_19_2)
             .registerPacketRegistry(
-                PacketState.HANDSHAKE, MinecraftCodecRegistry.create()
+                PacketState.HANDSHAKE,
+                MinecraftCodecRegistry.create()
                     .registerServerBoundPacket(0x00, Handshake::class, Handshake)
             )
             .registerPacketRegistry(
-                PacketState.LOGIN, MinecraftCodecRegistry.create()
+                PacketState.LOGIN,
+                MinecraftCodecRegistry.create()
                     .registerServerBoundPacket(0x00, LoginStart::class, LoginStart)
                     .registerServerBoundPacket(0x01, EncryptionResponse::class, EncryptionResponse)
                     .registerServerBoundPacket(0x02, LoginPluginResponse::class, LoginPluginResponse)
@@ -32,14 +34,16 @@ object MinecraftCodecs {
                     .registerClientBoundPacket(0x04, LoginPluginRequest::class, LoginPluginRequest)
             )
             .registerPacketRegistry(
-                PacketState.STATUS, MinecraftCodecRegistry.create()
+                PacketState.STATUS,
+                MinecraftCodecRegistry.create()
                     .registerServerBoundPacket(0x00, StatusRequest::class, StatusRequest)
                     .registerServerBoundPacket(0x01, PingRequest::class, PingRequest)
                     .registerClientBoundPacket(0x00, StatusResponse::class, StatusResponse)
                     .registerClientBoundPacket(0x01, PingResponse::class, PingResponse)
             )
             .registerPacketRegistry(
-                PacketState.PLAY, MinecraftCodecRegistry.create()
+                PacketState.PLAY,
+                MinecraftCodecRegistry.create()
                     .registerClientBoundPacket(0x00, SpawnEntity::class, SpawnEntity)
                     .registerClientBoundPacket(0x01, SpawnExperienceOrb::class, SpawnExperienceOrb)
                     .registerClientBoundPacket(0x02, SpawnPlayer::class, SpawnPlayer)
@@ -51,7 +55,6 @@ object MinecraftCodecs {
                     .registerClientBoundPacket(0x08, BlockAction::class, BlockAction)
                     .registerClientBoundPacket(0x0A, BossBar::class, BossBar)
                     .registerClientBoundPacket(0x25, Login::class, Login)
-
 
             )
 }

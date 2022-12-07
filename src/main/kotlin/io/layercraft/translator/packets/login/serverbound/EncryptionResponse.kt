@@ -17,13 +17,13 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
 
 @MinecraftPacket(packetId = 0x01, state = PacketState.LOGIN, direction = PacketDirection.SERVERBOUND)
 data class EncryptionResponse(
-    val sharedSecret: ByteArray, //varint byte array
+    val sharedSecret: ByteArray, // varint byte array
     val hasVerifyToken: Boolean,
-    val verifyToken: ByteArray?, //optional, varint byte array
-    val salt: Long?, //optional
-    val messageSignature: ByteArray?, //optional
+    val verifyToken: ByteArray?, // optional, varint byte array
+    val salt: Long?, // optional
+    val messageSignature: ByteArray? // optional
 ) : ServerBoundPacket {
-    companion object: PacketSerializer<EncryptionResponse> {
+    companion object : PacketSerializer<EncryptionResponse> {
 
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EncryptionResponse {
             val sharedSecret = input.readVarIntByteArray()

@@ -12,7 +12,7 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
  */
 @MinecraftPacket(0x05, PacketState.PLAY, PacketDirection.CLIENTBOUND)
 data class AcknowledgeBlockChange(
-    val sequenceId: Int, //varint
+    val sequenceId: Int // varint
 ) : ClientBoundPacket {
     companion object : PacketSerializer<AcknowledgeBlockChange> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): AcknowledgeBlockChange {

@@ -1,6 +1,6 @@
 package io.layercraft.translator.data.entity
 
-abstract class Entity (
+abstract class Entity(
     val state: Byte = 0,
     val airTicks: Int = 300,
     val customName: String? = null,
@@ -8,7 +8,7 @@ abstract class Entity (
     val silent: Boolean = false,
     val noGravity: Boolean = false,
     val pose: EntityPose = EntityPose.STANDING,
-    val snowTicks: Int = 0,
+    val snowTicks: Int = 0
 )
 
 enum class EntityState(
@@ -49,5 +49,5 @@ enum class EntityPose(
     ROARING(10),
     SNIFFING(11),
     EMERGING(12),
-    DIGGING(13),
+    DIGGING(13)
 }

@@ -20,13 +20,13 @@ import java.util.UUID
  */
 @MinecraftPacket(0x02, PacketState.PLAY, PacketDirection.CLIENTBOUND)
 data class SpawnPlayer(
-    val entityId: Int, //varint
+    val entityId: Int, // varint
     val playerUUID: UUID,
     val x: Double,
     val y: Double,
     val z: Double,
     val yaw: Float,
-    val pitch: Float,
+    val pitch: Float
 ) : ClientBoundPacket {
     companion object : PacketSerializer<SpawnPlayer> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnPlayer {
@@ -50,6 +50,5 @@ data class SpawnPlayer(
             output.writeAngle(value.yaw)
             output.writeAngle(value.pitch)
         }
-
     }
 }

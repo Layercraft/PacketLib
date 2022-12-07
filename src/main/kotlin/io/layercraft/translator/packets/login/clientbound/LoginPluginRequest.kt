@@ -14,11 +14,11 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
  */
 @MinecraftPacket(packetId = 0x04, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class LoginPluginRequest(
-    val messageId: Int, //varint
-    val channel: String, //identifier
-    val data: ByteArray, //byte array remaining
-): ClientBoundPacket {
-    companion object: PacketSerializer<LoginPluginRequest> {
+    val messageId: Int, // varint
+    val channel: String, // identifier
+    val data: ByteArray // byte array remaining
+) : ClientBoundPacket {
+    companion object : PacketSerializer<LoginPluginRequest> {
 
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LoginPluginRequest {
             val messageId = input.readVarInt()

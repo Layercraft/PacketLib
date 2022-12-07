@@ -16,7 +16,6 @@ interface MinecraftProtocolDeserializeInterface<I> {
 
     val remaining: Long
 
-
     fun readByte(): Byte
     fun readBytes(): ByteArray
     fun readBytes(n: Int): ByteArray
@@ -30,7 +29,6 @@ interface MinecraftProtocolDeserializeInterface<I> {
 
     fun readUByte(): UByte
     fun readUShort(): UShort
-
 
     fun readVarInt(): Int = MinecraftVarIntUtils.readVarInt(this)
     fun readVarLong(): Long = MinecraftVarLongUtils.readVarLong(this)
@@ -55,6 +53,6 @@ interface MinecraftProtocolDeserializeInterface<I> {
     }
 
     fun readPosition(): Position = Position.longToPosition(readLong())
-    fun readUUID(): UUID =UUID(readLong(), readLong())
+    fun readUUID(): UUID = UUID(readLong(), readLong())
     fun readAngle(): Float = (readByte() * 360.0f / 256f)
 }

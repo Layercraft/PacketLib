@@ -15,11 +15,11 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
 
 @MinecraftPacket(packetId = 0x01, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class EncryptionRequest(
-    val serverId: String, //string(20)
-    val publicKey: ByteArray, //varint byte array
-    val verifyToken: ByteArray, //varint byte array
-): ClientBoundPacket {
-    companion object: PacketSerializer<EncryptionRequest> {
+    val serverId: String, // string(20)
+    val publicKey: ByteArray, // varint byte array
+    val verifyToken: ByteArray // varint byte array
+) : ClientBoundPacket {
+    companion object : PacketSerializer<EncryptionRequest> {
 
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EncryptionRequest {
             val serverId = input.readString(20)

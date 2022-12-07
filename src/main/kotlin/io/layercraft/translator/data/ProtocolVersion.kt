@@ -1,6 +1,6 @@
 package io.layercraft.translator.data
 
-enum class ProtocolVersion (val protocolNumber: Int, val version: String) {
+enum class ProtocolVersion(val protocolNumber: Int, val version: String) {
 
     V1_7_10(5, "1.7.10"),
     V1_8(47, "1.8"),

@@ -17,7 +17,6 @@ interface MinecraftProtocolSerializeInterface<O> {
     fun writeByte(input: Byte)
     fun writeBytes(input: ByteArray)
 
-
     fun writeBoolean(input: Boolean)
     fun writeInt(input: Int)
     fun writeLong(input: Long)
@@ -25,13 +24,11 @@ interface MinecraftProtocolSerializeInterface<O> {
     fun writeFloat(input: Float)
     fun writeDouble(input: Double)
 
-
     fun writeUByte(input: UByte)
     fun writeUShort(input: UShort)
 
     fun writeVarInt(input: Int) = MinecraftVarIntUtils.writeVarInt(input, this)
     fun writeVarLong(input: Long) = MinecraftVarLongUtils.writeVarLong(input, this)
-
 
     fun writeString(input: String, n: Int = MINECRAFT_MAX_STRING_LENGTH) = MinecraftStringUtils.writeString(n, input, this)
     fun writeChat(input: String) = writeString(input, MINECRAFT_MAX_CHAT_LENGTH)

@@ -17,8 +17,8 @@ import java.util.UUID
 @MinecraftPacket(packetId = 0x02, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class LoginSuccess(
     val uuid: UUID,
-    val username: String, //string(16)
-    val properties: List<LoginProperty>, //varint array of login properties
+    val username: String, // string(16)
+    val properties: List<LoginProperty> // varint array of login properties
 ) : ClientBoundPacket {
     companion object : PacketSerializer<LoginSuccess> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LoginSuccess {
@@ -47,7 +47,6 @@ data class LoginSuccess(
     }
 }
 
-
 /**
  * Login property
  *
@@ -58,8 +57,8 @@ data class LoginSuccess(
  * @see <a href="https://wiki.vg/Protocol#Login_Success">Login Success</a>
  */
 data class LoginProperty(
-    val name: String, //string(32767)
-    val value: String, //string(32767)
+    val name: String, // string(32767)
+    val value: String, // string(32767)
     val signed: Boolean,
-    val signature: String?, //string(32767) - only if signed is true
+    val signature: String? // string(32767) - only if signed is true
 )

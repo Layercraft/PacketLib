@@ -238,7 +238,7 @@ internal class MinecraftByteTest {
 
     @Test
     fun testVarIntArray() {
-        val data = listOf(TestDataType(1, 1f, "fghjkl"),TestDataType(2, 2f, "qwerty"),TestDataType(3, 3f, "asdfgh"))
+        val data = listOf(TestDataType(1, 1f, "fghjkl"), TestDataType(2, 2f, "qwerty"), TestDataType(3, 3f, "asdfgh"))
         val packetWrite = BytePacketBuilder()
         packetWrite.minecraft.writeVarIntArray(data) { arrayValue, arrayOutput ->
             arrayOutput.writeVarInt(arrayValue.int)
@@ -260,14 +260,13 @@ internal class MinecraftByteTest {
 
     @Test
     fun testRemainingArray() {
-        val data = listOf(TestDataType(1, 1f, "fghjkl"),TestDataType(2, 2f, "qwerty"),TestDataType(3, 3f, "asdfgh"))
+        val data = listOf(TestDataType(1, 1f, "fghjkl"), TestDataType(2, 2f, "qwerty"), TestDataType(3, 3f, "asdfgh"))
         val packetWrite = BytePacketBuilder()
         packetWrite.minecraft.writeRemainingArray(data) { arrayValue, arrayOutput ->
-                arrayOutput.writeInt(arrayValue.int)
-                arrayOutput.writeFloat(arrayValue.float)
-                arrayOutput.writeString(arrayValue.string)
+            arrayOutput.writeInt(arrayValue.int)
+            arrayOutput.writeFloat(arrayValue.float)
+            arrayOutput.writeString(arrayValue.string)
         }
-
 
         val packetRead = packetWrite.build()
         val result = packetRead.minecraft.readRemainingArray { arrayInput ->
@@ -315,6 +314,6 @@ internal class MinecraftByteTest {
         packetWrite.minecraft.writeAngle(123f)
 
         val packetRead = packetWrite.build()
-        //assertEquals(packetRead.minecraft.readAngle(), 123f)
+        // assertEquals(packetRead.minecraft.readAngle(), 123f)
     }
 }

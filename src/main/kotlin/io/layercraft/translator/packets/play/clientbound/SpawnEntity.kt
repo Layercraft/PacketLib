@@ -27,16 +27,16 @@ import java.util.UUID
  */
 @MinecraftPacket(0x00, PacketState.PLAY, PacketDirection.CLIENTBOUND)
 data class SpawnEntity(
-    val entityId: Int, //varint
+    val entityId: Int, // varint
     val uuid: UUID,
-    val type: EntityType, //varint
+    val type: EntityType, // varint
     val x: Double,
     val y: Double,
     val z: Double,
-    val pitch: Float, //angle
-    val yaw: Float, //angle
+    val pitch: Float, // angle
+    val yaw: Float, // angle
     val headYaw: Float,
-    val data: Int, //varint
+    val data: Int, // varint
     val velocityX: Short,
     val velocityY: Short,
     val velocityZ: Short
@@ -75,6 +75,5 @@ data class SpawnEntity(
             output.writeShort(value.velocityY)
             output.writeShort(value.velocityZ)
         }
-
     }
 }

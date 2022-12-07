@@ -78,6 +78,5 @@ enum class CustomStatisticType(
     INTERACT_WITH_ANVIL(70, "minecraft.interact_with_anvil", CustomStatisticTypeUnit.NONE),
     INTERACT_WITH_GRINDSTONE(71, "minecraft.interact_with_grindstone", CustomStatisticTypeUnit.NONE),
     TARGET_HIT(72, "minecraft.target_hit", CustomStatisticTypeUnit.NONE),
-    INTERACT_WITH_SMITHING_TABLE(73, "minecraft.interact_with_smithing_table", CustomStatisticTypeUnit.NONE),
+    INTERACT_WITH_SMITHING_TABLE(73, "minecraft.interact_with_smithing_table", CustomStatisticTypeUnit.NONE)
 }
-

@@ -24,5 +24,4 @@ enum class BossBarColor {
             }
         }
     }
-
 }

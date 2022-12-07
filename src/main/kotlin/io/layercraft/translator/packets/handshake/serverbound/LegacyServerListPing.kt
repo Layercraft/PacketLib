@@ -10,8 +10,8 @@ data class LegacyServerListPing(
     val protocolVersion: ProtocolVersion,
     val hostname: String,
     val port: Int
-): ServerBoundPacket {
-    companion object: PacketSerializer<LegacyServerListPing> {
+) : ServerBoundPacket {
+    companion object : PacketSerializer<LegacyServerListPing> {
 
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LegacyServerListPing {
             TODO("Not yet implemented")

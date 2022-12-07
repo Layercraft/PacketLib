@@ -13,7 +13,6 @@ fun Position(
     z.toPositionInt()
 )
 
-
 /**
  * Position
  *
@@ -38,6 +37,5 @@ data class Position(
             (long and 0xFFF).toInt(),
             (long shl 26 shr 38).toInt()
         )
-
     }
 }

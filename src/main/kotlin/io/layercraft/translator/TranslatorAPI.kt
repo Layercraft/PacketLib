@@ -8,7 +8,7 @@ import io.layercraft.translator.packets.PacketSerializer
 import io.layercraft.translator.packets.PacketState
 import io.layercraft.translator.utils.minecraft
 
-object TranslatorAPI{
+object TranslatorAPI {
 
     fun <T : Packet> decodeFromByteArray(bytes: ByteArray, serializer: PacketSerializer<T>): T {
         val packetRead = ByteReadPacket(bytes)

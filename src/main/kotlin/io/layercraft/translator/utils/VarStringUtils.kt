@@ -11,7 +11,6 @@ const val MINECRAFT_MAX_STRING_LENGTH = 32767
 const val MINECRAFT_MAX_CHAT_LENGTH = 262144
 const val MINECRAFT_MAX_IDENTIFIER_LENGTH = 32767
 
-
 object MinecraftStringUtils {
 
     fun readString(maxLength: Int = MINECRAFT_MAX_STRING_LENGTH, input: MinecraftProtocolDeserializeInterface<*>): String {

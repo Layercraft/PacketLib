@@ -25,7 +25,7 @@ data class BossBar(
     val health: Float?,
     val color: BossBarColor?,
     val division: BossBarDivision?,
-    val flags: List<BossBarFlag>?,
+    val flags: List<BossBarFlag>?
 ) : ClientBoundPacket {
     companion object : PacketSerializer<BossBar> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): BossBar {
@@ -38,8 +38,6 @@ data class BossBar(
                     val health = input.readFloat()
                     val color = BossBarColor.fromColorId(input.readVarInt())
                     val division = BossBarDivision.fromDivisionId(input.readVarInt())
-
-
                 }
 
                 REMOVE -> TODO()
@@ -53,9 +51,6 @@ data class BossBar(
         }
 
         override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: BossBar) {
-
         }
-
     }
-
 }

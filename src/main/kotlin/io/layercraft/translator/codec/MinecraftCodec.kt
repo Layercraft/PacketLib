@@ -36,12 +36,9 @@ class MinecraftCodec private constructor(
         }
     }
 
-
-    fun <T: Packet> getCodecPacketFromPacket(packet: T): MinecraftCodecPacket<T>? {
+    fun <T : Packet> getCodecPacketFromPacket(packet: T): MinecraftCodecPacket<T>? {
         return list.find { it.packet == packet::class } as MinecraftCodecPacket<T>?
     }
-
-
 
     companion object {
         fun create(protocolVersion: ProtocolVersion): MinecraftCodec = MinecraftCodec(protocolVersion)
@@ -52,12 +49,12 @@ class MinecraftCodecRegistry private constructor(
     val clientPacketMap: HashMap<Int, MinecraftClientCodecPacket<out ServerBoundPacket>> = HashMap(),
     val serverPacketMap: HashMap<Int, MinecraftServerCodecPacket<out ClientBoundPacket>> = HashMap()
 ) {
-    fun <T: ClientBoundPacket> registerClientBoundPacket(packetId: Int, packet: KClass<T>, packetSerializer: PacketSerializer<T>) =
+    fun <T : ClientBoundPacket> registerClientBoundPacket(packetId: Int, packet: KClass<T>, packetSerializer: PacketSerializer<T>) =
         apply {
             serverPacketMap[packetId] = MinecraftServerCodecPacket(packetId, packet, packetSerializer)
         }
 
-    fun <T: ServerBoundPacket> registerServerBoundPacket(packetId: Int, packet: KClass<T>, packetSerializer: PacketSerializer<T>) =
+    fun <T : ServerBoundPacket> registerServerBoundPacket(packetId: Int, packet: KClass<T>, packetSerializer: PacketSerializer<T>) =
         apply {
             clientPacketMap[packetId] = MinecraftClientCodecPacket(packetId, packet, packetSerializer)
         }
@@ -67,20 +64,20 @@ class MinecraftCodecRegistry private constructor(
     }
 }
 
-interface MinecraftCodecPacket<T: Packet> {
+interface MinecraftCodecPacket<T : Packet> {
     val packetId: Int
     val packet: KClass<T>
     val packetSerializer: PacketSerializer<T>
 }
 
-data class MinecraftServerCodecPacket<T: ClientBoundPacket>(
+data class MinecraftServerCodecPacket<T : ClientBoundPacket>(
     override val packetId: Int,
     override val packet: KClass<T>,
     override val packetSerializer: PacketSerializer<T>
 ) : MinecraftCodecPacket<T>
 
-data class MinecraftClientCodecPacket<T: ServerBoundPacket>(
+data class MinecraftClientCodecPacket<T : ServerBoundPacket>(
     override val packetId: Int,
     override val packet: KClass<T>,
     override val packetSerializer: PacketSerializer<T>
-): MinecraftCodecPacket<T>
+) : MinecraftCodecPacket<T>

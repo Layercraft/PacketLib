@@ -31,27 +31,27 @@ import io.layercraft.translator.types.Position
  */
 @MinecraftPacket(0x25, PacketState.PLAY, PacketDirection.CLIENTBOUND)
 data class Login(
-    val entityId: Int, //varint
+    val entityId: Int, // varint
     val isHardcore: Boolean,
     val gameMode: UByte,
     val previousGameMode: UByte,
     val dimensionNames: List<String>,
-    val registryCodec: ByteArray, //nbt
-    val dimensionType: String, //identifier
-    val dimensionName: String, //identifier
+    val registryCodec: ByteArray, // nbt
+    val dimensionType: String, // identifier
+    val dimensionName: String, // identifier
     val hashedSeed: Long,
-    val maxPlayers: Int, //varint, ignored
-    val viewDistance: Int, //varint
-    val simulationDistance: Int, //varint
+    val maxPlayers: Int, // varint, ignored
+    val viewDistance: Int, // varint
+    val simulationDistance: Int, // varint
     val reducedDebugInfo: Boolean,
     val enableRespawnScreen: Boolean,
     val isDebug: Boolean,
     val isFlat: Boolean,
     val hasDeathLocation: Boolean,
-    val deathDimensionName: String?, //optional, identifier
-    val deathPosition: Position?, //optional
-): ClientBoundPacket {
-    companion object: PacketSerializer<Login>{
+    val deathDimensionName: String?, // optional, identifier
+    val deathPosition: Position? // optional
+) : ClientBoundPacket {
+    companion object : PacketSerializer<Login> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): Login {
             val entityId = input.readVarInt()
             val isHardcore = input.readBoolean()
@@ -94,7 +94,6 @@ data class Login(
                 deathDimensionName = deathDimensionName,
                 deathPosition = deathPosition
             )
-
         }
 
         override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: Login) {
@@ -102,7 +101,7 @@ data class Login(
             output.writeBoolean(value.isHardcore)
             output.writeUByte(value.gameMode)
             output.writeUByte(value.previousGameMode)
-            output.writeVarIntArray(value.dimensionNames) { str, outputArray ->  outputArray.writeIdentifier(str) }
+            output.writeVarIntArray(value.dimensionNames) { str, outputArray -> outputArray.writeIdentifier(str) }
             output.writeVarIntByteArray(value.registryCodec)
             output.writeIdentifier(value.dimensionType)
             output.writeIdentifier(value.dimensionName)

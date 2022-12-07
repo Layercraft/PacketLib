@@ -2,7 +2,7 @@ package io.layercraft.translator.data.particle
 
 enum class Particles(
     val id: Int,
-    val particleName: String,
+    val particleName: String
 ) {
     AMBIENT_ENTITY_EFFECT(0, "minecraft:ambient_entity_effect"),
     ANGRY_VILLAGER(1, "minecraft:angry_villager"),
@@ -91,5 +91,5 @@ enum class Particles(
     WAX_ON(84, "minecraft:wax_on"),
     WAX_OFF(85, "minecraft:wax_off"),
     ELECTRIC_SPARK(86, "minecraft:electric_spark"),
-    SCRAPE(87, "minecraft:scrape"),
+    SCRAPE(87, "minecraft:scrape")
 }

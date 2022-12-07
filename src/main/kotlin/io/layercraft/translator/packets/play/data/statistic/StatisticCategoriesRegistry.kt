@@ -6,5 +6,5 @@ enum class StatisticCategoriesRegistry(
     BLOCKS("Blocks"),
     ITEMS("Items"),
     ENTITIES("Entities"),
-    CUSTOM("Custom"),
+    CUSTOM("Custom")
 }

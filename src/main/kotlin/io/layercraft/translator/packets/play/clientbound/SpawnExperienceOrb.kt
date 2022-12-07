@@ -17,13 +17,13 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
  */
 @MinecraftPacket(0x01, PacketState.PLAY, PacketDirection.CLIENTBOUND)
 data class SpawnExperienceOrb(
-    val entityId: Int, //varint
+    val entityId: Int, // varint
     val x: Double,
     val y: Double,
     val z: Double,
     val count: Short
 ) : ClientBoundPacket {
-    companion object: PacketSerializer<SpawnExperienceOrb> {
+    companion object : PacketSerializer<SpawnExperienceOrb> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnExperienceOrb {
             val entityId = input.readVarInt()
             val x = input.readDouble()

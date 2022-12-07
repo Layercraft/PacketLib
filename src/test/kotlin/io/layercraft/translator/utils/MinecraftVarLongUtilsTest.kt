@@ -27,7 +27,6 @@ internal class MinecraftVarLongUtilsTest {
     private fun testNumber(number: Long) {
         val packetWrite = BytePacketBuilder()
 
-
         MinecraftVarLongUtils.writeVarLong(number, packetWrite.minecraft)
 
         val packetRead = packetWrite.build()
@@ -37,7 +36,6 @@ internal class MinecraftVarLongUtilsTest {
 
     private fun numberToBytes(number: Long): ByteArray {
         val packetWrite = BytePacketBuilder()
-
 
         MinecraftVarLongUtils.writeVarLong(number, packetWrite.minecraft)
 

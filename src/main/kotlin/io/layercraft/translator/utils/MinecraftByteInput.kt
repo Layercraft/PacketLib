@@ -5,7 +5,7 @@ import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterf
 import java.util.*
 
 @JvmInline
-value class MinecraftByteInput(override val input: Input): MinecraftProtocolDeserializeInterface<Input> {
+value class MinecraftByteInput(override val input: Input) : MinecraftProtocolDeserializeInterface<Input> {
     override val remaining: Long get() = input.remaining
 
     override fun readByte(): Byte = input.readByte()
@@ -21,6 +21,7 @@ value class MinecraftByteInput(override val input: Input): MinecraftProtocolDese
 
     @OptIn(ExperimentalUnsignedTypes::class)
     override fun readUByte(): UByte = input.readUByte()
+
     @OptIn(ExperimentalUnsignedTypes::class)
     override fun readUShort(): UShort = input.readUShort()
 }

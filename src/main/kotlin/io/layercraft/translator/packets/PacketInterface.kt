@@ -4,22 +4,20 @@ import io.ktor.utils.io.core.*
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
 
-
-interface Packet{
+interface Packet {
     val direction: PacketDirection
 }
 
-interface ServerBoundPacket: Packet {
+interface ServerBoundPacket : Packet {
     override val direction: PacketDirection
         get() = PacketDirection.SERVERBOUND
 }
-interface ClientBoundPacket: Packet {
+interface ClientBoundPacket : Packet {
     override val direction: PacketDirection
         get() = PacketDirection.CLIENTBOUND
 }
 
-
-interface PacketSerializer<T> where T:Packet {
+interface PacketSerializer<T> where T : Packet {
     fun serialize(input: MinecraftProtocolDeserializeInterface<*>): T
 
     fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: T)

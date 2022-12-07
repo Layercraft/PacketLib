@@ -19,16 +19,16 @@ import java.util.UUID
  */
 @MinecraftPacket(packetId = 0x00, state = PacketState.LOGIN, direction = PacketDirection.SERVERBOUND)
 data class LoginStart(
-    val name: String, //string (16)
+    val name: String, // string (16)
     val hasSigData: Boolean,
-    val timestamp: Long?, //optional when hasSigData is true
-    val publicKey: ByteArray?, //optional when hasSigData is true
-    val signature: ByteArray?, //optional when hasSigData is true
+    val timestamp: Long?, // optional when hasSigData is true
+    val publicKey: ByteArray?, // optional when hasSigData is true
+    val signature: ByteArray?, // optional when hasSigData is true
     val hasPlayerUUID: Boolean,
-    val playerUUID: UUID? //optional when hasPlayerUUID is true
+    val playerUUID: UUID? // optional when hasPlayerUUID is true
 ) : ServerBoundPacket {
 
-    companion object: PacketSerializer<LoginStart> {
+    companion object : PacketSerializer<LoginStart> {
 
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LoginStart {
             val name = input.readString(16)

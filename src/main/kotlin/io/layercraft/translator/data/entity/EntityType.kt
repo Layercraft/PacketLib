@@ -4,7 +4,7 @@ package io.layercraft.translator.data.entity
 enum class EntityType(
     val type: Int,
     val entityName: String,
-    val indentifier: String,
+    val indentifier: String
 ) {
     ALLAY(0, "Allay", "minecraft:allay"),
     AREA_EFFECT_CLOUD(1, "Area Effect Cloud", "minecraft:area_effect_cloud"),

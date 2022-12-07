@@ -19,7 +19,7 @@ import io.layercraft.translator.types.Position
 data class BlockEntityData(
     val location: Position,
     val type: Int,
-    val nbtData: ByteArray,
+    val nbtData: ByteArray
 ) : ClientBoundPacket {
     companion object : PacketSerializer<BlockEntityData> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): BlockEntityData {
