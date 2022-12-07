@@ -45,7 +45,7 @@ data class SpawnEntityPacket(
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnEntityPacket {
             val entityId = input.readVarInt()
             val uuid = input.readUUID()
-            val type = EntityType.byType(input.readVarInt()) ?: throw IllegalArgumentException("Invalid entity type")
+            val type = EntityType.byType(input.readVarInt())
             val x = input.readDouble()
             val y = input.readDouble()
             val z = input.readDouble()

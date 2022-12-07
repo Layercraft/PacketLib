@@ -19,7 +19,7 @@ data class ChangeDifficultyPacket(
 ) : ClientBoundPacket {
     companion object : PacketSerializer<ChangeDifficultyPacket> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ChangeDifficultyPacket {
-            val difficulty = Difficulty.byId(input.readVarInt())!!
+            val difficulty = Difficulty.byId(input.readVarInt())
             val locked = input.readBoolean()
 
             return ChangeDifficultyPacket(difficulty, locked)
