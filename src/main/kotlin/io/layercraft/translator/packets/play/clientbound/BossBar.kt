@@ -25,10 +25,8 @@ data class BossBar(
     val health: Float?,
     val color: BossBarColor?,
     val division: BossBarDivision?,
-    val flags: List<BossBarFlag>?
-
+    val flags: List<BossBarFlag>?,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<BossBar> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): BossBar {
             val uuid = input.readUUID()

@@ -7,7 +7,7 @@ import io.layercraft.translator.packets.login.clientbound.EncryptionRequest
 import io.layercraft.translator.packets.login.serverbound.LoginStart
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import java.util.*
+import java.util.UUID
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 
@@ -62,9 +62,11 @@ internal class SerializationTest {
 
         val packet = LoginStart(
             "Newspicel",
+            true,
             0x7F000001,
             exampleByteArray,
             exampleByteArray,
+            true,
             UUID.randomUUID()
         )
 
