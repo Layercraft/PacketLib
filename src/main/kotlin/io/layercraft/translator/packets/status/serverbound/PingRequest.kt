@@ -7,7 +7,7 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
 /**
  * Ping request | 0x01 | status | server-bound
  *
- * @property payload Long - Maybe any number. Notchian clients use a system-dependent time value which is counted in milliseconds.
+ * @property payload Maybe any number. Notchian clients use a system-dependent time value which is counted in milliseconds.
 
  * @see <a href="https://wiki.vg/Protocol#Ping_Request">https://wiki.vg/Protocol#Ping_Request</a>
  */

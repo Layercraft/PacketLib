@@ -4,7 +4,6 @@ import io.layercraft.translator.packets.*
 import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
 import java.util.Arrays
-import java.util.Optional
 import java.util.UUID
 
 /**
@@ -20,8 +19,8 @@ data class LoginSuccess(
     val uuid: UUID,
     val username: String, //string(16)
     val properties: List<LoginProperty>, //varint array of login properties
-): ClientBoundPacket {
-    companion object: PacketSerializer<LoginSuccess> {
+) : ClientBoundPacket {
+    companion object : PacketSerializer<LoginSuccess> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LoginSuccess {
             val uuid = input.readUUID()
             val username = input.readString(16)
@@ -52,15 +51,15 @@ data class LoginSuccess(
 /**
  * Login property
  *
- * @property name String (32767) -
- * @property value String (32767) -
- * @property signed Boolean -
- * @property signature [Optional] - String (32767) - Only if Is Signed is true.
+ * @property name
+ * @property value
+ * @property signed
+ * @property signature Only if Is Signed is true.
  * @see <a href="https://wiki.vg/Protocol#Login_Success">Login Success</a>
  */
 data class LoginProperty(
-    val name: String,
-    val value: String,
+    val name: String, //string(32767)
+    val value: String, //string(32767)
     val signed: Boolean,
-    val signature: String?,
+    val signature: String?, //string(32767) - only if signed is true
 )
