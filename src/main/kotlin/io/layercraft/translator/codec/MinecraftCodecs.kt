@@ -29,7 +29,7 @@ object MinecraftCodecs {
                     .registerServerBoundPacket(0x02, LoginPluginResponsePacket::class, LoginPluginResponsePacket)
                     .registerClientBoundPacket(0x00, DisconnectPacket::class, DisconnectPacket)
                     .registerClientBoundPacket(0x01, EncryptionRequestPacket::class, EncryptionRequestPacket)
-                    .registerClientBoundPacket(0x02, LoginSuccess::class, LoginSuccess)
+                    .registerClientBoundPacket(0x02, LoginSuccessPacket::class, LoginSuccessPacket)
                     .registerClientBoundPacket(0x03, SetCompressionPacket::class, SetCompressionPacket)
                     .registerClientBoundPacket(0x04, LoginPluginRequestPacket::class, LoginPluginRequestPacket),
             )

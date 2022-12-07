@@ -2,23 +2,23 @@ package io.layercraft.translator
 
 import io.layercraft.translator.data.ProtocolVersion
 import io.layercraft.translator.packets.handshake.data.HandshakeNextState
-import io.layercraft.translator.packets.handshake.serverbound.Handshake
-import io.layercraft.translator.packets.login.clientbound.EncryptionRequest
-import io.layercraft.translator.packets.login.serverbound.LoginStart
+import io.layercraft.translator.packets.handshake.serverbound.HandshakePacket
+import io.layercraft.translator.packets.login.clientbound.EncryptionRequestPacket
+import io.layercraft.translator.packets.login.serverbound.LoginStartPacket
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
-import java.util.UUID
+import java.util.*
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 
 internal class SerializationTest {
     @Test
     fun `test normal serialization`() {
-        val packet = Handshake(ProtocolVersion.V_1_19_2, "localhost", (25565).toUShort(), HandshakeNextState.LOGIN)
+        val packet = HandshakePacket(ProtocolVersion.V_1_19_2, "localhost", (25565).toUShort(), HandshakeNextState.LOGIN)
 
-        val bytes = TranslatorAPI.encodeToByteArray(packet, Handshake)
+        val bytes = TranslatorAPI.encodeToByteArray(packet, HandshakePacket)
 
-        val decoded = TranslatorAPI.decodeFromByteArray(bytes, Handshake)
+        val decoded = TranslatorAPI.decodeFromByteArray(bytes, HandshakePacket)
 
         Assertions.assertEquals(packet, decoded)
     }
@@ -27,7 +27,7 @@ internal class SerializationTest {
     fun `test normal serialization from raw bytes`() {
         val rawPacket = byteArrayOf(-0x08, 0x05, 0x09, 0x6C, 0x6F, 0x63, 0x61, 0x6C, 0x68, 0x6F, 0x73, 0x74, 0x63, -0x23, 0x01) // export from wireshark
 
-        val decoded: Handshake = TranslatorAPI.decodeFromByteArray(rawPacket, Handshake)
+        val decoded: HandshakePacket = TranslatorAPI.decodeFromByteArray(rawPacket, HandshakePacket)
 
         Assertions.assertEquals(ProtocolVersion.V_1_19_2, decoded.protocolVersion)
         Assertions.assertEquals("localhost", decoded.address)
@@ -40,15 +40,15 @@ internal class SerializationTest {
         val exampleByteArray = byteArrayOf(0x04, 0x6C, 0x6F, 0x63, 0x61, 0x6C, 0x68, 0x6F, 0x73, 0x74, 0x00, 0x7F, 0x00, 0x00)
 
         val packet =
-            EncryptionRequest(
+            EncryptionRequestPacket(
                 "",
                 exampleByteArray,
                 exampleByteArray,
             )
 
-        val bytes = TranslatorAPI.encodeToByteArray(packet, EncryptionRequest)
+        val bytes = TranslatorAPI.encodeToByteArray(packet, EncryptionRequestPacket)
 
-        val decoded = TranslatorAPI.decodeFromByteArray(bytes, EncryptionRequest)
+        val decoded = TranslatorAPI.decodeFromByteArray(bytes, EncryptionRequestPacket)
 
         Assertions.assertEquals(packet.serverId, decoded.serverId)
         Assertions.assertArrayEquals(packet.publicKey, decoded.publicKey)
@@ -59,7 +59,7 @@ internal class SerializationTest {
     fun `test serialization with custom serializer`() {
         val exampleByteArray = byteArrayOf(0x04, 0x6C, 0x6F, 0x63, 0x61, 0x6C, 0x68, 0x6F, 0x73, 0x74, 0x00, 0x7F, 0x00, 0x00)
 
-        val packet = LoginStart(
+        val packet = LoginStartPacket(
             "Newspicel",
             true,
             0x7F000001,
@@ -69,9 +69,9 @@ internal class SerializationTest {
             UUID.randomUUID(),
         )
 
-        val bytes = TranslatorAPI.encodeToByteArray(packet, LoginStart)
+        val bytes = TranslatorAPI.encodeToByteArray(packet, LoginStartPacket)
 
-        val decoded = TranslatorAPI.decodeFromByteArray(bytes, LoginStart)
+        val decoded = TranslatorAPI.decodeFromByteArray(bytes, LoginStartPacket)
 
         assertEquals(packet.name, decoded.name)
         assertEquals(packet.hasSigData, decoded.hasSigData)

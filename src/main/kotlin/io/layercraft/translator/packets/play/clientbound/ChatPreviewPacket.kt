@@ -7,6 +7,8 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
 /**
  * Chat preview | 0x0C | play | clientbound
  *
+ * Sets the message to preview on the client.
+ *
  * @property queryId
  * @property isPresent Component is Present
  * @property message Message to Preview

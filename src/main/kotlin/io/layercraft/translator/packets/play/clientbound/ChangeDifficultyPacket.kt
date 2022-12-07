@@ -8,6 +8,8 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
 /**
  * Change difficulty | 0x0B | play | clientbound
  *
+ * Changes the difficulty setting in the client's option menu
+ *
  * @property difficulty 0: peaceful, 1: easy, 2: normal, 3: hard.
  * @property locked Difficulty locked?
  * @see <a href="https://wiki.vg/Protocol#Change_Difficulty">https://wiki.vg/Protocol#Change_Difficulty</a>
