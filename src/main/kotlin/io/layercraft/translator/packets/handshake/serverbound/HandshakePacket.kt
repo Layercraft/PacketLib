@@ -7,7 +7,9 @@ import io.layercraft.translator.serialization.MinecraftProtocolDeserializeInterf
 import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Handshake | server-bound | Packet ID: 0x00 | State: Handshaking | Answer with nothing.
+ * Handshake | 0x00 | handshaking | server-bound
+ *
+ * Answer with nothing.
  *
  * @property protocolVersion See protocol version numbers (currently 760 in Minecraft 1.19.2).
  * @property address Hostname or IP, e.g. localhost or 127.0.0.1, that was used to connect. The Notchian server does not use this information. Note that SRV records are a simple redirect, e.g. if _minecraft._tcp.example.com points to mc.example.org, users connecting to example.com will provide example.org as server address in addition to connecting to it.

@@ -11,7 +11,7 @@ import io.layercraft.translator.serialization.MinecraftProtocolSerializeInterfac
 import java.util.*
 
 /**
- * Boss bar
+ * Boss bar | 0x0A | play | client-bound
  *
  * @property uuid Unique ID for this bar.
  * @property action Determines the layout of the remaining packet.
