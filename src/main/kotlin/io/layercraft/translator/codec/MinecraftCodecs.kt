@@ -54,6 +54,10 @@ object MinecraftCodecs {
                     .registerClientBoundPacket(0x07, BlockEntityDataPacket::class, BlockEntityDataPacket)
                     .registerClientBoundPacket(0x08, BlockActionPacket::class, BlockActionPacket)
                     .registerClientBoundPacket(0x0A, BossBarPacket::class, BossBarPacket)
+                    .registerClientBoundPacket(0x0B, ChangeDifficultyPacket::class, ChangeDifficultyPacket)
+                    .registerClientBoundPacket(0x0C, ChatPreviewPacket::class, ChatPreviewPacket)
+                    .registerClientBoundPacket(0x0D, ClearTitlesPacket::class, ClearTitlesPacket)
+                    .registerClientBoundPacket(0x0E, CommandSuggestionsResponsePacket::class, CommandSuggestionsResponsePacket)
                     .registerClientBoundPacket(0x25, LoginPacket::class, LoginPacket),
 
             )

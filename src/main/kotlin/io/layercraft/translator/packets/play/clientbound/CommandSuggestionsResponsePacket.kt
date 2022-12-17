@@ -21,8 +21,8 @@ data class CommandSuggestionsResponsePacket(
     val start: Int, // varint
     val length: Int, // varint
     val matches: List<CommandSuggestionsResponseMatch>, // varint array
-): ClientBoundPacket {
-    companion object: PacketSerializer<CommandSuggestionsResponsePacket> {
+) : ClientBoundPacket {
+    companion object : PacketSerializer<CommandSuggestionsResponsePacket> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): CommandSuggestionsResponsePacket {
             val id = input.readVarInt()
             val start = input.readVarInt()
@@ -48,7 +48,6 @@ data class CommandSuggestionsResponsePacket(
                 if (forValue.hasToolTip) forOutput.writeChat(forValue.toolTip!!)
             }
         }
-
     }
 }
 
