@@ -8,23 +8,22 @@ object MinecraftCodecs {
         MinecraftCodec.create(ProtocolVersion.V_1_19_2)
             .registerPacketRegistry(
                 PacketState.HANDSHAKING,
-                MinecraftCodecRegistry.create()
+                MinecraftCodecRegistry.create(),
 
             )
             .registerPacketRegistry(
                 PacketState.LOGIN,
-                MinecraftCodecRegistry.create()
+                MinecraftCodecRegistry.create(),
 
             )
             .registerPacketRegistry(
                 PacketState.STATUS,
-                MinecraftCodecRegistry.create()
+                MinecraftCodecRegistry.create(),
 
             )
             .registerPacketRegistry(
                 PacketState.PLAY,
-                MinecraftCodecRegistry.create()
-
+                MinecraftCodecRegistry.create(),
 
             )
 }
