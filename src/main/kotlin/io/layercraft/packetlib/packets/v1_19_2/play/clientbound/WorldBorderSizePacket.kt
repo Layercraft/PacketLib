@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Border_Size">https://wiki.vg/Protocol#Set_Border_Size</a>
  */
 
-@MinecraftPacket(packetId = 0x46, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x46, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class WorldBorderSizePacket(
     val diameter: Double,
 ) : ClientBoundPacket {

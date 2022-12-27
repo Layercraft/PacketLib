@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
  */
 
-@MinecraftPacket(packetId = 0x0f, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x0f, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class DeclareCommandsPacket(
     val rootIndex: Int, // varint
 ) : ClientBoundPacket {

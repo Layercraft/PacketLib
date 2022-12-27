@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Player_Abilities_.28clientbound.29">https://wiki.vg/Protocol#Player_Abilities_.28clientbound.29</a>
  */
 
-@MinecraftPacket(packetId = 0x31, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x31, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class AbilitiesPacket(
     val flags: Byte,
     val flyingSpeed: Float,

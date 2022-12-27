@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Update_Time">https://wiki.vg/Protocol#Update_Time</a>
  */
 
-@MinecraftPacket(packetId = 0x59, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x59, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class UpdateTimePacket(
     val age: Long,
     val time: Long,

@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Select_Advancements_Tab">https://wiki.vg/Protocol#Select_Advancements_Tab</a>
  */
 
-@MinecraftPacket(packetId = 0x41, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x41, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 class SelectAdvancementTabPacket() : ClientBoundPacket {
 
     companion object : PacketSerializer<SelectAdvancementTabPacket> {

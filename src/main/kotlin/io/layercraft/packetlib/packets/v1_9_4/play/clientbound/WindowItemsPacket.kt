@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Window_Items">https://wiki.vg/Protocol#Window_Items</a>
  */
 
-@MinecraftPacket(packetId = 0x14, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x14, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class WindowItemsPacket(
     val windowId: UByte,
 ) : ClientBoundPacket {

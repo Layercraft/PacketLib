@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Collect_Item">https://wiki.vg/Protocol#Collect_Item</a>
  */
 
-@MinecraftPacket(packetId = 0x48, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x48, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class CollectPacket(
     val collectedEntityId: Int, // varint
     val collectorEntityId: Int, // varint

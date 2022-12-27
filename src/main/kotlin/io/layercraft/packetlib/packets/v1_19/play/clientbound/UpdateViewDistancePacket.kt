@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Render_Distance">https://wiki.vg/Protocol#Set_Render_Distance</a>
  */
 
-@MinecraftPacket(packetId = 0x49, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x49, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class UpdateViewDistancePacket(
     val viewDistance: Int, // varint
 ) : ClientBoundPacket {

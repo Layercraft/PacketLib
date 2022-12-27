@@ -13,7 +13,7 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/Protocol#Query_Block_Entity_Tag">https://wiki.vg/Protocol#Query_Block_Entity_Tag</a>
  */
 
-@MinecraftPacket(packetId = 0x01, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x01, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class QueryBlockNbtPacket(
     val transactionId: Int, // varint
     val location: Position,

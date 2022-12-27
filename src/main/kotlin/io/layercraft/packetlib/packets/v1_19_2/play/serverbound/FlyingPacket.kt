@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Player_On_Ground">https://wiki.vg/Protocol#Set_Player_On_Ground</a>
  */
 
-@MinecraftPacket(packetId = 0x17, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x17, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class FlyingPacket(
     val onGround: Boolean,
 ) : ServerBoundPacket {

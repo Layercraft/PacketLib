@@ -3,7 +3,7 @@ package io.layercraft.packetlib.packets.v1_9_4.play.serverbound
 import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
-import io.layercraft.packetlib.types.Position 
+import io.layercraft.packetlib.types.Position
 
 /**
  * Player Digging | 0x13 | play | serverbound
@@ -14,7 +14,7 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/Protocol#Player_Digging">https://wiki.vg/Protocol#Player_Digging</a>
  */
 
-@MinecraftPacket(packetId = 0x13, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x13, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class BlockDigPacket(
     val status: Int, // varint
     val location: Position,

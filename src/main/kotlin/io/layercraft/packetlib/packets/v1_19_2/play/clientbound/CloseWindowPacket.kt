@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Close_Container_.28clientbound.29">https://wiki.vg/Protocol#Close_Container_.28clientbound.29</a>
  */
 
-@MinecraftPacket(packetId = 0x10, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x10, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class CloseWindowPacket(
     val windowId: UByte,
 ) : ClientBoundPacket {

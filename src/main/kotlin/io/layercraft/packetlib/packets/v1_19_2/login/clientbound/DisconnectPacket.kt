@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Disconnect_.28login.29">https://wiki.vg/Protocol#Disconnect_.28login.29</a>
  */
 
-@MinecraftPacket(packetId = 0x00, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x00, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class DisconnectPacket(
     val reason: String,
 ) : ClientBoundPacket {

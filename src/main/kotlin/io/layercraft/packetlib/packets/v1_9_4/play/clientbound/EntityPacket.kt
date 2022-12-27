@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Entity">https://wiki.vg/Protocol#Entity</a>
  */
 
-@MinecraftPacket(packetId = 0x28, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x28, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class EntityPacket(
     val entityId: Int, // varint
 ) : ClientBoundPacket {

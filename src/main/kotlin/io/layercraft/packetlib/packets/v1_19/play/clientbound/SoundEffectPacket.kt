@@ -18,7 +18,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
  */
 
-@MinecraftPacket(packetId = 0x5d, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x5d, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class SoundEffectPacket(
     val soundId: Int, // varint
     val soundCategory: Int, // varint

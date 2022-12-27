@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Entity_Event">https://wiki.vg/Protocol#Entity_Event</a>
  */
 
-@MinecraftPacket(packetId = 0x18, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x18, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class EntityStatusPacket(
     val entityId: Int,
     val entityStatus: Byte,

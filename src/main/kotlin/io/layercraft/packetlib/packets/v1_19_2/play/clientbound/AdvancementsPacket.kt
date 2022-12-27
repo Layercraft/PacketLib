@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Update_Advancements">https://wiki.vg/Protocol#Update_Advancements</a>
  */
 
-@MinecraftPacket(packetId = 0x67, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x67, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class AdvancementsPacket(
     val reset: Boolean,
 ) : ClientBoundPacket {

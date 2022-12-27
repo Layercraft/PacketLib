@@ -16,7 +16,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Spawn_Experience_Orb">https://wiki.vg/Protocol#Spawn_Experience_Orb</a>
  */
 
-@MinecraftPacket(packetId = 0x01, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x01, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class SpawnEntityExperienceOrbPacket(
     val entityId: Int, // varint
     val x: Double,

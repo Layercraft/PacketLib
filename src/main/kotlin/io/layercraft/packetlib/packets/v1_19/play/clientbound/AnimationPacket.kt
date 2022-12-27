@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Entity_Animation_.28clientbound.29">https://wiki.vg/Protocol#Entity_Animation_.28clientbound.29</a>
  */
 
-@MinecraftPacket(packetId = 0x03, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x03, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class AnimationPacket(
     val entityId: Int, // varint
     val animation: UByte,

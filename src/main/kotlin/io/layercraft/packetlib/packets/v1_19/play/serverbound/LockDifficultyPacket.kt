@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Lock_Difficulty">https://wiki.vg/Protocol#Lock_Difficulty</a>
  */
 
-@MinecraftPacket(packetId = 0x12, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x12, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class LockDifficultyPacket(
     val locked: Boolean,
 ) : ServerBoundPacket {

@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Resource_Pack_Status">https://wiki.vg/Protocol#Resource_Pack_Status</a>
  */
 
-@MinecraftPacket(packetId = 0x16, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x16, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class ResourcePackReceivePacket(
     val hash: String,
     val result: Int, // varint

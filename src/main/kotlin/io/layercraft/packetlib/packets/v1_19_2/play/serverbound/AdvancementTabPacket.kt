@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Seen_Advancements">https://wiki.vg/Protocol#Seen_Advancements</a>
  */
 
-@MinecraftPacket(packetId = 0x25, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x25, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class AdvancementTabPacket(
     val action: Int, // varint
 ) : ServerBoundPacket {

@@ -14,7 +14,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Player_Position">https://wiki.vg/Protocol#Set_Player_Position</a>
  */
 
-@MinecraftPacket(packetId = 0x14, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x14, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class PositionPacket(
     val x: Double,
     val y: Double,

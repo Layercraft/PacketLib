@@ -12,7 +12,7 @@ import java.util.UUID
  * @see <a href="https://wiki.vg/Protocol#Teleport_To_Entity">https://wiki.vg/Protocol#Teleport_To_Entity</a>
  */
 
-@MinecraftPacket(packetId = 0x30, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x30, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class SpectatePacket(
     val target: UUID,
 ) : ServerBoundPacket {

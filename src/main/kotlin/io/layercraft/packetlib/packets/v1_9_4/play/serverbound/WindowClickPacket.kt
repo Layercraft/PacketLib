@@ -16,7 +16,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Click_Window">https://wiki.vg/Protocol#Click_Window</a>
  */
 
-@MinecraftPacket(packetId = 0x07, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x07, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class WindowClickPacket(
     val windowId: UByte,
     val slot: Short,

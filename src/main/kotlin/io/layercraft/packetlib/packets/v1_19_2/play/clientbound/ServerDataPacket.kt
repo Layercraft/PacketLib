@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Server_Data">https://wiki.vg/Protocol#Server_Data</a>
  */
 
-@MinecraftPacket(packetId = 0x42, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x42, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class ServerDataPacket(
     val previewsChat: Boolean,
     val enforcesSecureChat: Boolean,

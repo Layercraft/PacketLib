@@ -13,7 +13,7 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/Protocol#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
  */
 
-@MinecraftPacket(packetId = 0x4a, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x4a, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class SpawnPositionPacket(
     val location: Position,
     val angle: Float,

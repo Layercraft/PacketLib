@@ -14,7 +14,7 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/Protocol#Set_Block_Destroy_Stage">https://wiki.vg/Protocol#Set_Block_Destroy_Stage</a>
  */
 
-@MinecraftPacket(packetId = 0x06, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x06, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class BlockBreakAnimationPacket(
     val entityId: Int, // varint
     val location: Position,

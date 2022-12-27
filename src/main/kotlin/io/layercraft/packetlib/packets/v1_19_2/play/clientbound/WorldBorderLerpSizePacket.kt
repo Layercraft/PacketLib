@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Border_Lerp_Size">https://wiki.vg/Protocol#Set_Border_Lerp_Size</a>
  */
 
-@MinecraftPacket(packetId = 0x45, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x45, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class WorldBorderLerpSizePacket(
     val oldDiameter: Double,
     val newDiameter: Double,

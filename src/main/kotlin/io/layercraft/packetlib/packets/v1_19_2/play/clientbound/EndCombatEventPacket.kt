@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#End_Combat">https://wiki.vg/Protocol#End_Combat</a>
  */
 
-@MinecraftPacket(packetId = 0x34, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x34, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class EndCombatEventPacket(
     val duration: Int, // varint
     val entityId: Int,

@@ -20,7 +20,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Particle_2">https://wiki.vg/Protocol#Particle_2</a>
  */
 
-@MinecraftPacket(packetId = 0x21, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x21, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class WorldParticlesPacket(
     val particleId: Int, // varint
     val longDistance: Boolean,

@@ -18,7 +18,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Entity_Teleport">https://wiki.vg/Protocol#Entity_Teleport</a>
  */
 
-@MinecraftPacket(packetId = 0x49, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x49, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class EntityTeleportPacket(
     val entityId: Int, // varint
     val x: Double,

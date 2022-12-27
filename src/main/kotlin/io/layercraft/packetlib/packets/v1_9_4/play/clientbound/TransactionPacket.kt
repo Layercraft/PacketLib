@@ -14,7 +14,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Confirm_Transaction_.28clientbound.29">https://wiki.vg/Protocol#Confirm_Transaction_.28clientbound.29</a>
  */
 
-@MinecraftPacket(packetId = 0x11, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x11, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class TransactionPacket(
     val windowId: Byte,
     val action: Short,

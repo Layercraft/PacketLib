@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Equipment">https://wiki.vg/Protocol#Set_Equipment</a>
  */
 
-@MinecraftPacket(packetId = 0x53, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x53, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class EntityEquipmentPacket(
     val entityId: Int, // varint
 ) : ClientBoundPacket {

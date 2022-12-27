@@ -14,7 +14,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Entity_Action">https://wiki.vg/Protocol#Entity_Action</a>
  */
 
-@MinecraftPacket(packetId = 0x14, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x14, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class EntityActionPacket(
     val entityId: Int, // varint
     val actionId: Int, // varint

@@ -15,7 +15,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Look_At">https://wiki.vg/Protocol#Look_At</a>
  */
 
-@MinecraftPacket(packetId = 0x35, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x35, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class FacePlayerPacket(
     val feet_eyes: Int, // varint
     val x: Double,

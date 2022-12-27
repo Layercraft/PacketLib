@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Beacon_Effect">https://wiki.vg/Protocol#Set_Beacon_Effect</a>
  */
 
-@MinecraftPacket(packetId = 0x26, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x26, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 class SetBeaconEffectPacket() : ServerBoundPacket {
 
     companion object : PacketSerializer<SetBeaconEffectPacket> {

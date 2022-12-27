@@ -15,7 +15,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Respawn">https://wiki.vg/Protocol#Respawn</a>
  */
 
-@MinecraftPacket(packetId = 0x33, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x33, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class RespawnPacket(
     val dimension: Int,
     val difficulty: UByte,

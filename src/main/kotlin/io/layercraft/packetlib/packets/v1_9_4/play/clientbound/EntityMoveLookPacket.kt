@@ -18,7 +18,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Entity_Look_And_Relative_Move">https://wiki.vg/Protocol#Entity_Look_And_Relative_Move</a>
  */
 
-@MinecraftPacket(packetId = 0x26, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x26, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class EntityMoveLookPacket(
     val entityId: Int, // varint
     val dX: Short,

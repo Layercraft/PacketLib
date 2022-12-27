@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Message_Acknowledgment">https://wiki.vg/Protocol#Message_Acknowledgment</a>
  */
 
-@MinecraftPacket(packetId = 0x03, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x03, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 class MessageAcknowledgementPacket() : ServerBoundPacket {
 
     companion object : PacketSerializer<MessageAcknowledgementPacket> {

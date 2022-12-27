@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Keep_Alive_.28clientbound.29">https://wiki.vg/Protocol#Keep_Alive_.28clientbound.29</a>
  */
 
-@MinecraftPacket(packetId = 0x20, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x20, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class KeepAlivePacket(
     val keepAliveId: Long,
 ) : ClientBoundPacket {

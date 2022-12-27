@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Teams">https://wiki.vg/Protocol#Teams</a>
  */
 
-@MinecraftPacket(packetId = 0x41, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x41, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class TeamsPacket(
     val team: String,
     val mode: Byte,

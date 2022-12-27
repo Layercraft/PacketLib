@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Encryption_Request">https://wiki.vg/Protocol#Encryption_Request</a>
  */
 
-@MinecraftPacket(packetId = 0x01, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x01, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class EncryptionBeginPacket(
     val serverId: String,
 ) : ClientBoundPacket {

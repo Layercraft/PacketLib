@@ -3,7 +3,7 @@ package io.layercraft.packetlib.packets.v1_9_4.play.clientbound
 import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
-import io.layercraft.packetlib.types.Position 
+import io.layercraft.packetlib.types.Position
 
 /**
  * Block Break Animation | 0x08 | play | clientbound
@@ -14,7 +14,7 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/Protocol#Block_Break_Animation">https://wiki.vg/Protocol#Block_Break_Animation</a>
  */
 
-@MinecraftPacket(packetId = 0x08, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x08, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class BlockBreakAnimationPacket(
     val entityId: Int, // varint
     val location: Position,

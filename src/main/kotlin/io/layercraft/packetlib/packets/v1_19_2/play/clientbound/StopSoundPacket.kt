@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Stop_Sound">https://wiki.vg/Protocol#Stop_Sound</a>
  */
 
-@MinecraftPacket(packetId = 0x61, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x61, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class StopSoundPacket(
     val flags: Byte,
 ) : ClientBoundPacket {

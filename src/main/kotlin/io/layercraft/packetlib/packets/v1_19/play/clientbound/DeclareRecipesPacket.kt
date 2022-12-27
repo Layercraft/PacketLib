@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Update_Recipes">https://wiki.vg/Protocol#Update_Recipes</a>
  */
 
-@MinecraftPacket(packetId = 0x67, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x67, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 class DeclareRecipesPacket() : ClientBoundPacket {
 
     companion object : PacketSerializer<DeclareRecipesPacket> {

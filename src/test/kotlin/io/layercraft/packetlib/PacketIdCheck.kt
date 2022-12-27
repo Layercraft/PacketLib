@@ -20,8 +20,8 @@ class PacketIdCheck {
             registry.clientPacketMap.forEach { (id, packet) ->
                 val annotation = packet.packet.annotations.filterIsInstance<MinecraftPacket>().first()
 
-                assert(annotation.packetId == id) {
-                    "Packet ${packet.packet.simpleName} has id ${annotation.packetId} in annotation, but $id in registry"
+                assert(annotation.id == id) {
+                    "Packet ${packet.packet.simpleName} has id ${annotation.id} in annotation, but $id in registry"
                 }
 
                 assert(annotation.state == state) {
@@ -39,8 +39,8 @@ class PacketIdCheck {
             registry.serverPacketMap.forEach { (id, packet) ->
                 val annotation = packet.packet.annotations.filterIsInstance<MinecraftPacket>().first()
 
-                assert(annotation.packetId == id) {
-                    "Packet ${packet.packet.simpleName} has id ${annotation.packetId} in annotation, but $id in registry"
+                assert(annotation.id == id) {
+                    "Packet ${packet.packet.simpleName} has id ${annotation.id} in annotation, but $id in registry"
                 }
 
                 assert(annotation.state == state) {

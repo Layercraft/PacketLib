@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Click_Container_Button">https://wiki.vg/Protocol#Click_Container_Button</a>
  */
 
-@MinecraftPacket(packetId = 0x09, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x09, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class EnchantItemPacket(
     val windowId: Byte,
     val enchantment: Byte,

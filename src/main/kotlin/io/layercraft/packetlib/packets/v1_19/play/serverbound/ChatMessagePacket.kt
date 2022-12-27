@@ -14,7 +14,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Chat_Message">https://wiki.vg/Protocol#Chat_Message</a>
  */
 
-@MinecraftPacket(packetId = 0x04, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x04, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class ChatMessagePacket(
     val message: String,
     val timestamp: Long,

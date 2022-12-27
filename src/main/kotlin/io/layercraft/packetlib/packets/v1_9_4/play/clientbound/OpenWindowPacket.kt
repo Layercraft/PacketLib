@@ -15,7 +15,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Open_Window">https://wiki.vg/Protocol#Open_Window</a>
  */
 
-@MinecraftPacket(packetId = 0x13, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x13, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class OpenWindowPacket(
     val windowId: UByte,
     val inventoryType: String,

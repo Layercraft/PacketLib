@@ -14,7 +14,7 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/Protocol#Jigsaw_Generate">https://wiki.vg/Protocol#Jigsaw_Generate</a>
  */
 
-@MinecraftPacket(packetId = 0x10, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x10, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class GenerateStructurePacket(
     val location: Position,
     val levels: Int, // varint

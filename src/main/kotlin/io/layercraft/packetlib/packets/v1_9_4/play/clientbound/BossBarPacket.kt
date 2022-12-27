@@ -3,7 +3,7 @@ package io.layercraft.packetlib.packets.v1_9_4.play.clientbound
 import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
-import java.util.UUID 
+import java.util.UUID
 
 /**
  * Encryption Response | 0x0c | play | clientbound
@@ -13,7 +13,7 @@ import java.util.UUID
  * @see <a href="https://wiki.vg/Protocol#Encryption_Response">https://wiki.vg/Protocol#Encryption_Response</a>
  */
 
-@MinecraftPacket(packetId = 0x0c, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x0c, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class BossBarPacket(
     val entityUUID: UUID,
     val action: Int, // varint

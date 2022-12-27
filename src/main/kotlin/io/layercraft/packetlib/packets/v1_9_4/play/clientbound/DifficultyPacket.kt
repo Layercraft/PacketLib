@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Encryption_Response">https://wiki.vg/Protocol#Encryption_Response</a>
  */
 
-@MinecraftPacket(packetId = 0x0d, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x0d, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class DifficultyPacket(
     val difficulty: UByte,
 ) : ClientBoundPacket {

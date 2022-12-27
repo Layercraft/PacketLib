@@ -15,7 +15,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Update_Entity_Position">https://wiki.vg/Protocol#Update_Entity_Position</a>
  */
 
-@MinecraftPacket(packetId = 0x26, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x26, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class RelEntityMovePacket(
     val entityId: Int, // varint
     val dX: Short,

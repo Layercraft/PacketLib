@@ -18,7 +18,7 @@ import java.util.UUID
  * @see <a href="https://wiki.vg/Protocol#Player_Chat_Message">https://wiki.vg/Protocol#Player_Chat_Message</a>
  */
 
-@MinecraftPacket(packetId = 0x33, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x33, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class PlayerChatPacket(
     val senderUuid: UUID,
     val plainMessage: String,

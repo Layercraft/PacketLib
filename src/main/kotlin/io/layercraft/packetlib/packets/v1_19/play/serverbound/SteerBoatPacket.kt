@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Paddle_Boat">https://wiki.vg/Protocol#Paddle_Boat</a>
  */
 
-@MinecraftPacket(packetId = 0x18, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x18, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class SteerBoatPacket(
     val leftPaddle: Boolean,
     val rightPaddle: Boolean,

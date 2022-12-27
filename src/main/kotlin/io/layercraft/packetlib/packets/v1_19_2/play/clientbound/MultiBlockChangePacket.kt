@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Update_Section_Blocks">https://wiki.vg/Protocol#Update_Section_Blocks</a>
  */
 
-@MinecraftPacket(packetId = 0x40, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x40, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class MultiBlockChangePacket(
     val suppressLightUpdates: Boolean,
 ) : ClientBoundPacket {

@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#System_Chat_Message">https://wiki.vg/Protocol#System_Chat_Message</a>
  */
 
-@MinecraftPacket(packetId = 0x62, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x62, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class SystemChatPacket(
     val content: String,
     val isActionBar: Boolean,

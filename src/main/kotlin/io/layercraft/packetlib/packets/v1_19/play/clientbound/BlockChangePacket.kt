@@ -13,7 +13,7 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/Protocol#Block_Update">https://wiki.vg/Protocol#Block_Update</a>
  */
 
-@MinecraftPacket(packetId = 0x09, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x09, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class BlockChangePacket(
     val location: Position,
     val type: Int, // varint

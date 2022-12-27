@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Response">https://wiki.vg/Protocol#Response</a>
  */
 
-@MinecraftPacket(packetId = 0x00, state = PacketState.STATUS, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x00, state = PacketState.STATUS, direction = PacketDirection.CLIENTBOUND)
 data class ServerInfoPacket(
     val response: String,
 ) : ClientBoundPacket {

@@ -24,7 +24,7 @@ interface PacketSerializer<T> where T : Packet {
 }
 
 @Target(AnnotationTarget.CLASS)
-annotation class MinecraftPacket(val packetId: Int, val state: PacketState, val direction: PacketDirection)
+annotation class MinecraftPacket(val id: Int, val state: PacketState, val direction: PacketDirection)
 
 enum class PacketDirection {
     SERVERBOUND,

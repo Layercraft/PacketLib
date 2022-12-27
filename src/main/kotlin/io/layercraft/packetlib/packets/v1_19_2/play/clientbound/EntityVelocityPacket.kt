@@ -14,7 +14,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Entity_Velocity">https://wiki.vg/Protocol#Set_Entity_Velocity</a>
  */
 
-@MinecraftPacket(packetId = 0x52, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x52, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class EntityVelocityPacket(
     val entityId: Int, // varint
     val velocityX: Short,

@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Tag_Query_Response">https://wiki.vg/Protocol#Tag_Query_Response</a>
  */
 
-@MinecraftPacket(packetId = 0x61, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x61, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class NbtQueryResponsePacket(
     val transactionId: Int, // varint
     val nbt: ByteArray,

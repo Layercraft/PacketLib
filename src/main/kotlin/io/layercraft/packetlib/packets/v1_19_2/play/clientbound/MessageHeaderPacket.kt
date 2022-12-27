@@ -12,7 +12,7 @@ import java.util.UUID
  * @see <a href="https://wiki.vg/Protocol#Message_Header">https://wiki.vg/Protocol#Message_Header</a>
  */
 
-@MinecraftPacket(packetId = 0x32, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x32, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class MessageHeaderPacket(
     val senderUuid: UUID,
 ) : ClientBoundPacket {

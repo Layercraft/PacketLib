@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Login_Plugin_Request">https://wiki.vg/Protocol#Login_Plugin_Request</a>
  */
 
-@MinecraftPacket(packetId = 0x04, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x04, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class LoginPluginRequestPacket(
     val messageId: Int, // varint
     val channel: String,

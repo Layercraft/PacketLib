@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Acknowledge_Block_Change">https://wiki.vg/Protocol#Acknowledge_Block_Change</a>
  */
 
-@MinecraftPacket(packetId = 0x05, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x05, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class AcknowledgePlayerDiggingPacket(
     val sequenceId: Int, // varint
 ) : ClientBoundPacket {

@@ -15,7 +15,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Move_Vehicle_.28serverbound.29">https://wiki.vg/Protocol#Move_Vehicle_.28serverbound.29</a>
  */
 
-@MinecraftPacket(packetId = 0x17, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x17, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class VehicleMovePacket(
     val x: Double,
     val y: Double,

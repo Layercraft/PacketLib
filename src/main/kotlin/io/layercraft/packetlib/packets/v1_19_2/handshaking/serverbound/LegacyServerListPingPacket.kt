@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
  */
 
-@MinecraftPacket(packetId = 0xfe, state = PacketState.HANDSHAKING, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0xfe, state = PacketState.HANDSHAKING, direction = PacketDirection.SERVERBOUND)
 data class LegacyServerListPingPacket(
     val payload: UByte,
 ) : ServerBoundPacket {

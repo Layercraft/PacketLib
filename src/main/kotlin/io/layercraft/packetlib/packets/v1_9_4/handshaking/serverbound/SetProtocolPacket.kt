@@ -15,7 +15,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Handshake">https://wiki.vg/Protocol#Handshake</a>
  */
 
-@MinecraftPacket(packetId = 0x00, state = PacketState.HANDSHAKING, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x00, state = PacketState.HANDSHAKING, direction = PacketDirection.SERVERBOUND)
 data class SetProtocolPacket(
     val protocolVersion: Int, // varint
     val serverHost: String,

@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Ping">https://wiki.vg/Protocol#Ping</a>
  */
 
-@MinecraftPacket(packetId = 0x01, state = PacketState.STATUS, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x01, state = PacketState.STATUS, direction = PacketDirection.SERVERBOUND)
 data class PingPacket(
     val time: Long,
 ) : ServerBoundPacket {

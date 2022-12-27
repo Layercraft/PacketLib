@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Link_Entities">https://wiki.vg/Protocol#Link_Entities</a>
  */
 
-@MinecraftPacket(packetId = 0x51, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x51, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class AttachEntityPacket(
     val entityId: Int,
     val vehicleId: Int,

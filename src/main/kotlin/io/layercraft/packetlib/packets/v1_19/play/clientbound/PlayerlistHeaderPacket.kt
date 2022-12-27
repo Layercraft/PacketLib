@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Tab_List_Header_And_Footer">https://wiki.vg/Protocol#Set_Tab_List_Header_And_Footer</a>
  */
 
-@MinecraftPacket(packetId = 0x60, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x60, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class PlayerlistHeaderPacket(
     val header: String,
     val footer: String,

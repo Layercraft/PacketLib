@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Interact">https://wiki.vg/Protocol#Interact</a>
  */
 
-@MinecraftPacket(packetId = 0x10, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x10, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class UseEntityPacket(
     val target: Int, // varint
     val mouse: Int, // varint

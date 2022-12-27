@@ -3,7 +3,7 @@ package io.layercraft.packetlib.packets.v1_9_4.play.clientbound
 import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
-import io.layercraft.packetlib.types.Position 
+import io.layercraft.packetlib.types.Position
 
 /**
  * Spawn Position | 0x43 | play | clientbound
@@ -12,7 +12,7 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/Protocol#Spawn_Position">https://wiki.vg/Protocol#Spawn_Position</a>
  */
 
-@MinecraftPacket(packetId = 0x43, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x43, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class SpawnPositionPacket(
     val location: Position,
 ) : ClientBoundPacket {

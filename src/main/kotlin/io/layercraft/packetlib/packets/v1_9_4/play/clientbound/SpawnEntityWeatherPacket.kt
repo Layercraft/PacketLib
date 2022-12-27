@@ -16,7 +16,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Spawn_Global_Entity">https://wiki.vg/Protocol#Spawn_Global_Entity</a>
  */
 
-@MinecraftPacket(packetId = 0x02, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x02, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class SpawnEntityWeatherPacket(
     val entityId: Int, // varint
     val type: Byte,

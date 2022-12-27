@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Destroy_Entities">https://wiki.vg/Protocol#Destroy_Entities</a>
  */
 
-@MinecraftPacket(packetId = 0x30, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x30, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
  class EntityDestroyPacket(
 
 ) : ClientBoundPacket {

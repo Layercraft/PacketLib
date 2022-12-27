@@ -15,7 +15,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Entity_Effect">https://wiki.vg/Protocol#Entity_Effect</a>
  */
 
-@MinecraftPacket(packetId = 0x66, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x66, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class EntityEffectPacket(
     val entityId: Int, // varint
     val effectId: Int, // varint

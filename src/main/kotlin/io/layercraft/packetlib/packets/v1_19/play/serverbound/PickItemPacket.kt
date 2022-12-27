@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Pick_Item">https://wiki.vg/Protocol#Pick_Item</a>
  */
 
-@MinecraftPacket(packetId = 0x19, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x19, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class PickItemPacket(
     val slot: Int, // varint
 ) : ServerBoundPacket {

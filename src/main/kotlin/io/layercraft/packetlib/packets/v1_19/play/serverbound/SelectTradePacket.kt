@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Select_Trade">https://wiki.vg/Protocol#Select_Trade</a>
  */
 
-@MinecraftPacket(packetId = 0x25, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x25, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class SelectTradePacket(
     val slot: Int, // varint
 ) : ServerBoundPacket {

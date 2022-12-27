@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Confirm_Teleportation">https://wiki.vg/Protocol#Confirm_Teleportation</a>
  */
 
-@MinecraftPacket(packetId = 0x00, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x00, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class TeleportConfirmPacket(
     val teleportId: Int, // varint
 ) : ServerBoundPacket {

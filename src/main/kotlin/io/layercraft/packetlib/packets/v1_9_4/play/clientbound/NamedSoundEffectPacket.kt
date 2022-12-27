@@ -18,7 +18,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Named_Sound_Effect">https://wiki.vg/Protocol#Named_Sound_Effect</a>
  */
 
-@MinecraftPacket(packetId = 0x19, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x19, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class NamedSoundEffectPacket(
     val soundName: String,
     val soundCategory: Int, // varint

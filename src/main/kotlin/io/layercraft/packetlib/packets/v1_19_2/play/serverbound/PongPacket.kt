@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Pong_.28play.29">https://wiki.vg/Protocol#Pong_.28play.29</a>
  */
 
-@MinecraftPacket(packetId = 0x20, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x20, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class PongPacket(
     val id: Int,
 ) : ServerBoundPacket {

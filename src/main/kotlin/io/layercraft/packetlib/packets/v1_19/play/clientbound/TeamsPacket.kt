@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Update_Teams">https://wiki.vg/Protocol#Update_Teams</a>
  */
 
-@MinecraftPacket(packetId = 0x55, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x55, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class TeamsPacket(
     val team: String,
     val mode: Byte,

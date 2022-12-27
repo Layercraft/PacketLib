@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Program_Command_Block_Minecart">https://wiki.vg/Protocol#Program_Command_Block_Minecart</a>
  */
 
-@MinecraftPacket(packetId = 0x29, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x29, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class UpdateCommandBlockMinecartPacket(
     val entityId: Int, // varint
     val command: String,

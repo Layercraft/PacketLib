@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Update_Attributes">https://wiki.vg/Protocol#Update_Attributes</a>
  */
 
-@MinecraftPacket(packetId = 0x68, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x68, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class EntityUpdateAttributesPacket(
     val entityId: Int, // varint
 ) : ClientBoundPacket {

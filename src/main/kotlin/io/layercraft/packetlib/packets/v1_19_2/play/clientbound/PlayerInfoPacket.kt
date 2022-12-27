@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Player_Info">https://wiki.vg/Protocol#Player_Info</a>
  */
 
-@MinecraftPacket(packetId = 0x37, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x37, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class PlayerInfoPacket(
     val action: Int, // varint
 ) : ClientBoundPacket {

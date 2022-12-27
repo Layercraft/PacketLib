@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Update_Objectives">https://wiki.vg/Protocol#Update_Objectives</a>
  */
 
-@MinecraftPacket(packetId = 0x56, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x56, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class ScoreboardObjectivePacket(
     val name: String,
     val action: Byte,

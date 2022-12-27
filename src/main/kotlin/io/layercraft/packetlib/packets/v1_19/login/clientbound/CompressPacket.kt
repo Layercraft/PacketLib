@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Compression">https://wiki.vg/Protocol#Set_Compression</a>
  */
 
-@MinecraftPacket(packetId = 0x03, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x03, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class CompressPacket(
     val threshold: Int, // varint
 ) : ClientBoundPacket {

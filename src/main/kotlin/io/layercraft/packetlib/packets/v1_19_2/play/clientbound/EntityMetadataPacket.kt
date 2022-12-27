@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Entity_Metadata">https://wiki.vg/Protocol#Set_Entity_Metadata</a>
  */
 
-@MinecraftPacket(packetId = 0x50, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x50, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class EntityMetadataPacket(
     val entityId: Int, // varint
 ) : ClientBoundPacket {

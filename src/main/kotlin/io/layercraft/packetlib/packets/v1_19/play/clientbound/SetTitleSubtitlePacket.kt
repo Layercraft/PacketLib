@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Subtitle_Text">https://wiki.vg/Protocol#Set_Subtitle_Text</a>
  */
 
-@MinecraftPacket(packetId = 0x58, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x58, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class SetTitleSubtitlePacket(
     val text: String,
 ) : ClientBoundPacket {

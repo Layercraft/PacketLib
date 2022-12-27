@@ -3,8 +3,8 @@ package io.layercraft.packetlib.packets.v1_9_4.play.clientbound
 import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
-import java.util.UUID 
-import io.layercraft.packetlib.types.Position 
+import java.util.UUID
+import io.layercraft.packetlib.types.Position
 
 /**
  * Spawn Painting | 0x04 | play | clientbound
@@ -17,7 +17,7 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/Protocol#Spawn_Painting">https://wiki.vg/Protocol#Spawn_Painting</a>
  */
 
-@MinecraftPacket(packetId = 0x04, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x04, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class SpawnEntityPaintingPacket(
     val entityId: Int, // varint
     val entityUUID: UUID,

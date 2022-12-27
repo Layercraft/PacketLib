@@ -3,7 +3,7 @@ package io.layercraft.packetlib.packets.v1_9_4.play.clientbound
 import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
-import io.layercraft.packetlib.types.Position 
+import io.layercraft.packetlib.types.Position
 
 /**
  * Encryption Response | 0x0b | play | clientbound
@@ -13,7 +13,7 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/Protocol#Encryption_Response">https://wiki.vg/Protocol#Encryption_Response</a>
  */
 
-@MinecraftPacket(packetId = 0x0b, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x0b, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class BlockChangePacket(
     val location: Position,
     val type: Int, // varint

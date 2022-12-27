@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Camera">https://wiki.vg/Protocol#Set_Camera</a>
  */
 
-@MinecraftPacket(packetId = 0x49, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x49, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class CameraPacket(
     val cameraId: Int, // varint
 ) : ClientBoundPacket {

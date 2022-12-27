@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Entity_Head_Look">https://wiki.vg/Protocol#Entity_Head_Look</a>
  */
 
-@MinecraftPacket(packetId = 0x34, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x34, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class EntityHeadRotationPacket(
     val entityId: Int, // varint
     val headYaw: Byte,

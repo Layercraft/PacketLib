@@ -17,7 +17,7 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/Protocol#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
  */
 
-@MinecraftPacket(packetId = 0x2c, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x2c, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class UpdateJigsawBlockPacket(
     val location: Position,
     val name: String,

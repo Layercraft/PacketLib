@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Update_Light">https://wiki.vg/Protocol#Update_Light</a>
  */
 
-@MinecraftPacket(packetId = 0x22, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x22, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class UpdateLightPacket(
     val chunkX: Int, // varint
     val chunkZ: Int, // varint

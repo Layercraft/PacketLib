@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Hide_Message">https://wiki.vg/Protocol#Hide_Message</a>
  */
 
-@MinecraftPacket(packetId = 0x18, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x18, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 class HideMessagePacket() : ClientBoundPacket {
 
     companion object : PacketSerializer<HideMessagePacket> {

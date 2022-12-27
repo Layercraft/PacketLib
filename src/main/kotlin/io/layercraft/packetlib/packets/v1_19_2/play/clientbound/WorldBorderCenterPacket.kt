@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Border_Center">https://wiki.vg/Protocol#Set_Border_Center</a>
  */
 
-@MinecraftPacket(packetId = 0x44, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x44, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class WorldBorderCenterPacket(
     val x: Double,
     val z: Double,

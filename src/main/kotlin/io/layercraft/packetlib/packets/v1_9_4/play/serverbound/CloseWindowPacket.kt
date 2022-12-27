@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Close_Window_.28serverbound.29">https://wiki.vg/Protocol#Close_Window_.28serverbound.29</a>
  */
 
-@MinecraftPacket(packetId = 0x08, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x08, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class CloseWindowPacket(
     val windowId: UByte,
 ) : ServerBoundPacket {

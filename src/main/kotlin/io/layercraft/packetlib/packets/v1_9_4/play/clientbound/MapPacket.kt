@@ -15,7 +15,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Map">https://wiki.vg/Protocol#Map</a>
  */
 
-@MinecraftPacket(packetId = 0x24, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x24, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class MapPacket(
     val itemDamage: Int, // varint
     val scale: Byte,

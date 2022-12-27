@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Encryption_Response">https://wiki.vg/Protocol#Encryption_Response</a>
  */
 
-@MinecraftPacket(packetId = 0xfe, state = PacketState.HANDSHAKING, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0xfe, state = PacketState.HANDSHAKING, direction = PacketDirection.SERVERBOUND)
 data class LegacyServerListPingPacket(
     val payload: UByte,
 ) : ServerBoundPacket {

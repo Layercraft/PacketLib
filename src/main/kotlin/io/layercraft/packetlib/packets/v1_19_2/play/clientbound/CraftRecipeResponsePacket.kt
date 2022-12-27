@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Place_Ghost_Recipe">https://wiki.vg/Protocol#Place_Ghost_Recipe</a>
  */
 
-@MinecraftPacket(packetId = 0x30, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x30, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class CraftRecipeResponsePacket(
     val windowId: Byte,
     val recipe: String,

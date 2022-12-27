@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Multi_Block_Change">https://wiki.vg/Protocol#Multi_Block_Change</a>
  */
 
-@MinecraftPacket(packetId = 0x10, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x10, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class MultiBlockChangePacket(
     val chunkX: Int,
     val chunkZ: Int,

@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Resource_Pack_Send">https://wiki.vg/Protocol#Resource_Pack_Send</a>
  */
 
-@MinecraftPacket(packetId = 0x32, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x32, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class ResourcePackSendPacket(
     val url: String,
     val hash: String,

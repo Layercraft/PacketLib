@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Border_Warning_Distance">https://wiki.vg/Protocol#Set_Border_Warning_Distance</a>
  */
 
-@MinecraftPacket(packetId = 0x45, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x45, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class WorldBorderWarningReachPacket(
     val warningBlocks: Int, // varint
 ) : ClientBoundPacket {

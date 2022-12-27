@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Change_Recipe_Book_Settings">https://wiki.vg/Protocol#Change_Recipe_Book_Settings</a>
  */
 
-@MinecraftPacket(packetId = 0x21, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x21, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class RecipeBookPacket(
     val bookId: Int, // varint
     val bookOpen: Boolean,

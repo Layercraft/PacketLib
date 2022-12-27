@@ -17,7 +17,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Client_Settings">https://wiki.vg/Protocol#Client_Settings</a>
  */
 
-@MinecraftPacket(packetId = 0x04, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x04, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class SettingsPacket(
     val locale: String,
     val viewDistance: Byte,

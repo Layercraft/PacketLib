@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Rename_Item">https://wiki.vg/Protocol#Rename_Item</a>
  */
 
-@MinecraftPacket(packetId = 0x22, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x22, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class NameItemPacket(
     val name: String,
 ) : ServerBoundPacket {

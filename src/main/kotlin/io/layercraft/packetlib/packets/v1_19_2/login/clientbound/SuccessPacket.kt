@@ -17,7 +17,7 @@ import java.util.*
  * @see <a href="https://wiki.vg/Protocol#Login_Success">https://wiki.vg/Protocol#Login_Success</a>
  */
 
-@MinecraftPacket(packetId = 0x02, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x02, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class SuccessPacket(
     val uuid: UUID,
     val username: String,

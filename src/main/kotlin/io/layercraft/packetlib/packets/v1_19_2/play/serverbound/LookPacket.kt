@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Player_Rotation">https://wiki.vg/Protocol#Set_Player_Rotation</a>
  */
 
-@MinecraftPacket(packetId = 0x16, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x16, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class LookPacket(
     val yaw: Float,
     val pitch: Float,

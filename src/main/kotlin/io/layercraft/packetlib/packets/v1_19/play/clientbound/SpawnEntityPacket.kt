@@ -24,7 +24,7 @@ import java.util.UUID
  * @see <a href="https://wiki.vg/Protocol#Spawn_Entity">https://wiki.vg/Protocol#Spawn_Entity</a>
  */
 
-@MinecraftPacket(packetId = 0x00, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x00, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class SpawnEntityPacket(
     val entityId: Int, // varint
     val objectUUID: UUID,

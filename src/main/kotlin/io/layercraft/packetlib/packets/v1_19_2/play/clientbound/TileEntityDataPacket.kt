@@ -14,7 +14,7 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/Protocol#Block_Entity_Data">https://wiki.vg/Protocol#Block_Entity_Data</a>
  */
 
-@MinecraftPacket(packetId = 0x07, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x07, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class TileEntityDataPacket(
     val location: Position,
     val action: Int, // varint

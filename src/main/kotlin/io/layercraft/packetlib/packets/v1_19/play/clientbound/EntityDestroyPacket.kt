@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Remove_Entities">https://wiki.vg/Protocol#Remove_Entities</a>
  */
 
-@MinecraftPacket(packetId = 0x38, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x38, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 class EntityDestroyPacket() : ClientBoundPacket {
 
     companion object : PacketSerializer<EntityDestroyPacket> {

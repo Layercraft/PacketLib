@@ -15,7 +15,7 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/Protocol#World_Event">https://wiki.vg/Protocol#World_Event</a>
  */
 
-@MinecraftPacket(packetId = 0x22, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x22, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class WorldEventPacket(
     val effectId: Int,
     val location: Position,

@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Enter_Combat">https://wiki.vg/Protocol#Enter_Combat</a>
  */
 
-@MinecraftPacket(packetId = 0x35, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x35, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 class EnterCombatEventPacket() : ClientBoundPacket {
 
     companion object : PacketSerializer<EnterCombatEventPacket> {

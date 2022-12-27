@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Chat_Suggestions">https://wiki.vg/Protocol#Chat_Suggestions</a>
  */
 
-@MinecraftPacket(packetId = 0x15, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x15, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class ChatSuggestionsPacket(
     val action: Int, // varint
 ) : ClientBoundPacket {

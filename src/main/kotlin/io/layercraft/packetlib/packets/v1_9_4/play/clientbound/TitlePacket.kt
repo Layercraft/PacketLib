@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Title">https://wiki.vg/Protocol#Title</a>
  */
 
-@MinecraftPacket(packetId = 0x45, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x45, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class TitlePacket(
     val action: Int, // varint
 ) : ClientBoundPacket {

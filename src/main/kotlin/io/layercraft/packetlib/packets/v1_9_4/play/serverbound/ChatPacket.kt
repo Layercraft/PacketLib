@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Chat_Message_.28serverbound.29">https://wiki.vg/Protocol#Chat_Message_.28serverbound.29</a>
  */
 
-@MinecraftPacket(packetId = 0x02, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x02, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class ChatPacket(
     val message: String,
 ) : ServerBoundPacket {

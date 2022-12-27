@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Slot">https://wiki.vg/Protocol#Set_Slot</a>
  */
 
-@MinecraftPacket(packetId = 0x16, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x16, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class SetSlotPacket(
     val windowId: Byte,
     val slot: Short,

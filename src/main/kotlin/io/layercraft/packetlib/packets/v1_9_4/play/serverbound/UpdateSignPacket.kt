@@ -3,7 +3,7 @@ package io.layercraft.packetlib.packets.v1_9_4.play.serverbound
 import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
-import io.layercraft.packetlib.types.Position 
+import io.layercraft.packetlib.types.Position
 
 /**
  * Update Sign | 0x19 | play | serverbound
@@ -16,7 +16,7 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/Protocol#Update_Sign">https://wiki.vg/Protocol#Update_Sign</a>
  */
 
-@MinecraftPacket(packetId = 0x19, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x19, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class UpdateSignPacket(
     val location: Position,
     val text1: String,

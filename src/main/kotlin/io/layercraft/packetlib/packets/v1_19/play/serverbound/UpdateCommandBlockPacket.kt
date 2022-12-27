@@ -15,7 +15,7 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/Protocol#Program_Command_Block">https://wiki.vg/Protocol#Program_Command_Block</a>
  */
 
-@MinecraftPacket(packetId = 0x28, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x28, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class UpdateCommandBlockPacket(
     val location: Position,
     val command: String,

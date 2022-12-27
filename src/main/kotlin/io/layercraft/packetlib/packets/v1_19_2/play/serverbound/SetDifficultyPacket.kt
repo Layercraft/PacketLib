@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Change_Difficulty_2">https://wiki.vg/Protocol#Change_Difficulty_2</a>
  */
 
-@MinecraftPacket(packetId = 0x02, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x02, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class SetDifficultyPacket(
     val newDifficulty: UByte,
 ) : ServerBoundPacket {

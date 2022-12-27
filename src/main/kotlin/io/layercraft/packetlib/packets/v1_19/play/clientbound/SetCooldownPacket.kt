@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Cooldown">https://wiki.vg/Protocol#Set_Cooldown</a>
  */
 
-@MinecraftPacket(packetId = 0x14, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x14, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class SetCooldownPacket(
     val itemID: Int, // varint
     val cooldownTicks: Int, // varint

@@ -19,7 +19,7 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/Protocol#Use_Item_On">https://wiki.vg/Protocol#Use_Item_On</a>
  */
 
-@MinecraftPacket(packetId = 0x30, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x30, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class BlockPlacePacket(
     val hand: Int, // varint
     val location: Position,

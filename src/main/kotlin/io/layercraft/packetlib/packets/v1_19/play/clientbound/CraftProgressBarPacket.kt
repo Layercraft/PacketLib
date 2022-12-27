@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Container_Property">https://wiki.vg/Protocol#Set_Container_Property</a>
  */
 
-@MinecraftPacket(packetId = 0x12, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x12, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class CraftProgressBarPacket(
     val windowId: UByte,
     val property: Short,

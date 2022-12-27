@@ -18,7 +18,7 @@ import java.util.UUID
  * @see <a href="https://wiki.vg/Protocol#Spawn_Player">https://wiki.vg/Protocol#Spawn_Player</a>
  */
 
-@MinecraftPacket(packetId = 0x02, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x02, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class NamedEntitySpawnPacket(
     val entityId: Int, // varint
     val playerUUID: UUID,

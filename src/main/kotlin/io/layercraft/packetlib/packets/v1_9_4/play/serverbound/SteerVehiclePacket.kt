@@ -14,7 +14,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Steer_Vehicle">https://wiki.vg/Protocol#Steer_Vehicle</a>
  */
 
-@MinecraftPacket(packetId = 0x15, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x15, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class SteerVehiclePacket(
     val sideways: Float,
     val forward: Float,

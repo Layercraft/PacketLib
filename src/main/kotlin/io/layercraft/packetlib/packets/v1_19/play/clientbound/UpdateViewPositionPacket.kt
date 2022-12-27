@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Center_Chunk">https://wiki.vg/Protocol#Set_Center_Chunk</a>
  */
 
-@MinecraftPacket(packetId = 0x48, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x48, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class UpdateViewPositionPacket(
     val chunkX: Int, // varint
     val chunkZ: Int, // varint

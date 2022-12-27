@@ -3,7 +3,7 @@ package io.layercraft.packetlib.packets.v1_9_4.play.clientbound
 import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
-import java.util.UUID 
+import java.util.UUID
 
 /**
  * Spawn Object | 0x00 | play | clientbound
@@ -23,7 +23,7 @@ import java.util.UUID
  * @see <a href="https://wiki.vg/Protocol#Spawn_Object">https://wiki.vg/Protocol#Spawn_Object</a>
  */
 
-@MinecraftPacket(packetId = 0x00, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x00, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class SpawnEntityPacket(
     val entityId: Int, // varint
     val objectUUID: UUID,

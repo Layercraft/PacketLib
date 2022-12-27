@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Set_Health">https://wiki.vg/Protocol#Set_Health</a>
  */
 
-@MinecraftPacket(packetId = 0x55, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x55, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class UpdateHealthPacket(
     val health: Float,
     val food: Int, // varint

@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#World_Border">https://wiki.vg/Protocol#World_Border</a>
  */
 
-@MinecraftPacket(packetId = 0x35, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
+@MinecraftPacket(id = 0x35, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class WorldBorderPacket(
     val action: Int, // varint
 ) : ClientBoundPacket {

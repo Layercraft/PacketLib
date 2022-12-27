@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/Protocol#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
  */
 
-@MinecraftPacket(packetId = 0x2f, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
+@MinecraftPacket(id = 0x2f, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class ArmAnimationPacket(
     val hand: Int, // varint
 ) : ServerBoundPacket {
