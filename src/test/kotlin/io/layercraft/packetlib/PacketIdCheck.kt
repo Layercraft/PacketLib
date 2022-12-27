@@ -11,7 +11,7 @@ class PacketIdCheck {
 
     @Test
     fun `check if all ids are same in registry and in packet class`() {
-        val codecs = listOf(MC.V1_9_4, MC.V1_19, MC.V1_19_2)
+        val codecs = listOf(MC.V1_19_2)
         codecs.forEach { checkCodec(it) }
     }
 
