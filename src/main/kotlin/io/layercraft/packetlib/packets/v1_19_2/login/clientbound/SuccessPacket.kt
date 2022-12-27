@@ -1,20 +1,16 @@
 package io.layercraft.packetlib.packets.v1_19_2.login.clientbound
 
-import io.layercraft.packetlib.packets.ClientBoundPacket
-import io.layercraft.packetlib.packets.MinecraftPacket
-import io.layercraft.packetlib.packets.PacketDirection
-import io.layercraft.packetlib.packets.PacketSerializer
-import io.layercraft.packetlib.packets.PacketState
+import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
-import java.util.*
+import java.util.UUID
 
 /**
  * Login Success | 0x02 | login | clientbound
  *
  * @property uuid uuid
  * @property username username
- * @see <a href="https://wiki.vg/Protocol#Login_Success">https://wiki.vg/Protocol#Login_Success</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Login_Success">https://wiki.vg/Protocol#Login_Success</a>
  */
 
 @MinecraftPacket(id = 0x02, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)

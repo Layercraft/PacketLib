@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property experienceBar experienceBar
  * @property level level
  * @property totalExperience totalExperience
- * @see <a href="https://wiki.vg/Protocol#Set_Experience">https://wiki.vg/Protocol#Set_Experience</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Experience">https://wiki.vg/Protocol#Set_Experience</a>
  */
 
 @MinecraftPacket(id = 0x54, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

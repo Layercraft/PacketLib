@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @property name name
  * @property action action
- * @see <a href="https://wiki.vg/Protocol#Update_Objectives">https://wiki.vg/Protocol#Update_Objectives</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Objectives">https://wiki.vg/Protocol#Update_Objectives</a>
  */
 
 @MinecraftPacket(id = 0x56, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

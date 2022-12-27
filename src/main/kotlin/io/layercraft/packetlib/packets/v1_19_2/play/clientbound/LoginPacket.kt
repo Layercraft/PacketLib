@@ -22,7 +22,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property enableRespawnScreen enableRespawnScreen
  * @property isDebug isDebug
  * @property isFlat isFlat
- * @see <a href="https://wiki.vg/Protocol#Login_.28play.29">https://wiki.vg/Protocol#Login_.28play.29</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Login_.28play.29">https://wiki.vg/Protocol#Login_.28play.29</a>
  */
 
 @MinecraftPacket(id = 0x25, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

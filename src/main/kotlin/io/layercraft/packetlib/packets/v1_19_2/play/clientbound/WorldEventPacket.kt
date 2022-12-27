@@ -12,7 +12,7 @@ import io.layercraft.packetlib.types.Position
  * @property location location
  * @property data data
  * @property global global
- * @see <a href="https://wiki.vg/Protocol#World_Event">https://wiki.vg/Protocol#World_Event</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#World_Event">https://wiki.vg/Protocol#World_Event</a>
  */
 
 @MinecraftPacket(id = 0x22, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

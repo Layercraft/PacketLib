@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @property transactionId transactionId
  * @property text text
- * @see <a href="https://wiki.vg/Protocol#Command_Suggestions_Request">https://wiki.vg/Protocol#Command_Suggestions_Request</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Command_Suggestions_Request">https://wiki.vg/Protocol#Command_Suggestions_Request</a>
  */
 
 @MinecraftPacket(id = 0x09, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

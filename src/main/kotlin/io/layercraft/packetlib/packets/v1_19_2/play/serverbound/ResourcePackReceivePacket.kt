@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *  | 0x24 | play | serverbound
  *
  * @property result result
- * @see <a href="https://wiki.vg/Protocol#Resource_Pack_.28serverbound.29">https://wiki.vg/Protocol#Resource_Pack_.28serverbound.29</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Resource_Pack_.28serverbound.29">https://wiki.vg/Protocol#Resource_Pack_.28serverbound.29</a>
  */
 
 @MinecraftPacket(id = 0x24, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

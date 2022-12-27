@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @property team team
  * @property mode mode
- * @see <a href="https://wiki.vg/Protocol#Update_Teams">https://wiki.vg/Protocol#Update_Teams</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Teams">https://wiki.vg/Protocol#Update_Teams</a>
  */
 
 @MinecraftPacket(id = 0x58, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

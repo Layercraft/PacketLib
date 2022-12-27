@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property yaw yaw
  * @property pitch pitch
  * @property onGround onGround
- * @see <a href="https://wiki.vg/Protocol#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
  */
 
 @MinecraftPacket(id = 0x2a, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

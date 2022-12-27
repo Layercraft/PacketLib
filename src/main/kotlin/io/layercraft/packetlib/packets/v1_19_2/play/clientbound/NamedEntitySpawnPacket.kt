@@ -15,7 +15,7 @@ import java.util.UUID
  * @property z z
  * @property yaw yaw
  * @property pitch pitch
- * @see <a href="https://wiki.vg/Protocol#Spawn_Player">https://wiki.vg/Protocol#Spawn_Player</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Spawn_Player">https://wiki.vg/Protocol#Spawn_Player</a>
  */
 
 @MinecraftPacket(id = 0x02, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

@@ -12,7 +12,7 @@ import io.layercraft.packetlib.types.Position
  * @property byte1 byte1
  * @property byte2 byte2
  * @property blockId blockId
- * @see <a href="https://wiki.vg/Protocol#Block_Action">https://wiki.vg/Protocol#Block_Action</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Block_Action">https://wiki.vg/Protocol#Block_Action</a>
  */
 
 @MinecraftPacket(id = 0x08, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

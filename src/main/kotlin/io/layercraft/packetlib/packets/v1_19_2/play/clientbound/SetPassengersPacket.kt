@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Set Passengers | 0x57 | play | clientbound
  *
  * @property entityId entityId
- * @see <a href="https://wiki.vg/Protocol#Set_Passengers">https://wiki.vg/Protocol#Set_Passengers</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Passengers">https://wiki.vg/Protocol#Set_Passengers</a>
  */
 
 @MinecraftPacket(id = 0x57, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

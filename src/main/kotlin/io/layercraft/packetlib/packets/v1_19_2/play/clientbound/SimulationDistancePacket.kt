@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Use Item | 0x5a | play | clientbound
  *
  * @property distance distance
- * @see <a href="https://wiki.vg/Protocol#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
  */
 
 @MinecraftPacket(id = 0x5a, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

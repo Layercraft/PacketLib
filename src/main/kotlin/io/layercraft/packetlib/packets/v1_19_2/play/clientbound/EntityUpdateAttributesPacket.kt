@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Update Attributes | 0x68 | play | clientbound
  *
  * @property entityId entityId
- * @see <a href="https://wiki.vg/Protocol#Update_Attributes">https://wiki.vg/Protocol#Update_Attributes</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Attributes">https://wiki.vg/Protocol#Update_Attributes</a>
  */
 
 @MinecraftPacket(id = 0x68, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

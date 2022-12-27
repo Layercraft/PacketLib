@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property target target
  * @property mouse mouse
  * @property sneaking sneaking
- * @see <a href="https://wiki.vg/Protocol#Interact">https://wiki.vg/Protocol#Interact</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Interact">https://wiki.vg/Protocol#Interact</a>
  */
 
 @MinecraftPacket(id = 0x10, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

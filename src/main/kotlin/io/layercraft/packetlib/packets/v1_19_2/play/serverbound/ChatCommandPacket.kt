@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property timestamp timestamp
  * @property salt salt
  * @property signedPreview signedPreview
- * @see <a href="https://wiki.vg/Protocol#Chat_Command">https://wiki.vg/Protocol#Chat_Command</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Chat_Command">https://wiki.vg/Protocol#Chat_Command</a>
  */
 
 @MinecraftPacket(id = 0x04, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

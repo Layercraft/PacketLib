@@ -15,7 +15,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property flags flags
  * @property teleportId teleportId
  * @property dismountVehicle dismountVehicle
- * @see <a href="https://wiki.vg/Protocol#Synchronize_Player_Position">https://wiki.vg/Protocol#Synchronize_Player_Position</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Synchronize_Player_Position">https://wiki.vg/Protocol#Synchronize_Player_Position</a>
  */
 
 @MinecraftPacket(id = 0x39, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

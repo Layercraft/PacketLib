@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Lock Difficulty | 0x13 | play | serverbound
  *
  * @property locked locked
- * @see <a href="https://wiki.vg/Protocol#Lock_Difficulty">https://wiki.vg/Protocol#Lock_Difficulty</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Lock_Difficulty">https://wiki.vg/Protocol#Lock_Difficulty</a>
  */
 
 @MinecraftPacket(id = 0x13, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

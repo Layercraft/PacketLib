@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *  | 0x12 | play | serverbound
  *
  * @property keepAliveId keepAliveId
- * @see <a href="https://wiki.vg/Protocol#Keep_Alive_.28serverbound.29">https://wiki.vg/Protocol#Keep_Alive_.28serverbound.29</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Keep_Alive_.28serverbound.29">https://wiki.vg/Protocol#Keep_Alive_.28serverbound.29</a>
  */
 
 @MinecraftPacket(id = 0x12, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

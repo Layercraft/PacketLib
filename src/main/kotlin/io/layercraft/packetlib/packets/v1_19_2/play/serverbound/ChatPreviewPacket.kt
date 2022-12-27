@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @property query query
  * @property message message
- * @see <a href="https://wiki.vg/Protocol#Chat_Preview_.28serverbound.29">https://wiki.vg/Protocol#Chat_Preview_.28serverbound.29</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Chat_Preview_.28serverbound.29">https://wiki.vg/Protocol#Chat_Preview_.28serverbound.29</a>
  */
 
 @MinecraftPacket(id = 0x06, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @property entityId entityId
  * @property animation animation
- * @see <a href="https://wiki.vg/Protocol#Entity_Animation_.28clientbound.29">https://wiki.vg/Protocol#Entity_Animation_.28clientbound.29</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Entity_Animation_.28clientbound.29">https://wiki.vg/Protocol#Entity_Animation_.28clientbound.29</a>
  */
 
 @MinecraftPacket(id = 0x03, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

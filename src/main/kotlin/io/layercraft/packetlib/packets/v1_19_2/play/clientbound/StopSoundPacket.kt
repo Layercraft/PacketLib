@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Stop Sound | 0x61 | play | clientbound
  *
  * @property flags flags
- * @see <a href="https://wiki.vg/Protocol#Stop_Sound">https://wiki.vg/Protocol#Stop_Sound</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Stop_Sound">https://wiki.vg/Protocol#Stop_Sound</a>
  */
 
 @MinecraftPacket(id = 0x61, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

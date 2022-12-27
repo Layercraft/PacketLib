@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Update Section Blocks | 0x40 | play | clientbound
  *
  * @property suppressLightUpdates suppressLightUpdates
- * @see <a href="https://wiki.vg/Protocol#Update_Section_Blocks">https://wiki.vg/Protocol#Update_Section_Blocks</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Section_Blocks">https://wiki.vg/Protocol#Update_Section_Blocks</a>
  */
 
 @MinecraftPacket(id = 0x40, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

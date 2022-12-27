@@ -14,7 +14,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property yaw yaw
  * @property pitch pitch
  * @property onGround onGround
- * @see <a href="https://wiki.vg/Protocol#Update_Entity_Position_and_Rotation">https://wiki.vg/Protocol#Update_Entity_Position_and_Rotation</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Entity_Position_and_Rotation">https://wiki.vg/Protocol#Update_Entity_Position_and_Rotation</a>
  */
 
 @MinecraftPacket(id = 0x29, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

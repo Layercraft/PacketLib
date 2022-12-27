@@ -9,30 +9,30 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @property entityId entityId
  * @property command command
- * @property track_output track_output
- * @see <a href="https://wiki.vg/Protocol#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @property trackOutput track_output
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
  */
 
 @MinecraftPacket(id = 0x2a, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class UpdateCommandBlockMinecartPacket(
     val entityId: Int, // varint
     val command: String,
-    val track_output: Boolean,
+    val trackOutput: Boolean,
 ) : ServerBoundPacket {
 
     companion object : PacketSerializer<UpdateCommandBlockMinecartPacket> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateCommandBlockMinecartPacket {
             val entityId = input.readVarInt()
             val command = input.readString()
-            val track_output = input.readBoolean()
+            val trackOutput = input.readBoolean()
 
-            return UpdateCommandBlockMinecartPacket(entityId, command, track_output)
+            return UpdateCommandBlockMinecartPacket(entityId, command, trackOutput)
         }
 
         override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateCommandBlockMinecartPacket) {
             output.writeVarInt(value.entityId)
             output.writeString(value.command)
-            output.writeBoolean(value.track_output)
+            output.writeBoolean(value.trackOutput)
         }
     }
 }

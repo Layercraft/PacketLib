@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Use Item | 0xfe | handshaking | serverbound
  *
  * @property payload payload
- * @see <a href="https://wiki.vg/Protocol#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
  */
 
 @MinecraftPacket(id = 0xfe, state = PacketState.HANDSHAKING, direction = PacketDirection.SERVERBOUND)

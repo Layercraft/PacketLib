@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *  | 0x28 | play | serverbound
  *
  * @property slotId slotId
- * @see <a href="https://wiki.vg/Protocol#Set_Held_Item_.28serverbound.29">https://wiki.vg/Protocol#Set_Held_Item_.28serverbound.29</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Held_Item_.28serverbound.29">https://wiki.vg/Protocol#Set_Held_Item_.28serverbound.29</a>
  */
 
 @MinecraftPacket(id = 0x28, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

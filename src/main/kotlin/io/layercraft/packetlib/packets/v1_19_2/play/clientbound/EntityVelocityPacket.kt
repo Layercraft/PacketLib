@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property velocityX velocityX
  * @property velocityY velocityY
  * @property velocityZ velocityZ
- * @see <a href="https://wiki.vg/Protocol#Set_Entity_Velocity">https://wiki.vg/Protocol#Set_Entity_Velocity</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Entity_Velocity">https://wiki.vg/Protocol#Set_Entity_Velocity</a>
  */
 
 @MinecraftPacket(id = 0x52, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

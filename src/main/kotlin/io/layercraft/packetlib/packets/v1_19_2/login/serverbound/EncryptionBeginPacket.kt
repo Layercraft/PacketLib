@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Encryption Response | 0x01 | login | serverbound
  *
  * @property hasVerifyToken hasVerifyToken
- * @see <a href="https://wiki.vg/Protocol#Encryption_Response">https://wiki.vg/Protocol#Encryption_Response</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Encryption_Response">https://wiki.vg/Protocol#Encryption_Response</a>
  */
 
 @MinecraftPacket(id = 0x01, state = PacketState.LOGIN, direction = PacketDirection.SERVERBOUND)

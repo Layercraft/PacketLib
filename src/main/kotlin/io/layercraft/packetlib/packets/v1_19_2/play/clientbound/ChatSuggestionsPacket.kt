@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Chat Suggestions | 0x15 | play | clientbound
  *
  * @property action action
- * @see <a href="https://wiki.vg/Protocol#Chat_Suggestions">https://wiki.vg/Protocol#Chat_Suggestions</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Chat_Suggestions">https://wiki.vg/Protocol#Chat_Suggestions</a>
  */
 
 @MinecraftPacket(id = 0x15, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Set Border Size | 0x46 | play | clientbound
  *
  * @property diameter diameter
- * @see <a href="https://wiki.vg/Protocol#Set_Border_Size">https://wiki.vg/Protocol#Set_Border_Size</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Border_Size">https://wiki.vg/Protocol#Set_Border_Size</a>
  */
 
 @MinecraftPacket(id = 0x46, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Set Compression | 0x03 | login | clientbound
  *
  * @property threshold threshold
- * @see <a href="https://wiki.vg/Protocol#Set_Compression">https://wiki.vg/Protocol#Set_Compression</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Compression">https://wiki.vg/Protocol#Set_Compression</a>
  */
 
 @MinecraftPacket(id = 0x03, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)

@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property health health
  * @property food food
  * @property foodSaturation foodSaturation
- * @see <a href="https://wiki.vg/Protocol#Set_Health">https://wiki.vg/Protocol#Set_Health</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Health">https://wiki.vg/Protocol#Set_Health</a>
  */
 
 @MinecraftPacket(id = 0x55, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

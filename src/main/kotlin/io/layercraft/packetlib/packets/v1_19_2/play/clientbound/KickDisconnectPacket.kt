@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *  | 0x19 | play | clientbound
  *
  * @property reason reason
- * @see <a href="https://wiki.vg/Protocol#Disconnect_.28play.29">https://wiki.vg/Protocol#Disconnect_.28play.29</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Disconnect_.28play.29">https://wiki.vg/Protocol#Disconnect_.28play.29</a>
  */
 
 @MinecraftPacket(id = 0x19, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

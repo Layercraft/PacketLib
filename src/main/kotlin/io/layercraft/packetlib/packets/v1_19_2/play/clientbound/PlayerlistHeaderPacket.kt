@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @property header header
  * @property footer footer
- * @see <a href="https://wiki.vg/Protocol#Set_Tab_List_Header_And_Footer">https://wiki.vg/Protocol#Set_Tab_List_Header_And_Footer</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Tab_List_Header_And_Footer">https://wiki.vg/Protocol#Set_Tab_List_Header_And_Footer</a>
  */
 
 @MinecraftPacket(id = 0x63, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

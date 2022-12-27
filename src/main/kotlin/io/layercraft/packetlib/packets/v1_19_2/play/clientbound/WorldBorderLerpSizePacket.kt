@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property oldDiameter oldDiameter
  * @property newDiameter newDiameter
  * @property speed speed
- * @see <a href="https://wiki.vg/Protocol#Set_Border_Lerp_Size">https://wiki.vg/Protocol#Set_Border_Lerp_Size</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Border_Lerp_Size">https://wiki.vg/Protocol#Set_Border_Lerp_Size</a>
  */
 
 @MinecraftPacket(id = 0x45, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Player Info | 0x37 | play | clientbound
  *
  * @property action action
- * @see <a href="https://wiki.vg/Protocol#Player_Info">https://wiki.vg/Protocol#Player_Info</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Player_Info">https://wiki.vg/Protocol#Player_Info</a>
  */
 
 @MinecraftPacket(id = 0x37, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

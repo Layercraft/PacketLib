@@ -15,7 +15,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property mainHand mainHand
  * @property enableTextFiltering enableTextFiltering
  * @property enableServerListing enableServerListing
- * @see <a href="https://wiki.vg/Protocol#Client_Information">https://wiki.vg/Protocol#Client_Information</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Client_Information">https://wiki.vg/Protocol#Client_Information</a>
  */
 
 @MinecraftPacket(id = 0x08, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

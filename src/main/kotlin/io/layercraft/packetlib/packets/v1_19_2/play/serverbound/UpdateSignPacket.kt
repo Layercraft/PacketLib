@@ -13,7 +13,7 @@ import io.layercraft.packetlib.types.Position
  * @property text2 text2
  * @property text3 text3
  * @property text4 text4
- * @see <a href="https://wiki.vg/Protocol#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
  */
 
 @MinecraftPacket(id = 0x2e, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

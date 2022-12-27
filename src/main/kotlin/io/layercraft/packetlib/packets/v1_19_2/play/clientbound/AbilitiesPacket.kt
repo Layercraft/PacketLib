@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property flags flags
  * @property flyingSpeed flyingSpeed
  * @property walkingSpeed walkingSpeed
- * @see <a href="https://wiki.vg/Protocol#Player_Abilities_.28clientbound.29">https://wiki.vg/Protocol#Player_Abilities_.28clientbound.29</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Player_Abilities_.28clientbound.29">https://wiki.vg/Protocol#Player_Abilities_.28clientbound.29</a>
  */
 
 @MinecraftPacket(id = 0x31, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

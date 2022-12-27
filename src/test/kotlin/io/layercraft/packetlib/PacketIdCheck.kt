@@ -15,7 +15,7 @@ class PacketIdCheck {
         codecs.forEach { checkCodec(it) }
     }
 
-    private fun checkCodec(codec: MinecraftCodec){
+    private fun checkCodec(codec: MinecraftCodec) {
         codec.packets.forEach { (state, registry) ->
             registry.clientPacketMap.forEach { (id, packet) ->
                 val annotation = packet.packet.annotations.filterIsInstance<MinecraftPacket>().first()

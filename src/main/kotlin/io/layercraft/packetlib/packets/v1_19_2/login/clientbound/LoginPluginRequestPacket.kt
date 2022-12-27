@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property messageId messageId
  * @property channel channel
  * @property data data
- * @see <a href="https://wiki.vg/Protocol#Login_Plugin_Request">https://wiki.vg/Protocol#Login_Plugin_Request</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Login_Plugin_Request">https://wiki.vg/Protocol#Login_Plugin_Request</a>
  */
 
 @MinecraftPacket(id = 0x04, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)

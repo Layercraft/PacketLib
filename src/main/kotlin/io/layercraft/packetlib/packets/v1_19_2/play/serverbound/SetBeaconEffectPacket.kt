@@ -7,19 +7,36 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Beacon Effect | 0x27 | play | serverbound
  *
-
- * @see <a href="https://wiki.vg/Protocol#Set_Beacon_Effect">https://wiki.vg/Protocol#Set_Beacon_Effect</a>
+ * @property hasPrimaryEffect primary_effect is present
+ * @property primaryEffect primary_effect
+ * @property hasSecondaryEffect secondary_effect is present
+ * @property secondaryEffect secondary_effect
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Beacon_Effect">https://wiki.vg/Protocol#Set_Beacon_Effect</a>
  */
 
 @MinecraftPacket(id = 0x27, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
-class SetBeaconEffectPacket() : ServerBoundPacket {
+data class SetBeaconEffectPacket(
+    val hasPrimaryEffect: Boolean,
+    val primaryEffect: Int?, // varint
+    val hasSecondaryEffect: Boolean,
+    val secondaryEffect: Int?, // varint
+) : ServerBoundPacket {
 
     companion object : PacketSerializer<SetBeaconEffectPacket> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SetBeaconEffectPacket {
-            return SetBeaconEffectPacket()
+            val hasPrimaryEffect = input.readBoolean()
+            val primaryEffect = if (hasPrimaryEffect) input.readVarInt() else null
+            val hasSecondaryEffect = input.readBoolean()
+            val secondaryEffect = if (hasSecondaryEffect) input.readVarInt() else null
+
+            return SetBeaconEffectPacket(hasPrimaryEffect, primaryEffect, hasSecondaryEffect, secondaryEffect)
         }
 
         override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SetBeaconEffectPacket) {
+            output.writeBoolean(value.hasPrimaryEffect)
+            if (value.hasPrimaryEffect) output.writeVarInt(value.primaryEffect!!)
+            output.writeBoolean(value.hasSecondaryEffect)
+            if (value.hasSecondaryEffect) output.writeVarInt(value.secondaryEffect!!)
         }
     }
 }

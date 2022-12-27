@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property chunkX chunkX
  * @property chunkZ chunkZ
  * @property trustEdges trustEdges
- * @see <a href="https://wiki.vg/Protocol#Update_Light">https://wiki.vg/Protocol#Update_Light</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Light">https://wiki.vg/Protocol#Update_Light</a>
  */
 
 @MinecraftPacket(id = 0x24, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

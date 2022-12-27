@@ -12,7 +12,7 @@ import io.layercraft.packetlib.types.Position
  * @property command command
  * @property mode mode
  * @property flags flags
- * @see <a href="https://wiki.vg/Protocol#Program_Command_Block">https://wiki.vg/Protocol#Program_Command_Block</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Program_Command_Block">https://wiki.vg/Protocol#Program_Command_Block</a>
  */
 
 @MinecraftPacket(id = 0x29, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

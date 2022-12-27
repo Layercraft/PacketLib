@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Encryption Request | 0x01 | login | clientbound
  *
  * @property serverId serverId
- * @see <a href="https://wiki.vg/Protocol#Encryption_Request">https://wiki.vg/Protocol#Encryption_Request</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Encryption_Request">https://wiki.vg/Protocol#Encryption_Request</a>
  */
 
 @MinecraftPacket(id = 0x01, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)

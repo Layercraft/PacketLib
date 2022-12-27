@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *  | 0x10 | play | clientbound
  *
  * @property windowId windowId
- * @see <a href="https://wiki.vg/Protocol#Close_Container_.28clientbound.29">https://wiki.vg/Protocol#Close_Container_.28clientbound.29</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Close_Container_.28clientbound.29">https://wiki.vg/Protocol#Close_Container_.28clientbound.29</a>
  */
 
 @MinecraftPacket(id = 0x10, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

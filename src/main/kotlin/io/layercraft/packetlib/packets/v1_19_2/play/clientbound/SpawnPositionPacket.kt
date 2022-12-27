@@ -10,7 +10,7 @@ import io.layercraft.packetlib.types.Position
  *
  * @property location location
  * @property angle angle
- * @see <a href="https://wiki.vg/Protocol#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
  */
 
 @MinecraftPacket(id = 0x4d, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

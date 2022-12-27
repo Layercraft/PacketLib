@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property itemName itemName
  * @property action action
  * @property scoreName scoreName
- * @see <a href="https://wiki.vg/Protocol#Update_Score">https://wiki.vg/Protocol#Update_Score</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Score">https://wiki.vg/Protocol#Update_Score</a>
  */
 
 @MinecraftPacket(id = 0x59, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

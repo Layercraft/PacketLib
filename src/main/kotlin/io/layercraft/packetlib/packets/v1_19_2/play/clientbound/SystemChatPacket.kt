@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @property content content
  * @property isActionBar isActionBar
- * @see <a href="https://wiki.vg/Protocol#System_Chat_Message">https://wiki.vg/Protocol#System_Chat_Message</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#System_Chat_Message">https://wiki.vg/Protocol#System_Chat_Message</a>
  */
 
 @MinecraftPacket(id = 0x62, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

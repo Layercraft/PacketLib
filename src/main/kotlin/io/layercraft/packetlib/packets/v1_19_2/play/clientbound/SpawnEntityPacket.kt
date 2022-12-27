@@ -21,7 +21,7 @@ import java.util.UUID
  * @property velocityX velocityX
  * @property velocityY velocityY
  * @property velocityZ velocityZ
- * @see <a href="https://wiki.vg/Protocol#Spawn_Entity">https://wiki.vg/Protocol#Spawn_Entity</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Spawn_Entity">https://wiki.vg/Protocol#Spawn_Entity</a>
  */
 
 @MinecraftPacket(id = 0x00, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

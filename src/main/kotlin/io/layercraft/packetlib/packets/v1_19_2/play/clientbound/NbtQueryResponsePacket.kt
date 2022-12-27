@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @property transactionId transactionId
  * @property nbt nbt
- * @see <a href="https://wiki.vg/Protocol#Tag_Query_Response">https://wiki.vg/Protocol#Tag_Query_Response</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Tag_Query_Response">https://wiki.vg/Protocol#Tag_Query_Response</a>
  */
 
 @MinecraftPacket(id = 0x64, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

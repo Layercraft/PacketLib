@@ -1,10 +1,6 @@
 package io.layercraft.packetlib.packets.v1_19_2.play.serverbound
 
-import io.layercraft.packetlib.packets.MinecraftPacket
-import io.layercraft.packetlib.packets.PacketDirection
-import io.layercraft.packetlib.packets.PacketSerializer
-import io.layercraft.packetlib.packets.PacketState
-import io.layercraft.packetlib.packets.ServerBoundPacket
+import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.Position
@@ -14,13 +10,13 @@ import io.layercraft.packetlib.types.Position
  *
  * @property hand hand
  * @property location location
- * @property bound direction
+ * @property direction direction
  * @property cursorX cursorX
  * @property cursorY cursorY
  * @property cursorZ cursorZ
  * @property insideBlock insideBlock
  * @property sequence sequence
- * @see <a href="https://wiki.vg/Protocol#Use_Item_On">https://wiki.vg/Protocol#Use_Item_On</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item_On">https://wiki.vg/Protocol#Use_Item_On</a>
  */
 
 @MinecraftPacket(id = 0x31, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

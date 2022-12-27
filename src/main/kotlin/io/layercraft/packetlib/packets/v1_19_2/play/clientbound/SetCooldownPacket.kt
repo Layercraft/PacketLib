@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @property itemID itemID
  * @property cooldownTicks cooldownTicks
- * @see <a href="https://wiki.vg/Protocol#Set_Cooldown">https://wiki.vg/Protocol#Set_Cooldown</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Cooldown">https://wiki.vg/Protocol#Set_Cooldown</a>
  */
 
 @MinecraftPacket(id = 0x14, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

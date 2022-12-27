@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Update Advancements | 0x67 | play | clientbound
  *
  * @property reset reset
- * @see <a href="https://wiki.vg/Protocol#Update_Advancements">https://wiki.vg/Protocol#Update_Advancements</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Advancements">https://wiki.vg/Protocol#Update_Advancements</a>
  */
 
 @MinecraftPacket(id = 0x67, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

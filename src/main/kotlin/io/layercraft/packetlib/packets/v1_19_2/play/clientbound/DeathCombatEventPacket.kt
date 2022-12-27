@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property playerId playerId
  * @property entityId entityId
  * @property message message
- * @see <a href="https://wiki.vg/Protocol#Combat_Death">https://wiki.vg/Protocol#Combat_Death</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Combat_Death">https://wiki.vg/Protocol#Combat_Death</a>
  */
 
 @MinecraftPacket(id = 0x36, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

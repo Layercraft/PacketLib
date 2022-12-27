@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Confirm Teleportation | 0x00 | play | serverbound
  *
  * @property teleportId teleportId
- * @see <a href="https://wiki.vg/Protocol#Confirm_Teleportation">https://wiki.vg/Protocol#Confirm_Teleportation</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Confirm_Teleportation">https://wiki.vg/Protocol#Confirm_Teleportation</a>
  */
 
 @MinecraftPacket(id = 0x00, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

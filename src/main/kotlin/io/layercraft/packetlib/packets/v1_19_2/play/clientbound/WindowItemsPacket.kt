@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @property windowId windowId
  * @property stateId stateId
- * @see <a href="https://wiki.vg/Protocol#Set_Container_Content">https://wiki.vg/Protocol#Set_Container_Content</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Container_Content">https://wiki.vg/Protocol#Set_Container_Content</a>
  */
 
 @MinecraftPacket(id = 0x11, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

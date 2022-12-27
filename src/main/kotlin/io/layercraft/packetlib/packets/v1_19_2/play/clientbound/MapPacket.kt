@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property scale scale
  * @property locked locked
  * @property columns columns
- * @see <a href="https://wiki.vg/Protocol#Map_Data">https://wiki.vg/Protocol#Map_Data</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Map_Data">https://wiki.vg/Protocol#Map_Data</a>
  */
 
 @MinecraftPacket(id = 0x26, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

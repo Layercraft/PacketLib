@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Set Border Warning Distance | 0x48 | play | clientbound
  *
  * @property warningBlocks warningBlocks
- * @see <a href="https://wiki.vg/Protocol#Set_Border_Warning_Distance">https://wiki.vg/Protocol#Set_Border_Warning_Distance</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Border_Warning_Distance">https://wiki.vg/Protocol#Set_Border_Warning_Distance</a>
  */
 
 @MinecraftPacket(id = 0x48, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

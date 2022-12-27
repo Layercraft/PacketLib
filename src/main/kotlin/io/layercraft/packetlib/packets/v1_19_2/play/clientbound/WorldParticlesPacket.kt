@@ -17,7 +17,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property offsetZ offsetZ
  * @property particleData particleData
  * @property particles particles
- * @see <a href="https://wiki.vg/Protocol#Particle_2">https://wiki.vg/Protocol#Particle_2</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Particle_2">https://wiki.vg/Protocol#Particle_2</a>
  */
 
 @MinecraftPacket(id = 0x23, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

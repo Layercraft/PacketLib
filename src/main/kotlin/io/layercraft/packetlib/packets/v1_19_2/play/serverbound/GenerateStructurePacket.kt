@@ -11,7 +11,7 @@ import io.layercraft.packetlib.types.Position
  * @property location location
  * @property levels levels
  * @property keepJigsaws keepJigsaws
- * @see <a href="https://wiki.vg/Protocol#Jigsaw_Generate">https://wiki.vg/Protocol#Jigsaw_Generate</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Jigsaw_Generate">https://wiki.vg/Protocol#Jigsaw_Generate</a>
  */
 
 @MinecraftPacket(id = 0x11, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

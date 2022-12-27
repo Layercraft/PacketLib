@@ -12,7 +12,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property amplifier amplifier
  * @property duration duration
  * @property hideParticles hideParticles
- * @see <a href="https://wiki.vg/Protocol#Entity_Effect">https://wiki.vg/Protocol#Entity_Effect</a>
+ * @property hasFactorCodec factorCodec is present
+ * @property factorCodec factorCodec
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Entity_Effect">https://wiki.vg/Protocol#Entity_Effect</a>
  */
 
 @MinecraftPacket(id = 0x69, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
@@ -22,6 +24,8 @@ data class EntityEffectPacket(
     val amplifier: Byte,
     val duration: Int, // varint
     val hideParticles: Byte,
+    val hasFactorCodec: Boolean,
+    val factorCodec: ByteArray?,
 ) : ClientBoundPacket {
 
     companion object : PacketSerializer<EntityEffectPacket> {
@@ -31,8 +35,10 @@ data class EntityEffectPacket(
             val amplifier = input.readByte()
             val duration = input.readVarInt()
             val hideParticles = input.readByte()
+            val hasFactorCodec = input.readBoolean()
+            val factorCodec = if (hasFactorCodec) input.readNBT() else null
 
-            return EntityEffectPacket(entityId, effectId, amplifier, duration, hideParticles)
+            return EntityEffectPacket(entityId, effectId, amplifier, duration, hideParticles, hasFactorCodec, factorCodec)
         }
 
         override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityEffectPacket) {
@@ -41,6 +47,8 @@ data class EntityEffectPacket(
             output.writeByte(value.amplifier)
             output.writeVarInt(value.duration)
             output.writeByte(value.hideParticles)
+            output.writeBoolean(value.hasFactorCodec)
+            if (value.hasFactorCodec) output.writeBytes(value.factorCodec!!)
         }
     }
 }

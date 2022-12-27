@@ -10,7 +10,7 @@ import io.layercraft.packetlib.types.Position
  *
  * @property location location
  * @property type type
- * @see <a href="https://wiki.vg/Protocol#Block_Update">https://wiki.vg/Protocol#Block_Update</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Block_Update">https://wiki.vg/Protocol#Block_Update</a>
  */
 
 @MinecraftPacket(id = 0x09, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

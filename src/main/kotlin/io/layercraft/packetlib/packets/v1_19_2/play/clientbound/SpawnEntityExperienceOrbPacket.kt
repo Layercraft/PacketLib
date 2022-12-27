@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property y y
  * @property z z
  * @property count count
- * @see <a href="https://wiki.vg/Protocol#Spawn_Experience_Orb">https://wiki.vg/Protocol#Spawn_Experience_Orb</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Spawn_Experience_Orb">https://wiki.vg/Protocol#Spawn_Experience_Orb</a>
  */
 
 @MinecraftPacket(id = 0x01, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

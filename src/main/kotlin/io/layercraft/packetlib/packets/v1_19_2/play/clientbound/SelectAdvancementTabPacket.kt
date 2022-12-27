@@ -7,19 +7,28 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Select Advancements Tab | 0x41 | play | clientbound
  *
-
- * @see <a href="https://wiki.vg/Protocol#Select_Advancements_Tab">https://wiki.vg/Protocol#Select_Advancements_Tab</a>
+ * @property hasId id is present
+ * @property id id
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Select_Advancements_Tab">https://wiki.vg/Protocol#Select_Advancements_Tab</a>
  */
 
 @MinecraftPacket(id = 0x41, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
-class SelectAdvancementTabPacket() : ClientBoundPacket {
+data class SelectAdvancementTabPacket(
+    val hasId: Boolean,
+    val id: String?,
+) : ClientBoundPacket {
 
     companion object : PacketSerializer<SelectAdvancementTabPacket> {
         override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SelectAdvancementTabPacket {
-            return SelectAdvancementTabPacket()
+            val hasId = input.readBoolean()
+            val id = if (hasId) input.readString() else null
+
+            return SelectAdvancementTabPacket(hasId, id)
         }
 
         override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SelectAdvancementTabPacket) {
+            output.writeBoolean(value.hasId)
+            if (value.hasId) output.writeString(value.id!!)
         }
     }
 }
