@@ -37,16 +37,16 @@ enum class ProtocolVersion(val protocolNumber: Int, val version: String) {
     V1_18(757, "1.18"),
     V1_18_1(757, "1.18.1"),
     V1_18_2(758, "1.18.2"),
-    V_1_19(759, "1.19"),
-    V_1_19_1(760, "1.19.1"),
-    V_1_19_2(760, "1.19.2"),
-    V_1_19_3(761, "1.19.3"),
+    V1_19(759, "1.19"),
+    V1_19_1(760, "1.19.1"),
+    V1_19_2(760, "1.19.2"),
+    V1_19_3(761, "1.19.3"),
     ;
 
     val v: Int get() = protocolNumber
 
     companion object {
-        val LATEST = V_1_19_2
+        val LATEST = V1_19_2
 
         fun fromProtocolNumber(protocolNumber: Int): ProtocolVersion {
             return values().last { it.protocolNumber == protocolNumber }
