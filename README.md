@@ -1,5 +1,6 @@
-# PacketLib
+# WIP: PacketLib
 
+## Not safe for use currently.
 
 Special Thanks to [wiki.vg](https://wiki.vg) for the protocol documentation.
 
