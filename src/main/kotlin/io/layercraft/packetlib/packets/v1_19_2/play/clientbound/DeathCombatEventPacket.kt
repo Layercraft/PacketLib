@@ -19,9 +19,8 @@ data class DeathCombatEventPacket(
     val entityId: Int,
     val message: String,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<DeathCombatEventPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): DeathCombatEventPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): DeathCombatEventPacket {
             val playerId = input.readVarInt()
             val entityId = input.readInt()
             val message = input.readString()
@@ -29,7 +28,7 @@ data class DeathCombatEventPacket(
             return DeathCombatEventPacket(playerId, entityId, message)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: DeathCombatEventPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: DeathCombatEventPacket) {
             output.writeVarInt(value.playerId)
             output.writeInt(value.entityId)
             output.writeString(value.message)

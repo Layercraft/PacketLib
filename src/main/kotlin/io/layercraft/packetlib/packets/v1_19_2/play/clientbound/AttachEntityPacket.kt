@@ -17,16 +17,15 @@ data class AttachEntityPacket(
     val entityId: Int,
     val vehicleId: Int,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<AttachEntityPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): AttachEntityPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): AttachEntityPacket {
             val entityId = input.readInt()
             val vehicleId = input.readInt()
 
             return AttachEntityPacket(entityId, vehicleId)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: AttachEntityPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: AttachEntityPacket) {
             output.writeInt(value.entityId)
             output.writeInt(value.vehicleId)
         }

@@ -17,16 +17,15 @@ data class GameStateChangePacket(
     val reason: UByte,
     val gameMode: Float,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<GameStateChangePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): GameStateChangePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): GameStateChangePacket {
             val reason = input.readUByte()
             val gameMode = input.readFloat()
 
             return GameStateChangePacket(reason, gameMode)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: GameStateChangePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: GameStateChangePacket) {
             output.writeUByte(value.reason)
             output.writeFloat(value.gameMode)
         }

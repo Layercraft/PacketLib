@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class SetTitleSubtitlePacket(
     val text: String,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<SetTitleSubtitlePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SetTitleSubtitlePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SetTitleSubtitlePacket {
             val text = input.readString()
 
             return SetTitleSubtitlePacket(text)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SetTitleSubtitlePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SetTitleSubtitlePacket) {
             output.writeString(value.text)
         }
     }

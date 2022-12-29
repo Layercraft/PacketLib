@@ -19,9 +19,8 @@ data class UpdateCommandBlockMinecartPacket(
     val command: String,
     val trackOutput: Boolean,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<UpdateCommandBlockMinecartPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateCommandBlockMinecartPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateCommandBlockMinecartPacket {
             val entityId = input.readVarInt()
             val command = input.readString()
             val trackOutput = input.readBoolean()
@@ -29,7 +28,7 @@ data class UpdateCommandBlockMinecartPacket(
             return UpdateCommandBlockMinecartPacket(entityId, command, trackOutput)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateCommandBlockMinecartPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateCommandBlockMinecartPacket) {
             output.writeVarInt(value.entityId)
             output.writeString(value.command)
             output.writeBoolean(value.trackOutput)

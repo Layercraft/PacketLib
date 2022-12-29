@@ -19,9 +19,8 @@ data class CraftRecipeRequestPacket(
     val recipe: String,
     val makeAll: Boolean,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<CraftRecipeRequestPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): CraftRecipeRequestPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): CraftRecipeRequestPacket {
             val windowId = input.readByte()
             val recipe = input.readString()
             val makeAll = input.readBoolean()
@@ -29,7 +28,7 @@ data class CraftRecipeRequestPacket(
             return CraftRecipeRequestPacket(windowId, recipe, makeAll)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: CraftRecipeRequestPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: CraftRecipeRequestPacket) {
             output.writeByte(value.windowId)
             output.writeString(value.recipe)
             output.writeBoolean(value.makeAll)

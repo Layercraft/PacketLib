@@ -17,16 +17,15 @@ data class NbtQueryResponsePacket(
     val transactionId: Int, // varint
     val nbt: ByteArray,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<NbtQueryResponsePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): NbtQueryResponsePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): NbtQueryResponsePacket {
             val transactionId = input.readVarInt()
             val nbt = input.readNBT()
 
             return NbtQueryResponsePacket(transactionId, nbt)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: NbtQueryResponsePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: NbtQueryResponsePacket) {
             output.writeVarInt(value.transactionId)
             output.writeBytes(value.nbt)
         }

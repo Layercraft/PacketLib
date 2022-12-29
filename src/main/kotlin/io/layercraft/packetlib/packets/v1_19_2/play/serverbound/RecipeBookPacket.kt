@@ -19,9 +19,8 @@ data class RecipeBookPacket(
     val bookOpen: Boolean,
     val filterActive: Boolean,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<RecipeBookPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): RecipeBookPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): RecipeBookPacket {
             val bookId = input.readVarInt()
             val bookOpen = input.readBoolean()
             val filterActive = input.readBoolean()
@@ -29,7 +28,7 @@ data class RecipeBookPacket(
             return RecipeBookPacket(bookId, bookOpen, filterActive)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: RecipeBookPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: RecipeBookPacket) {
             output.writeVarInt(value.bookId)
             output.writeBoolean(value.bookOpen)
             output.writeBoolean(value.filterActive)

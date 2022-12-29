@@ -19,9 +19,8 @@ data class UpdateHealthPacket(
     val food: Int, // varint
     val foodSaturation: Float,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<UpdateHealthPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateHealthPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateHealthPacket {
             val health = input.readFloat()
             val food = input.readVarInt()
             val foodSaturation = input.readFloat()
@@ -29,7 +28,7 @@ data class UpdateHealthPacket(
             return UpdateHealthPacket(health, food, foodSaturation)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateHealthPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateHealthPacket) {
             output.writeFloat(value.health)
             output.writeVarInt(value.food)
             output.writeFloat(value.foodSaturation)

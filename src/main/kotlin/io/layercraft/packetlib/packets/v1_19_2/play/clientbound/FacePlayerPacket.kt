@@ -12,6 +12,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property y y
  * @property z z
  * @property isEntity isEntity
+ * @property entityId entityId
+ * @property entityFeetEyes entity_feet_eyes
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Look_At">https://wiki.vg/Protocol#Look_At</a>
  */
 
@@ -22,25 +24,42 @@ data class FacePlayerPacket(
     val y: Double,
     val z: Double,
     val isEntity: Boolean,
+    val entityId: Int?, // varint
+    val entityFeetEyes: String?,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<FacePlayerPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): FacePlayerPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): FacePlayerPacket {
             val feetEyes = input.readVarInt()
             val x = input.readDouble()
             val y = input.readDouble()
             val z = input.readDouble()
             val isEntity = input.readBoolean()
+            val entityId = when (isEntity) {
+                true -> input.readVarInt()
+                else -> null
+            }
+            val entityFeetEyes = when (isEntity) {
+                true -> input.readString()
+                else -> null
+            }
 
-            return FacePlayerPacket(feetEyes, x, y, z, isEntity)
+            return FacePlayerPacket(feetEyes, x, y, z, isEntity, entityId, entityFeetEyes)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: FacePlayerPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: FacePlayerPacket) {
             output.writeVarInt(value.feetEyes)
             output.writeDouble(value.x)
             output.writeDouble(value.y)
             output.writeDouble(value.z)
             output.writeBoolean(value.isEntity)
+            when (value.isEntity) {
+                true -> output.writeVarInt(value.entityId!!)
+                else -> {}
+            }
+            when (value.isEntity) {
+                true -> output.writeString(value.entityFeetEyes!!)
+                else -> {}
+            }
         }
     }
 }

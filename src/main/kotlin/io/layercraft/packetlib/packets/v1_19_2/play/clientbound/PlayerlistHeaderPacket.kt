@@ -17,16 +17,15 @@ data class PlayerlistHeaderPacket(
     val header: String,
     val footer: String,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<PlayerlistHeaderPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): PlayerlistHeaderPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): PlayerlistHeaderPacket {
             val header = input.readString()
             val footer = input.readString()
 
             return PlayerlistHeaderPacket(header, footer)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: PlayerlistHeaderPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: PlayerlistHeaderPacket) {
             output.writeString(value.header)
             output.writeString(value.footer)
         }

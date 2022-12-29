@@ -23,9 +23,8 @@ data class WindowClickPacket(
     val mouseButton: Byte,
     val mode: Int, // varint
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<WindowClickPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): WindowClickPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): WindowClickPacket {
             val windowId = input.readUByte()
             val stateId = input.readVarInt()
             val slot = input.readShort()
@@ -35,7 +34,7 @@ data class WindowClickPacket(
             return WindowClickPacket(windowId, stateId, slot, mouseButton, mode)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: WindowClickPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: WindowClickPacket) {
             output.writeUByte(value.windowId)
             output.writeVarInt(value.stateId)
             output.writeShort(value.slot)

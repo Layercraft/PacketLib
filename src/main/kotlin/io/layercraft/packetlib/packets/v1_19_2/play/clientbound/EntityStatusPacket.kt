@@ -17,16 +17,15 @@ data class EntityStatusPacket(
     val entityId: Int,
     val entityStatus: Byte,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<EntityStatusPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EntityStatusPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntityStatusPacket {
             val entityId = input.readInt()
             val entityStatus = input.readByte()
 
             return EntityStatusPacket(entityId, entityStatus)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityStatusPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityStatusPacket) {
             output.writeInt(value.entityId)
             output.writeByte(value.entityStatus)
         }

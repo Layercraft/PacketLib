@@ -17,16 +17,15 @@ data class WindowItemsPacket(
     val windowId: UByte,
     val stateId: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<WindowItemsPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): WindowItemsPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): WindowItemsPacket {
             val windowId = input.readUByte()
             val stateId = input.readVarInt()
 
             return WindowItemsPacket(windowId, stateId)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: WindowItemsPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: WindowItemsPacket) {
             output.writeUByte(value.windowId)
             output.writeVarInt(value.stateId)
         }

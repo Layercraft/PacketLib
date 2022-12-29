@@ -4,7 +4,6 @@ import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import java.util.UUID
-
 /**
  * Login Success | 0x02 | login | clientbound
  *
@@ -18,16 +17,15 @@ data class SuccessPacket(
     val uuid: UUID,
     val username: String,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<SuccessPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SuccessPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SuccessPacket {
             val uuid = input.readUUID()
             val username = input.readString()
 
             return SuccessPacket(uuid, username)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SuccessPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SuccessPacket) {
             output.writeUUID(value.uuid)
             output.writeString(value.username)
         }

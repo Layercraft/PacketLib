@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class ArmAnimationPacket(
     val hand: Int, // varint
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<ArmAnimationPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ArmAnimationPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ArmAnimationPacket {
             val hand = input.readVarInt()
 
             return ArmAnimationPacket(hand)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: ArmAnimationPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ArmAnimationPacket) {
             output.writeVarInt(value.hand)
         }
     }

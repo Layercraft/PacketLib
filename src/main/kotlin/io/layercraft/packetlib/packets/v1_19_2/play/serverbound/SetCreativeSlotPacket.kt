@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class SetCreativeSlotPacket(
     val slot: Short,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<SetCreativeSlotPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SetCreativeSlotPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SetCreativeSlotPacket {
             val slot = input.readShort()
 
             return SetCreativeSlotPacket(slot)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SetCreativeSlotPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SetCreativeSlotPacket) {
             output.writeShort(value.slot)
         }
     }

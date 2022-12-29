@@ -17,16 +17,15 @@ data class ScoreboardDisplayObjectivePacket(
     val position: Byte,
     val name: String,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<ScoreboardDisplayObjectivePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ScoreboardDisplayObjectivePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ScoreboardDisplayObjectivePacket {
             val position = input.readByte()
             val name = input.readString()
 
             return ScoreboardDisplayObjectivePacket(position, name)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: ScoreboardDisplayObjectivePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ScoreboardDisplayObjectivePacket) {
             output.writeByte(value.position)
             output.writeString(value.name)
         }

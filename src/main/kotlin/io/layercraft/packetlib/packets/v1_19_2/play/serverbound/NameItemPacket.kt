@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class NameItemPacket(
     val name: String,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<NameItemPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): NameItemPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): NameItemPacket {
             val name = input.readString()
 
             return NameItemPacket(name)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: NameItemPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: NameItemPacket) {
             output.writeString(value.name)
         }
     }

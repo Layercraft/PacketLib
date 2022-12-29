@@ -19,9 +19,8 @@ data class LoginPluginRequestPacket(
     val channel: String,
     val data: ByteArray,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<LoginPluginRequestPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LoginPluginRequestPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): LoginPluginRequestPacket {
             val messageId = input.readVarInt()
             val channel = input.readString()
             val data = input.readRemainingByteArray()
@@ -29,7 +28,7 @@ data class LoginPluginRequestPacket(
             return LoginPluginRequestPacket(messageId, channel, data)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LoginPluginRequestPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: LoginPluginRequestPacket) {
             output.writeVarInt(value.messageId)
             output.writeString(value.channel)
             output.writeRemainingByteArray(value.data)

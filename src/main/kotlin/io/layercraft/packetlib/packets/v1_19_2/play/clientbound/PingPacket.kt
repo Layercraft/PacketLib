@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class PingPacket(
     val id: Int,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<PingPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): PingPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): PingPacket {
             val id = input.readInt()
 
             return PingPacket(id)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: PingPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: PingPacket) {
             output.writeInt(value.id)
         }
     }

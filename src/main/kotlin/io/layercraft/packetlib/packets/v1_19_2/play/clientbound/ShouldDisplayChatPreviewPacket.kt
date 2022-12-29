@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class ShouldDisplayChatPreviewPacket(
     val shouldDisplayChatPreview: Boolean,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<ShouldDisplayChatPreviewPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ShouldDisplayChatPreviewPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ShouldDisplayChatPreviewPacket {
             val shouldDisplayChatPreview = input.readBoolean()
 
             return ShouldDisplayChatPreviewPacket(shouldDisplayChatPreview)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: ShouldDisplayChatPreviewPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ShouldDisplayChatPreviewPacket) {
             output.writeBoolean(value.shouldDisplayChatPreview)
         }
     }

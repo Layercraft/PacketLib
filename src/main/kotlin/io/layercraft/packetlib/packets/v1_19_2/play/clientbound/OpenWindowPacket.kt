@@ -19,9 +19,8 @@ data class OpenWindowPacket(
     val inventoryType: Int, // varint
     val windowTitle: String,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<OpenWindowPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): OpenWindowPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): OpenWindowPacket {
             val windowId = input.readVarInt()
             val inventoryType = input.readVarInt()
             val windowTitle = input.readString()
@@ -29,7 +28,7 @@ data class OpenWindowPacket(
             return OpenWindowPacket(windowId, inventoryType, windowTitle)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: OpenWindowPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: OpenWindowPacket) {
             output.writeVarInt(value.windowId)
             output.writeVarInt(value.inventoryType)
             output.writeString(value.windowTitle)

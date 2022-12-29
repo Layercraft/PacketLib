@@ -29,9 +29,8 @@ data class SettingsPacket(
     val enableTextFiltering: Boolean,
     val enableServerListing: Boolean,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<SettingsPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SettingsPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SettingsPacket {
             val locale = input.readString()
             val viewDistance = input.readByte()
             val chatFlags = input.readVarInt()
@@ -44,7 +43,7 @@ data class SettingsPacket(
             return SettingsPacket(locale, viewDistance, chatFlags, chatColors, skinParts, mainHand, enableTextFiltering, enableServerListing)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SettingsPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SettingsPacket) {
             output.writeString(value.locale)
             output.writeByte(value.viewDistance)
             output.writeVarInt(value.chatFlags)

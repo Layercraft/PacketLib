@@ -23,9 +23,8 @@ data class RelEntityMovePacket(
     val dZ: Short,
     val onGround: Boolean,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<RelEntityMovePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): RelEntityMovePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): RelEntityMovePacket {
             val entityId = input.readVarInt()
             val dX = input.readShort()
             val dY = input.readShort()
@@ -35,7 +34,7 @@ data class RelEntityMovePacket(
             return RelEntityMovePacket(entityId, dX, dY, dZ, onGround)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: RelEntityMovePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: RelEntityMovePacket) {
             output.writeVarInt(value.entityId)
             output.writeShort(value.dX)
             output.writeShort(value.dY)

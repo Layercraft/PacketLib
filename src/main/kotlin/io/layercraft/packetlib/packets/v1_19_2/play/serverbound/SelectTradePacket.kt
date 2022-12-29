@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class SelectTradePacket(
     val slot: Int, // varint
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<SelectTradePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SelectTradePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SelectTradePacket {
             val slot = input.readVarInt()
 
             return SelectTradePacket(slot)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SelectTradePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SelectTradePacket) {
             output.writeVarInt(value.slot)
         }
     }

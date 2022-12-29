@@ -17,16 +17,15 @@ data class TabCompletePacket(
     val transactionId: Int, // varint
     val text: String,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<TabCompletePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): TabCompletePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): TabCompletePacket {
             val transactionId = input.readVarInt()
             val text = input.readString()
 
             return TabCompletePacket(transactionId, text)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: TabCompletePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: TabCompletePacket) {
             output.writeVarInt(value.transactionId)
             output.writeString(value.text)
         }

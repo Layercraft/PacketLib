@@ -7,23 +7,26 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Encryption Response | 0x01 | login | serverbound
  *
+ * @property sharedSecret sharedSecret
  * @property hasVerifyToken hasVerifyToken
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Encryption_Response">https://wiki.vg/Protocol#Encryption_Response</a>
  */
 
 @MinecraftPacket(id = 0x01, state = PacketState.LOGIN, direction = PacketDirection.SERVERBOUND)
 data class EncryptionBeginPacket(
+    val sharedSecret: ByteArray,
     val hasVerifyToken: Boolean,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<EncryptionBeginPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EncryptionBeginPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EncryptionBeginPacket {
+            val sharedSecret = input.readVarIntByteArray()
             val hasVerifyToken = input.readBoolean()
 
-            return EncryptionBeginPacket(hasVerifyToken)
+            return EncryptionBeginPacket(sharedSecret, hasVerifyToken)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EncryptionBeginPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EncryptionBeginPacket) {
+            output.writeVarIntByteArray(value.sharedSecret)
             output.writeBoolean(value.hasVerifyToken)
         }
     }

@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class CloseWindowPacket(
     val windowId: UByte,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<CloseWindowPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): CloseWindowPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): CloseWindowPacket {
             val windowId = input.readUByte()
 
             return CloseWindowPacket(windowId)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: CloseWindowPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: CloseWindowPacket) {
             output.writeUByte(value.windowId)
         }
     }

@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class CompressPacket(
     val threshold: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<CompressPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): CompressPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): CompressPacket {
             val threshold = input.readVarInt()
 
             return CompressPacket(threshold)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: CompressPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: CompressPacket) {
             output.writeVarInt(value.threshold)
         }
     }

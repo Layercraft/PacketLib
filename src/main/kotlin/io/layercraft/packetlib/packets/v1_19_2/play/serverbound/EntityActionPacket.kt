@@ -19,9 +19,8 @@ data class EntityActionPacket(
     val actionId: Int, // varint
     val jumpBoost: Int, // varint
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<EntityActionPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EntityActionPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntityActionPacket {
             val entityId = input.readVarInt()
             val actionId = input.readVarInt()
             val jumpBoost = input.readVarInt()
@@ -29,7 +28,7 @@ data class EntityActionPacket(
             return EntityActionPacket(entityId, actionId, jumpBoost)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityActionPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityActionPacket) {
             output.writeVarInt(value.entityId)
             output.writeVarInt(value.actionId)
             output.writeVarInt(value.jumpBoost)

@@ -19,9 +19,8 @@ data class CollectPacket(
     val collectorEntityId: Int, // varint
     val pickupItemCount: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<CollectPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): CollectPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): CollectPacket {
             val collectedEntityId = input.readVarInt()
             val collectorEntityId = input.readVarInt()
             val pickupItemCount = input.readVarInt()
@@ -29,7 +28,7 @@ data class CollectPacket(
             return CollectPacket(collectedEntityId, collectorEntityId, pickupItemCount)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: CollectPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: CollectPacket) {
             output.writeVarInt(value.collectedEntityId)
             output.writeVarInt(value.collectorEntityId)
             output.writeVarInt(value.pickupItemCount)

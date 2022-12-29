@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class OpenBookPacket(
     val hand: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<OpenBookPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): OpenBookPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): OpenBookPacket {
             val hand = input.readVarInt()
 
             return OpenBookPacket(hand)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: OpenBookPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: OpenBookPacket) {
             output.writeVarInt(value.hand)
         }
     }

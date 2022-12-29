@@ -8,23 +8,30 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Encryption Request | 0x01 | login | clientbound
  *
  * @property serverId serverId
+ * @property publicKey publicKey
+ * @property verifyToken verifyToken
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Encryption_Request">https://wiki.vg/Protocol#Encryption_Request</a>
  */
 
 @MinecraftPacket(id = 0x01, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)
 data class EncryptionBeginPacket(
     val serverId: String,
+    val publicKey: ByteArray,
+    val verifyToken: ByteArray,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<EncryptionBeginPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EncryptionBeginPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EncryptionBeginPacket {
             val serverId = input.readString()
+            val publicKey = input.readVarIntByteArray()
+            val verifyToken = input.readVarIntByteArray()
 
-            return EncryptionBeginPacket(serverId)
+            return EncryptionBeginPacket(serverId, publicKey, verifyToken)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EncryptionBeginPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EncryptionBeginPacket) {
             output.writeString(value.serverId)
+            output.writeVarIntByteArray(value.publicKey)
+            output.writeVarIntByteArray(value.verifyToken)
         }
     }
 }

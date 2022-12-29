@@ -4,7 +4,6 @@ import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.Position
-
 /**
  * Block Entity Data | 0x07 | play | clientbound
  *
@@ -20,9 +19,8 @@ data class TileEntityDataPacket(
     val action: Int, // varint
     val nbtData: ByteArray,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<TileEntityDataPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): TileEntityDataPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): TileEntityDataPacket {
             val location = input.readPosition()
             val action = input.readVarInt()
             val nbtData = input.readNBT()
@@ -30,7 +28,7 @@ data class TileEntityDataPacket(
             return TileEntityDataPacket(location, action, nbtData)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: TileEntityDataPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: TileEntityDataPacket) {
             output.writePosition(value.location)
             output.writeVarInt(value.action)
             output.writeBytes(value.nbtData)

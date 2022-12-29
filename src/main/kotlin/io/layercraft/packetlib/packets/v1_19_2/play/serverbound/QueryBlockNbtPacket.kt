@@ -4,7 +4,6 @@ import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.Position
-
 /**
  * Query Block Entity Tag | 0x01 | play | serverbound
  *
@@ -18,16 +17,15 @@ data class QueryBlockNbtPacket(
     val transactionId: Int, // varint
     val location: Position,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<QueryBlockNbtPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): QueryBlockNbtPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): QueryBlockNbtPacket {
             val transactionId = input.readVarInt()
             val location = input.readPosition()
 
             return QueryBlockNbtPacket(transactionId, location)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: QueryBlockNbtPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: QueryBlockNbtPacket) {
             output.writeVarInt(value.transactionId)
             output.writePosition(value.location)
         }

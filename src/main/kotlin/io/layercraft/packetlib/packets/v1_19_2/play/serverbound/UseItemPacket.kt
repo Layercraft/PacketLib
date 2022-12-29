@@ -17,16 +17,15 @@ data class UseItemPacket(
     val hand: Int, // varint
     val sequence: Int, // varint
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<UseItemPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): UseItemPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UseItemPacket {
             val hand = input.readVarInt()
             val sequence = input.readVarInt()
 
             return UseItemPacket(hand, sequence)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: UseItemPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: UseItemPacket) {
             output.writeVarInt(value.hand)
             output.writeVarInt(value.sequence)
         }

@@ -3,7 +3,7 @@ package io.layercraft.packetlib.packets.v1_19_2.play.clientbound
 import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
-
+import io.layercraft.packetlib.types.Position
 /**
  *  | 0x25 | play | clientbound
  *
@@ -11,6 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property isHardcore isHardcore
  * @property gameMode gameMode
  * @property previousGameMode previousGameMode
+ * @property worldNames worldNames
  * @property dimensionCodec dimensionCodec
  * @property worldType worldType
  * @property worldName worldName
@@ -22,6 +23,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property enableRespawnScreen enableRespawnScreen
  * @property isDebug isDebug
  * @property isFlat isFlat
+ * @property hasDeath death is present
+ * @property dimensionName dimensionName
+ * @property location location
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Login_.28play.29">https://wiki.vg/Protocol#Login_.28play.29</a>
  */
 
@@ -31,6 +35,7 @@ data class LoginPacket(
     val isHardcore: Boolean,
     val gameMode: UByte,
     val previousGameMode: Byte,
+    val worldNames: List<String>, // varint array
     val dimensionCodec: ByteArray,
     val worldType: String,
     val worldName: String,
@@ -42,14 +47,17 @@ data class LoginPacket(
     val enableRespawnScreen: Boolean,
     val isDebug: Boolean,
     val isFlat: Boolean,
+    val hasDeath: Boolean,
+    val dimensionName: String?,
+    val location: Position?,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<LoginPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LoginPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): LoginPacket {
             val entityId = input.readInt()
             val isHardcore = input.readBoolean()
             val gameMode = input.readUByte()
             val previousGameMode = input.readByte()
+            val worldNames = input.readVarIntArray { arrayInput -> arrayInput.readString() }
             val dimensionCodec = input.readNBT()
             val worldType = input.readString()
             val worldName = input.readString()
@@ -61,15 +69,19 @@ data class LoginPacket(
             val enableRespawnScreen = input.readBoolean()
             val isDebug = input.readBoolean()
             val isFlat = input.readBoolean()
+            val hasDeath = input.readBoolean()
+            val dimensionName = if (hasDeath) input.readString() else null
+            val location = if (hasDeath) input.readPosition() else null
 
-            return LoginPacket(entityId, isHardcore, gameMode, previousGameMode, dimensionCodec, worldType, worldName, hashedSeed, maxPlayers, viewDistance, simulationDistance, reducedDebugInfo, enableRespawnScreen, isDebug, isFlat)
+            return LoginPacket(entityId, isHardcore, gameMode, previousGameMode, worldNames, dimensionCodec, worldType, worldName, hashedSeed, maxPlayers, viewDistance, simulationDistance, reducedDebugInfo, enableRespawnScreen, isDebug, isFlat, hasDeath, dimensionName, location)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LoginPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: LoginPacket) {
             output.writeInt(value.entityId)
             output.writeBoolean(value.isHardcore)
             output.writeUByte(value.gameMode)
             output.writeByte(value.previousGameMode)
+            output.writeVarIntArray(value.worldNames) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue) }
             output.writeBytes(value.dimensionCodec)
             output.writeString(value.worldType)
             output.writeString(value.worldName)
@@ -81,6 +93,9 @@ data class LoginPacket(
             output.writeBoolean(value.enableRespawnScreen)
             output.writeBoolean(value.isDebug)
             output.writeBoolean(value.isFlat)
+            output.writeBoolean(value.hasDeath)
+            if (value.hasDeath) output.writeString(value.dimensionName!!)
+            if (value.hasDeath) output.writePosition(value.location!!)
         }
     }
 }

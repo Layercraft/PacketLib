@@ -17,16 +17,15 @@ data class ChatPreviewPacket(
     val query: Int,
     val message: String,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<ChatPreviewPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ChatPreviewPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ChatPreviewPacket {
             val query = input.readInt()
             val message = input.readString()
 
             return ChatPreviewPacket(query, message)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: ChatPreviewPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ChatPreviewPacket) {
             output.writeInt(value.query)
             output.writeString(value.message)
         }

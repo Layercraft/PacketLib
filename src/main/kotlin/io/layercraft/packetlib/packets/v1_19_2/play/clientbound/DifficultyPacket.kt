@@ -17,16 +17,15 @@ data class DifficultyPacket(
     val difficulty: UByte,
     val difficultyLocked: Boolean,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<DifficultyPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): DifficultyPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): DifficultyPacket {
             val difficulty = input.readUByte()
             val difficultyLocked = input.readBoolean()
 
             return DifficultyPacket(difficulty, difficultyLocked)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: DifficultyPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: DifficultyPacket) {
             output.writeUByte(value.difficulty)
             output.writeBoolean(value.difficultyLocked)
         }

@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class WorldBorderWarningReachPacket(
     val warningBlocks: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<WorldBorderWarningReachPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): WorldBorderWarningReachPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): WorldBorderWarningReachPacket {
             val warningBlocks = input.readVarInt()
 
             return WorldBorderWarningReachPacket(warningBlocks)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: WorldBorderWarningReachPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: WorldBorderWarningReachPacket) {
             output.writeVarInt(value.warningBlocks)
         }
     }

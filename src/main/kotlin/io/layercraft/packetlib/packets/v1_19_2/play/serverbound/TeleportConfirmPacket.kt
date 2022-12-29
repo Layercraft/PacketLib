@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class TeleportConfirmPacket(
     val teleportId: Int, // varint
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<TeleportConfirmPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): TeleportConfirmPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): TeleportConfirmPacket {
             val teleportId = input.readVarInt()
 
             return TeleportConfirmPacket(teleportId)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: TeleportConfirmPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: TeleportConfirmPacket) {
             output.writeVarInt(value.teleportId)
         }
     }

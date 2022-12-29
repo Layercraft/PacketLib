@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class ActionBarPacket(
     val text: String,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<ActionBarPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ActionBarPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ActionBarPacket {
             val text = input.readString()
 
             return ActionBarPacket(text)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: ActionBarPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ActionBarPacket) {
             output.writeString(value.text)
         }
     }

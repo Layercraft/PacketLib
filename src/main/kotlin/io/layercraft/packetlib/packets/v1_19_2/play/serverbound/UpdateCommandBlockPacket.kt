@@ -4,7 +4,6 @@ import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.Position
-
 /**
  * Program Command Block | 0x29 | play | serverbound
  *
@@ -22,9 +21,8 @@ data class UpdateCommandBlockPacket(
     val mode: Int, // varint
     val flags: UByte,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<UpdateCommandBlockPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateCommandBlockPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateCommandBlockPacket {
             val location = input.readPosition()
             val command = input.readString()
             val mode = input.readVarInt()
@@ -33,7 +31,7 @@ data class UpdateCommandBlockPacket(
             return UpdateCommandBlockPacket(location, command, mode, flags)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateCommandBlockPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateCommandBlockPacket) {
             output.writePosition(value.location)
             output.writeString(value.command)
             output.writeVarInt(value.mode)

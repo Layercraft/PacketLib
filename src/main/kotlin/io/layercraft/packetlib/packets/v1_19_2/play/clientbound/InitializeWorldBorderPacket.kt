@@ -29,9 +29,8 @@ data class InitializeWorldBorderPacket(
     val warningBlocks: Int, // varint
     val warningTime: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<InitializeWorldBorderPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): InitializeWorldBorderPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): InitializeWorldBorderPacket {
             val x = input.readDouble()
             val z = input.readDouble()
             val oldDiameter = input.readDouble()
@@ -44,7 +43,7 @@ data class InitializeWorldBorderPacket(
             return InitializeWorldBorderPacket(x, z, oldDiameter, newDiameter, speed, portalTeleportBoundary, warningBlocks, warningTime)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: InitializeWorldBorderPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: InitializeWorldBorderPacket) {
             output.writeDouble(value.x)
             output.writeDouble(value.z)
             output.writeDouble(value.oldDiameter)

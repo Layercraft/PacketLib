@@ -19,9 +19,8 @@ data class SetSlotPacket(
     val stateId: Int, // varint
     val slot: Short,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<SetSlotPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SetSlotPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SetSlotPacket {
             val windowId = input.readByte()
             val stateId = input.readVarInt()
             val slot = input.readShort()
@@ -29,7 +28,7 @@ data class SetSlotPacket(
             return SetSlotPacket(windowId, stateId, slot)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SetSlotPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SetSlotPacket) {
             output.writeByte(value.windowId)
             output.writeVarInt(value.stateId)
             output.writeShort(value.slot)

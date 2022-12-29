@@ -19,5 +19,6 @@ ij_kotlin_imports_layout = *,java.**,javax.**,kotlin.**,^
 ij_kotlin_packages_to_use_import_on_demand = java.util.*
 #Ktlint
 ktlint_standard_no-wildcard-imports = disabled
+ktlint_standard_package-name = disabled
 ktlint_code_style = official
 ktlint_ignore_back_ticked_identifier = false

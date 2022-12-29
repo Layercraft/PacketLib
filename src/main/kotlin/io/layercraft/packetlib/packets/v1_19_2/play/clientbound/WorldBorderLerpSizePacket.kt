@@ -19,9 +19,8 @@ data class WorldBorderLerpSizePacket(
     val newDiameter: Double,
     val speed: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<WorldBorderLerpSizePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): WorldBorderLerpSizePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): WorldBorderLerpSizePacket {
             val oldDiameter = input.readDouble()
             val newDiameter = input.readDouble()
             val speed = input.readVarInt()
@@ -29,7 +28,7 @@ data class WorldBorderLerpSizePacket(
             return WorldBorderLerpSizePacket(oldDiameter, newDiameter, speed)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: WorldBorderLerpSizePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: WorldBorderLerpSizePacket) {
             output.writeDouble(value.oldDiameter)
             output.writeDouble(value.newDiameter)
             output.writeVarInt(value.speed)

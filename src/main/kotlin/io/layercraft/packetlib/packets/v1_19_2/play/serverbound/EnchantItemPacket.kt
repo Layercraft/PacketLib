@@ -17,16 +17,15 @@ data class EnchantItemPacket(
     val windowId: Byte,
     val enchantment: Byte,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<EnchantItemPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EnchantItemPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EnchantItemPacket {
             val windowId = input.readByte()
             val enchantment = input.readByte()
 
             return EnchantItemPacket(windowId, enchantment)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EnchantItemPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EnchantItemPacket) {
             output.writeByte(value.windowId)
             output.writeByte(value.enchantment)
         }

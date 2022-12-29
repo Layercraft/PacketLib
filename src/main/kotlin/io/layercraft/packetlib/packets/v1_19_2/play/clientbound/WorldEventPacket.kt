@@ -4,7 +4,6 @@ import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.Position
-
 /**
  * World Event | 0x22 | play | clientbound
  *
@@ -22,9 +21,8 @@ data class WorldEventPacket(
     val data: Int,
     val global: Boolean,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<WorldEventPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): WorldEventPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): WorldEventPacket {
             val effectId = input.readInt()
             val location = input.readPosition()
             val data = input.readInt()
@@ -33,7 +31,7 @@ data class WorldEventPacket(
             return WorldEventPacket(effectId, location, data, global)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: WorldEventPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: WorldEventPacket) {
             output.writeInt(value.effectId)
             output.writePosition(value.location)
             output.writeInt(value.data)

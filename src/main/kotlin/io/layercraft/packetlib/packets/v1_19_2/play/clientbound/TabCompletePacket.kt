@@ -19,9 +19,8 @@ data class TabCompletePacket(
     val start: Int, // varint
     val length: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<TabCompletePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): TabCompletePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): TabCompletePacket {
             val transactionId = input.readVarInt()
             val start = input.readVarInt()
             val length = input.readVarInt()
@@ -29,7 +28,7 @@ data class TabCompletePacket(
             return TabCompletePacket(transactionId, start, length)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: TabCompletePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: TabCompletePacket) {
             output.writeVarInt(value.transactionId)
             output.writeVarInt(value.start)
             output.writeVarInt(value.length)

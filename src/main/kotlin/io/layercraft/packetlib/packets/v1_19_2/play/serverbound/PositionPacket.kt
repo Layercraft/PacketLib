@@ -21,9 +21,8 @@ data class PositionPacket(
     val z: Double,
     val onGround: Boolean,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<PositionPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): PositionPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): PositionPacket {
             val x = input.readDouble()
             val y = input.readDouble()
             val z = input.readDouble()
@@ -32,7 +31,7 @@ data class PositionPacket(
             return PositionPacket(x, y, z, onGround)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: PositionPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: PositionPacket) {
             output.writeDouble(value.x)
             output.writeDouble(value.y)
             output.writeDouble(value.z)

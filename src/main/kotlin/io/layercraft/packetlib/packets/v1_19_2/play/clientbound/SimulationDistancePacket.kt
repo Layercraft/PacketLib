@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class SimulationDistancePacket(
     val distance: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<SimulationDistancePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SimulationDistancePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SimulationDistancePacket {
             val distance = input.readVarInt()
 
             return SimulationDistancePacket(distance)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SimulationDistancePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SimulationDistancePacket) {
             output.writeVarInt(value.distance)
         }
     }

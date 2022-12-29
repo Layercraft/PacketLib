@@ -4,7 +4,6 @@ import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.Position
-
 /**
  * Use Item | 0x2e | play | clientbound
  *
@@ -16,15 +15,14 @@ import io.layercraft.packetlib.types.Position
 data class OpenSignEntityPacket(
     val location: Position,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<OpenSignEntityPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): OpenSignEntityPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): OpenSignEntityPacket {
             val location = input.readPosition()
 
             return OpenSignEntityPacket(location)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: OpenSignEntityPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: OpenSignEntityPacket) {
             output.writePosition(value.location)
         }
     }

@@ -13,13 +13,12 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 @MinecraftPacket(id = 0x6a, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 class DeclareRecipesPacket() : ClientBoundPacket {
-
     companion object : PacketSerializer<DeclareRecipesPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): DeclareRecipesPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): DeclareRecipesPacket {
             return DeclareRecipesPacket()
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: DeclareRecipesPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: DeclareRecipesPacket) {
         }
     }
 }

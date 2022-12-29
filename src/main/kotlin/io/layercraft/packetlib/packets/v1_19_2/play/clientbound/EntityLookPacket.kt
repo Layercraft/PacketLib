@@ -21,9 +21,8 @@ data class EntityLookPacket(
     val pitch: Byte,
     val onGround: Boolean,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<EntityLookPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EntityLookPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntityLookPacket {
             val entityId = input.readVarInt()
             val yaw = input.readByte()
             val pitch = input.readByte()
@@ -32,7 +31,7 @@ data class EntityLookPacket(
             return EntityLookPacket(entityId, yaw, pitch, onGround)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityLookPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityLookPacket) {
             output.writeVarInt(value.entityId)
             output.writeByte(value.yaw)
             output.writeByte(value.pitch)

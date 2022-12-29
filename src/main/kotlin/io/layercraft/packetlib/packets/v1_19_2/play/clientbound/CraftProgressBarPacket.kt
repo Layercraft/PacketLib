@@ -19,9 +19,8 @@ data class CraftProgressBarPacket(
     val property: Short,
     val value: Short,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<CraftProgressBarPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): CraftProgressBarPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): CraftProgressBarPacket {
             val windowId = input.readUByte()
             val property = input.readShort()
             val value = input.readShort()
@@ -29,7 +28,7 @@ data class CraftProgressBarPacket(
             return CraftProgressBarPacket(windowId, property, value)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: CraftProgressBarPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: CraftProgressBarPacket) {
             output.writeUByte(value.windowId)
             output.writeShort(value.property)
             output.writeShort(value.value)

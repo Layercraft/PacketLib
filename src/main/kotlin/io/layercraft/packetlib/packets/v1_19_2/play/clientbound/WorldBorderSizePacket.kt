@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class WorldBorderSizePacket(
     val diameter: Double,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<WorldBorderSizePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): WorldBorderSizePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): WorldBorderSizePacket {
             val diameter = input.readDouble()
 
             return WorldBorderSizePacket(diameter)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: WorldBorderSizePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: WorldBorderSizePacket) {
             output.writeDouble(value.diameter)
         }
     }

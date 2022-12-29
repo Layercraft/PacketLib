@@ -4,7 +4,6 @@ import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.Position
-
 /**
  * Block Update | 0x09 | play | clientbound
  *
@@ -18,16 +17,15 @@ data class BlockChangePacket(
     val location: Position,
     val type: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<BlockChangePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): BlockChangePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): BlockChangePacket {
             val location = input.readPosition()
             val type = input.readVarInt()
 
             return BlockChangePacket(location, type)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: BlockChangePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: BlockChangePacket) {
             output.writePosition(value.location)
             output.writeVarInt(value.type)
         }

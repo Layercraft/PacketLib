@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class WorldBorderWarningDelayPacket(
     val warningTime: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<WorldBorderWarningDelayPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): WorldBorderWarningDelayPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): WorldBorderWarningDelayPacket {
             val warningTime = input.readVarInt()
 
             return WorldBorderWarningDelayPacket(warningTime)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: WorldBorderWarningDelayPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: WorldBorderWarningDelayPacket) {
             output.writeVarInt(value.warningTime)
         }
     }

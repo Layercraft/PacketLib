@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class EntityUpdateAttributesPacket(
     val entityId: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<EntityUpdateAttributesPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EntityUpdateAttributesPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntityUpdateAttributesPacket {
             val entityId = input.readVarInt()
 
             return EntityUpdateAttributesPacket(entityId)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityUpdateAttributesPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityUpdateAttributesPacket) {
             output.writeVarInt(value.entityId)
         }
     }

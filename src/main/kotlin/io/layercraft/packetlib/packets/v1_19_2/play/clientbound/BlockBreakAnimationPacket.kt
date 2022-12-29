@@ -4,7 +4,6 @@ import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.Position
-
 /**
  * Set Block Destroy Stage | 0x06 | play | clientbound
  *
@@ -20,9 +19,8 @@ data class BlockBreakAnimationPacket(
     val location: Position,
     val destroyStage: Byte,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<BlockBreakAnimationPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): BlockBreakAnimationPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): BlockBreakAnimationPacket {
             val entityId = input.readVarInt()
             val location = input.readPosition()
             val destroyStage = input.readByte()
@@ -30,7 +28,7 @@ data class BlockBreakAnimationPacket(
             return BlockBreakAnimationPacket(entityId, location, destroyStage)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: BlockBreakAnimationPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: BlockBreakAnimationPacket) {
             output.writeVarInt(value.entityId)
             output.writePosition(value.location)
             output.writeByte(value.destroyStage)

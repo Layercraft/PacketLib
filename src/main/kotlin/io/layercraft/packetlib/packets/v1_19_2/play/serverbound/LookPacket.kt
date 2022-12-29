@@ -19,9 +19,8 @@ data class LookPacket(
     val pitch: Float,
     val onGround: Boolean,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<LookPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LookPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): LookPacket {
             val yaw = input.readFloat()
             val pitch = input.readFloat()
             val onGround = input.readBoolean()
@@ -29,7 +28,7 @@ data class LookPacket(
             return LookPacket(yaw, pitch, onGround)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LookPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: LookPacket) {
             output.writeFloat(value.yaw)
             output.writeFloat(value.pitch)
             output.writeBoolean(value.onGround)

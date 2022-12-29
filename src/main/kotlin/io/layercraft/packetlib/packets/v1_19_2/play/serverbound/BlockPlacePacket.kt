@@ -4,7 +4,6 @@ import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.Position
-
 /**
  * Use Item On | 0x31 | play | serverbound
  *
@@ -30,9 +29,8 @@ data class BlockPlacePacket(
     val insideBlock: Boolean,
     val sequence: Int, // varint
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<BlockPlacePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): BlockPlacePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): BlockPlacePacket {
             val hand = input.readVarInt()
             val location = input.readPosition()
             val direction = input.readVarInt()
@@ -45,7 +43,7 @@ data class BlockPlacePacket(
             return BlockPlacePacket(hand, location, direction, cursorX, cursorY, cursorZ, insideBlock, sequence)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: BlockPlacePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: BlockPlacePacket) {
             output.writeVarInt(value.hand)
             output.writePosition(value.location)
             output.writeVarInt(value.direction)

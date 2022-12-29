@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class HeldItemSlotPacket(
     val slot: Byte,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<HeldItemSlotPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): HeldItemSlotPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): HeldItemSlotPacket {
             val slot = input.readByte()
 
             return HeldItemSlotPacket(slot)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: HeldItemSlotPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: HeldItemSlotPacket) {
             output.writeByte(value.slot)
         }
     }

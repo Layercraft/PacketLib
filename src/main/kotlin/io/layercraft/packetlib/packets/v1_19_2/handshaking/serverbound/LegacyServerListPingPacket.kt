@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class LegacyServerListPingPacket(
     val payload: UByte,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<LegacyServerListPingPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LegacyServerListPingPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): LegacyServerListPingPacket {
             val payload = input.readUByte()
 
             return LegacyServerListPingPacket(payload)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LegacyServerListPingPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: LegacyServerListPingPacket) {
             output.writeUByte(value.payload)
         }
     }

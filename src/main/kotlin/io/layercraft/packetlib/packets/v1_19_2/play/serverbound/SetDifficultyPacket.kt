@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class SetDifficultyPacket(
     val newDifficulty: UByte,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<SetDifficultyPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SetDifficultyPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SetDifficultyPacket {
             val newDifficulty = input.readUByte()
 
             return SetDifficultyPacket(newDifficulty)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SetDifficultyPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SetDifficultyPacket) {
             output.writeUByte(value.newDifficulty)
         }
     }

@@ -4,11 +4,11 @@ import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import java.util.UUID
-
 /**
  * Player Chat Message | 0x33 | play | clientbound
  *
  * @property senderUuid senderUuid
+ * @property headerSignature headerSignature
  * @property plainMessage plainMessage
  * @property hasFormattedMessage formattedMessage is present
  * @property formattedMessage formattedMessage
@@ -27,6 +27,7 @@ import java.util.UUID
 @MinecraftPacket(id = 0x33, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class PlayerChatPacket(
     val senderUuid: UUID,
+    val headerSignature: List<UByte>, // varint array
     val plainMessage: String,
     val hasFormattedMessage: Boolean,
     val formattedMessage: String?,
@@ -40,10 +41,10 @@ data class PlayerChatPacket(
     val hasNetworkTargetName: Boolean,
     val networkTargetName: String?,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<PlayerChatPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): PlayerChatPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): PlayerChatPacket {
             val senderUuid = input.readUUID()
+            val headerSignature = input.readVarIntArray { arrayInput -> arrayInput.readUByte() }
             val plainMessage = input.readString()
             val hasFormattedMessage = input.readBoolean()
             val formattedMessage = if (hasFormattedMessage) input.readString() else null
@@ -57,11 +58,12 @@ data class PlayerChatPacket(
             val hasNetworkTargetName = input.readBoolean()
             val networkTargetName = if (hasNetworkTargetName) input.readString() else null
 
-            return PlayerChatPacket(senderUuid, plainMessage, hasFormattedMessage, formattedMessage, timestamp, salt, hasUnsignedContent, unsignedContent, filterType, type, networkName, hasNetworkTargetName, networkTargetName)
+            return PlayerChatPacket(senderUuid, headerSignature, plainMessage, hasFormattedMessage, formattedMessage, timestamp, salt, hasUnsignedContent, unsignedContent, filterType, type, networkName, hasNetworkTargetName, networkTargetName)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: PlayerChatPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: PlayerChatPacket) {
             output.writeUUID(value.senderUuid)
+            output.writeVarIntArray(value.headerSignature) { arrayValue, arrayOutput -> arrayOutput.writeUByte(arrayValue) }
             output.writeString(value.plainMessage)
             output.writeBoolean(value.hasFormattedMessage)
             if (value.hasFormattedMessage) output.writeString(value.formattedMessage!!)

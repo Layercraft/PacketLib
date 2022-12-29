@@ -23,9 +23,8 @@ data class EntitySoundEffectPacket(
     val volume: Float,
     val pitch: Float,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<EntitySoundEffectPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EntitySoundEffectPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntitySoundEffectPacket {
             val soundId = input.readVarInt()
             val soundCategory = input.readVarInt()
             val entityId = input.readVarInt()
@@ -35,7 +34,7 @@ data class EntitySoundEffectPacket(
             return EntitySoundEffectPacket(soundId, soundCategory, entityId, volume, pitch)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EntitySoundEffectPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntitySoundEffectPacket) {
             output.writeVarInt(value.soundId)
             output.writeVarInt(value.soundCategory)
             output.writeVarInt(value.entityId)

@@ -27,9 +27,8 @@ data class EntityEffectPacket(
     val hasFactorCodec: Boolean,
     val factorCodec: ByteArray?,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<EntityEffectPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EntityEffectPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntityEffectPacket {
             val entityId = input.readVarInt()
             val effectId = input.readVarInt()
             val amplifier = input.readByte()
@@ -41,7 +40,7 @@ data class EntityEffectPacket(
             return EntityEffectPacket(entityId, effectId, amplifier, duration, hideParticles, hasFactorCodec, factorCodec)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityEffectPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityEffectPacket) {
             output.writeVarInt(value.entityId)
             output.writeVarInt(value.effectId)
             output.writeByte(value.amplifier)

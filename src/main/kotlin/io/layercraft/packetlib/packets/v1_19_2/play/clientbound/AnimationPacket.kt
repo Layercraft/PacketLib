@@ -17,16 +17,15 @@ data class AnimationPacket(
     val entityId: Int, // varint
     val animation: UByte,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<AnimationPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): AnimationPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): AnimationPacket {
             val entityId = input.readVarInt()
             val animation = input.readUByte()
 
             return AnimationPacket(entityId, animation)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: AnimationPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: AnimationPacket) {
             output.writeVarInt(value.entityId)
             output.writeUByte(value.animation)
         }

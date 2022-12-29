@@ -23,9 +23,8 @@ data class ResourcePackSendPacket(
     val hasPromptMessage: Boolean,
     val promptMessage: String?,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<ResourcePackSendPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ResourcePackSendPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ResourcePackSendPacket {
             val url = input.readString()
             val hash = input.readString()
             val forced = input.readBoolean()
@@ -35,7 +34,7 @@ data class ResourcePackSendPacket(
             return ResourcePackSendPacket(url, hash, forced, hasPromptMessage, promptMessage)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: ResourcePackSendPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ResourcePackSendPacket) {
             output.writeString(value.url)
             output.writeString(value.hash)
             output.writeBoolean(value.forced)

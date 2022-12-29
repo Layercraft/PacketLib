@@ -19,9 +19,8 @@ data class AbilitiesPacket(
     val flyingSpeed: Float,
     val walkingSpeed: Float,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<AbilitiesPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): AbilitiesPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): AbilitiesPacket {
             val flags = input.readByte()
             val flyingSpeed = input.readFloat()
             val walkingSpeed = input.readFloat()
@@ -29,7 +28,7 @@ data class AbilitiesPacket(
             return AbilitiesPacket(flags, flyingSpeed, walkingSpeed)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: AbilitiesPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: AbilitiesPacket) {
             output.writeByte(value.flags)
             output.writeFloat(value.flyingSpeed)
             output.writeFloat(value.walkingSpeed)

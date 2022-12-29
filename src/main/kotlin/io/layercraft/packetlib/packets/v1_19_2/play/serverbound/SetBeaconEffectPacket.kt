@@ -21,9 +21,8 @@ data class SetBeaconEffectPacket(
     val hasSecondaryEffect: Boolean,
     val secondaryEffect: Int?, // varint
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<SetBeaconEffectPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SetBeaconEffectPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SetBeaconEffectPacket {
             val hasPrimaryEffect = input.readBoolean()
             val primaryEffect = if (hasPrimaryEffect) input.readVarInt() else null
             val hasSecondaryEffect = input.readBoolean()
@@ -32,7 +31,7 @@ data class SetBeaconEffectPacket(
             return SetBeaconEffectPacket(hasPrimaryEffect, primaryEffect, hasSecondaryEffect, secondaryEffect)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SetBeaconEffectPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SetBeaconEffectPacket) {
             output.writeBoolean(value.hasPrimaryEffect)
             if (value.hasPrimaryEffect) output.writeVarInt(value.primaryEffect!!)
             output.writeBoolean(value.hasSecondaryEffect)

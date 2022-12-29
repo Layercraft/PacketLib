@@ -4,7 +4,6 @@ import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.Position
-
 /**
  * Use Item | 0x1d | play | serverbound
  *
@@ -22,9 +21,8 @@ data class BlockDigPacket(
     val face: Byte,
     val sequence: Int, // varint
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<BlockDigPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): BlockDigPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): BlockDigPacket {
             val status = input.readVarInt()
             val location = input.readPosition()
             val face = input.readByte()
@@ -33,7 +31,7 @@ data class BlockDigPacket(
             return BlockDigPacket(status, location, face, sequence)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: BlockDigPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: BlockDigPacket) {
             output.writeVarInt(value.status)
             output.writePosition(value.location)
             output.writeByte(value.face)

@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class KickDisconnectPacket(
     val reason: String,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<KickDisconnectPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): KickDisconnectPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): KickDisconnectPacket {
             val reason = input.readString()
 
             return KickDisconnectPacket(reason)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: KickDisconnectPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: KickDisconnectPacket) {
             output.writeString(value.reason)
         }
     }

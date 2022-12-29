@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class AbilitiesPacket(
     val flags: Byte,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<AbilitiesPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): AbilitiesPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): AbilitiesPacket {
             val flags = input.readByte()
 
             return AbilitiesPacket(flags)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: AbilitiesPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: AbilitiesPacket) {
             output.writeByte(value.flags)
         }
     }

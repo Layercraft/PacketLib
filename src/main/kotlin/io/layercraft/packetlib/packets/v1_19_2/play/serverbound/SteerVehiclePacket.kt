@@ -19,9 +19,8 @@ data class SteerVehiclePacket(
     val forward: Float,
     val jump: UByte,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<SteerVehiclePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SteerVehiclePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SteerVehiclePacket {
             val sideways = input.readFloat()
             val forward = input.readFloat()
             val jump = input.readUByte()
@@ -29,7 +28,7 @@ data class SteerVehiclePacket(
             return SteerVehiclePacket(sideways, forward, jump)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SteerVehiclePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SteerVehiclePacket) {
             output.writeFloat(value.sideways)
             output.writeFloat(value.forward)
             output.writeUByte(value.jump)

@@ -25,9 +25,8 @@ data class ServerDataPacket(
     val previewsChat: Boolean,
     val enforcesSecureChat: Boolean,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<ServerDataPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ServerDataPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ServerDataPacket {
             val hasMotd = input.readBoolean()
             val motd = if (hasMotd) input.readString() else null
             val hasIcon = input.readBoolean()
@@ -38,7 +37,7 @@ data class ServerDataPacket(
             return ServerDataPacket(hasMotd, motd, hasIcon, icon, previewsChat, enforcesSecureChat)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: ServerDataPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ServerDataPacket) {
             output.writeBoolean(value.hasMotd)
             if (value.hasMotd) output.writeString(value.motd!!)
             output.writeBoolean(value.hasIcon)

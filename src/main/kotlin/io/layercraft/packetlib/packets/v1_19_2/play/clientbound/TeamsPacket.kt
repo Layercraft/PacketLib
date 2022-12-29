@@ -9,6 +9,13 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @property team team
  * @property mode mode
+ * @property name name
+ * @property friendlyFire friendlyFire
+ * @property nameTagVisibility nameTagVisibility
+ * @property collisionRule collisionRule
+ * @property formatting formatting
+ * @property prefix prefix
+ * @property suffix suffix
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Teams">https://wiki.vg/Protocol#Update_Teams</a>
  */
 
@@ -16,19 +23,95 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class TeamsPacket(
     val team: String,
     val mode: Byte,
+    val name: String?,
+    val friendlyFire: Byte?,
+    val nameTagVisibility: String?,
+    val collisionRule: String?,
+    val formatting: Int?, // varint
+    val prefix: String?,
+    val suffix: String?,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<TeamsPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): TeamsPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): TeamsPacket {
             val team = input.readString()
             val mode = input.readByte()
+            val name = when (mode.toInt()) {
+                0 -> input.readString()
+                2 -> input.readString()
+                else -> null
+            }
+            val friendlyFire = when (mode.toInt()) {
+                0 -> input.readByte()
+                2 -> input.readByte()
+                else -> null
+            }
+            val nameTagVisibility = when (mode.toInt()) {
+                0 -> input.readString()
+                2 -> input.readString()
+                else -> null
+            }
+            val collisionRule = when (mode.toInt()) {
+                0 -> input.readString()
+                2 -> input.readString()
+                else -> null
+            }
+            val formatting = when (mode.toInt()) {
+                0 -> input.readVarInt()
+                2 -> input.readVarInt()
+                else -> null
+            }
+            val prefix = when (mode.toInt()) {
+                0 -> input.readString()
+                2 -> input.readString()
+                else -> null
+            }
+            val suffix = when (mode.toInt()) {
+                0 -> input.readString()
+                2 -> input.readString()
+                else -> null
+            }
 
-            return TeamsPacket(team, mode)
+            return TeamsPacket(team, mode, name, friendlyFire, nameTagVisibility, collisionRule, formatting, prefix, suffix)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: TeamsPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: TeamsPacket) {
             output.writeString(value.team)
             output.writeByte(value.mode)
+            when (value.mode.toInt()) {
+                0 -> output.writeString(value.name!!)
+                2 -> output.writeString(value.name!!)
+                else -> {}
+            }
+            when (value.mode.toInt()) {
+                0 -> output.writeByte(value.friendlyFire!!)
+                2 -> output.writeByte(value.friendlyFire!!)
+                else -> {}
+            }
+            when (value.mode.toInt()) {
+                0 -> output.writeString(value.nameTagVisibility!!)
+                2 -> output.writeString(value.nameTagVisibility!!)
+                else -> {}
+            }
+            when (value.mode.toInt()) {
+                0 -> output.writeString(value.collisionRule!!)
+                2 -> output.writeString(value.collisionRule!!)
+                else -> {}
+            }
+            when (value.mode.toInt()) {
+                0 -> output.writeVarInt(value.formatting!!)
+                2 -> output.writeVarInt(value.formatting!!)
+                else -> {}
+            }
+            when (value.mode.toInt()) {
+                0 -> output.writeString(value.prefix!!)
+                2 -> output.writeString(value.prefix!!)
+                else -> {}
+            }
+            when (value.mode.toInt()) {
+                0 -> output.writeString(value.suffix!!)
+                2 -> output.writeString(value.suffix!!)
+                else -> {}
+            }
         }
     }
 }

@@ -4,7 +4,6 @@ import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import java.util.UUID
-
 /**
  * Spawn Player | 0x02 | play | clientbound
  *
@@ -28,9 +27,8 @@ data class NamedEntitySpawnPacket(
     val yaw: Byte,
     val pitch: Byte,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<NamedEntitySpawnPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): NamedEntitySpawnPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): NamedEntitySpawnPacket {
             val entityId = input.readVarInt()
             val playerUUID = input.readUUID()
             val x = input.readDouble()
@@ -42,7 +40,7 @@ data class NamedEntitySpawnPacket(
             return NamedEntitySpawnPacket(entityId, playerUUID, x, y, z, yaw, pitch)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: NamedEntitySpawnPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: NamedEntitySpawnPacket) {
             output.writeVarInt(value.entityId)
             output.writeUUID(value.playerUUID)
             output.writeDouble(value.x)

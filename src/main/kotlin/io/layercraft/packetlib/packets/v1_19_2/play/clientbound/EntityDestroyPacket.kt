@@ -7,19 +7,23 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Use Item | 0x3b | play | clientbound
  *
-
+ * @property entityIds entityIds
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
  */
 
 @MinecraftPacket(id = 0x3b, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
-class EntityDestroyPacket() : ClientBoundPacket {
-
+data class EntityDestroyPacket(
+    val entityIds: List<Int>, // varint array
+) : ClientBoundPacket {
     companion object : PacketSerializer<EntityDestroyPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EntityDestroyPacket {
-            return EntityDestroyPacket()
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntityDestroyPacket {
+            val entityIds = input.readVarIntArray { arrayInput -> arrayInput.readVarInt() }
+
+            return EntityDestroyPacket(entityIds)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityDestroyPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityDestroyPacket) {
+            output.writeVarIntArray(value.entityIds) { arrayValue, arrayOutput -> arrayOutput.writeVarInt(arrayValue) }
         }
     }
 }

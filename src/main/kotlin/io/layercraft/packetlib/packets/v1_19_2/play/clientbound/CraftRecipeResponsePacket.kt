@@ -17,16 +17,15 @@ data class CraftRecipeResponsePacket(
     val windowId: Byte,
     val recipe: String,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<CraftRecipeResponsePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): CraftRecipeResponsePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): CraftRecipeResponsePacket {
             val windowId = input.readByte()
             val recipe = input.readString()
 
             return CraftRecipeResponsePacket(windowId, recipe)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: CraftRecipeResponsePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: CraftRecipeResponsePacket) {
             output.writeByte(value.windowId)
             output.writeString(value.recipe)
         }

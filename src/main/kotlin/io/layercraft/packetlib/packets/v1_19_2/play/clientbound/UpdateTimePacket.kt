@@ -17,16 +17,15 @@ data class UpdateTimePacket(
     val age: Long,
     val time: Long,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<UpdateTimePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateTimePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateTimePacket {
             val age = input.readLong()
             val time = input.readLong()
 
             return UpdateTimePacket(age, time)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateTimePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateTimePacket) {
             output.writeLong(value.age)
             output.writeLong(value.time)
         }

@@ -23,9 +23,8 @@ data class VehicleMovePacket(
     val yaw: Float,
     val pitch: Float,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<VehicleMovePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): VehicleMovePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): VehicleMovePacket {
             val x = input.readDouble()
             val y = input.readDouble()
             val z = input.readDouble()
@@ -35,7 +34,7 @@ data class VehicleMovePacket(
             return VehicleMovePacket(x, y, z, yaw, pitch)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: VehicleMovePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: VehicleMovePacket) {
             output.writeDouble(value.x)
             output.writeDouble(value.y)
             output.writeDouble(value.z)

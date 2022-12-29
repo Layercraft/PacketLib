@@ -21,9 +21,8 @@ data class SetProtocolPacket(
     val serverPort: UShort,
     val nextState: Int, // varint
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<SetProtocolPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SetProtocolPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SetProtocolPacket {
             val protocolVersion = input.readVarInt()
             val serverHost = input.readString()
             val serverPort = input.readUShort()
@@ -32,7 +31,7 @@ data class SetProtocolPacket(
             return SetProtocolPacket(protocolVersion, serverHost, serverPort, nextState)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SetProtocolPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SetProtocolPacket) {
             output.writeVarInt(value.protocolVersion)
             output.writeString(value.serverHost)
             output.writeUShort(value.serverPort)

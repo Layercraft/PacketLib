@@ -17,16 +17,15 @@ data class WorldBorderCenterPacket(
     val x: Double,
     val z: Double,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<WorldBorderCenterPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): WorldBorderCenterPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): WorldBorderCenterPacket {
             val x = input.readDouble()
             val z = input.readDouble()
 
             return WorldBorderCenterPacket(x, z)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: WorldBorderCenterPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: WorldBorderCenterPacket) {
             output.writeDouble(value.x)
             output.writeDouble(value.z)
         }

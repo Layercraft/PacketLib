@@ -4,7 +4,6 @@ import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.Position
-
 /**
  * Jigsaw Generate | 0x11 | play | serverbound
  *
@@ -20,9 +19,8 @@ data class GenerateStructurePacket(
     val levels: Int, // varint
     val keepJigsaws: Boolean,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<GenerateStructurePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): GenerateStructurePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): GenerateStructurePacket {
             val location = input.readPosition()
             val levels = input.readVarInt()
             val keepJigsaws = input.readBoolean()
@@ -30,7 +28,7 @@ data class GenerateStructurePacket(
             return GenerateStructurePacket(location, levels, keepJigsaws)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: GenerateStructurePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: GenerateStructurePacket) {
             output.writePosition(value.location)
             output.writeVarInt(value.levels)
             output.writeBoolean(value.keepJigsaws)

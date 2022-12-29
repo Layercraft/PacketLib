@@ -17,16 +17,15 @@ data class EntityHeadRotationPacket(
     val entityId: Int, // varint
     val headYaw: Byte,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<EntityHeadRotationPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EntityHeadRotationPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntityHeadRotationPacket {
             val entityId = input.readVarInt()
             val headYaw = input.readByte()
 
             return EntityHeadRotationPacket(entityId, headYaw)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityHeadRotationPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityHeadRotationPacket) {
             output.writeVarInt(value.entityId)
             output.writeByte(value.headYaw)
         }

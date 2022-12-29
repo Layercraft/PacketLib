@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class UpdateViewDistancePacket(
     val viewDistance: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<UpdateViewDistancePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateViewDistancePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateViewDistancePacket {
             val viewDistance = input.readVarInt()
 
             return UpdateViewDistancePacket(viewDistance)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateViewDistancePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateViewDistancePacket) {
             output.writeVarInt(value.viewDistance)
         }
     }

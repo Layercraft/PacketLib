@@ -19,9 +19,8 @@ data class SetTitleTimePacket(
     val stay: Int,
     val fadeOut: Int,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<SetTitleTimePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SetTitleTimePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SetTitleTimePacket {
             val fadeIn = input.readInt()
             val stay = input.readInt()
             val fadeOut = input.readInt()
@@ -29,7 +28,7 @@ data class SetTitleTimePacket(
             return SetTitleTimePacket(fadeIn, stay, fadeOut)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SetTitleTimePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SetTitleTimePacket) {
             output.writeInt(value.fadeIn)
             output.writeInt(value.stay)
             output.writeInt(value.fadeOut)

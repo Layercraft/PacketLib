@@ -17,16 +17,15 @@ data class CustomPayloadPacket(
     val channel: String,
     val data: ByteArray,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<CustomPayloadPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): CustomPayloadPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): CustomPayloadPacket {
             val channel = input.readString()
             val data = input.readRemainingByteArray()
 
             return CustomPayloadPacket(channel, data)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: CustomPayloadPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: CustomPayloadPacket) {
             output.writeString(value.channel)
             output.writeRemainingByteArray(value.data)
         }

@@ -18,9 +18,9 @@ interface ClientBoundPacket : Packet {
 }
 
 interface PacketSerializer<T> where T : Packet {
-    fun serialize(input: MinecraftProtocolDeserializeInterface<*>): T
+    fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): T
 
-    fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: T)
+    fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: T)
 }
 
 @Target(AnnotationTarget.CLASS)

@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class FlyingPacket(
     val onGround: Boolean,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<FlyingPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): FlyingPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): FlyingPacket {
             val onGround = input.readBoolean()
 
             return FlyingPacket(onGround)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: FlyingPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: FlyingPacket) {
             output.writeBoolean(value.onGround)
         }
     }

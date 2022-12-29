@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class LockDifficultyPacket(
     val locked: Boolean,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<LockDifficultyPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LockDifficultyPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): LockDifficultyPacket {
             val locked = input.readBoolean()
 
             return LockDifficultyPacket(locked)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LockDifficultyPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: LockDifficultyPacket) {
             output.writeBoolean(value.locked)
         }
     }

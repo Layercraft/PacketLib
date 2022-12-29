@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class CameraPacket(
     val cameraId: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<CameraPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): CameraPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): CameraPacket {
             val cameraId = input.readVarInt()
 
             return CameraPacket(cameraId)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: CameraPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: CameraPacket) {
             output.writeVarInt(value.cameraId)
         }
     }

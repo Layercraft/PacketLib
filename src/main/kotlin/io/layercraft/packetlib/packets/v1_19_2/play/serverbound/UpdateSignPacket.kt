@@ -4,7 +4,6 @@ import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.Position
-
 /**
  * Use Item | 0x2e | play | serverbound
  *
@@ -24,9 +23,8 @@ data class UpdateSignPacket(
     val text3: String,
     val text4: String,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<UpdateSignPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateSignPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateSignPacket {
             val location = input.readPosition()
             val text1 = input.readString()
             val text2 = input.readString()
@@ -36,7 +34,7 @@ data class UpdateSignPacket(
             return UpdateSignPacket(location, text1, text2, text3, text4)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateSignPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateSignPacket) {
             output.writePosition(value.location)
             output.writeString(value.text1)
             output.writeString(value.text2)

@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class ClearTitlesPacket(
     val reset: Boolean,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<ClearTitlesPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ClearTitlesPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ClearTitlesPacket {
             val reset = input.readBoolean()
 
             return ClearTitlesPacket(reset)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: ClearTitlesPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ClearTitlesPacket) {
             output.writeBoolean(value.reset)
         }
     }

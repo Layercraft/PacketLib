@@ -33,9 +33,8 @@ data class WorldParticlesPacket(
     val particleData: Float,
     val particles: Int,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<WorldParticlesPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): WorldParticlesPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): WorldParticlesPacket {
             val particleId = input.readVarInt()
             val longDistance = input.readBoolean()
             val x = input.readDouble()
@@ -50,7 +49,7 @@ data class WorldParticlesPacket(
             return WorldParticlesPacket(particleId, longDistance, x, y, z, offsetX, offsetY, offsetZ, particleData, particles)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: WorldParticlesPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: WorldParticlesPacket) {
             output.writeVarInt(value.particleId)
             output.writeBoolean(value.longDistance)
             output.writeDouble(value.x)

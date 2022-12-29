@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class ClientCommandPacket(
     val actionId: Int, // varint
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<ClientCommandPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ClientCommandPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ClientCommandPacket {
             val actionId = input.readVarInt()
 
             return ClientCommandPacket(actionId)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: ClientCommandPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ClientCommandPacket) {
             output.writeVarInt(value.actionId)
         }
     }

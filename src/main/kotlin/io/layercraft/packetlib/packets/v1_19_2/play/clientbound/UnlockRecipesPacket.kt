@@ -16,6 +16,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property filteringBlastFurnace filteringBlastFurnace
  * @property smokerBookOpen smokerBookOpen
  * @property filteringSmoker filteringSmoker
+ * @property recipes1 recipes1
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
  */
 
@@ -30,10 +31,10 @@ data class UnlockRecipesPacket(
     val filteringBlastFurnace: Boolean,
     val smokerBookOpen: Boolean,
     val filteringSmoker: Boolean,
+    val recipes1: List<String>, // varint array
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<UnlockRecipesPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): UnlockRecipesPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UnlockRecipesPacket {
             val action = input.readVarInt()
             val craftingBookOpen = input.readBoolean()
             val filteringCraftable = input.readBoolean()
@@ -43,11 +44,12 @@ data class UnlockRecipesPacket(
             val filteringBlastFurnace = input.readBoolean()
             val smokerBookOpen = input.readBoolean()
             val filteringSmoker = input.readBoolean()
+            val recipes1 = input.readVarIntArray { arrayInput -> arrayInput.readString() }
 
-            return UnlockRecipesPacket(action, craftingBookOpen, filteringCraftable, smeltingBookOpen, filteringSmeltable, blastFurnaceOpen, filteringBlastFurnace, smokerBookOpen, filteringSmoker)
+            return UnlockRecipesPacket(action, craftingBookOpen, filteringCraftable, smeltingBookOpen, filteringSmeltable, blastFurnaceOpen, filteringBlastFurnace, smokerBookOpen, filteringSmoker, recipes1)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: UnlockRecipesPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: UnlockRecipesPacket) {
             output.writeVarInt(value.action)
             output.writeBoolean(value.craftingBookOpen)
             output.writeBoolean(value.filteringCraftable)
@@ -57,6 +59,7 @@ data class UnlockRecipesPacket(
             output.writeBoolean(value.filteringBlastFurnace)
             output.writeBoolean(value.smokerBookOpen)
             output.writeBoolean(value.filteringSmoker)
+            output.writeVarIntArray(value.recipes1) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue) }
         }
     }
 }

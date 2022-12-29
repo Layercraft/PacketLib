@@ -9,6 +9,10 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @property target target
  * @property mouse mouse
+ * @property x x
+ * @property y y
+ * @property z z
+ * @property hand hand
  * @property sneaking sneaking
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Interact">https://wiki.vg/Protocol#Interact</a>
  */
@@ -17,21 +21,58 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class UseEntityPacket(
     val target: Int, // varint
     val mouse: Int, // varint
+    val x: Float?,
+    val y: Float?,
+    val z: Float?,
+    val hand: Int?, // varint
     val sneaking: Boolean,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<UseEntityPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): UseEntityPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UseEntityPacket {
             val target = input.readVarInt()
             val mouse = input.readVarInt()
+            val x = when (mouse) {
+                2 -> input.readFloat()
+                else -> null
+            }
+            val y = when (mouse) {
+                2 -> input.readFloat()
+                else -> null
+            }
+            val z = when (mouse) {
+                2 -> input.readFloat()
+                else -> null
+            }
+            val hand = when (mouse) {
+                0 -> input.readVarInt()
+                2 -> input.readVarInt()
+                else -> null
+            }
             val sneaking = input.readBoolean()
 
-            return UseEntityPacket(target, mouse, sneaking)
+            return UseEntityPacket(target, mouse, x, y, z, hand, sneaking)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: UseEntityPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: UseEntityPacket) {
             output.writeVarInt(value.target)
             output.writeVarInt(value.mouse)
+            when (value.mouse) {
+                2 -> output.writeFloat(value.x!!)
+                else -> {}
+            }
+            when (value.mouse) {
+                2 -> output.writeFloat(value.y!!)
+                else -> {}
+            }
+            when (value.mouse) {
+                2 -> output.writeFloat(value.z!!)
+                else -> {}
+            }
+            when (value.mouse) {
+                0 -> output.writeVarInt(value.hand!!)
+                2 -> output.writeVarInt(value.hand!!)
+                else -> {}
+            }
             output.writeBoolean(value.sneaking)
         }
     }

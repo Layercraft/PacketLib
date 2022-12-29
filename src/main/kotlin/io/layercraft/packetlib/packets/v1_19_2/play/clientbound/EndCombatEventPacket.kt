@@ -17,16 +17,15 @@ data class EndCombatEventPacket(
     val duration: Int, // varint
     val entityId: Int,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<EndCombatEventPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EndCombatEventPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EndCombatEventPacket {
             val duration = input.readVarInt()
             val entityId = input.readInt()
 
             return EndCombatEventPacket(duration, entityId)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EndCombatEventPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EndCombatEventPacket) {
             output.writeVarInt(value.duration)
             output.writeInt(value.entityId)
         }

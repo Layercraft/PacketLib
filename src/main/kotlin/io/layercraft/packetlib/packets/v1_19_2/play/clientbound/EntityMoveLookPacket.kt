@@ -27,9 +27,8 @@ data class EntityMoveLookPacket(
     val pitch: Byte,
     val onGround: Boolean,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<EntityMoveLookPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EntityMoveLookPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntityMoveLookPacket {
             val entityId = input.readVarInt()
             val dX = input.readShort()
             val dY = input.readShort()
@@ -41,7 +40,7 @@ data class EntityMoveLookPacket(
             return EntityMoveLookPacket(entityId, dX, dY, dZ, yaw, pitch, onGround)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityMoveLookPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityMoveLookPacket) {
             output.writeVarInt(value.entityId)
             output.writeShort(value.dX)
             output.writeShort(value.dY)

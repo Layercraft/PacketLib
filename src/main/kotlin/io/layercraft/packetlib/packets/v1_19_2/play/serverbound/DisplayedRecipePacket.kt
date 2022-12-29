@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class DisplayedRecipePacket(
     val recipeId: String,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<DisplayedRecipePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): DisplayedRecipePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): DisplayedRecipePacket {
             val recipeId = input.readString()
 
             return DisplayedRecipePacket(recipeId)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: DisplayedRecipePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: DisplayedRecipePacket) {
             output.writeString(value.recipeId)
         }
     }

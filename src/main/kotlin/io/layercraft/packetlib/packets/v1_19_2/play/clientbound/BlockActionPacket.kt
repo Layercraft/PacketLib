@@ -4,7 +4,6 @@ import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.Position
-
 /**
  * Block Action | 0x08 | play | clientbound
  *
@@ -22,9 +21,8 @@ data class BlockActionPacket(
     val byte2: UByte,
     val blockId: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<BlockActionPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): BlockActionPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): BlockActionPacket {
             val location = input.readPosition()
             val byte1 = input.readUByte()
             val byte2 = input.readUByte()
@@ -33,7 +31,7 @@ data class BlockActionPacket(
             return BlockActionPacket(location, byte1, byte2, blockId)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: BlockActionPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: BlockActionPacket) {
             output.writePosition(value.location)
             output.writeUByte(value.byte1)
             output.writeUByte(value.byte2)

@@ -17,16 +17,15 @@ data class SystemChatPacket(
     val content: String,
     val isActionBar: Boolean,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<SystemChatPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SystemChatPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SystemChatPacket {
             val content = input.readString()
             val isActionBar = input.readBoolean()
 
             return SystemChatPacket(content, isActionBar)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SystemChatPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SystemChatPacket) {
             output.writeString(value.content)
             output.writeBoolean(value.isActionBar)
         }

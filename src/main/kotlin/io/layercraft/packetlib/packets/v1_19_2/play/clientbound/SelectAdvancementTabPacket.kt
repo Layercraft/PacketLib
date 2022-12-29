@@ -17,16 +17,15 @@ data class SelectAdvancementTabPacket(
     val hasId: Boolean,
     val id: String?,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<SelectAdvancementTabPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SelectAdvancementTabPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SelectAdvancementTabPacket {
             val hasId = input.readBoolean()
             val id = if (hasId) input.readString() else null
 
             return SelectAdvancementTabPacket(hasId, id)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SelectAdvancementTabPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SelectAdvancementTabPacket) {
             output.writeBoolean(value.hasId)
             if (value.hasId) output.writeString(value.id!!)
         }

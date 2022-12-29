@@ -17,16 +17,15 @@ data class RemoveEntityEffectPacket(
     val entityId: Int, // varint
     val effectId: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<RemoveEntityEffectPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): RemoveEntityEffectPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): RemoveEntityEffectPacket {
             val entityId = input.readVarInt()
             val effectId = input.readVarInt()
 
             return RemoveEntityEffectPacket(entityId, effectId)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: RemoveEntityEffectPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: RemoveEntityEffectPacket) {
             output.writeVarInt(value.entityId)
             output.writeVarInt(value.effectId)
         }

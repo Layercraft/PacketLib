@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class PongPacket(
     val id: Int,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<PongPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): PongPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): PongPacket {
             val id = input.readInt()
 
             return PongPacket(id)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: PongPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: PongPacket) {
             output.writeInt(value.id)
         }
     }

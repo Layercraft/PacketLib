@@ -23,9 +23,8 @@ data class TradeListPacket(
     val isRegularVillager: Boolean,
     val canRestock: Boolean,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<TradeListPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): TradeListPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): TradeListPacket {
             val windowId = input.readVarInt()
             val villagerLevel = input.readVarInt()
             val experience = input.readVarInt()
@@ -35,7 +34,7 @@ data class TradeListPacket(
             return TradeListPacket(windowId, villagerLevel, experience, isRegularVillager, canRestock)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: TradeListPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: TradeListPacket) {
             output.writeVarInt(value.windowId)
             output.writeVarInt(value.villagerLevel)
             output.writeVarInt(value.experience)

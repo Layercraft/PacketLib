@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class ResourcePackReceivePacket(
     val result: Int, // varint
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<ResourcePackReceivePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ResourcePackReceivePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ResourcePackReceivePacket {
             val result = input.readVarInt()
 
             return ResourcePackReceivePacket(result)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: ResourcePackReceivePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ResourcePackReceivePacket) {
             output.writeVarInt(value.result)
         }
     }

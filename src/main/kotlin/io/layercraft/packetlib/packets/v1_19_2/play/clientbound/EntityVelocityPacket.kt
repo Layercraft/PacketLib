@@ -21,9 +21,8 @@ data class EntityVelocityPacket(
     val velocityY: Short,
     val velocityZ: Short,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<EntityVelocityPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EntityVelocityPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntityVelocityPacket {
             val entityId = input.readVarInt()
             val velocityX = input.readShort()
             val velocityY = input.readShort()
@@ -32,7 +31,7 @@ data class EntityVelocityPacket(
             return EntityVelocityPacket(entityId, velocityX, velocityY, velocityZ)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityVelocityPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityVelocityPacket) {
             output.writeVarInt(value.entityId)
             output.writeShort(value.velocityX)
             output.writeShort(value.velocityY)

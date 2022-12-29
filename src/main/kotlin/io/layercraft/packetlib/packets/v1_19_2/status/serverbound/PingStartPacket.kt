@@ -13,13 +13,12 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 @MinecraftPacket(id = 0x00, state = PacketState.STATUS, direction = PacketDirection.SERVERBOUND)
 class PingStartPacket() : ServerBoundPacket {
-
     companion object : PacketSerializer<PingStartPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): PingStartPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): PingStartPacket {
             return PingStartPacket()
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: PingStartPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: PingStartPacket) {
         }
     }
 }

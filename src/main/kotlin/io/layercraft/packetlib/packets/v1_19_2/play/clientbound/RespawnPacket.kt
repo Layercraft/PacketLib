@@ -3,7 +3,7 @@ package io.layercraft.packetlib.packets.v1_19_2.play.clientbound
 import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
-
+import io.layercraft.packetlib.types.Position
 /**
  * Use Item | 0x3e | play | clientbound
  *
@@ -15,6 +15,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property isDebug isDebug
  * @property isFlat isFlat
  * @property copyMetadata copyMetadata
+ * @property hasDeath death is present
+ * @property dimensionName dimensionName
+ * @property location location
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
  */
 
@@ -28,10 +31,12 @@ data class RespawnPacket(
     val isDebug: Boolean,
     val isFlat: Boolean,
     val copyMetadata: Boolean,
+    val hasDeath: Boolean,
+    val dimensionName: String?,
+    val location: Position?,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<RespawnPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): RespawnPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): RespawnPacket {
             val dimension = input.readString()
             val worldName = input.readString()
             val hashedSeed = input.readLong()
@@ -40,11 +45,14 @@ data class RespawnPacket(
             val isDebug = input.readBoolean()
             val isFlat = input.readBoolean()
             val copyMetadata = input.readBoolean()
+            val hasDeath = input.readBoolean()
+            val dimensionName = if (hasDeath) input.readString() else null
+            val location = if (hasDeath) input.readPosition() else null
 
-            return RespawnPacket(dimension, worldName, hashedSeed, gamemode, previousGamemode, isDebug, isFlat, copyMetadata)
+            return RespawnPacket(dimension, worldName, hashedSeed, gamemode, previousGamemode, isDebug, isFlat, copyMetadata, hasDeath, dimensionName, location)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: RespawnPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: RespawnPacket) {
             output.writeString(value.dimension)
             output.writeString(value.worldName)
             output.writeLong(value.hashedSeed)
@@ -53,6 +61,9 @@ data class RespawnPacket(
             output.writeBoolean(value.isDebug)
             output.writeBoolean(value.isFlat)
             output.writeBoolean(value.copyMetadata)
+            output.writeBoolean(value.hasDeath)
+            if (value.hasDeath) output.writeString(value.dimensionName!!)
+            if (value.hasDeath) output.writePosition(value.location!!)
         }
     }
 }

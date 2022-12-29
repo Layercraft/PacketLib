@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class ServerInfoPacket(
     val response: String,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<ServerInfoPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ServerInfoPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ServerInfoPacket {
             val response = input.readString()
 
             return ServerInfoPacket(response)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: ServerInfoPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ServerInfoPacket) {
             output.writeString(value.response)
         }
     }

@@ -12,21 +12,21 @@ object TranslatorAPI {
 
     fun <T : Packet> decodeFromByteArray(bytes: ByteArray, serializer: PacketSerializer<T>): T {
         val packetRead = ByteReadPacket(bytes)
-        return serializer.serialize(packetRead.minecraft)
+        return serializer.deserialize(packetRead.minecraft)
     }
 
     fun <T : Packet> encodeToByteArray(value: T, serializer: PacketSerializer<T>): ByteArray {
         val packetWrite = BytePacketBuilder()
 
-        serializer.deserialize(packetWrite.minecraft, value)
+        serializer.serialize(packetWrite.minecraft, value)
         return packetWrite.build().readBytes()
     }
 
     fun decodeFromInputWithCodec(input: Input, codec: MinecraftCodec, packetDirection: PacketDirection, packetState: PacketState, packetId: Int): Packet? {
-        return codec.getCodecPacket(packetDirection, packetState, packetId)?.packetSerializer?.serialize(input.minecraft)
+        return codec.getCodecPacket(packetDirection, packetState, packetId)?.packetSerializer?.deserialize(input.minecraft)
     }
 
     fun encodeToOutputWithCodec(value: Packet, codec: MinecraftCodec, output: Output) {
-        codec.getCodecPacketFromPacket(value)?.packetSerializer!!.deserialize(output.minecraft, value)
+        codec.getCodecPacketFromPacket(value)?.packetSerializer!!.serialize(output.minecraft, value)
     }
 }

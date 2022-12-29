@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class KeepAlivePacket(
     val keepAliveId: Long,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<KeepAlivePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): KeepAlivePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): KeepAlivePacket {
             val keepAliveId = input.readLong()
 
             return KeepAlivePacket(keepAliveId)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: KeepAlivePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: KeepAlivePacket) {
             output.writeLong(value.keepAliveId)
         }
     }

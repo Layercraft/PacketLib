@@ -4,7 +4,6 @@ import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.Position
-
 /**
  * Use Item | 0x2c | play | serverbound
  *
@@ -26,9 +25,8 @@ data class UpdateJigsawBlockPacket(
     val finalState: String,
     val jointType: String,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<UpdateJigsawBlockPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateJigsawBlockPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateJigsawBlockPacket {
             val location = input.readPosition()
             val name = input.readString()
             val target = input.readString()
@@ -39,7 +37,7 @@ data class UpdateJigsawBlockPacket(
             return UpdateJigsawBlockPacket(location, name, target, pool, finalState, jointType)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateJigsawBlockPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateJigsawBlockPacket) {
             output.writePosition(value.location)
             output.writeString(value.name)
             output.writeString(value.target)

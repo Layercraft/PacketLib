@@ -27,9 +27,8 @@ data class ExplosionPacket(
     val playerMotionY: Float,
     val playerMotionZ: Float,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<ExplosionPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ExplosionPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ExplosionPacket {
             val x = input.readFloat()
             val y = input.readFloat()
             val z = input.readFloat()
@@ -41,7 +40,7 @@ data class ExplosionPacket(
             return ExplosionPacket(x, y, z, radius, playerMotionX, playerMotionY, playerMotionZ)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: ExplosionPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ExplosionPacket) {
             output.writeFloat(value.x)
             output.writeFloat(value.y)
             output.writeFloat(value.z)

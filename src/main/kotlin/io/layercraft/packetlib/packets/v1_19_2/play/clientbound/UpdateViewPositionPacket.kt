@@ -17,16 +17,15 @@ data class UpdateViewPositionPacket(
     val chunkX: Int, // varint
     val chunkZ: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<UpdateViewPositionPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateViewPositionPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateViewPositionPacket {
             val chunkX = input.readVarInt()
             val chunkZ = input.readVarInt()
 
             return UpdateViewPositionPacket(chunkX, chunkZ)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateViewPositionPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateViewPositionPacket) {
             output.writeVarInt(value.chunkX)
             output.writeVarInt(value.chunkZ)
         }

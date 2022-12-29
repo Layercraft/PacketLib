@@ -29,9 +29,8 @@ data class PositionPacket(
     val teleportId: Int, // varint
     val dismountVehicle: Boolean,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<PositionPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): PositionPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): PositionPacket {
             val x = input.readDouble()
             val y = input.readDouble()
             val z = input.readDouble()
@@ -44,7 +43,7 @@ data class PositionPacket(
             return PositionPacket(x, y, z, yaw, pitch, flags, teleportId, dismountVehicle)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: PositionPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: PositionPacket) {
             output.writeDouble(value.x)
             output.writeDouble(value.y)
             output.writeDouble(value.z)

@@ -4,7 +4,6 @@ import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.Position
-
 /**
  * Use Item | 0x2d | play | serverbound
  *
@@ -46,9 +45,8 @@ data class UpdateStructureBlockPacket(
     val seed: Int, // varint
     val flags: UByte,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<UpdateStructureBlockPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateStructureBlockPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateStructureBlockPacket {
             val location = input.readPosition()
             val action = input.readVarInt()
             val mode = input.readVarInt()
@@ -69,7 +67,7 @@ data class UpdateStructureBlockPacket(
             return UpdateStructureBlockPacket(location, action, mode, name, offsetX, offsetY, offsetZ, sizeX, sizeY, sizeZ, mirror, rotation, metadata, integrity, seed, flags)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateStructureBlockPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateStructureBlockPacket) {
             output.writePosition(value.location)
             output.writeVarInt(value.action)
             output.writeVarInt(value.mode)

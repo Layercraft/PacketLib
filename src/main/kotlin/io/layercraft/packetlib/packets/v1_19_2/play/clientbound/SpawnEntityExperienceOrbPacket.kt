@@ -23,9 +23,8 @@ data class SpawnEntityExperienceOrbPacket(
     val z: Double,
     val count: Short,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<SpawnEntityExperienceOrbPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnEntityExperienceOrbPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnEntityExperienceOrbPacket {
             val entityId = input.readVarInt()
             val x = input.readDouble()
             val y = input.readDouble()
@@ -35,7 +34,7 @@ data class SpawnEntityExperienceOrbPacket(
             return SpawnEntityExperienceOrbPacket(entityId, x, y, z, count)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SpawnEntityExperienceOrbPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SpawnEntityExperienceOrbPacket) {
             output.writeVarInt(value.entityId)
             output.writeDouble(value.x)
             output.writeDouble(value.y)

@@ -25,9 +25,8 @@ data class PositionLookPacket(
     val pitch: Float,
     val onGround: Boolean,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<PositionLookPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): PositionLookPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): PositionLookPacket {
             val x = input.readDouble()
             val y = input.readDouble()
             val z = input.readDouble()
@@ -38,7 +37,7 @@ data class PositionLookPacket(
             return PositionLookPacket(x, y, z, yaw, pitch, onGround)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: PositionLookPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: PositionLookPacket) {
             output.writeDouble(value.x)
             output.writeDouble(value.y)
             output.writeDouble(value.z)

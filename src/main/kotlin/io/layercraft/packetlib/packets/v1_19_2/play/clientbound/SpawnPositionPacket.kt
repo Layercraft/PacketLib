@@ -4,7 +4,6 @@ import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.Position
-
 /**
  * Use Item | 0x4d | play | clientbound
  *
@@ -18,16 +17,15 @@ data class SpawnPositionPacket(
     val location: Position,
     val angle: Float,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<SpawnPositionPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnPositionPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnPositionPacket {
             val location = input.readPosition()
             val angle = input.readFloat()
 
             return SpawnPositionPacket(location, angle)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SpawnPositionPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SpawnPositionPacket) {
             output.writePosition(value.location)
             output.writeFloat(value.angle)
         }

@@ -4,7 +4,6 @@ import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import java.util.UUID
-
 /**
  * Teleport To Entity | 0x30 | play | serverbound
  *
@@ -16,15 +15,14 @@ import java.util.UUID
 data class SpectatePacket(
     val target: UUID,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<SpectatePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SpectatePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SpectatePacket {
             val target = input.readUUID()
 
             return SpectatePacket(target)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SpectatePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SpectatePacket) {
             output.writeUUID(value.target)
         }
     }

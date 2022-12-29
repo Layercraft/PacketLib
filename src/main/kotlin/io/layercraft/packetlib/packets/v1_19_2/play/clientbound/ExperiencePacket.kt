@@ -19,9 +19,8 @@ data class ExperiencePacket(
     val level: Int, // varint
     val totalExperience: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<ExperiencePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ExperiencePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ExperiencePacket {
             val experienceBar = input.readFloat()
             val level = input.readVarInt()
             val totalExperience = input.readVarInt()
@@ -29,7 +28,7 @@ data class ExperiencePacket(
             return ExperiencePacket(experienceBar, level, totalExperience)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: ExperiencePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ExperiencePacket) {
             output.writeFloat(value.experienceBar)
             output.writeVarInt(value.level)
             output.writeVarInt(value.totalExperience)

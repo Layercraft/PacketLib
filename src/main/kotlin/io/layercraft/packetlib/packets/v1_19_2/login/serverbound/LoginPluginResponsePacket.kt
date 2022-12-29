@@ -19,9 +19,8 @@ data class LoginPluginResponsePacket(
     val hasData: Boolean,
     val data: ByteArray?,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<LoginPluginResponsePacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): LoginPluginResponsePacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): LoginPluginResponsePacket {
             val messageId = input.readVarInt()
             val hasData = input.readBoolean()
             val data = if (hasData) input.readRemainingByteArray() else null
@@ -29,7 +28,7 @@ data class LoginPluginResponsePacket(
             return LoginPluginResponsePacket(messageId, hasData, data)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: LoginPluginResponsePacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: LoginPluginResponsePacket) {
             output.writeVarInt(value.messageId)
             output.writeBoolean(value.hasData)
             if (value.hasData) output.writeRemainingByteArray(value.data!!)

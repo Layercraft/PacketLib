@@ -17,16 +17,15 @@ data class SetCooldownPacket(
     val itemID: Int, // varint
     val cooldownTicks: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<SetCooldownPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SetCooldownPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SetCooldownPacket {
             val itemID = input.readVarInt()
             val cooldownTicks = input.readVarInt()
 
             return SetCooldownPacket(itemID, cooldownTicks)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SetCooldownPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SetCooldownPacket) {
             output.writeVarInt(value.itemID)
             output.writeVarInt(value.cooldownTicks)
         }

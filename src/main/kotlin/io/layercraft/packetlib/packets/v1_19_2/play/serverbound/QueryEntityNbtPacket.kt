@@ -17,16 +17,15 @@ data class QueryEntityNbtPacket(
     val transactionId: Int, // varint
     val entityId: Int, // varint
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<QueryEntityNbtPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): QueryEntityNbtPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): QueryEntityNbtPacket {
             val transactionId = input.readVarInt()
             val entityId = input.readVarInt()
 
             return QueryEntityNbtPacket(transactionId, entityId)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: QueryEntityNbtPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: QueryEntityNbtPacket) {
             output.writeVarInt(value.transactionId)
             output.writeVarInt(value.entityId)
         }

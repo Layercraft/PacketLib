@@ -13,13 +13,12 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 @MinecraftPacket(id = 0x35, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 class EnterCombatEventPacket() : ClientBoundPacket {
-
     companion object : PacketSerializer<EnterCombatEventPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EnterCombatEventPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EnterCombatEventPacket {
             return EnterCombatEventPacket()
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EnterCombatEventPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EnterCombatEventPacket) {
         }
     }
 }

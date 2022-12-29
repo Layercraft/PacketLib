@@ -19,9 +19,8 @@ data class ChatPreviewPacket(
     val hasMessage: Boolean,
     val message: String?,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<ChatPreviewPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): ChatPreviewPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ChatPreviewPacket {
             val queryId = input.readInt()
             val hasMessage = input.readBoolean()
             val message = if (hasMessage) input.readString() else null
@@ -29,7 +28,7 @@ data class ChatPreviewPacket(
             return ChatPreviewPacket(queryId, hasMessage, message)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: ChatPreviewPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ChatPreviewPacket) {
             output.writeInt(value.queryId)
             output.writeBoolean(value.hasMessage)
             if (value.hasMessage) output.writeString(value.message!!)

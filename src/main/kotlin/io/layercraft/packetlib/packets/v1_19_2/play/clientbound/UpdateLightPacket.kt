@@ -10,6 +10,10 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property chunkX chunkX
  * @property chunkZ chunkZ
  * @property trustEdges trustEdges
+ * @property skyLightMask skyLightMask
+ * @property blockLightMask blockLightMask
+ * @property emptySkyLightMask emptySkyLightMask
+ * @property emptyBlockLightMask emptyBlockLightMask
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Light">https://wiki.vg/Protocol#Update_Light</a>
  */
 
@@ -18,21 +22,32 @@ data class UpdateLightPacket(
     val chunkX: Int, // varint
     val chunkZ: Int, // varint
     val trustEdges: Boolean,
+    val skyLightMask: List<Long>, // varint array
+    val blockLightMask: List<Long>, // varint array
+    val emptySkyLightMask: List<Long>, // varint array
+    val emptyBlockLightMask: List<Long>, // varint array
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<UpdateLightPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateLightPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateLightPacket {
             val chunkX = input.readVarInt()
             val chunkZ = input.readVarInt()
             val trustEdges = input.readBoolean()
+            val skyLightMask = input.readVarIntArray { arrayInput -> arrayInput.readLong() }
+            val blockLightMask = input.readVarIntArray { arrayInput -> arrayInput.readLong() }
+            val emptySkyLightMask = input.readVarIntArray { arrayInput -> arrayInput.readLong() }
+            val emptyBlockLightMask = input.readVarIntArray { arrayInput -> arrayInput.readLong() }
 
-            return UpdateLightPacket(chunkX, chunkZ, trustEdges)
+            return UpdateLightPacket(chunkX, chunkZ, trustEdges, skyLightMask, blockLightMask, emptySkyLightMask, emptyBlockLightMask)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateLightPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateLightPacket) {
             output.writeVarInt(value.chunkX)
             output.writeVarInt(value.chunkZ)
             output.writeBoolean(value.trustEdges)
+            output.writeVarIntArray(value.skyLightMask) { arrayValue, arrayOutput -> arrayOutput.writeLong(arrayValue) }
+            output.writeVarIntArray(value.blockLightMask) { arrayValue, arrayOutput -> arrayOutput.writeLong(arrayValue) }
+            output.writeVarIntArray(value.emptySkyLightMask) { arrayValue, arrayOutput -> arrayOutput.writeLong(arrayValue) }
+            output.writeVarIntArray(value.emptyBlockLightMask) { arrayValue, arrayOutput -> arrayOutput.writeLong(arrayValue) }
         }
     }
 }

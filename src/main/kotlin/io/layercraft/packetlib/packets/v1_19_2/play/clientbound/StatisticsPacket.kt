@@ -13,13 +13,12 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 @MinecraftPacket(id = 0x04, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 class StatisticsPacket() : ClientBoundPacket {
-
     companion object : PacketSerializer<StatisticsPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): StatisticsPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): StatisticsPacket {
             return StatisticsPacket()
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: StatisticsPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: StatisticsPacket) {
         }
     }
 }

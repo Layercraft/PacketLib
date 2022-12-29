@@ -13,13 +13,12 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 @MinecraftPacket(id = 0x6b, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 class TagsPacket() : ClientBoundPacket {
-
     companion object : PacketSerializer<TagsPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): TagsPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): TagsPacket {
             return TagsPacket()
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: TagsPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: TagsPacket) {
         }
     }
 }

@@ -19,9 +19,8 @@ data class OpenHorseWindowPacket(
     val nbSlots: Int, // varint
     val entityId: Int,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<OpenHorseWindowPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): OpenHorseWindowPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): OpenHorseWindowPacket {
             val windowId = input.readUByte()
             val nbSlots = input.readVarInt()
             val entityId = input.readInt()
@@ -29,7 +28,7 @@ data class OpenHorseWindowPacket(
             return OpenHorseWindowPacket(windowId, nbSlots, entityId)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: OpenHorseWindowPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: OpenHorseWindowPacket) {
             output.writeUByte(value.windowId)
             output.writeVarInt(value.nbSlots)
             output.writeInt(value.entityId)

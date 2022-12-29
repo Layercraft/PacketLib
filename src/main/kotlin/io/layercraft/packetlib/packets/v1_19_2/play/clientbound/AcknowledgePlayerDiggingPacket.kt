@@ -15,15 +15,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class AcknowledgePlayerDiggingPacket(
     val sequenceId: Int, // varint
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<AcknowledgePlayerDiggingPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): AcknowledgePlayerDiggingPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): AcknowledgePlayerDiggingPacket {
             val sequenceId = input.readVarInt()
 
             return AcknowledgePlayerDiggingPacket(sequenceId)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: AcknowledgePlayerDiggingPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: AcknowledgePlayerDiggingPacket) {
             output.writeVarInt(value.sequenceId)
         }
     }

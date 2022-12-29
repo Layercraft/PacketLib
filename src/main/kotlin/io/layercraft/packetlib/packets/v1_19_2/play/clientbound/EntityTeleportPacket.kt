@@ -27,9 +27,8 @@ data class EntityTeleportPacket(
     val pitch: Byte,
     val onGround: Boolean,
 ) : ClientBoundPacket {
-
     companion object : PacketSerializer<EntityTeleportPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): EntityTeleportPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntityTeleportPacket {
             val entityId = input.readVarInt()
             val x = input.readDouble()
             val y = input.readDouble()
@@ -41,7 +40,7 @@ data class EntityTeleportPacket(
             return EntityTeleportPacket(entityId, x, y, z, yaw, pitch, onGround)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityTeleportPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityTeleportPacket) {
             output.writeVarInt(value.entityId)
             output.writeDouble(value.x)
             output.writeDouble(value.y)

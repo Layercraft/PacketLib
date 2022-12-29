@@ -17,16 +17,15 @@ data class SteerBoatPacket(
     val leftPaddle: Boolean,
     val rightPaddle: Boolean,
 ) : ServerBoundPacket {
-
     companion object : PacketSerializer<SteerBoatPacket> {
-        override fun serialize(input: MinecraftProtocolDeserializeInterface<*>): SteerBoatPacket {
+        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SteerBoatPacket {
             val leftPaddle = input.readBoolean()
             val rightPaddle = input.readBoolean()
 
             return SteerBoatPacket(leftPaddle, rightPaddle)
         }
 
-        override fun deserialize(output: MinecraftProtocolSerializeInterface<*>, value: SteerBoatPacket) {
+        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SteerBoatPacket) {
             output.writeBoolean(value.leftPaddle)
             output.writeBoolean(value.rightPaddle)
         }
