@@ -33,7 +33,7 @@ dependencies {
 ```groovy
 repositories {
     maven {
-        url = uri("https://maven.pkg.github.com/Layercraft/Translator-API")
+        url = 'https://maven.pkg.github.com/Layercraft/Translator-API'
         credentials {
             username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
             password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
