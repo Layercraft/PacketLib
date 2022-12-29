@@ -1,10 +1,16 @@
-# WIP: PacketLib
+[![](https://jitpack.io/v/Layercraft/PacketLib.svg)](https://jitpack.io/#Layercraft/PacketLib)
+[![Java CI with Gradle](https://github.com/Layercraft/PacketLib/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/Layercraft/PacketLib/actions/workflows/gradle-build.yml)
+[![Gradle Publish](https://github.com/Layercraft/PacketLib/actions/workflows/gradle-publish.yml/badge.svg)](https://github.com/Layercraft/PacketLib/actions/workflows/gradle-publish.yml)
+[![Deploy Dokka KDocs with GitHub Pages](https://github.com/Layercraft/PacketLib/actions/workflows/kdocs.yml/badge.svg)](https://github.com/Layercraft/PacketLib/actions/workflows/kdocs.yml)
 
-## Not safe for use currently.
+# PacketLib - A library for creating and parsing packets
+## Warning: Not safe for use currently.
 
+KDocs: [PacketLib KDocs](https://packetlib.kdocs.layercraft.io/)
+
+## Prewords:
 Special Thanks to [wiki.vg](https://wiki.vg) for the protocol documentation.
-
-Docs: [PacketLib KDocs](https://packetlib.kdocs.layercraft.io/)
+And to [PrismarineJS/minecraft-data](https://github.com/PrismarineJS/minecraft-data) for the protocol data as json.
 
 ## Repo
 
