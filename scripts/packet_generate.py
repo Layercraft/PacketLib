@@ -99,13 +99,13 @@ kotlin_types_wrapper = {
         "deserialize": "readNBT()",
         "serialize": "writeBytes(%s)"
     },
-    "slot": "native",
     "position": {
         "type": "Position",
         "deserialize": "readPosition()",
         "serialize": "writePosition(%s)",
         "import": "import io.layercraft.packetlib.types.Position"
     },
+    "slot": "native",
     "entityMetadata": "native",
     "previousMessages": "native",
     "command_node": "native",
@@ -126,6 +126,7 @@ version_underline = version.replace(".", "_")
 minecraft_codec = []
 
 runs = []
+
 
 def camel_case(s):
     camel_case_str = re.sub(r"([-_])([a-zA-Z])",
@@ -240,70 +241,21 @@ def transfer_packets(direction: str, status: str, data: dict):
 
 def packets(data: dict):
     print("Generating packets...")
-    packets = []
+    packets_data = []
 
     for status in data:
         if status == "types":
             continue
 
-        toClient = data[status]["toClient"]["types"]
-        toServer = data[status]["toServer"]["types"]
+        to_client = data[status]["toClient"]["types"]
+        to_server = data[status]["toServer"]["types"]
 
-        clientbound = transfer_packets("clientbound", status, toClient)
-        serverbound = transfer_packets("serverbound", status, toServer)
+        client_bound = transfer_packets("clientbound", status, to_client)
+        server_bound = transfer_packets("serverbound", status, to_server)
 
-        packets += clientbound + serverbound
+        packets_data += client_bound + server_bound
 
-    return packets
-
-    handshakingText = ""
-    loginText = ""
-    statusText = ""
-    playText = ""
-
-    for packet in minecraft_codec:
-        class_name = packet["class"]
-        package_string = packet["package"]
-        status = packet["status"]
-        id = packet["id"]
-
-        direction_string = "registerClientBoundPacket" if packet[
-                                                              "direction"] == "clientbound" else "registerServerBoundPacket"
-        add_text = f"""                    .{direction_string}({id}, {package_string}.{class_name}::class, {package_string}.{class_name}) \n"""
-
-        if status == "handshaking":
-            handshakingText += add_text
-        elif status == "login":
-            loginText += add_text
-        elif status == "status":
-            statusText += add_text
-        elif status == "play":
-            playText += add_text
-
-    text = f"""
-    val V{version_underline}: MinecraftCodec =
-        MinecraftCodec.create(ProtocolVersion.V{version_underline})
-            .registerPacketRegistry(
-                PacketState.HANDSHAKING,
-                MinecraftCodecRegistry.create()
-{handshakingText})
-            .registerPacketRegistry(
-                PacketState.LOGIN,
-                MinecraftCodecRegistry.create()
-{loginText})
-            .registerPacketRegistry(
-                PacketState.STATUS,
-                MinecraftCodecRegistry.create()
-{statusText})
-            .registerPacketRegistry(
-                PacketState.PLAY,
-                MinecraftCodecRegistry.create()
-{playText})
-    """
-
-    # write to codec.kt.tmp file
-    with open(f"codec.kt.tmp", "w+") as f:
-        f.write(text)
+    return packets_data
 
 
 def add_run(source: str = "None"):
@@ -530,10 +482,9 @@ class PacketGenerator:
 
         other_switch = False
         other_switch_value = []
-        other_switch_value_list = {}
+        other_switch_value_dict = []
 
         for field in fields:
-            field_key = field
             field_value = fields[field]
 
             if field_value == ['buffer', {'countType': 'varint'}]:
@@ -546,29 +497,43 @@ class PacketGenerator:
                 kotlin_type = kotlin_types_wrapper[field_value]
 
                 if field_value == "void":
-                    deserialize += [f"{field_key} -> null"]
+                    deserialize += [f"{field} -> null"]
                 else:
                     kotlin_type_fix = kotlin_type
-                    deserialize += [f"{field_key} -> input.{kotlin_type['deserialize']}"]
-                    serialize += [f"{field_key} -> output.{kotlin_type['serialize'] % ('value.' + field_var_name + '!!')}"]
+                    deserialize += [f"{field} -> input.{kotlin_type['deserialize']}"]
+                    serialize += [f"{field} -> output.{kotlin_type['serialize'] % ('value.' + field_var_name + '!!')}"]
             else:
                 other_switch = True
                 other_switch_value = field_value
-                other_switch_value_list[field_key] = field_value
+                for field_container in field_value[1]:
+
+                    inside = False
+                    for it in other_switch_value_dict:
+                        if it["value"] == field_container:
+                            inside = True
+                            break
+
+                    if inside is False:
+                        print("Adding field to dict")
+                        other_switch_value_dict += [{"value": field_container, "keys": [field]}]
+                    else:
+                        for x in other_switch_value_dict:
+                            if x["value"] == field_container:
+                                x["keys"] += [field]
 
         if other_switch:
             other_switch_value_type = other_switch_value[0]
 
             if other_switch_value_type == "container":
-                for field in other_switch_value[1]:
-                    field_name = field['name']
-                    field_type = field['type']
-
-                    build_other_switch_value_list = {x: field_type for x in other_switch_value_list}
+                for field in other_switch_value_dict:
+                    field_info = field['value']
+                    field_keys = field['keys']
+                    field_name = field_info['name']
+                    field_type = field_info['type']
 
                     build_other_switch = {
                         "compareTo": compare_to_field,
-                        "fields": build_other_switch_value_list
+                        "fields": {x: field_type for x in field_keys}
                     }
 
                     self.generate_switch(field_name, field_var_name, build_other_switch)
