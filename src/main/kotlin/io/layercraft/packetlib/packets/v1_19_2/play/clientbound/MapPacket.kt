@@ -14,6 +14,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property rows rows
  * @property x x
  * @property y y
+ * @property data data
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Map_Data">https://wiki.vg/Protocol#Map_Data</a>
  */
 
@@ -26,6 +27,7 @@ data class MapPacket(
     val rows: UByte?,
     val x: UByte?,
     val y: UByte?,
+    val data: ByteArray?,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<MapPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): MapPacket {
@@ -45,8 +47,12 @@ data class MapPacket(
                 0 -> null
                 else -> input.readUByte()
             }
+            val data = when (columns.toInt()) {
+                0 -> null
+                else -> input.readVarIntByteArray()
+            }
 
-            return MapPacket(itemDamage, scale, locked, columns, rows, x, y)
+            return MapPacket(itemDamage, scale, locked, columns, rows, x, y, data)
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: MapPacket) {
@@ -54,14 +60,17 @@ data class MapPacket(
             output.writeByte(value.scale)
             output.writeBoolean(value.locked)
             output.writeUByte(value.columns)
-            when (value.columns) {
+            when (value.columns.toInt()) {
                 else -> output.writeUByte(value.rows!!)
             }
-            when (value.columns) {
+            when (value.columns.toInt()) {
                 else -> output.writeUByte(value.x!!)
             }
-            when (value.columns) {
+            when (value.columns.toInt()) {
                 else -> output.writeUByte(value.y!!)
+            }
+            when (value.columns.toInt()) {
+                else -> output.writeVarIntByteArray(value.data!!)
             }
         }
     }

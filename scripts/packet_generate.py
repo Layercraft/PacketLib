@@ -433,7 +433,7 @@ class PacketGenerator:
 
         self.class_deserialize += [f"val {field_var_name} = if ({boolean_field_var_name}) input.{kotlin_type_deserialize} else null"]
 
-        self.class_serialize += [f"if (value.{boolean_field_var_name}) output.{kotlin_type_serialize % ('value.' + field_var_name+ '!!')}"]
+        self.class_serialize += [f"if (value.{boolean_field_var_name}) output.{kotlin_type_serialize % ('value.' + field_var_name + '!!')}"]
 
         self.class_var_list += [field_var_name]
 
@@ -470,7 +470,6 @@ class PacketGenerator:
 
         if count_type == "varint":
             if array_type_type is str:
-                print("field_name: " + field_name)
                 self.generate_basic_type_array(field_name, array_type, field_var_name)
             elif array_type_type is dict:
                 add_run()
@@ -513,10 +512,20 @@ class PacketGenerator:
 
     def generate_switch(self, field_name: str, field_var_name: str, switch: dict):
         compare_to_field = switch["compareTo"]
+        compare_to_field_type = ""
         compare_to_field_var_name = camel_case(compare_to_field)
         default = switch["default"] if "default" in switch else None
         fields = switch["fields"]
         kotlin_type_fix = {}
+
+        # filter self.class_fields for compare_to_field_var_name
+        for field in self.class_fields:
+            if compare_to_field in field:
+                compare_to_field_type = field.split(":")[1].split(",")[0].strip()
+                break
+
+        if "Byte" in compare_to_field_type:
+            compare_to_field_var_name = compare_to_field_var_name + ".toInt()"
 
         deserialize = []
         serialize = []
@@ -542,20 +551,18 @@ class PacketGenerator:
                 return
 
         if default is not None:
-            default_type = type(default)
-            if default_type is str:
-                default_kotlin_type = kotlin_types_wrapper[default]
-                if default == "void":
-                    deserialize += ["else -> null"]
-                    serialize += ["else -> {}"]
-                else:
-                    kotlin_type_fix = default_kotlin_type
-                    deserialize += [f"else -> input.{default_kotlin_type['deserialize']}"]
-                    serialize += [f"else -> output.{default_kotlin_type['serialize'] % ('value.' + field_var_name + '!!')}"]
+            if default == ['buffer', {'countType': 'varint'}]:
+                default = "buffer"
+
+            default_kotlin_type = kotlin_types_wrapper[default]
+            if default == "void":
+                deserialize += ["else -> null"]
+                serialize += ["else -> {}"]
             else:
-                print("Not supported yet")
-                add_run()
-                return
+                kotlin_type_fix = default_kotlin_type
+                deserialize += [f"else -> input.{default_kotlin_type['deserialize']}"]
+                serialize += [f"else -> output.{default_kotlin_type['serialize'] % ('value.' + field_var_name + '!!')}"]
+
         else:
             deserialize += ["else -> null"]
             serialize += ["else -> {}"]
@@ -620,7 +627,6 @@ class PacketGenerator:
                     else:
                         raise Exception("Not supported")
                 elif field_sub_type_name == "switch":
-                    print(field_type)
                     self.generate_switch(field_name, field_var_name, field_type[1])
                 elif field_sub_type_name == "array":
                     # Array
