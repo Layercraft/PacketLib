@@ -125,9 +125,7 @@ version_underline = version.replace(".", "_")
 
 minecraft_codec = []
 
-runs = 0
-runswitherror = 0
-
+runs = []
 
 def camel_case(s):
     camel_case_str = re.sub(r"([-_])([a-zA-Z])",
@@ -308,9 +306,9 @@ def packets(data: dict):
         f.write(text)
 
 
-def add_run():
+def add_run(source: str = "None"):
     global runs
-    runs += 1
+    runs += [source]
 
 
 class PacketGenerator:
@@ -367,7 +365,7 @@ class PacketGenerator:
                         kotlin_type["comment"] if "comment" in kotlin_type else ""
 
         if kotlin_type == "native":
-            add_run()
+            add_run("NOT IMPLEMENTED NATIVE TYPE")
             print("Not supported yet")
             return
         elif kotlin_type == "":
@@ -446,7 +444,7 @@ class PacketGenerator:
         array_kotlin_type = kotlin_types_wrapper[array_type]
 
         if array_kotlin_type == "native":
-            add_run()
+            add_run("NOT IMPLEMENTED NATIVE TYPE")
             print("Not supported yet")
             return
 
@@ -472,7 +470,7 @@ class PacketGenerator:
             if array_type_type is str:
                 self.generate_basic_type_array(field_name, array_type, field_var_name)
             elif array_type_type is dict:
-                add_run()
+                add_run("CONTAINER ARRAY")
                 print("Not supported yet")
         else:
             raise Exception("Not supported")
@@ -503,7 +501,7 @@ class PacketGenerator:
                     else:
                         raise Exception("Not supported")
                 elif field_sub_type_name == "array":
-                    add_run()
+                    add_run("ARRAY IN OPT CONTAINER")
                     print("Not supported yet")
                 else:
                     raise Exception("Not supported")
@@ -530,9 +528,17 @@ class PacketGenerator:
         deserialize = []
         serialize = []
 
+        other_switch = False
+        other_switch_value = []
+        other_switch_value_list = {}
+
         for field in fields:
             field_key = field
             field_value = fields[field]
+
+            if field_value == ['buffer', {'countType': 'varint'}]:
+                field_value = "buffer"
+
             field_type_type = type(field_value)
 
             if field_type_type is str:
@@ -546,9 +552,32 @@ class PacketGenerator:
                     deserialize += [f"{field_key} -> input.{kotlin_type['deserialize']}"]
                     serialize += [f"{field_key} -> output.{kotlin_type['serialize'] % ('value.' + field_var_name + '!!')}"]
             else:
+                other_switch = True
+                other_switch_value = field_value
+                other_switch_value_list[field_key] = field_value
+
+        if other_switch:
+            other_switch_value_type = other_switch_value[0]
+
+            if other_switch_value_type == "container":
+                for field in other_switch_value[1]:
+                    field_name = field['name']
+                    field_type = field['type']
+
+                    build_other_switch_value_list = {x: field_type for x in other_switch_value_list}
+
+                    build_other_switch = {
+                        "compareTo": compare_to_field,
+                        "fields": build_other_switch_value_list
+                    }
+
+                    self.generate_switch(field_name, field_var_name, build_other_switch)
+            elif other_switch_value_type == "array":
+                add_run("ARRAY IN SWITCH")
                 print("Not supported yet")
-                add_run()
-                return
+            else:
+                raise Exception("Not supported")
+            return
 
         if default is not None:
             if default == ['buffer', {'countType': 'varint'}]:
@@ -564,8 +593,11 @@ class PacketGenerator:
                 serialize += [f"else -> output.{default_kotlin_type['serialize'] % ('value.' + field_var_name + '!!')}"]
 
         else:
-            deserialize += ["else -> null"]
-            serialize += ["else -> {}"]
+            if compare_to_field_type == "Boolean" and len(deserialize) == 2:
+                print("Boolean switch with no default")
+            else:
+                deserialize += ["else -> null"]
+                serialize += ["else -> {}"]
 
         deserialize_str = "\n                ".join(deserialize)
         serialize_str = "\n                ".join(serialize)
@@ -639,7 +671,7 @@ class PacketGenerator:
                         raise Exception("Not supported")
                 else:
                     print("Not supported yet")
-                    add_run()
+                    add_run("Unsupported type: " + field_sub_type_name)
             else:
                 raise Exception("Not supported")
 
@@ -759,4 +791,10 @@ if __name__ == "__main__":
     print("Codec generation...")
     codec_generate()
     print("Done!")
-    print(runs)
+    runs_grouped = {}
+    for run in runs:
+        runs_grouped[run] = runs_grouped.get(run, 0) + 1
+
+    print(runs_grouped)
+
+    print(len(runs))
