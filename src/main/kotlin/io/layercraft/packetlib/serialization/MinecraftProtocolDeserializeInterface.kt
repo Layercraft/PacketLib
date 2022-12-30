@@ -1,5 +1,6 @@
 package io.layercraft.packetlib.serialization
 
+import io.layercraft.packetlib.types.NBT
 import io.layercraft.packetlib.types.Position
 import io.layercraft.packetlib.utils.*
 import java.util.*
