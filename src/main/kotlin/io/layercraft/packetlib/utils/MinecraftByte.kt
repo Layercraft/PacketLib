@@ -6,5 +6,3 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 val Input.minecraft: MinecraftProtocolDeserializeInterface<Input> get() = MinecraftByteInput(this)
 val Output.minecraft: MinecraftProtocolSerializeInterface<Output> get() = MinecraftByteOutput(this)
-
-typealias NBT = ByteArray

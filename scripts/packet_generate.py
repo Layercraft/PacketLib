@@ -89,12 +89,14 @@ kotlin_types_wrapper = {
     "nbt": {
         "type": "NBT",
         "deserialize": "readNbt()",
-        "serialize": "writeNbt(%s)"
+        "serialize": "writeNbt(%s)",
+        "import": "import io.layercraft.packetlib.types.NBT"
     },
     "optionalNbt": {
         "type": "NBT",
         "deserialize": "readNbt()",
-        "serialize": "writeNbt(%s)"
+        "serialize": "writeNbt(%s)",
+        "import": "import io.layercraft.packetlib.types.NBT"
     },
     "position": {
         "type": "Position",
@@ -761,7 +763,9 @@ if __name__ == "__main__":
     for run in runs:
         runs_grouped[run] = runs_grouped.get(run, 0) + 1
 
+    # Sort
     runs_grouped = {k: v for k, v in sorted(runs_grouped.items(), key=lambda item: item[1], reverse=True)}
+
     print(runs_grouped)
 
     print(len(runs))
