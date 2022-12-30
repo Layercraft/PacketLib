@@ -36,7 +36,7 @@ data class LoginPacket(
     val gameMode: UByte,
     val previousGameMode: Byte,
     val worldNames: List<String>, // varint array
-    val dimensionCodec: ByteArray,
+    val dimensionCodec: NBT,
     val worldType: String,
     val worldName: String,
     val hashedSeed: Long,
@@ -58,7 +58,7 @@ data class LoginPacket(
             val gameMode = input.readUByte()
             val previousGameMode = input.readByte()
             val worldNames = input.readVarIntArray { arrayInput -> arrayInput.readString() }
-            val dimensionCodec = input.readNBT()
+            val dimensionCodec = input.readNbt()
             val worldType = input.readString()
             val worldName = input.readString()
             val hashedSeed = input.readLong()
@@ -82,7 +82,7 @@ data class LoginPacket(
             output.writeUByte(value.gameMode)
             output.writeByte(value.previousGameMode)
             output.writeVarIntArray(value.worldNames) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue) }
-            output.writeBytes(value.dimensionCodec)
+            output.writeNbt(value.dimensionCodec)
             output.writeString(value.worldType)
             output.writeString(value.worldName)
             output.writeLong(value.hashedSeed)

@@ -25,7 +25,7 @@ data class EntityEffectPacket(
     val duration: Int, // varint
     val hideParticles: Byte,
     val hasFactorCodec: Boolean,
-    val factorCodec: ByteArray?,
+    val factorCodec: NBT?,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<EntityEffectPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntityEffectPacket {
@@ -35,7 +35,7 @@ data class EntityEffectPacket(
             val duration = input.readVarInt()
             val hideParticles = input.readByte()
             val hasFactorCodec = input.readBoolean()
-            val factorCodec = if (hasFactorCodec) input.readNBT() else null
+            val factorCodec = if (hasFactorCodec) input.readNbt() else null
 
             return EntityEffectPacket(entityId, effectId, amplifier, duration, hideParticles, hasFactorCodec, factorCodec)
         }
@@ -47,7 +47,7 @@ data class EntityEffectPacket(
             output.writeVarInt(value.duration)
             output.writeByte(value.hideParticles)
             output.writeBoolean(value.hasFactorCodec)
-            if (value.hasFactorCodec) output.writeBytes(value.factorCodec!!)
+            if (value.hasFactorCodec) output.writeNbt(value.factorCodec!!)
         }
     }
 }

@@ -58,7 +58,7 @@ interface MinecraftProtocolDeserializeInterface<I> {
     fun readUUID(): UUID = UUID(readLong(), readLong())
     fun readAngle(): Float = (readByte() * 360.0f / 256f)
 
-    fun readNBT(): ByteArray {
+    fun readNbt(): NBT {
         val list: MutableList<Byte> = mutableListOf()
         while (true) {
             val type = readByte()

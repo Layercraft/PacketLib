@@ -15,19 +15,19 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 @MinecraftPacket(id = 0x64, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class NbtQueryResponsePacket(
     val transactionId: Int, // varint
-    val nbt: ByteArray,
+    val nbt: NBT,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<NbtQueryResponsePacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): NbtQueryResponsePacket {
             val transactionId = input.readVarInt()
-            val nbt = input.readNBT()
+            val nbt = input.readNbt()
 
             return NbtQueryResponsePacket(transactionId, nbt)
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: NbtQueryResponsePacket) {
             output.writeVarInt(value.transactionId)
-            output.writeBytes(value.nbt)
+            output.writeNbt(value.nbt)
         }
     }
 }

@@ -70,9 +70,6 @@ kotlin_types_wrapper = {
         "deserialize": "readString()",
         "serialize": "writeString(%s)"
     },
-    "entityMetadataLoop": "native",
-    "topBitSetTerminatedArray": "native",
-    "bitfield": "native",
     "void": {
         "type": "null",
         "deserialize": "null",
@@ -90,14 +87,14 @@ kotlin_types_wrapper = {
         "serialize": "writeRemainingByteArray(%s)"
     },
     "nbt": {
-        "type": "ByteArray",
-        "deserialize": "readNBT()",
-        "serialize": "writeBytes(%s)"
+        "type": "NBT",
+        "deserialize": "readNbt()",
+        "serialize": "writeNbt(%s)"
     },
     "optionalNbt": {
-        "type": "ByteArray",
-        "deserialize": "readNBT()",
-        "serialize": "writeBytes(%s)"
+        "type": "NBT",
+        "deserialize": "readNbt()",
+        "serialize": "writeNbt(%s)"
     },
     "position": {
         "type": "Position",
@@ -105,6 +102,9 @@ kotlin_types_wrapper = {
         "serialize": "writePosition(%s)",
         "import": "import io.layercraft.packetlib.types.Position"
     },
+    "entityMetadataLoop": "native",
+    "topBitSetTerminatedArray": "native",
+    "bitfield": "native",
     "slot": "native",
     "entityMetadata": "native",
     "previousMessages": "native",
@@ -136,10 +136,10 @@ def camel_case(s):
 
 
 def codec_generate():
-    handshakingText = ""
-    loginText = ""
-    statusText = ""
-    playText = ""
+    handshaking_text = ""
+    login_text = ""
+    status_text = ""
+    play_text = ""
 
     for packet in minecraft_codec:
         class_name = packet["class"]
@@ -152,13 +152,13 @@ def codec_generate():
         add_text = f"""                    .{direction_string}({id}, {package_string}.{class_name}::class, {package_string}.{class_name}) \n"""
 
         if status == "handshaking":
-            handshakingText += add_text
+            handshaking_text += add_text
         elif status == "login":
-            loginText += add_text
+            login_text += add_text
         elif status == "status":
-            statusText += add_text
+            status_text += add_text
         elif status == "play":
-            playText += add_text
+            play_text += add_text
 
     text = f"""
     val V{version_underline}: MinecraftCodec =
@@ -166,19 +166,19 @@ def codec_generate():
             .registerPacketRegistry(
                 PacketState.HANDSHAKING,
                 MinecraftCodecRegistry.create()
-{handshakingText})
+{handshaking_text})
             .registerPacketRegistry(
                 PacketState.LOGIN,
                 MinecraftCodecRegistry.create()
-{loginText})
+{login_text})
             .registerPacketRegistry(
                 PacketState.STATUS,
                 MinecraftCodecRegistry.create()
-{statusText})
+{status_text})
             .registerPacketRegistry(
                 PacketState.PLAY,
                 MinecraftCodecRegistry.create()
-{playText})
+{play_text})
     """
 
     # write to codec.kt.tmp file
@@ -186,7 +186,7 @@ def codec_generate():
         f.write(text)
 
 
-def transfer_packets(direction: str, status: str, data: dict):
+def transfer_packets(direction: str, status: str, data: dict) -> list:
     packets_result = []
 
     # Packet = data with "packet_" key
@@ -239,7 +239,7 @@ def transfer_packets(direction: str, status: str, data: dict):
     return packets_result
 
 
-def packets(data: dict):
+def packets(data: dict) -> list:
     print("Generating packets...")
     packets_data = []
 
@@ -263,6 +263,24 @@ def add_run(source: str = "None"):
     runs += [source]
 
 
+def wikivg_data(packet_id: str, state: str, direction: str) -> dict:
+    body_text = re.search('<body.*?>(.*?)</body>',
+                          wikivg_text, re.DOTALL).group(1)
+
+    direction = "Client" if direction == "clientbound" else "Server"
+    state = state.capitalize()
+    regex = rf'<td.*?>{packet_id}\n</td>\n<td.*?>{state}\n</td>\n<td.*?>{direction}\n</td>'
+    result = re.split(regex, body_text, re.DOTALL)[0]
+    result = result.split("<h4>")[-1]
+    id = result.split('<span class="mw-headline" id="')[1].split('">')[0]
+    name = result.split('">')[1].split("</span>")[0]
+
+    return {
+        "id": id,
+        "name": name
+    }
+
+
 class PacketGenerator:
     def __init__(self, packet_dict: dict):
         self.packet = packet_dict
@@ -276,9 +294,9 @@ class PacketGenerator:
         self.package = f"io.layercraft.packetlib.packets.v{self.version_underline}.{self.status}.{self.direction}"
         self.package_path = f"io/layercraft/packetlib/packets/v{self.version_underline}/{self.status}/{self.direction}"
         self.class_name = self.name.replace("_", " ").title().replace(" ", "") + "Packet"
-        wikivg_data = self.wikivg_data(self.id, self.status, self.direction)
-        self.wikivg_id = wikivg_data['id']
-        self.wikivg_name = wikivg_data['name']
+        wiki_data = wikivg_data(self.id, self.status, self.direction)
+        self.wikivg_id = wiki_data['id']
+        self.wikivg_name = wiki_data['name']
 
         self.class_fields = []
         self.class_serialize = []
@@ -288,28 +306,11 @@ class PacketGenerator:
         self.class_other_imports = []
         self.additional_class = ""
 
-    def direction_interface(self):
+    def direction_interface(self) -> str:
         if self.direction == "serverbound":
             return "ServerBoundPacket"
         elif self.direction == "clientbound":
             return "ClientBoundPacket"
-
-    def wikivg_data(self, packet_id: str, state: str, direction: str):
-        body_text = re.search('<body.*?>(.*?)</body>',
-                              wikivg_text, re.DOTALL).group(1)
-
-        direction = "Client" if direction == "clientbound" else "Server"
-        state = state.capitalize()
-        regex = rf'<td.*?>{packet_id}\n</td>\n<td.*?>{state}\n</td>\n<td.*?>{direction}\n</td>'
-        result = re.split(regex, body_text, re.DOTALL)[0]
-        result = result.split("<h4>")[-1]
-        id = result.split('<span class="mw-headline" id="')[1].split('">')[0]
-        name = result.split('">')[1].split("</span>")[0]
-
-        return {
-            "id": id,
-            "name": name
-        }
 
     def generate_basic_type(self, field_name: str, field_type: str, field_var_name: str):
         kotlin_type = kotlin_types_wrapper[field_type]
@@ -317,7 +318,7 @@ class PacketGenerator:
                         kotlin_type["comment"] if "comment" in kotlin_type else ""
 
         if kotlin_type == "native":
-            add_run("NOT IMPLEMENTED NATIVE TYPE")
+            add_run("Unsupported type: " + field_type)
             print("Not supported yet")
             return
         elif kotlin_type == "":
@@ -396,7 +397,7 @@ class PacketGenerator:
         array_kotlin_type = kotlin_types_wrapper[array_type]
 
         if array_kotlin_type == "native":
-            add_run("NOT IMPLEMENTED NATIVE TYPE")
+            add_run("Unsupported type: " + array_type)
             print("Not supported yet")
             return
 
@@ -643,7 +644,7 @@ class PacketGenerator:
     def generate_fields_internal(self, fields: list):
         self.generate_container(fields)
 
-    def generate_fields(self):
+    def generate_fields(self) -> dict:
         self.generate_fields_internal(self.fields)
 
         class_fields_str = "\n    ".join(self.class_fields)
@@ -662,7 +663,7 @@ class PacketGenerator:
             "class_other_imports_str": class_other_imports_str
         }
 
-    def generate(self):
+    def generate(self) -> str:
 
         print(f"Generate: {self.package}.{self.class_name} ({self.id})")
 
@@ -760,6 +761,7 @@ if __name__ == "__main__":
     for run in runs:
         runs_grouped[run] = runs_grouped.get(run, 0) + 1
 
+    runs_grouped = {k: v for k, v in sorted(runs_grouped.items(), key=lambda item: item[1], reverse=True)}
     print(runs_grouped)
 
     print(len(runs))

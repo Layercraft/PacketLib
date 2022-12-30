@@ -52,4 +52,6 @@ interface MinecraftProtocolSerializeInterface<O> {
         writeLong(input.leastSignificantBits)
     }
     fun writeAngle(input: Float) = writeByte((input * 256f / 360f).toInt().toByte())
+
+    fun writeNbt(input: NBT) = writeBytes(input)
 }

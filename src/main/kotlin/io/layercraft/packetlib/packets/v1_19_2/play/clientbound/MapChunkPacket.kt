@@ -23,7 +23,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 data class MapChunkPacket(
     val x: Int,
     val z: Int,
-    val heightmaps: ByteArray,
+    val heightmaps: NBT,
     val chunkData: ByteArray,
     val trustEdges: Boolean,
     val skyLightMask: List<Long>, // varint array
@@ -35,7 +35,7 @@ data class MapChunkPacket(
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): MapChunkPacket {
             val x = input.readInt()
             val z = input.readInt()
-            val heightmaps = input.readNBT()
+            val heightmaps = input.readNbt()
             val chunkData = input.readVarIntByteArray()
             val trustEdges = input.readBoolean()
             val skyLightMask = input.readVarIntArray { arrayInput -> arrayInput.readLong() }
@@ -49,7 +49,7 @@ data class MapChunkPacket(
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: MapChunkPacket) {
             output.writeInt(value.x)
             output.writeInt(value.z)
-            output.writeBytes(value.heightmaps)
+            output.writeNbt(value.heightmaps)
             output.writeVarIntByteArray(value.chunkData)
             output.writeBoolean(value.trustEdges)
             output.writeVarIntArray(value.skyLightMask) { arrayValue, arrayOutput -> arrayOutput.writeLong(arrayValue) }

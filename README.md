@@ -8,7 +8,7 @@
 
 KDocs: [PacketLib KDocs](https://packetlib.kdocs.layercraft.io/)
 
-## Prewords:
+## Prewords
 Special Thanks to [wiki.vg](https://wiki.vg) for the protocol documentation.
 And to [PrismarineJS/minecraft-data](https://github.com/PrismarineJS/minecraft-data) for the protocol data as json.
 
@@ -122,19 +122,24 @@ dependencies {
 #### Maven:
 
 ```xml
-
-<repositories>
-    <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
-    </repository>
-</repositories>
-
-<dependency>
-<groupId>com.github.layercraft</groupId>
-<artifactId>packetlib</artifactId>
-<version>0.0.23</version>
-</dependency>
+<project>
+    ...
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+    ...
+    <dependencies>
+        <dependency>
+            <groupId>com.github.layercraft</groupId>
+            <artifactId>packetlib</artifactId>
+            <version>0.0.23</version>
+        </dependency>
+    </dependencies>
+    ...
+</project>
 ```
 
 ## Usage

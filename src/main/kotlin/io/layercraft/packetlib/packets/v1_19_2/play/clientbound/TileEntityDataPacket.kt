@@ -17,13 +17,13 @@ import io.layercraft.packetlib.types.Position
 data class TileEntityDataPacket(
     val location: Position,
     val action: Int, // varint
-    val nbtData: ByteArray,
+    val nbtData: NBT,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<TileEntityDataPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): TileEntityDataPacket {
             val location = input.readPosition()
             val action = input.readVarInt()
-            val nbtData = input.readNBT()
+            val nbtData = input.readNbt()
 
             return TileEntityDataPacket(location, action, nbtData)
         }
@@ -31,7 +31,7 @@ data class TileEntityDataPacket(
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: TileEntityDataPacket) {
             output.writePosition(value.location)
             output.writeVarInt(value.action)
-            output.writeBytes(value.nbtData)
+            output.writeNbt(value.nbtData)
         }
     }
 }
