@@ -17,7 +17,7 @@ data class TagsPacket(
 ) : ClientBoundPacket {
     companion object : PacketSerializer<TagsPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): TagsPacket {
-            val tags = input.readVarIntArray { arrayInput ->
+            val tags = input.readVarIntArray { arrayInput -> 
                 val tagType = arrayInput.readString()
 
                 return@readVarIntArray TagsPacketTags(tagType)
@@ -27,7 +27,7 @@ data class TagsPacket(
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: TagsPacket) {
-            output.writeVarIntArray(value.tags) { arrayValue, arrayOutput ->
+            output.writeVarIntArray(value.tags) { arrayValue, arrayOutput -> 
                 arrayOutput.writeString(arrayValue.tagType)
             }
         }

@@ -24,13 +24,13 @@ data class AdvancementsPacket(
     companion object : PacketSerializer<AdvancementsPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): AdvancementsPacket {
             val reset = input.readBoolean()
-            val advancementMapping = input.readVarIntArray { arrayInput ->
+            val advancementMapping = input.readVarIntArray { arrayInput -> 
                 val key = arrayInput.readString()
 
                 return@readVarIntArray AdvancementsPacketAdvancementMapping(key)
             }
             val identifiers = input.readVarIntArray { arrayInput -> arrayInput.readString() }
-            val progressMapping = input.readVarIntArray { arrayInput ->
+            val progressMapping = input.readVarIntArray { arrayInput -> 
                 val key = arrayInput.readString()
 
                 return@readVarIntArray AdvancementsPacketProgressMapping(key)
@@ -41,11 +41,11 @@ data class AdvancementsPacket(
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: AdvancementsPacket) {
             output.writeBoolean(value.reset)
-            output.writeVarIntArray(value.advancementMapping) { arrayValue, arrayOutput ->
+            output.writeVarIntArray(value.advancementMapping) { arrayValue, arrayOutput -> 
                 arrayOutput.writeString(arrayValue.key)
             }
-            output.writeVarIntArray(value.identifiers) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue)}
-            output.writeVarIntArray(value.progressMapping) { arrayValue, arrayOutput ->
+            output.writeVarIntArray(value.identifiers) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue) }
+            output.writeVarIntArray(value.progressMapping) { arrayValue, arrayOutput -> 
                 arrayOutput.writeString(arrayValue.key)
             }
         }

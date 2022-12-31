@@ -27,7 +27,7 @@ data class ChatSuggestionsPacket(
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ChatSuggestionsPacket) {
             output.writeVarInt(value.action)
-            output.writeVarIntArray(value.entries) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue)}
+            output.writeVarIntArray(value.entries) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue) }
         }
     }
 }

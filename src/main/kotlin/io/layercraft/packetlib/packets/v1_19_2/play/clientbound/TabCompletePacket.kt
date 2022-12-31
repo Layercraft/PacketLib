@@ -26,7 +26,7 @@ data class TabCompletePacket(
             val transactionId = input.readVarInt()
             val start = input.readVarInt()
             val length = input.readVarInt()
-            val matches = input.readVarIntArray { arrayInput ->
+            val matches = input.readVarIntArray { arrayInput -> 
                 val match = arrayInput.readString()
                 val hasTooltip = arrayInput.readBoolean()
                 val tooltip = if (hasTooltip) arrayInput.readString() else null
@@ -41,7 +41,7 @@ data class TabCompletePacket(
             output.writeVarInt(value.transactionId)
             output.writeVarInt(value.start)
             output.writeVarInt(value.length)
-            output.writeVarIntArray(value.matches) { arrayValue, arrayOutput ->
+            output.writeVarIntArray(value.matches) { arrayValue, arrayOutput -> 
                 arrayOutput.writeString(arrayValue.match)
                 arrayOutput.writeBoolean(arrayValue.hasTooltip)
                 if (arrayValue.hasTooltip) arrayOutput.writeString(arrayValue.tooltip!!)

@@ -35,7 +35,7 @@ data class ExplosionPacket(
             val y = input.readFloat()
             val z = input.readFloat()
             val radius = input.readFloat()
-            val affectedBlockOffsets = input.readVarIntArray { arrayInput ->
+            val affectedBlockOffsets = input.readVarIntArray { arrayInput -> 
                 val x = arrayInput.readByte()
                 val y = arrayInput.readByte()
                 val z = arrayInput.readByte()
@@ -54,7 +54,7 @@ data class ExplosionPacket(
             output.writeFloat(value.y)
             output.writeFloat(value.z)
             output.writeFloat(value.radius)
-            output.writeVarIntArray(value.affectedBlockOffsets) { arrayValue, arrayOutput ->
+            output.writeVarIntArray(value.affectedBlockOffsets) { arrayValue, arrayOutput -> 
                 arrayOutput.writeByte(arrayValue.x)
                 arrayOutput.writeByte(arrayValue.y)
                 arrayOutput.writeByte(arrayValue.z)

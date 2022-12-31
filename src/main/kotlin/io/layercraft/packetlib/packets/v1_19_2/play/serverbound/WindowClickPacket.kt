@@ -32,7 +32,7 @@ data class WindowClickPacket(
             val slot = input.readShort()
             val mouseButton = input.readByte()
             val mode = input.readVarInt()
-            val changedSlots = input.readVarIntArray { arrayInput ->
+            val changedSlots = input.readVarIntArray { arrayInput -> 
                 val location = arrayInput.readShort()
 
                 return@readVarIntArray WindowClickPacketChangedSlots(location)
@@ -47,7 +47,7 @@ data class WindowClickPacket(
             output.writeShort(value.slot)
             output.writeByte(value.mouseButton)
             output.writeVarInt(value.mode)
-            output.writeVarIntArray(value.changedSlots) { arrayValue, arrayOutput ->
+            output.writeVarIntArray(value.changedSlots) { arrayValue, arrayOutput -> 
                 arrayOutput.writeShort(arrayValue.location)
             }
         }

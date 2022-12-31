@@ -32,7 +32,7 @@ data class ChatCommandPacket(
             val command = input.readString()
             val timestamp = input.readLong()
             val salt = input.readLong()
-            val argumentSignatures = input.readVarIntArray { arrayInput ->
+            val argumentSignatures = input.readVarIntArray { arrayInput -> 
                 val argumentName = arrayInput.readString()
 
                 return@readVarIntArray ChatCommandPacketArgumentSignatures(argumentName)
@@ -48,7 +48,7 @@ data class ChatCommandPacket(
             output.writeString(value.command)
             output.writeLong(value.timestamp)
             output.writeLong(value.salt)
-            output.writeVarIntArray(value.argumentSignatures) { arrayValue, arrayOutput ->
+            output.writeVarIntArray(value.argumentSignatures) { arrayValue, arrayOutput -> 
                 arrayOutput.writeString(arrayValue.argumentName)
             }
             output.writeBoolean(value.signedPreview)

@@ -28,7 +28,7 @@ data class TradeListPacket(
     companion object : PacketSerializer<TradeListPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): TradeListPacket {
             val windowId = input.readVarInt()
-            val trades = input.readVarIntArray { arrayInput ->
+            val trades = input.readVarIntArray { arrayInput -> 
                 val tradeDisabled = arrayInput.readBoolean()
                 val nbTradeUses = arrayInput.readInt()
                 val maximumNbTradeUses = arrayInput.readInt()
@@ -49,7 +49,7 @@ data class TradeListPacket(
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: TradeListPacket) {
             output.writeVarInt(value.windowId)
-            output.writeVarIntArray(value.trades) { arrayValue, arrayOutput ->
+            output.writeVarIntArray(value.trades) { arrayValue, arrayOutput -> 
                 arrayOutput.writeBoolean(arrayValue.tradeDisabled)
                 arrayOutput.writeInt(arrayValue.nbTradeUses)
                 arrayOutput.writeInt(arrayValue.maximumNbTradeUses)

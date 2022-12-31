@@ -20,7 +20,7 @@ data class EntityUpdateAttributesPacket(
     companion object : PacketSerializer<EntityUpdateAttributesPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntityUpdateAttributesPacket {
             val entityId = input.readVarInt()
-            val properties = input.readVarIntArray { arrayInput ->
+            val properties = input.readVarIntArray { arrayInput -> 
                 val key = arrayInput.readString()
                 val value = arrayInput.readDouble()
 
@@ -32,7 +32,7 @@ data class EntityUpdateAttributesPacket(
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityUpdateAttributesPacket) {
             output.writeVarInt(value.entityId)
-            output.writeVarIntArray(value.properties) { arrayValue, arrayOutput ->
+            output.writeVarIntArray(value.properties) { arrayValue, arrayOutput -> 
                 arrayOutput.writeString(arrayValue.key)
                 arrayOutput.writeDouble(arrayValue.value)
             }

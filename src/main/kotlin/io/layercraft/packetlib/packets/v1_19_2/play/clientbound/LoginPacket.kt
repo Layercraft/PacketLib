@@ -82,7 +82,7 @@ data class LoginPacket(
             output.writeBoolean(value.isHardcore)
             output.writeUByte(value.gameMode)
             output.writeByte(value.previousGameMode)
-            output.writeVarIntArray(value.worldNames) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue)}
+            output.writeVarIntArray(value.worldNames) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue) }
             output.writeNbt(value.dimensionCodec)
             output.writeString(value.worldType)
             output.writeString(value.worldName)

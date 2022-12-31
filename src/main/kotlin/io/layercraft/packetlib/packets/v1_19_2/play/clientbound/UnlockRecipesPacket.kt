@@ -59,7 +59,7 @@ data class UnlockRecipesPacket(
             output.writeBoolean(value.filteringBlastFurnace)
             output.writeBoolean(value.smokerBookOpen)
             output.writeBoolean(value.filteringSmoker)
-            output.writeVarIntArray(value.recipes1) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue)}
+            output.writeVarIntArray(value.recipes1) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue) }
         }
     }
 }

@@ -27,7 +27,7 @@ data class MultiBlockChangePacket(
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: MultiBlockChangePacket) {
             output.writeBoolean(value.suppressLightUpdates)
-            output.writeVarIntArray(value.records) { arrayValue, arrayOutput -> arrayOutput.writeVarInt(arrayValue)}
+            output.writeVarIntArray(value.records) { arrayValue, arrayOutput -> arrayOutput.writeVarInt(arrayValue) }
         }
     }
 }

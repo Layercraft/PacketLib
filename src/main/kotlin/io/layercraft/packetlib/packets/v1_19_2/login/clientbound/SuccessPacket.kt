@@ -23,7 +23,7 @@ data class SuccessPacket(
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SuccessPacket {
             val uuid = input.readUUID()
             val username = input.readString()
-            val properties = input.readVarIntArray { arrayInput ->
+            val properties = input.readVarIntArray { arrayInput -> 
                 val name = arrayInput.readString()
                 val value = arrayInput.readString()
                 val hasSignature = arrayInput.readBoolean()
@@ -38,7 +38,7 @@ data class SuccessPacket(
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SuccessPacket) {
             output.writeUUID(value.uuid)
             output.writeString(value.username)
-            output.writeVarIntArray(value.properties) { arrayValue, arrayOutput ->
+            output.writeVarIntArray(value.properties) { arrayValue, arrayOutput -> 
                 arrayOutput.writeString(arrayValue.name)
                 arrayOutput.writeString(arrayValue.value)
                 arrayOutput.writeBoolean(arrayValue.hasSignature)

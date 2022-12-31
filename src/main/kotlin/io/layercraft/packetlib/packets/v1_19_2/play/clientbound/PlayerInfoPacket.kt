@@ -20,7 +20,7 @@ data class PlayerInfoPacket(
     companion object : PacketSerializer<PlayerInfoPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): PlayerInfoPacket {
             val action = input.readVarInt()
-            val data = input.readVarIntArray { arrayInput ->
+            val data = input.readVarIntArray { arrayInput -> 
                 val uuid = arrayInput.readUUID()
 
                 return@readVarIntArray PlayerInfoPacketData(uuid)
@@ -31,7 +31,7 @@ data class PlayerInfoPacket(
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: PlayerInfoPacket) {
             output.writeVarInt(value.action)
-            output.writeVarIntArray(value.data) { arrayValue, arrayOutput ->
+            output.writeVarIntArray(value.data) { arrayValue, arrayOutput -> 
                 arrayOutput.writeUUID(arrayValue.uuid)
             }
         }

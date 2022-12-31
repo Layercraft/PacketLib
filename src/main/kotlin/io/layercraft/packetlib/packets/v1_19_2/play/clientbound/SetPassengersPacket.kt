@@ -27,7 +27,7 @@ data class SetPassengersPacket(
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SetPassengersPacket) {
             output.writeVarInt(value.entityId)
-            output.writeVarIntArray(value.passengers) { arrayValue, arrayOutput -> arrayOutput.writeVarInt(arrayValue)}
+            output.writeVarIntArray(value.passengers) { arrayValue, arrayOutput -> arrayOutput.writeVarInt(arrayValue) }
         }
     }
 }

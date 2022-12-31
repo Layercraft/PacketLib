@@ -17,7 +17,7 @@ data class StatisticsPacket(
 ) : ClientBoundPacket {
     companion object : PacketSerializer<StatisticsPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): StatisticsPacket {
-            val entries = input.readVarIntArray { arrayInput ->
+            val entries = input.readVarIntArray { arrayInput -> 
                 val categoryId = arrayInput.readVarInt()
                 val statisticId = arrayInput.readVarInt()
                 val value = arrayInput.readVarInt()
@@ -29,7 +29,7 @@ data class StatisticsPacket(
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: StatisticsPacket) {
-            output.writeVarIntArray(value.entries) { arrayValue, arrayOutput ->
+            output.writeVarIntArray(value.entries) { arrayValue, arrayOutput -> 
                 arrayOutput.writeVarInt(arrayValue.categoryId)
                 arrayOutput.writeVarInt(arrayValue.statisticId)
                 arrayOutput.writeVarInt(arrayValue.value)

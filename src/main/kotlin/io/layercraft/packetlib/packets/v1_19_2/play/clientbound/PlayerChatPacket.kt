@@ -63,7 +63,7 @@ data class PlayerChatPacket(
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: PlayerChatPacket) {
             output.writeUUID(value.senderUuid)
-            output.writeVarIntArray(value.headerSignature) { arrayValue, arrayOutput -> arrayOutput.writeUByte(arrayValue)}
+            output.writeVarIntArray(value.headerSignature) { arrayValue, arrayOutput -> arrayOutput.writeUByte(arrayValue) }
             output.writeString(value.plainMessage)
             output.writeBoolean(value.hasFormattedMessage)
             if (value.hasFormattedMessage) output.writeString(value.formattedMessage!!)

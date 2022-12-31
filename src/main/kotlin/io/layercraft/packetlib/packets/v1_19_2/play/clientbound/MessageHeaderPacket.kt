@@ -30,8 +30,8 @@ data class MessageHeaderPacket(
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: MessageHeaderPacket) {
             output.writeUUID(value.senderUuid)
-            output.writeVarIntArray(value.headerSignature) { arrayValue, arrayOutput -> arrayOutput.writeUByte(arrayValue)}
-            output.writeVarIntArray(value.bodyDigest) { arrayValue, arrayOutput -> arrayOutput.writeUByte(arrayValue)}
+            output.writeVarIntArray(value.headerSignature) { arrayValue, arrayOutput -> arrayOutput.writeUByte(arrayValue) }
+            output.writeVarIntArray(value.bodyDigest) { arrayValue, arrayOutput -> arrayOutput.writeUByte(arrayValue) }
         }
     }
 }

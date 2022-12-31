@@ -17,7 +17,7 @@ data class DeclareRecipesPacket(
 ) : ClientBoundPacket {
     companion object : PacketSerializer<DeclareRecipesPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): DeclareRecipesPacket {
-            val recipes = input.readVarIntArray { arrayInput ->
+            val recipes = input.readVarIntArray { arrayInput -> 
                 val type = arrayInput.readString()
                 val recipeId = arrayInput.readString()
 
@@ -28,7 +28,7 @@ data class DeclareRecipesPacket(
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: DeclareRecipesPacket) {
-            output.writeVarIntArray(value.recipes) { arrayValue, arrayOutput ->
+            output.writeVarIntArray(value.recipes) { arrayValue, arrayOutput -> 
                 arrayOutput.writeString(arrayValue.type)
                 arrayOutput.writeString(arrayValue.recipeId)
             }

@@ -293,6 +293,20 @@ def wikivg_data(packet_id: str, state: str, direction: str) -> dict:
         "name": name
     }
 
+class GeneratedArray:
+
+    # Generated type is the type in koltin like String, Int, etc.
+    # Content parse str is the content of the readVarIntArray
+    # Content write str is the content of the writeVarIntArray
+    # Import str is an optional import
+    def __init__(self, generated_type: str,
+                 content_parse_str: str, content_write_str: str,
+                 import_str: str = None, extra_class: str = None):
+        self.generated_type = generated_type
+        self.content_parse_str = content_parse_str
+        self.content_write_str = content_write_str
+        self.import_str = import_str
+        self.extra_class = extra_class
 
 class PacketGenerator:
     def __init__(self, packet_dict: dict):
@@ -406,7 +420,7 @@ class PacketGenerator:
         if "import" in kotlin_type:
             self.class_other_imports += [kotlin_type["import"]]
 
-    def generate_basic_type_array(self, field_name: str, array_type: str, field_var_name: str):
+    def generate_basic_type_array(self, array_type: str):
         array_kotlin_type = kotlin_types_wrapper[array_type]
 
         if array_kotlin_type == "native":
@@ -418,34 +432,83 @@ class PacketGenerator:
         kotlin_type_serialize = array_kotlin_type["serialize"]
         kotlin_type_deserialize = array_kotlin_type["deserialize"]
 
-        self.class_fields += [f"val {field_var_name}: List<{kotlin_type_str}>, // varint array"]
-        self.class_deserialize += [f"val {field_var_name} = input.readVarIntArray {{ arrayInput -> arrayInput.{kotlin_type_deserialize} }}"]
-        self.class_serialize += [f"output.writeVarIntArray(value.{field_var_name}) {{ arrayValue, arrayOutput -> arrayOutput.{kotlin_type_serialize % 'arrayValue'}}}"]
-        self.class_var_list += [field_var_name]
-        self.class_docs += [f" * @property {field_var_name} {field_name}"]
+        # self.class_fields += [f"val {field_var_name}: List<{kotlin_type_str}>, // varint array"]
+        # self.class_deserialize += [f"val {field_var_name} = input.readVarIntArray {{ arrayInput -> arrayInput.{kotlin_type_deserialize} }}"]
+        # self.class_serialize += [f"output.writeVarIntArray(value.{field_var_name}) {{ arrayValue, arrayOutput -> arrayOutput.{kotlin_type_serialize % 'arrayValue'}}}"]
+        # self.class_var_list += [field_var_name]
+        # self.class_docs += [f" * @property {field_var_name} {field_name}"]
+
+        import_str = None
 
         if "import" in array_kotlin_type:
-            self.class_other_imports += [array_kotlin_type["import"]]
+            import_str = [array_kotlin_type["import"]]
+        return GeneratedArray(kotlin_type_str, f"arrayInput.{kotlin_type_deserialize}",
+                              f"arrayOutput.{kotlin_type_serialize % 'arrayValue'}", import_str)
 
     def generate_array(self, field_name: str, array: dict, field_var_name: str):
         count_type = array["countType"]
         array_type = array["type"]
         array_type_type = type(array_type)
 
+        generated = None
+
         if count_type == "varint":
             if array_type_type is str:
-                self.generate_basic_type_array(field_name, array_type, field_var_name)
+                generated = self.generate_basic_type_array(array_type)
+
             elif array_type_type is list:
+                array_type_data = array_type[1]
                 array_type = array_type[0]
                 if array_type == "container":
-                    self.generate_container_array(field_name, array, field_var_name)
+                    generated = self.generate_container_array(field_name, array, field_var_name)
                 elif array_type == "array": #2D Array probably
-                    self.generate_array_array(field_name, array_type, field_var_name)
+                    generated = self.generate_nested_array(array_type_data, field_name, field_var_name)
                 else:
                     add_run("COMPLEX ARRAY that is not a container: " + field_name)
                     print("Not supported yet")
         else:
             raise Exception("Not supported")
+
+        if generated is not None:
+            self.class_fields += [f"val {field_var_name}: List<{generated.generated_type}>, // varint array"]
+            self.class_deserialize += [f"val {field_var_name} = input.readVarIntArray {{ arrayInput -> {generated.content_parse_str} }}"]
+            self.class_serialize += [f"output.writeVarIntArray(value.{field_var_name}) {{ arrayValue, arrayOutput -> {generated.content_write_str} }}"]
+            self.class_var_list += [field_var_name]
+            self.class_docs += [f" * @property {field_var_name} {field_name}"]
+            if generated.import_str is not None:
+                self.class_other_imports += generated.import_str
+            if generated.extra_class is not None:
+                self.additional_class += generated.extra_class
+
+    def generate_nested_array(self, array: dict, field_name: str, field_var_name: str):
+        count_type = array["countType"]
+        array_type = array["type"]
+        array_type_type = type(array_type)
+
+        generated = None
+
+        if count_type == "varint":
+            if array_type_type is str:
+                generated = self.generate_basic_type_array(array_type)
+
+            elif array_type_type is list:
+                array_type_data = array_type[1]
+                array_type = array_type[0]
+                if array_type == "container":
+                    generated = self.generate_container_array(field_name, array, field_var_name)
+                elif array_type == "array": #2D Array probably
+                    generated = self.generate_nested_array(array_type_data, field_name, field_var_name)
+                else:
+                    add_run("COMPLEX ARRAY that is not a container: " + field_name)
+                    print("Not supported yet")
+
+        if generated is None:
+            raise Exception("Not supported")
+
+        return GeneratedArray(f"List<{generated.generated_type}>",
+                              f"arrayInput.readVarIntArray {{ arrayInput -> {generated.content_parse_str} }}",
+                              f"arrayOutput.writeVarIntArray(arrayValue) {{ arrayValue, arrayOutput -> {generated.content_write_str} }}",
+                              generated.import_str, generated.extra_class)
 
     def generate_container_array(self, class_name: str, array: dict, class_field_var_name: str):
         count_type = array["countType"]
@@ -548,21 +611,32 @@ data class {class_name_final}(
 )
 """
 
-        self.class_fields += [f"val {class_field_var_name}: List<{class_name_final}>, // varint array"]
-        self.class_deserialize += [f"""val {class_field_var_name} = input.readVarIntArray {{ arrayInput ->
+        # self.class_fields += [f"val {class_field_var_name}: List<{class_name_final}>, // varint array"]
+        # self.class_deserialize += [f"""val {class_field_var_name} = input.readVarIntArray {{ arrayInput ->
+        #         {extra_class_deserialize_str}
+        #
+        #         return@readVarIntArray {extra_class_vas_list_str}
+        #     }}"""]
+
+        # self.class_serialize += [f"""output.writeVarIntArray(value.{class_field_var_name}) {{ arrayValue, arrayOutput ->
+        #         {extra_class_serialize_str}
+        #     }}"""]
+
+        print(f"""output.writeVarIntArray(value.{class_field_var_name}) {{ arrayValue, arrayOutput ->
+        #         {extra_class_serialize_str}
+        #     }}""")
+
+        # self.class_var_list += [class_field_var_name]
+        # self.class_docs += [f" * @property {class_field_var_name} {class_name}"]
+
+        # self.additional_class += extra_class_str
+        return GeneratedArray(class_name_final, f"""
                 {extra_class_deserialize_str}
 
                 return@readVarIntArray {extra_class_vas_list_str}
-            }}"""]
-
-        self.class_serialize += [f"""output.writeVarIntArray(value.{class_field_var_name}) {{ arrayValue, arrayOutput ->
+           """, f"""
                 {extra_class_serialize_str}
-            }}"""]
-
-        self.class_var_list += [class_field_var_name]
-        self.class_docs += [f" * @property {class_field_var_name} {class_name}"]
-
-        self.additional_class += extra_class_str
+           """, None, extra_class_str)
 
     def generate_option_container(self, container: list, parent_field_name: str, parent_field_var_name: str):
         parent_field_boolean_var_name = ("has" + parent_field_var_name[0].upper() + parent_field_var_name[1:])
