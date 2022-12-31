@@ -5,10 +5,10 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x2b | play | serverbound
+ * Set Creative Mode Slot | 0x2b | play | serverbound
  *
  * @property slot slot
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Creative_Mode_Slot">https://wiki.vg/Protocol#Set_Creative_Mode_Slot</a>
  */
 
 @MinecraftPacket(id = 0x2b, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

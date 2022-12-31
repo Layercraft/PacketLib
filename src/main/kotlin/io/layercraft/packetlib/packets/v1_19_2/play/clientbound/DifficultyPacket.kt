@@ -5,11 +5,11 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x0b | play | clientbound
+ * Change Difficulty | 0x0b | play | clientbound
  *
  * @property difficulty difficulty
  * @property difficultyLocked difficultyLocked
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Change_Difficulty">https://wiki.vg/Protocol#Change_Difficulty</a>
  */
 
 @MinecraftPacket(id = 0x0b, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

@@ -5,14 +5,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x2b | play | clientbound
+ * Move Vehicle (clientbound) | 0x2b | play | clientbound
  *
  * @property x x
  * @property y y
  * @property z z
  * @property yaw yaw
  * @property pitch pitch
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Move_Vehicle_.28clientbound.29">https://wiki.vg/Protocol#Move_Vehicle_.28clientbound.29</a>
  */
 
 @MinecraftPacket(id = 0x2b, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

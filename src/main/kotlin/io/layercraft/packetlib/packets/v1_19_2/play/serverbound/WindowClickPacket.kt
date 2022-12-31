@@ -5,14 +5,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x0b | play | serverbound
+ * Click Container | 0x0b | play | serverbound
  *
  * @property windowId windowId
  * @property stateId stateId
  * @property slot slot
  * @property mouseButton mouseButton
  * @property mode mode
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Click_Container">https://wiki.vg/Protocol#Click_Container</a>
  */
 
 @MinecraftPacket(id = 0x0b, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

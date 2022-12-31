@@ -5,10 +5,10 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x3b | play | clientbound
+ * Remove Entities | 0x3b | play | clientbound
  *
  * @property entityIds entityIds
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Remove_Entities">https://wiki.vg/Protocol#Remove_Entities</a>
  */
 
 @MinecraftPacket(id = 0x3b, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

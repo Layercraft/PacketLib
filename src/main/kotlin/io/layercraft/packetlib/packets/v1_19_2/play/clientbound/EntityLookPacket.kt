@@ -5,13 +5,13 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x2a | play | clientbound
+ * Update Entity Rotation | 0x2a | play | clientbound
  *
  * @property entityId entityId
  * @property yaw yaw
  * @property pitch pitch
  * @property onGround onGround
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Entity_Rotation">https://wiki.vg/Protocol#Update_Entity_Rotation</a>
  */
 
 @MinecraftPacket(id = 0x2a, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

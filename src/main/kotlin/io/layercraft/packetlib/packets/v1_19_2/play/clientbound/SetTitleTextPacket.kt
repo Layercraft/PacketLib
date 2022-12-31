@@ -5,10 +5,10 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x5d | play | clientbound
+ * Set Title Text | 0x5d | play | clientbound
  *
  * @property text text
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Title_Text">https://wiki.vg/Protocol#Set_Title_Text</a>
  */
 
 @MinecraftPacket(id = 0x5d, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

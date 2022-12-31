@@ -5,13 +5,13 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x0e | play | serverbound
+ * Edit Book | 0x0e | play | serverbound
  *
  * @property hand hand
  * @property pages pages
  * @property hasTitle title is present
  * @property title title
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Edit_Book">https://wiki.vg/Protocol#Edit_Book</a>
  */
 
 @MinecraftPacket(id = 0x0e, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

@@ -5,12 +5,12 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x2d | play | clientbound
+ * Open Screen | 0x2d | play | clientbound
  *
  * @property windowId windowId
  * @property inventoryType inventoryType
  * @property windowTitle windowTitle
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Open_Screen">https://wiki.vg/Protocol#Open_Screen</a>
  */
 
 @MinecraftPacket(id = 0x2d, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

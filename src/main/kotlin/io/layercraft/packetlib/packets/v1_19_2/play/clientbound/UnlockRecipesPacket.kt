@@ -5,7 +5,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x3a | play | clientbound
+ * Update Recipe Book | 0x3a | play | clientbound
  *
  * @property action action
  * @property craftingBookOpen craftingBookOpen
@@ -17,7 +17,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property smokerBookOpen smokerBookOpen
  * @property filteringSmoker filteringSmoker
  * @property recipes1 recipes1
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Recipe_Book">https://wiki.vg/Protocol#Update_Recipe_Book</a>
  */
 
 @MinecraftPacket(id = 0x3a, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

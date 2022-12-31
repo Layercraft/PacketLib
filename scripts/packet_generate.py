@@ -271,7 +271,7 @@ def wikivg_data(packet_id: str, state: str, direction: str) -> dict:
 
     direction = "Client" if direction == "clientbound" else "Server"
     state = state.capitalize()
-    packet_id = packet_id.capitalize()
+    packet_id = "0x" + packet_id.split("x")[1].upper()
     regex = rf'<td.*?>{packet_id}\n</td>\n<td.*?>{state}\n</td>\n<td.*?>{direction}\n</td>'
     result = re.split(regex, body_text, re.DOTALL)[0]
     result = result.split("<h4>")[-1]

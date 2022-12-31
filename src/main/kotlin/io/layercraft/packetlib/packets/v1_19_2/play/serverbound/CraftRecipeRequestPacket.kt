@@ -5,12 +5,12 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x1b | play | serverbound
+ * Place Recipe | 0x1b | play | serverbound
  *
  * @property windowId windowId
  * @property recipe recipe
  * @property makeAll makeAll
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Place_Recipe">https://wiki.vg/Protocol#Place_Recipe</a>
  */
 
 @MinecraftPacket(id = 0x1b, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

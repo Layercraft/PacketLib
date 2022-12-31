@@ -5,11 +5,11 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x0d | play | serverbound
+ * Plugin Message (serverbound) | 0x0d | play | serverbound
  *
  * @property channel channel
  * @property data data
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Plugin_Message_.28serverbound.29">https://wiki.vg/Protocol#Plugin_Message_.28serverbound.29</a>
  */
 
 @MinecraftPacket(id = 0x0d, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

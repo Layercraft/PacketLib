@@ -5,10 +5,10 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x0f | play | clientbound
+ * Commands | 0x0f | play | clientbound
  *
  * @property rootIndex rootIndex
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Commands">https://wiki.vg/Protocol#Commands</a>
  */
 
 @MinecraftPacket(id = 0x0f, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

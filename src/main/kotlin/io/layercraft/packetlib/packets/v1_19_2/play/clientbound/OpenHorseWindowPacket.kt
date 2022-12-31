@@ -5,12 +5,12 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x1e | play | clientbound
+ * Open Horse Screen | 0x1e | play | clientbound
  *
  * @property windowId windowId
  * @property nbSlots nbSlots
  * @property entityId entityId
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Open_Horse_Screen">https://wiki.vg/Protocol#Open_Horse_Screen</a>
  */
 
 @MinecraftPacket(id = 0x1e, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

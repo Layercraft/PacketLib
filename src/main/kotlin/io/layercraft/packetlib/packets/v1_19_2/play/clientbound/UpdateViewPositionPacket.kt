@@ -5,11 +5,11 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x4b | play | clientbound
+ * Set Center Chunk | 0x4b | play | clientbound
  *
  * @property chunkX chunkX
  * @property chunkZ chunkZ
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Center_Chunk">https://wiki.vg/Protocol#Set_Center_Chunk</a>
  */
 
 @MinecraftPacket(id = 0x4b, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

@@ -5,11 +5,11 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x4f | play | clientbound
+ * Display Objective | 0x4f | play | clientbound
  *
  * @property position position
  * @property name name
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Display_Objective">https://wiki.vg/Protocol#Display_Objective</a>
  */
 
 @MinecraftPacket(id = 0x4f, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

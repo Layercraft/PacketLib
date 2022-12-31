@@ -5,12 +5,12 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x0c | play | clientbound
+ * Chat Preview (clientbound) | 0x0c | play | clientbound
  *
  * @property queryId queryId
  * @property hasMessage message is present
  * @property message message
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Chat_Preview_.28clientbound.29">https://wiki.vg/Protocol#Chat_Preview_.28clientbound.29</a>
  */
 
 @MinecraftPacket(id = 0x0c, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

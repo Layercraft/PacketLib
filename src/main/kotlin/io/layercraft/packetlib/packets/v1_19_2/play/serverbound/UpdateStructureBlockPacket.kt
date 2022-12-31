@@ -5,7 +5,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.Position
 /**
- * Use Item | 0x2d | play | serverbound
+ * Program Structure Block | 0x2d | play | serverbound
  *
  * @property location location
  * @property action action
@@ -23,7 +23,7 @@ import io.layercraft.packetlib.types.Position
  * @property integrity integrity
  * @property seed seed
  * @property flags flags
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Program_Structure_Block">https://wiki.vg/Protocol#Program_Structure_Block</a>
  */
 
 @MinecraftPacket(id = 0x2d, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

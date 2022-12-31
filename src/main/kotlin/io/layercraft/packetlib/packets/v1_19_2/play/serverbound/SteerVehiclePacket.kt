@@ -5,12 +5,12 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x1f | play | serverbound
+ * Player Input | 0x1f | play | serverbound
  *
  * @property sideways sideways
  * @property forward forward
  * @property jump jump
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Player_Input">https://wiki.vg/Protocol#Player_Input</a>
  */
 
 @MinecraftPacket(id = 0x1f, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

@@ -5,10 +5,10 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x5a | play | clientbound
+ * Set Simulation Distance | 0x5a | play | clientbound
  *
  * @property distance distance
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Simulation_Distance">https://wiki.vg/Protocol#Set_Simulation_Distance</a>
  */
 
 @MinecraftPacket(id = 0x5a, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

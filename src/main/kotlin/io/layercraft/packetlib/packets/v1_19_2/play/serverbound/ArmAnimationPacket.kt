@@ -5,10 +5,10 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x2f | play | serverbound
+ * Swing Arm | 0x2f | play | serverbound
  *
  * @property hand hand
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Swing_Arm">https://wiki.vg/Protocol#Swing_Arm</a>
  */
 
 @MinecraftPacket(id = 0x2f, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

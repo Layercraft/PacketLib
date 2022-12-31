@@ -5,14 +5,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x5f | play | clientbound
+ * Entity Sound Effect | 0x5f | play | clientbound
  *
  * @property soundId soundId
  * @property soundCategory soundCategory
  * @property entityId entityId
  * @property volume volume
  * @property pitch pitch
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Entity_Sound_Effect">https://wiki.vg/Protocol#Entity_Sound_Effect</a>
  */
 
 @MinecraftPacket(id = 0x5f, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

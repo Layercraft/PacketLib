@@ -5,10 +5,10 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x4e | play | clientbound
+ * Set Display Chat Preview | 0x4e | play | clientbound
  *
  * @property shouldDisplayChatPreview should_display_chat_preview
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Display_Chat_Preview">https://wiki.vg/Protocol#Set_Display_Chat_Preview</a>
  */
 
 @MinecraftPacket(id = 0x4e, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

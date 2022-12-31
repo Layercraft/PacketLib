@@ -5,7 +5,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.Position
 /**
- * Use Item | 0x2c | play | serverbound
+ * Program Jigsaw Block | 0x2c | play | serverbound
  *
  * @property location location
  * @property name name
@@ -13,7 +13,7 @@ import io.layercraft.packetlib.types.Position
  * @property pool pool
  * @property finalState finalState
  * @property jointType jointType
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Program_Jigsaw_Block">https://wiki.vg/Protocol#Program_Jigsaw_Block</a>
  */
 
 @MinecraftPacket(id = 0x2c, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

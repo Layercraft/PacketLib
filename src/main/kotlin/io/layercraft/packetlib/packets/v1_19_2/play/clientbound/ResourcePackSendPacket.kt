@@ -5,14 +5,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x3d | play | clientbound
+ * Resource Pack (clientbound) | 0x3d | play | clientbound
  *
  * @property url url
  * @property hash hash
  * @property forced forced
  * @property hasPromptMessage promptMessage is present
  * @property promptMessage promptMessage
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Resource_Pack_.28clientbound.29">https://wiki.vg/Protocol#Resource_Pack_.28clientbound.29</a>
  */
 
 @MinecraftPacket(id = 0x3d, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

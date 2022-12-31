@@ -5,7 +5,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import java.util.UUID
 /**
- * Use Item | 0x0a | play | clientbound
+ * Boss Bar | 0x0a | play | clientbound
  *
  * @property entityUUID entityUUID
  * @property action action
@@ -14,7 +14,7 @@ import java.util.UUID
  * @property color color
  * @property dividers dividers
  * @property flags flags
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Boss_Bar">https://wiki.vg/Protocol#Boss_Bar</a>
  */
 
 @MinecraftPacket(id = 0x0a, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

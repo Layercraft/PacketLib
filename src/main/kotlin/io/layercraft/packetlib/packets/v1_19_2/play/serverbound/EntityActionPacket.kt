@@ -5,12 +5,12 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- * Use Item | 0x1e | play | serverbound
+ * Player Command | 0x1e | play | serverbound
  *
  * @property entityId entityId
  * @property actionId actionId
  * @property jumpBoost jumpBoost
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Player_Command">https://wiki.vg/Protocol#Player_Command</a>
  */
 
 @MinecraftPacket(id = 0x1e, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

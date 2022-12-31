@@ -5,13 +5,13 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.Position
 /**
- * Use Item | 0x1d | play | serverbound
+ * Player Action | 0x1d | play | serverbound
  *
  * @property status status
  * @property location location
  * @property face face
  * @property sequence sequence
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Player_Action">https://wiki.vg/Protocol#Player_Action</a>
  */
 
 @MinecraftPacket(id = 0x1d, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
