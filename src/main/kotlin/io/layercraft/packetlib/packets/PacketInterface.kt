@@ -1,6 +1,5 @@
 package io.layercraft.packetlib.packets
 
-import io.ktor.utils.io.core.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 

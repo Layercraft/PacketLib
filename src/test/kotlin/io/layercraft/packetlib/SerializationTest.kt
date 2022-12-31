@@ -1,13 +1,22 @@
 package io.layercraft.packetlib
 
+import io.layercraft.packetlib.data.ProtocolVersion
+import io.layercraft.packetlib.packets.v1_19_2.handshaking.serverbound.SetProtocolPacket
+import io.layercraft.packetlib.packets.v1_19_2.login.serverbound.EncryptionBeginPacket
+import io.layercraft.packetlib.packets.v1_19_2.login.serverbound.LoginStartPacket
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Test
+import java.util.*
+import kotlin.test.assertContentEquals
+
 internal class SerializationTest {
-    /*@Test
+    @Test
     fun `test normal serialization`() {
-        val packet = HandshakePacket(ProtocolVersion.V_1_19_2, "localhost", (25565).toUShort(), HandshakeNextState.LOGIN)
+        val packet = SetProtocolPacket(ProtocolVersion.V1_19_2.protocolNumber, "localhost", (25565).toUShort(), 1)
 
-        val bytes = TranslatorAPI.encodeToByteArray(packet, HandshakePacket)
+        val bytes = TranslatorAPI.encodeToByteArray(packet, SetProtocolPacket)
 
-        val decoded = TranslatorAPI.decodeFromByteArray(bytes, HandshakePacket)
+        val decoded = TranslatorAPI.decodeFromByteArray(bytes, SetProtocolPacket)
 
         Assertions.assertEquals(packet, decoded)
     }
@@ -16,12 +25,12 @@ internal class SerializationTest {
     fun `test normal serialization from raw bytes`() {
         val rawPacket = byteArrayOf(-0x08, 0x05, 0x09, 0x6C, 0x6F, 0x63, 0x61, 0x6C, 0x68, 0x6F, 0x73, 0x74, 0x63, -0x23, 0x01) // export from wireshark
 
-        val decoded: HandshakePacket = TranslatorAPI.decodeFromByteArray(rawPacket, HandshakePacket)
+        val decoded: SetProtocolPacket = TranslatorAPI.decodeFromByteArray(rawPacket, SetProtocolPacket)
 
-        Assertions.assertEquals(ProtocolVersion.V_1_19_2, decoded.protocolVersion)
-        Assertions.assertEquals("localhost", decoded.address)
-        Assertions.assertEquals(25565, decoded.port.toInt())
-        Assertions.assertEquals(HandshakeNextState.STATUS, decoded.nextState)
+        Assertions.assertEquals(ProtocolVersion.V1_19_2.protocolNumber, decoded.protocolVersion)
+        Assertions.assertEquals("localhost", decoded.serverHost)
+        Assertions.assertEquals(25565, decoded.serverPort.toInt())
+        Assertions.assertEquals(1, decoded.nextState)
     }
 
     @Test
@@ -29,18 +38,20 @@ internal class SerializationTest {
         val exampleByteArray = byteArrayOf(0x04, 0x6C, 0x6F, 0x63, 0x61, 0x6C, 0x68, 0x6F, 0x73, 0x74, 0x00, 0x7F, 0x00, 0x00)
 
         val packet =
-            EncryptionRequestPacket(
-                "",
+            EncryptionBeginPacket(
                 exampleByteArray,
+                true,
                 exampleByteArray,
+                null,
+                null,
             )
 
-        val bytes = TranslatorAPI.encodeToByteArray(packet, EncryptionRequestPacket)
+        val bytes = TranslatorAPI.encodeToByteArray(packet, EncryptionBeginPacket)
 
-        val decoded = TranslatorAPI.decodeFromByteArray(bytes, EncryptionRequestPacket)
+        val decoded = TranslatorAPI.decodeFromByteArray(bytes, EncryptionBeginPacket)
 
-        Assertions.assertEquals(packet.serverId, decoded.serverId)
-        Assertions.assertArrayEquals(packet.publicKey, decoded.publicKey)
+        Assertions.assertArrayEquals(packet.sharedSecret, decoded.sharedSecret)
+        Assertions.assertArrayEquals(packet.messageSignature, decoded.messageSignature)
         Assertions.assertArrayEquals(packet.verifyToken, decoded.verifyToken)
     }
 
@@ -62,12 +73,12 @@ internal class SerializationTest {
 
         val decoded = TranslatorAPI.decodeFromByteArray(bytes, LoginStartPacket)
 
-        assertEquals(packet.name, decoded.name)
-        assertEquals(packet.hasSigData, decoded.hasSigData)
-        assertEquals(packet.timestamp, decoded.timestamp)
+        Assertions.assertEquals(packet.username, decoded.username)
+        Assertions.assertEquals(packet.hasSignature, decoded.hasSignature)
+        Assertions.assertEquals(packet.timestamp, decoded.timestamp)
         assertContentEquals(packet.signature, decoded.signature)
         assertContentEquals(packet.publicKey, decoded.publicKey)
-        assertEquals(packet.hasPlayerUUID, decoded.hasPlayerUUID)
-        assertEquals(packet.playerUUID, decoded.playerUUID)
-    }*/
+        Assertions.assertEquals(packet.hasPlayerUUID, decoded.hasPlayerUUID)
+        Assertions.assertEquals(packet.playerUUID, decoded.playerUUID)
+    }
 }
