@@ -5,7 +5,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- *  | 0x18 | play | serverbound
+ * Move Vehicle (serverbound) | 0x18 | play | serverbound
  *
  * @property x x
  * @property y y

@@ -5,7 +5,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- *  | 0x06 | play | serverbound
+ * Chat Preview (serverbound) | 0x06 | play | serverbound
  *
  * @property query query
  * @property message message

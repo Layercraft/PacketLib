@@ -5,7 +5,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- *  | 0x16 | play | clientbound
+ * Plugin Message (clientbound) | 0x16 | play | clientbound
  *
  * @property channel channel
  * @property data data

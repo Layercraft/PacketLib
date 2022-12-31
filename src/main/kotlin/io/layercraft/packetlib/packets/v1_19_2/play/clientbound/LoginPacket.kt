@@ -6,7 +6,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import io.layercraft.packetlib.types.NBT
 import io.layercraft.packetlib.types.Position
 /**
- *  | 0x25 | play | clientbound
+ * Login (play) | 0x25 | play | clientbound
  *
  * @property entityId entityId
  * @property isHardcore isHardcore

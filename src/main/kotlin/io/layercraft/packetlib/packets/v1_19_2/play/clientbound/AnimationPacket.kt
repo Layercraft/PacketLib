@@ -5,7 +5,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- *  | 0x03 | play | clientbound
+ * Entity Animation (clientbound) | 0x03 | play | clientbound
  *
  * @property entityId entityId
  * @property animation animation

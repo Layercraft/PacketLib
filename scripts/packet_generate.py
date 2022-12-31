@@ -271,11 +271,13 @@ def wikivg_data(packet_id: str, state: str, direction: str) -> dict:
 
     direction = "Client" if direction == "clientbound" else "Server"
     state = state.capitalize()
+    packet_id = packet_id.capitalize()
     regex = rf'<td.*?>{packet_id}\n</td>\n<td.*?>{state}\n</td>\n<td.*?>{direction}\n</td>'
     result = re.split(regex, body_text, re.DOTALL)[0]
     result = result.split("<h4>")[-1]
     id = result.split('<span class="mw-headline" id="')[1].split('">')[0]
-    name = result.split('">')[1].split("</span>")[0]
+    name_regex = r'<span class="mw-headline" id=".*?">'
+    name = re.split(name_regex, result, re.DOTALL)[1].split("</span>")[0]
 
     return {
         "id": id,

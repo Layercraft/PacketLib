@@ -5,7 +5,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- *  | 0x12 | play | serverbound
+ * Keep Alive (serverbound) | 0x12 | play | serverbound
  *
  * @property keepAliveId keepAliveId
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Keep_Alive_.28serverbound.29">https://wiki.vg/Protocol#Keep_Alive_.28serverbound.29</a>

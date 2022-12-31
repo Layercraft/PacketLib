@@ -5,7 +5,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- *  | 0x10 | play | clientbound
+ * Close Container (clientbound) | 0x10 | play | clientbound
  *
  * @property windowId windowId
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Close_Container_.28clientbound.29">https://wiki.vg/Protocol#Close_Container_.28clientbound.29</a>

@@ -5,7 +5,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterfa
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 /**
- *  | 0x31 | play | clientbound
+ * Player Abilities (clientbound) | 0x31 | play | clientbound
  *
  * @property flags flags
  * @property flyingSpeed flyingSpeed
