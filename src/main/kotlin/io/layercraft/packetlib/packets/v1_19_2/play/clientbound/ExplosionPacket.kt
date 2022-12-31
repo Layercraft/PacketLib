@@ -11,6 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property y y
  * @property z z
  * @property radius radius
+ * @property affectedBlockOffsets affectedBlockOffsets
  * @property playerMotionX playerMotionX
  * @property playerMotionY playerMotionY
  * @property playerMotionZ playerMotionZ
@@ -23,6 +24,7 @@ data class ExplosionPacket(
     val y: Float,
     val z: Float,
     val radius: Float,
+    val affectedBlockOffsets: List<ExplosionPacketAffectedBlockOffsets>, // varint array
     val playerMotionX: Float,
     val playerMotionY: Float,
     val playerMotionZ: Float,
@@ -33,11 +35,18 @@ data class ExplosionPacket(
             val y = input.readFloat()
             val z = input.readFloat()
             val radius = input.readFloat()
+            val affectedBlockOffsets = input.readVarIntArray { arrayInput ->
+                val x = arrayInput.readByte()
+                val y = arrayInput.readByte()
+                val z = arrayInput.readByte()
+
+                return@readVarIntArray ExplosionPacketAffectedBlockOffsets(x, y, z)
+            }
             val playerMotionX = input.readFloat()
             val playerMotionY = input.readFloat()
             val playerMotionZ = input.readFloat()
 
-            return ExplosionPacket(x, y, z, radius, playerMotionX, playerMotionY, playerMotionZ)
+            return ExplosionPacket(x, y, z, radius, affectedBlockOffsets, playerMotionX, playerMotionY, playerMotionZ)
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ExplosionPacket) {
@@ -45,9 +54,27 @@ data class ExplosionPacket(
             output.writeFloat(value.y)
             output.writeFloat(value.z)
             output.writeFloat(value.radius)
+            output.writeVarIntArray(value.affectedBlockOffsets) { arrayValue, arrayOutput ->
+                arrayOutput.writeByte(arrayValue.x)
+                arrayOutput.writeByte(arrayValue.y)
+                arrayOutput.writeByte(arrayValue.z)
+            }
             output.writeFloat(value.playerMotionX)
             output.writeFloat(value.playerMotionY)
             output.writeFloat(value.playerMotionZ)
         }
     }
 }
+
+/**
+ * ExplosionPacketAffectedBlockOffsets | affectedBlockOffsets
+ *
+ * @property x x
+ * @property y y
+ * @property z z
+*/
+data class ExplosionPacketAffectedBlockOffsets(
+    val x: Byte,
+    val y: Byte,
+    val z: Byte,
+)

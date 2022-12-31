@@ -112,6 +112,7 @@ kotlin_types_wrapper = {
     "previousMessages": "native",
     "command_node": "native",
     "chunkBlockEntity": "native",
+    "tags": "native",
 }
 
 src = "src/main/kotlin"
@@ -130,7 +131,10 @@ minecraft_codec = []
 runs = []
 
 
-def camel_case(s):
+def camel_case(s: str):
+    if s.upper() == "UUID":
+        return "uuid"
+
     camel_case_str = re.sub(r"([-_])([a-zA-Z])",
                             lambda m: m.group(2).upper(), s)
     camel_case_str = camel_case_str[0].lower() + camel_case_str[1:]
@@ -333,8 +337,8 @@ class PacketGenerator:
         kotlin_type_deserialize = kotlin_type["deserialize"]
 
         self.class_fields += [f"val {field_var_name}: {kotlin_type_str},{field_comment}"]
-        self.class_deserialize += [f"val {field_var_name} = input.{kotlin_type_deserialize}"]
 
+        self.class_deserialize += [f"val {field_var_name} = input.{kotlin_type_deserialize}"]
         self.class_serialize += [f"output.{kotlin_type_serialize % ('value.' + field_var_name)}"]
 
         self.class_var_list += [field_var_name]
@@ -426,11 +430,132 @@ class PacketGenerator:
         if count_type == "varint":
             if array_type_type is str:
                 self.generate_basic_type_array(field_name, array_type, field_var_name)
-            elif array_type_type is dict:
-                add_run("CONTAINER ARRAY")
-                print("Not supported yet")
+            elif array_type_type is list:
+                array_type = array_type[0]
+                if array_type == "container":
+                    self.generate_container_array(field_name, array, field_var_name)
+                else:
+                    add_run("COMPLEX ARRAY thats is not a container: " + field_name)
+                    print("Not supported yet")
         else:
             raise Exception("Not supported")
+
+    def generate_container_array(self, class_name: str, array: dict, class_field_var_name: str):
+        count_type = array["countType"]
+        if count_type != "varint":
+            raise Exception("Not supported")
+
+        fields = array["type"][1]
+        extra_class_str = ""
+        class_name_final = self.class_name + (camel_case(class_name)[0].upper() + camel_case(class_name)[1:])
+
+        extra_class_serialize = []
+        extra_class_deserialize = []
+        extra_class_class_fields = []
+        extra_class_class_var_list = []
+        extra_class_class_docs = []
+
+        for field in fields:
+            field_name = field["name"]
+            field_type = field["type"]
+            field_type_type = type(field_type)
+            field_var_name = camel_case(field_name)
+
+            if field_type_type is list:
+                special_type = field_type[0]
+                if special_type == "option":
+                    field_type = field_type[1]
+                    kotlin_type = kotlin_types_wrapper[field_type]
+                    kotlin_type_str = kotlin_type["type"]
+                    kotlin_type_serialize = kotlin_type["serialize"]
+                    kotlin_type_deserialize = kotlin_type["deserialize"]
+
+                    field_comment = (" // " + kotlin_type["comment"]) if "comment" in kotlin_type else ""
+                    boolean_field_var_name = ("has" + field_var_name[0].upper() + field_var_name[1:])
+
+                    extra_class_class_fields += [f"val {boolean_field_var_name}: Boolean,"]
+                    extra_class_class_fields += [f"val {field_var_name}: {kotlin_type_str}?,{field_comment}"]
+
+                    extra_class_deserialize += [f"val {boolean_field_var_name} = arrayInput.readBoolean()"]
+                    extra_class_deserialize += [
+                        f"val {field_var_name} = if ({boolean_field_var_name}) arrayInput.{kotlin_type_deserialize} else null"]
+
+                    extra_class_serialize += [f"arrayOutput.writeBoolean(arrayValue.{boolean_field_var_name})"]
+                    extra_class_serialize += [
+                        f"if (arrayValue.{boolean_field_var_name}) arrayOutput.{kotlin_type_serialize % ('arrayValue.' + field_var_name + '!!')}"]
+
+                    extra_class_class_var_list += [boolean_field_var_name, field_var_name]
+
+                    extra_class_class_docs += [f" * @property {boolean_field_var_name} {field_name} is present"]
+                    extra_class_class_docs += [f" * @property {field_var_name} {field_name}"]
+                else:
+                    add_run("Complex Type in Array: " + special_type)
+                    print("Not supported yet")
+                    continue
+            elif field_type_type is str:
+                kotlin_type = kotlin_types_wrapper[field_type]
+
+                if kotlin_type == "native":
+                    add_run("Unsupported type: " + field_type)
+                    print("Not supported yet")
+                    continue
+
+                kotlin_type_str = kotlin_type["type"]
+                kotlin_type_serialize = kotlin_type["serialize"]
+                kotlin_type_deserialize = kotlin_type["deserialize"]
+
+                field_comment = (" // " + kotlin_type["comment"]) if "comment" in kotlin_type else ""
+
+                extra_class_class_fields += [f"val {field_var_name}: {kotlin_type_str},{field_comment}"]
+                extra_class_deserialize += [f"val {field_var_name} = arrayInput.{kotlin_type_deserialize}"]
+                extra_class_serialize += [f"arrayOutput.{kotlin_type_serialize % ('arrayValue.' + field_var_name)}"]
+                extra_class_class_docs += [f" * @property {field_var_name} {field_name}"]
+
+                extra_class_class_var_list += [field_var_name]
+
+            else:
+                add_run("Complex Type in Array: " + field_type)
+                print("Not supported yet")
+                continue
+
+            if "import" in kotlin_type:
+                self.class_other_imports += [kotlin_type["import"]]
+
+
+        extra_class_fields_str = "\n    ".join(extra_class_class_fields)
+        extra_class_serialize_str = "\n                ".join(extra_class_serialize)
+        extra_class_deserialize_str = "\n                ".join(extra_class_deserialize)
+        extra_class_var_list_str = ", ".join(extra_class_class_var_list)
+        extra_class_docs_str = "\n".join(extra_class_class_docs)
+
+        extra_class_vas_list_str = f"{class_name_final}({extra_class_var_list_str})"
+
+        extra_class_str += f"""
+/**
+ * {class_name_final} | {class_field_var_name}
+ *
+{extra_class_docs_str}
+*/
+data class {class_name_final}(
+    {extra_class_fields_str}
+)
+"""
+
+        self.class_fields += [f"val {class_field_var_name}: List<{class_name_final}>, // varint array"]
+        self.class_deserialize += [f"""val {class_field_var_name} = input.readVarIntArray {{ arrayInput ->
+                {extra_class_deserialize_str}
+
+                return@readVarIntArray {extra_class_vas_list_str}
+            }}"""]
+
+        self.class_serialize += [f"""output.writeVarIntArray(value.{class_field_var_name}) {{ arrayValue, arrayOutput ->
+                {extra_class_serialize_str}
+            }}"""]
+
+        self.class_var_list += [class_field_var_name]
+        self.class_docs += [f" * @property {class_field_var_name} {class_name}"]
+
+        self.additional_class += extra_class_str
 
     def generate_option_container(self, container: list, parent_field_name: str, parent_field_var_name: str):
         parent_field_boolean_var_name = ("has" + parent_field_var_name[0].upper() + parent_field_var_name[1:])
@@ -656,7 +781,7 @@ class PacketGenerator:
         class_deserialize_str = "\n            ".join(self.class_deserialize)
         class_var_list_str = ", ".join(self.class_var_list)
         class_docs_str = "\n".join(self.class_docs)
-        class_other_imports_str = "\n".join(self.class_other_imports)
+        class_other_imports_str = "\n".join(set(self.class_other_imports))
 
         return {
             "class_fields_str": class_fields_str,

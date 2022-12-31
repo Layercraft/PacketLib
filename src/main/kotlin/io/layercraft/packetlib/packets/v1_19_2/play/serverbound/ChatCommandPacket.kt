@@ -10,6 +10,7 @@ import java.util.UUID
  * @property command command
  * @property timestamp timestamp
  * @property salt salt
+ * @property argumentSignatures argumentSignatures
  * @property signedPreview signedPreview
  * @property hasLastMessage lastMessage is present
  * @property sender sender
@@ -21,6 +22,7 @@ data class ChatCommandPacket(
     val command: String,
     val timestamp: Long,
     val salt: Long,
+    val argumentSignatures: List<ChatCommandPacketArgumentSignatures>, // varint array
     val signedPreview: Boolean,
     val hasLastMessage: Boolean,
     val sender: UUID?,
@@ -30,20 +32,37 @@ data class ChatCommandPacket(
             val command = input.readString()
             val timestamp = input.readLong()
             val salt = input.readLong()
+            val argumentSignatures = input.readVarIntArray { arrayInput ->
+                val argumentName = arrayInput.readString()
+
+                return@readVarIntArray ChatCommandPacketArgumentSignatures(argumentName)
+            }
             val signedPreview = input.readBoolean()
             val hasLastMessage = input.readBoolean()
             val sender = if (hasLastMessage) input.readUUID() else null
 
-            return ChatCommandPacket(command, timestamp, salt, signedPreview, hasLastMessage, sender)
+            return ChatCommandPacket(command, timestamp, salt, argumentSignatures, signedPreview, hasLastMessage, sender)
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ChatCommandPacket) {
             output.writeString(value.command)
             output.writeLong(value.timestamp)
             output.writeLong(value.salt)
+            output.writeVarIntArray(value.argumentSignatures) { arrayValue, arrayOutput ->
+                arrayOutput.writeString(arrayValue.argumentName)
+            }
             output.writeBoolean(value.signedPreview)
             output.writeBoolean(value.hasLastMessage)
             if (value.hasLastMessage) output.writeUUID(value.sender!!)
         }
     }
 }
+
+/**
+ * ChatCommandPacketArgumentSignatures | argumentSignatures
+ *
+ * @property argumentName argumentName
+*/
+data class ChatCommandPacketArgumentSignatures(
+    val argumentName: String,
+)

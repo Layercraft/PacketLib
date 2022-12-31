@@ -12,6 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @property slot slot
  * @property mouseButton mouseButton
  * @property mode mode
+ * @property changedSlots changedSlots
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Click_Container">https://wiki.vg/Protocol#Click_Container</a>
  */
 
@@ -22,6 +23,7 @@ data class WindowClickPacket(
     val slot: Short,
     val mouseButton: Byte,
     val mode: Int, // varint
+    val changedSlots: List<WindowClickPacketChangedSlots>, // varint array
 ) : ServerBoundPacket {
     companion object : PacketSerializer<WindowClickPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): WindowClickPacket {
@@ -30,8 +32,13 @@ data class WindowClickPacket(
             val slot = input.readShort()
             val mouseButton = input.readByte()
             val mode = input.readVarInt()
+            val changedSlots = input.readVarIntArray { arrayInput ->
+                val location = arrayInput.readShort()
 
-            return WindowClickPacket(windowId, stateId, slot, mouseButton, mode)
+                return@readVarIntArray WindowClickPacketChangedSlots(location)
+            }
+
+            return WindowClickPacket(windowId, stateId, slot, mouseButton, mode, changedSlots)
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: WindowClickPacket) {
@@ -40,6 +47,18 @@ data class WindowClickPacket(
             output.writeShort(value.slot)
             output.writeByte(value.mouseButton)
             output.writeVarInt(value.mode)
+            output.writeVarIntArray(value.changedSlots) { arrayValue, arrayOutput ->
+                arrayOutput.writeShort(arrayValue.location)
+            }
         }
     }
 }
+
+/**
+ * WindowClickPacketChangedSlots | changedSlots
+ *
+ * @property location location
+*/
+data class WindowClickPacketChangedSlots(
+    val location: Short,
+)
