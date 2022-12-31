@@ -111,7 +111,12 @@ kotlin_types_wrapper = {
     "entityMetadata": "native",
     "previousMessages": "native",
     "command_node": "native",
-    "chunkBlockEntity": "native",
+    "chunkBlockEntity": {
+        "type": "ChunkBlockEntity",
+        "deserialize": "readChunkBlockEntity()",
+        "serialize": "writeChunkBlockEntity(%s)",
+        "import": "import io.layercraft.packetlib.types.ChunkBlockEntity"
+    },
     "tags": "native",
 }
 
@@ -434,8 +439,10 @@ class PacketGenerator:
                 array_type = array_type[0]
                 if array_type == "container":
                     self.generate_container_array(field_name, array, field_var_name)
+                elif array_type == "array": #2D Array probably
+                    self.generate_array_array(field_name, array_type, field_var_name)
                 else:
-                    add_run("COMPLEX ARRAY thats is not a container: " + field_name)
+                    add_run("COMPLEX ARRAY that is not a container: " + field_name)
                     print("Not supported yet")
         else:
             raise Exception("Not supported")

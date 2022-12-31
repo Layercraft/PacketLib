@@ -23,7 +23,7 @@ data class EntityDestroyPacket(
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityDestroyPacket) {
-            output.writeVarIntArray(value.entityIds) { arrayValue, arrayOutput -> arrayOutput.writeVarInt(arrayValue) }
+            output.writeVarIntArray(value.entityIds) { arrayValue, arrayOutput -> arrayOutput.writeVarInt(arrayValue)}
         }
     }
 }

@@ -1,5 +1,6 @@
 package io.layercraft.packetlib.serialization
 
+import io.layercraft.packetlib.types.ChunkBlockEntity
 import io.layercraft.packetlib.types.NBT
 import io.layercraft.packetlib.types.Position
 import io.layercraft.packetlib.utils.*
@@ -43,6 +44,8 @@ interface MinecraftProtocolSerializeInterface<O> {
         writeVarInt(input.size)
         input.forEach { encoder(it, this) }
     }
+
+    fun writeChunkBlockEntity(chunkBlockEntity: ChunkBlockEntity) = ChunkBlockEntity.write(chunkBlockEntity, this)
 
     fun writeRemainingByteArray(input: ByteArray) = writeBytes(input)
     fun <T> writeRemainingArray(input: List<T>, encoder: (value: T, output: MinecraftProtocolSerializeInterface<O>) -> Unit) = input.forEach { encoder(it, this) }

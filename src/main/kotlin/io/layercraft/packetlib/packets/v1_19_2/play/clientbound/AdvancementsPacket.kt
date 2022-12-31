@@ -44,7 +44,7 @@ data class AdvancementsPacket(
             output.writeVarIntArray(value.advancementMapping) { arrayValue, arrayOutput ->
                 arrayOutput.writeString(arrayValue.key)
             }
-            output.writeVarIntArray(value.identifiers) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue) }
+            output.writeVarIntArray(value.identifiers) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue)}
             output.writeVarIntArray(value.progressMapping) { arrayValue, arrayOutput ->
                 arrayOutput.writeString(arrayValue.key)
             }

@@ -23,7 +23,7 @@ data class HideMessagePacket(
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: HideMessagePacket) {
-            output.writeVarIntArray(value.signature) { arrayValue, arrayOutput -> arrayOutput.writeUByte(arrayValue) }
+            output.writeVarIntArray(value.signature) { arrayValue, arrayOutput -> arrayOutput.writeUByte(arrayValue)}
         }
     }
 }

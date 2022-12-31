@@ -3,8 +3,8 @@ package io.layercraft.packetlib.packets.v1_19_2.play.clientbound
 import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
-import io.layercraft.packetlib.types.NBT
 import io.layercraft.packetlib.types.Position
+import io.layercraft.packetlib.types.NBT
 /**
  * Block Entity Data | 0x07 | play | clientbound
  *

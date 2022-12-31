@@ -33,7 +33,7 @@ data class EditBookPacket(
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EditBookPacket) {
             output.writeVarInt(value.hand)
-            output.writeVarIntArray(value.pages) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue) }
+            output.writeVarIntArray(value.pages) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue)}
             output.writeBoolean(value.hasTitle)
             if (value.hasTitle) output.writeString(value.title!!)
         }
