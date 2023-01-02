@@ -106,6 +106,7 @@ kotlin_types_wrapper = {
         "type": "ChunkBlockEntity",
         "deserialize": "readChunkBlockEntity()",
         "serialize": "writeChunkBlockEntity(%s)",
+        "import": "import io.layercraft.packetlib.types.ChunkBlockEntity"
     },
     "entityMetadataLoop": "native",
     "topBitSetTerminatedArray": "native",
