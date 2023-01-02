@@ -4,11 +4,13 @@
 [![Deploy Dokka KDocs with GitHub Pages](https://github.com/Layercraft/PacketLib/actions/workflows/kdocs.yml/badge.svg)](https://github.com/Layercraft/PacketLib/actions/workflows/kdocs.yml)
 
 # PacketLib - A library for creating and parsing packets
+
 ## Warning: Not safe for use currently.
 
 KDocs: [PacketLib KDocs](https://packetlib.kdocs.layercraft.io/)
 
 ## Prewords
+
 Special Thanks to [wiki.vg](https://wiki.vg) for the protocol documentation.
 And to [PrismarineJS/minecraft-data](https://github.com/PrismarineJS/minecraft-data) for the protocol data as json.
 
@@ -16,7 +18,8 @@ And to [PrismarineJS/minecraft-data](https://github.com/PrismarineJS/minecraft-d
 
 ### Github Packages:
 
-#### Gradle Kotlin
+<details open>
+<summary>Gradle Kotlin</summary>
 
 ```kotlin
 repositories {
@@ -34,7 +37,11 @@ dependencies {
 }
 ```
 
-#### Gradle Groovy
+</details>
+
+
+<details>
+<summary>Gradle Groovy</summary>
 
 ```groovy
 repositories {
@@ -52,7 +59,10 @@ dependencies {
 }
 ```
 
-#### Maven
+</details>
+
+<details>
+<summary>Maven</summary>
 
 ```xml
 
@@ -93,9 +103,12 @@ Settings.xml
 </settings>
 ```
 
+</details>
+
 ### Jitpack:
 
-#### Gradle Kotlin:
+<details open>
+<summary>Gradle Kotlin</summary>
 
 ```kotlin
 repositories {
@@ -107,7 +120,10 @@ dependencies {
 }
 ```
 
-#### Gradle Groovy:
+</details>
+
+<details>
+<summary>Gradle Groovy</summary>
 
 ```groovy
 repositories {
@@ -119,9 +135,13 @@ dependencies {
 }
 ```
 
-#### Maven:
+</details>
+
+<details>
+<summary>Maven</summary>
 
 ```xml
+
 <project>
     ...
     <repositories>
@@ -141,6 +161,8 @@ dependencies {
     ...
 </project>
 ```
+
+</details>
 
 ## Usage
 
