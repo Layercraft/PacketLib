@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Player Abilities (serverbound) | 0x1c | play | serverbound
  *
- * @property flags flags
+ * @param flags flags
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Player_Abilities_.28serverbound.29">https://wiki.vg/Protocol#Player_Abilities_.28serverbound.29</a>
  */
 

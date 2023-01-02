@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Entity Event | 0x1a | play | clientbound
  *
- * @property entityId entityId
- * @property entityStatus entityStatus
+ * @param entityId entityId
+ * @param entityStatus entityStatus
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Entity_Event">https://wiki.vg/Protocol#Entity_Event</a>
  */
 

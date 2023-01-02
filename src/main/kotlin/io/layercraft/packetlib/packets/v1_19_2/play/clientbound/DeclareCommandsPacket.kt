@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Commands | 0x0f | play | clientbound
  *
- * @property rootIndex rootIndex
+ * @param rootIndex rootIndex
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Commands">https://wiki.vg/Protocol#Commands</a>
  */
 

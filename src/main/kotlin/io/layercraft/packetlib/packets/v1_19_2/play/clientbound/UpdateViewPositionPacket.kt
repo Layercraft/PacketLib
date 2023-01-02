@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Center Chunk | 0x4b | play | clientbound
  *
- * @property chunkX chunkX
- * @property chunkZ chunkZ
+ * @param chunkX chunkX
+ * @param chunkZ chunkZ
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Center_Chunk">https://wiki.vg/Protocol#Set_Center_Chunk</a>
  */
 

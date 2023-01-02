@@ -7,11 +7,11 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Move Vehicle (serverbound) | 0x18 | play | serverbound
  *
- * @property x x
- * @property y y
- * @property z z
- * @property yaw yaw
- * @property pitch pitch
+ * @param x x
+ * @param y y
+ * @param z z
+ * @param yaw yaw
+ * @param pitch pitch
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Move_Vehicle_.28serverbound.29">https://wiki.vg/Protocol#Move_Vehicle_.28serverbound.29</a>
  */
 

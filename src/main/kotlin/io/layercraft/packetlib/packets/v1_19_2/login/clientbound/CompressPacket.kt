@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Compression | 0x03 | login | clientbound
  *
- * @property threshold threshold
+ * @param threshold threshold
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Compression">https://wiki.vg/Protocol#Set_Compression</a>
  */
 

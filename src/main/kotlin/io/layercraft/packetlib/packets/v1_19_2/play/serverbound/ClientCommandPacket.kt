@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Client Command | 0x07 | play | serverbound
  *
- * @property actionId actionId
+ * @param actionId actionId
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Client_Command">https://wiki.vg/Protocol#Client_Command</a>
  */
 

@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Seen Advancements | 0x25 | play | serverbound
  *
- * @property action action
- * @property tabId tabId
+ * @param action action
+ * @param tabId tabId
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Seen_Advancements">https://wiki.vg/Protocol#Seen_Advancements</a>
  */
 

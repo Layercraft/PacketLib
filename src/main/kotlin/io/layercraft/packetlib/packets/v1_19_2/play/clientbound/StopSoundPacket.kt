@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Stop Sound | 0x61 | play | clientbound
  *
- * @property flags flags
- * @property source source
- * @property sound sound
+ * @param flags flags
+ * @param source source
+ * @param sound sound
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Stop_Sound">https://wiki.vg/Protocol#Stop_Sound</a>
  */
 

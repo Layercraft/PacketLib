@@ -7,15 +7,15 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Passengers | 0x57 | play | clientbound
  *
- * @property entityId entityId
- * @property passengers passengers
+ * @param entityId entityId
+ * @param passengers passengers
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Passengers">https://wiki.vg/Protocol#Set_Passengers</a>
  */
 
 @MinecraftPacket(id = 0x57, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class SetPassengersPacket(
     val entityId: Int, // varint
-    val passengers: List<Int>, // varint array
+    val passengers: List<Int>, // varint array of varint
 ) : ClientBoundPacket {
     companion object : PacketSerializer<SetPassengersPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SetPassengersPacket {

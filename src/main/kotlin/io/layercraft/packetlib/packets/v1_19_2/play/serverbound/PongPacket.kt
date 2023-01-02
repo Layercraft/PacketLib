@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Pong (play) | 0x20 | play | serverbound
  *
- * @property id id
+ * @param id id
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Pong_.28play.29">https://wiki.vg/Protocol#Pong_.28play.29</a>
  */
 

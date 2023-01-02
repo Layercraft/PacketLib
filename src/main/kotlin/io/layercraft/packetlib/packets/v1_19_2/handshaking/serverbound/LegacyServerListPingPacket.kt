@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Legacy Server List Ping | 0xfe | handshaking | serverbound
  *
- * @property payload payload
+ * @param payload payload
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Legacy_Server_List_Ping">https://wiki.vg/Protocol#Legacy_Server_List_Ping</a>
  */
 

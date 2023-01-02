@@ -7,10 +7,10 @@ import io.layercraft.packetlib.types.Position
 /**
  * Program Command Block | 0x29 | play | serverbound
  *
- * @property location location
- * @property command command
- * @property mode mode
- * @property flags flags
+ * @param location location
+ * @param command command
+ * @param mode mode
+ * @param flags flags
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Program_Command_Block">https://wiki.vg/Protocol#Program_Command_Block</a>
  */
 

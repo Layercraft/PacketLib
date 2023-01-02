@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Creative Mode Slot | 0x2b | play | serverbound
  *
- * @property slot slot
+ * @param slot slot
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Creative_Mode_Slot">https://wiki.vg/Protocol#Set_Creative_Mode_Slot</a>
  */
 

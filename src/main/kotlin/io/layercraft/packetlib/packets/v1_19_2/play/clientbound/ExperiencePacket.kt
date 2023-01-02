@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Experience | 0x54 | play | clientbound
  *
- * @property experienceBar experienceBar
- * @property level level
- * @property totalExperience totalExperience
+ * @param experienceBar experienceBar
+ * @param level level
+ * @param totalExperience totalExperience
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Experience">https://wiki.vg/Protocol#Set_Experience</a>
  */
 

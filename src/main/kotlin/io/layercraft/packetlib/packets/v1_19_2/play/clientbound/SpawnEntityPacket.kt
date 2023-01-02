@@ -7,19 +7,19 @@ import java.util.UUID
 /**
  * Spawn Entity | 0x00 | play | clientbound
  *
- * @property entityId entityId
- * @property objectUUID objectUUID
- * @property type type
- * @property x x
- * @property y y
- * @property z z
- * @property pitch pitch
- * @property yaw yaw
- * @property headPitch headPitch
- * @property objectData objectData
- * @property velocityX velocityX
- * @property velocityY velocityY
- * @property velocityZ velocityZ
+ * @param entityId entityId
+ * @param objectUUID objectUUID
+ * @param type type
+ * @param x x
+ * @param y y
+ * @param z z
+ * @param pitch pitch
+ * @param yaw yaw
+ * @param headPitch headPitch
+ * @param objectData objectData
+ * @param velocityX velocityX
+ * @param velocityY velocityY
+ * @param velocityZ velocityZ
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Spawn_Entity">https://wiki.vg/Protocol#Spawn_Entity</a>
  */
 

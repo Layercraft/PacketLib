@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Login Plugin Request | 0x04 | login | clientbound
  *
- * @property messageId messageId
- * @property channel channel
- * @property data data
+ * @param messageId messageId
+ * @param channel channel
+ * @param data data
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Login_Plugin_Request">https://wiki.vg/Protocol#Login_Plugin_Request</a>
  */
 

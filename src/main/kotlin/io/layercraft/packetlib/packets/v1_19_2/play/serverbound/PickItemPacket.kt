@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Pick Item | 0x1a | play | serverbound
  *
- * @property slot slot
+ * @param slot slot
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Pick_Item">https://wiki.vg/Protocol#Pick_Item</a>
  */
 

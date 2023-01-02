@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Update Time | 0x5c | play | clientbound
  *
- * @property age age
- * @property time time
+ * @param age age
+ * @param time time
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Time">https://wiki.vg/Protocol#Update_Time</a>
  */
 

@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Equipment | 0x53 | play | clientbound
  *
- * @property entityId entityId
+ * @param entityId entityId
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Equipment">https://wiki.vg/Protocol#Set_Equipment</a>
  */
 

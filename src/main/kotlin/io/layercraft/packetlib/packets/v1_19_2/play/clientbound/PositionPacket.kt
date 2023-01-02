@@ -7,14 +7,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Synchronize Player Position | 0x39 | play | clientbound
  *
- * @property x x
- * @property y y
- * @property z z
- * @property yaw yaw
- * @property pitch pitch
- * @property flags flags
- * @property teleportId teleportId
- * @property dismountVehicle dismountVehicle
+ * @param x x
+ * @param y y
+ * @param z z
+ * @param yaw yaw
+ * @param pitch pitch
+ * @param flags flags
+ * @param teleportId teleportId
+ * @param dismountVehicle dismountVehicle
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Synchronize_Player_Position">https://wiki.vg/Protocol#Synchronize_Player_Position</a>
  */
 

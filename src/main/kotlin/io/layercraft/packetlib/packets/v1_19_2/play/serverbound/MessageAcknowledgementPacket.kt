@@ -8,7 +8,7 @@ import java.util.UUID
  * Message Acknowledgment | 0x03 | play | serverbound
  *
  * @property hasLastMessage lastMessage is present
- * @property sender sender
+ * @param sender sender
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Message_Acknowledgment">https://wiki.vg/Protocol#Message_Acknowledgment</a>
  */
 

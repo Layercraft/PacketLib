@@ -7,10 +7,10 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Handshake | 0x00 | handshaking | serverbound
  *
- * @property protocolVersion protocolVersion
- * @property serverHost serverHost
- * @property serverPort serverPort
- * @property nextState nextState
+ * @param protocolVersion protocolVersion
+ * @param serverHost serverHost
+ * @param serverPort serverPort
+ * @param nextState nextState
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Handshake">https://wiki.vg/Protocol#Handshake</a>
  */
 

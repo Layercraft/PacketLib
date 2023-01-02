@@ -7,8 +7,8 @@ import io.layercraft.packetlib.types.Position
 /**
  * Query Block Entity Tag | 0x01 | play | serverbound
  *
- * @property transactionId transactionId
- * @property location location
+ * @param transactionId transactionId
+ * @param location location
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Query_Block_Entity_Tag">https://wiki.vg/Protocol#Query_Block_Entity_Tag</a>
  */
 

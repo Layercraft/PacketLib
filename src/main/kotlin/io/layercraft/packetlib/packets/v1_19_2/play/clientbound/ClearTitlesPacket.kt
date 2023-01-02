@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Clear Titles | 0x0d | play | clientbound
  *
- * @property reset reset
+ * @param reset reset
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Clear_Titles">https://wiki.vg/Protocol#Clear_Titles</a>
  */
 

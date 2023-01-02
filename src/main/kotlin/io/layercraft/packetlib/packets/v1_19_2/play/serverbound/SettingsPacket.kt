@@ -7,14 +7,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Client Information | 0x08 | play | serverbound
  *
- * @property locale locale
- * @property viewDistance viewDistance
- * @property chatFlags chatFlags
- * @property chatColors chatColors
- * @property skinParts skinParts
- * @property mainHand mainHand
- * @property enableTextFiltering enableTextFiltering
- * @property enableServerListing enableServerListing
+ * @param locale locale
+ * @param viewDistance viewDistance
+ * @param chatFlags chatFlags
+ * @param chatColors chatColors
+ * @param skinParts skinParts
+ * @param mainHand mainHand
+ * @param enableTextFiltering enableTextFiltering
+ * @param enableServerListing enableServerListing
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Client_Information">https://wiki.vg/Protocol#Client_Information</a>
  */
 

@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Change Recipe Book Settings | 0x21 | play | serverbound
  *
- * @property bookId bookId
- * @property bookOpen bookOpen
- * @property filterActive filterActive
+ * @param bookId bookId
+ * @param bookOpen bookOpen
+ * @param filterActive filterActive
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Change_Recipe_Book_Settings">https://wiki.vg/Protocol#Change_Recipe_Book_Settings</a>
  */
 

@@ -7,10 +7,10 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Entity Velocity | 0x52 | play | clientbound
  *
- * @property entityId entityId
- * @property velocityX velocityX
- * @property velocityY velocityY
- * @property velocityZ velocityZ
+ * @param entityId entityId
+ * @param velocityX velocityX
+ * @param velocityY velocityY
+ * @param velocityZ velocityZ
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Entity_Velocity">https://wiki.vg/Protocol#Set_Entity_Velocity</a>
  */
 

@@ -7,14 +7,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Initialize World Border | 0x1f | play | clientbound
  *
- * @property x x
- * @property z z
- * @property oldDiameter oldDiameter
- * @property newDiameter newDiameter
- * @property speed speed
- * @property portalTeleportBoundary portalTeleportBoundary
- * @property warningBlocks warningBlocks
- * @property warningTime warningTime
+ * @param x x
+ * @param z z
+ * @param oldDiameter oldDiameter
+ * @param newDiameter newDiameter
+ * @param speed speed
+ * @param portalTeleportBoundary portalTeleportBoundary
+ * @param warningBlocks warningBlocks
+ * @param warningTime warningTime
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Initialize_World_Border">https://wiki.vg/Protocol#Initialize_World_Border</a>
  */
 

@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Player Input | 0x1f | play | serverbound
  *
- * @property sideways sideways
- * @property forward forward
- * @property jump jump
+ * @param sideways sideways
+ * @param forward forward
+ * @param jump jump
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Player_Input">https://wiki.vg/Protocol#Player_Input</a>
  */
 

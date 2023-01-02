@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Resource Pack (serverbound) | 0x24 | play | serverbound
  *
- * @property result result
+ * @param result result
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Resource_Pack_.28serverbound.29">https://wiki.vg/Protocol#Resource_Pack_.28serverbound.29</a>
  */
 

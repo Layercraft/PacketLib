@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Command Suggestions Request | 0x09 | play | serverbound
  *
- * @property transactionId transactionId
- * @property text text
+ * @param transactionId transactionId
+ * @param text text
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Command_Suggestions_Request">https://wiki.vg/Protocol#Command_Suggestions_Request</a>
  */
 

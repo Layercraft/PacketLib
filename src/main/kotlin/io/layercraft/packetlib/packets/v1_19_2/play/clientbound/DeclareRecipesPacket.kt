@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Update Recipes | 0x6a | play | clientbound
  *
- * @property recipes recipes
+ * @param recipes list of DeclareRecipesPacketRecipes
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Recipes">https://wiki.vg/Protocol#Update_Recipes</a>
  */
 
@@ -20,8 +20,34 @@ data class DeclareRecipesPacket(
             val recipes = input.readVarIntArray { arrayInput ->
                 val type = arrayInput.readString()
                 val recipeId = arrayInput.readString()
+                val group = when (type) {
+                    "minecraft:crafting_shapeless" -> arrayInput.readString()
+                    "minecraft:crafting_shaped" -> arrayInput.readString()
+                    "minecraft:stonecutting" -> arrayInput.readString()
+                    else -> null
+                }
+                val result = when (type) {
+                    else -> null
+                }
+                val width = when (type) {
+                    "minecraft:crafting_shaped" -> arrayInput.readVarInt()
+                    else -> null
+                }
+                val height = when (type) {
+                    "minecraft:crafting_shaped" -> arrayInput.readVarInt()
+                    else -> null
+                }
+                val ingredient = when (type) {
+                    else -> null
+                }
+                val base = when (type) {
+                    else -> null
+                }
+                val addition = when (type) {
+                    else -> null
+                }
 
-                return@readVarIntArray DeclareRecipesPacketRecipes(type, recipeId)
+                return@readVarIntArray DeclareRecipesPacketRecipes(type, recipeId, group, width, height)
             }
 
             return DeclareRecipesPacket(recipes)
@@ -31,18 +57,50 @@ data class DeclareRecipesPacket(
             output.writeVarIntArray(value.recipes) { arrayValue, arrayOutput ->
                 arrayOutput.writeString(arrayValue.type)
                 arrayOutput.writeString(arrayValue.recipeId)
+                when (arrayValue.type) {
+                    "minecraft:crafting_shapeless" -> arrayOutput.writeString(arrayValue.group!!)
+                    "minecraft:crafting_shaped" -> arrayOutput.writeString(arrayValue.group!!)
+                    "minecraft:stonecutting" -> arrayOutput.writeString(arrayValue.group!!)
+                    else -> {}
+                }
+                when (arrayValue.type) {
+                    else -> {}
+                }
+                when (arrayValue.type) {
+                    "minecraft:crafting_shaped" -> arrayOutput.writeVarInt(arrayValue.width!!)
+                    else -> {}
+                }
+                when (arrayValue.type) {
+                    "minecraft:crafting_shaped" -> arrayOutput.writeVarInt(arrayValue.height!!)
+                    else -> {}
+                }
+                when (arrayValue.type) {
+                    else -> {}
+                }
+                when (arrayValue.type) {
+                    else -> {}
+                }
+                when (arrayValue.type) {
+                    else -> {}
+                }
             }
         }
     }
 }
 
 /**
- * DeclareRecipesPacketRecipes | recipes
+ * DeclareRecipesPacketRecipes
  *
- * @property type type
- * @property recipeId recipeId
+ * @param type type
+ * @param recipeId recipeId
+ * @param group group
+ * @param width width
+ * @param height height
 */
 data class DeclareRecipesPacketRecipes(
     val type: String,
     val recipeId: String,
+    val group: String?,
+    val width: Int?, // varint
+    val height: Int?, // varint
 )

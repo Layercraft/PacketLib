@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Cooldown | 0x14 | play | clientbound
  *
- * @property itemID itemID
- * @property cooldownTicks cooldownTicks
+ * @param itemID itemID
+ * @param cooldownTicks cooldownTicks
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Cooldown">https://wiki.vg/Protocol#Set_Cooldown</a>
  */
 

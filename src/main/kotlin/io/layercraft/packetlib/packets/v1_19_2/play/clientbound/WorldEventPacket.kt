@@ -7,10 +7,10 @@ import io.layercraft.packetlib.types.Position
 /**
  * World Event | 0x22 | play | clientbound
  *
- * @property effectId effectId
- * @property location location
- * @property data data
- * @property global global
+ * @param effectId effectId
+ * @param location location
+ * @param data data
+ * @param global global
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#World_Event">https://wiki.vg/Protocol#World_Event</a>
  */
 

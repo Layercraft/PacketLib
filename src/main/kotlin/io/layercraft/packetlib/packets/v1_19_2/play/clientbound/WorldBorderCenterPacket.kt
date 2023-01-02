@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Border Center | 0x44 | play | clientbound
  *
- * @property x x
- * @property z z
+ * @param x x
+ * @param z z
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Border_Center">https://wiki.vg/Protocol#Set_Border_Center</a>
  */
 

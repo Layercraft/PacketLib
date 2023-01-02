@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Unload Chunk | 0x1c | play | clientbound
  *
- * @property chunkX chunkX
- * @property chunkZ chunkZ
+ * @param chunkX chunkX
+ * @param chunkZ chunkZ
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Unload_Chunk">https://wiki.vg/Protocol#Unload_Chunk</a>
  */
 

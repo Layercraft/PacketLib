@@ -7,13 +7,13 @@ import io.layercraft.packetlib.types.NBT
 /**
  * Entity Effect | 0x69 | play | clientbound
  *
- * @property entityId entityId
- * @property effectId effectId
- * @property amplifier amplifier
- * @property duration duration
- * @property hideParticles hideParticles
- * @property hasFactorCodec factorCodec is present
- * @property factorCodec factorCodec
+ * @param entityId entityId
+ * @param effectId effectId
+ * @param amplifier amplifier
+ * @param duration duration
+ * @param hideParticles hideParticles
+ * @param hasFactorCodec factorCodec is present
+ * @param factorCodec factorCodec
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Entity_Effect">https://wiki.vg/Protocol#Entity_Effect</a>
  */
 

@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Status Response | 0x00 | status | clientbound
  *
- * @property response response
+ * @param response response
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Status_Response">https://wiki.vg/Protocol#Status_Response</a>
  */
 

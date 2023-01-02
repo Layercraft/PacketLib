@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Program Command Block Minecart | 0x2a | play | serverbound
  *
- * @property entityId entityId
- * @property command command
- * @property trackOutput track_output
+ * @param entityId entityId
+ * @param command command
+ * @param trackOutput track_output
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Program_Command_Block_Minecart">https://wiki.vg/Protocol#Program_Command_Block_Minecart</a>
  */
 

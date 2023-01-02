@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Place Recipe | 0x1b | play | serverbound
  *
- * @property windowId windowId
- * @property recipe recipe
- * @property makeAll makeAll
+ * @param windowId windowId
+ * @param recipe recipe
+ * @param makeAll makeAll
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Place_Recipe">https://wiki.vg/Protocol#Place_Recipe</a>
  */
 

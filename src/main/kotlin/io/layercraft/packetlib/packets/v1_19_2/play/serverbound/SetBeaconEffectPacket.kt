@@ -7,10 +7,10 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Beacon Effect | 0x27 | play | serverbound
  *
- * @property hasPrimaryEffect primary_effect is present
- * @property primaryEffect primary_effect
- * @property hasSecondaryEffect secondary_effect is present
- * @property secondaryEffect secondary_effect
+ * @param hasPrimaryEffect primary_effect is present
+ * @param primaryEffect primary_effect
+ * @param hasSecondaryEffect secondary_effect is present
+ * @param secondaryEffect secondary_effect
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Beacon_Effect">https://wiki.vg/Protocol#Set_Beacon_Effect</a>
  */
 

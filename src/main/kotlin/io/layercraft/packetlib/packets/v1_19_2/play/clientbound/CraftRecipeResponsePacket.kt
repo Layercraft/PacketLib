@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Place Ghost Recipe | 0x30 | play | clientbound
  *
- * @property windowId windowId
- * @property recipe recipe
+ * @param windowId windowId
+ * @param recipe recipe
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Place_Ghost_Recipe">https://wiki.vg/Protocol#Place_Ghost_Recipe</a>
  */
 

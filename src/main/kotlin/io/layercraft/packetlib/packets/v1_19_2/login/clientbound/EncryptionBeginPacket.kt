@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Encryption Request | 0x01 | login | clientbound
  *
- * @property serverId serverId
- * @property publicKey publicKey
- * @property verifyToken verifyToken
+ * @param serverId serverId
+ * @param publicKey publicKey
+ * @param verifyToken verifyToken
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Encryption_Request">https://wiki.vg/Protocol#Encryption_Request</a>
  */
 

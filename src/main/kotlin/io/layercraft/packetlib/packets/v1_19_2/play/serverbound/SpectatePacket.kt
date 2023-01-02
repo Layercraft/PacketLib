@@ -7,7 +7,7 @@ import java.util.UUID
 /**
  * Teleport To Entity | 0x30 | play | serverbound
  *
- * @property target target
+ * @param target target
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Teleport_To_Entity">https://wiki.vg/Protocol#Teleport_To_Entity</a>
  */
 

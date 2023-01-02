@@ -7,11 +7,11 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Encryption Response | 0x01 | login | serverbound
  *
- * @property sharedSecret sharedSecret
- * @property hasVerifyToken hasVerifyToken
- * @property verifyToken verifyToken
- * @property salt salt
- * @property messageSignature messageSignature
+ * @param sharedSecret sharedSecret
+ * @param hasVerifyToken hasVerifyToken
+ * @param verifyToken verifyToken
+ * @param salt salt
+ * @param messageSignature messageSignature
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Encryption_Response">https://wiki.vg/Protocol#Encryption_Response</a>
  */
 

@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Ping Request | 0x01 | status | serverbound
  *
- * @property time time
+ * @param time time
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Ping_Request">https://wiki.vg/Protocol#Ping_Request</a>
  */
 

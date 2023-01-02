@@ -7,12 +7,12 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Click Container | 0x0b | play | serverbound
  *
- * @property windowId windowId
- * @property stateId stateId
- * @property slot slot
- * @property mouseButton mouseButton
- * @property mode mode
- * @property changedSlots changedSlots
+ * @param windowId windowId
+ * @param stateId stateId
+ * @param slot slot
+ * @param mouseButton mouseButton
+ * @param mode mode
+ * @param changedSlots list of WindowClickPacketChangedSlots
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Click_Container">https://wiki.vg/Protocol#Click_Container</a>
  */
 
@@ -47,6 +47,7 @@ data class WindowClickPacket(
             output.writeShort(value.slot)
             output.writeByte(value.mouseButton)
             output.writeVarInt(value.mode)
+
             output.writeVarIntArray(value.changedSlots) { arrayValue, arrayOutput ->
                 arrayOutput.writeShort(arrayValue.location)
             }
@@ -55,9 +56,9 @@ data class WindowClickPacket(
 }
 
 /**
- * WindowClickPacketChangedSlots | changedSlots
+ * WindowClickPacketChangedSlots
  *
- * @property location location
+ * @param location location
 */
 data class WindowClickPacketChangedSlots(
     val location: Short,

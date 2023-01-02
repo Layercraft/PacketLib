@@ -7,11 +7,11 @@ import io.layercraft.packetlib.types.Position
 /**
  * Update Sign | 0x2e | play | serverbound
  *
- * @property location location
- * @property text1 text1
- * @property text2 text2
- * @property text3 text3
- * @property text4 text4
+ * @param location location
+ * @param text1 text1
+ * @param text2 text2
+ * @param text3 text3
+ * @param text4 text4
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Sign">https://wiki.vg/Protocol#Update_Sign</a>
  */
 

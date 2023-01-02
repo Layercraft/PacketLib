@@ -7,10 +7,10 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Update Score | 0x59 | play | clientbound
  *
- * @property itemName itemName
- * @property action action
- * @property scoreName scoreName
- * @property value value
+ * @param itemName itemName
+ * @param action action
+ * @param scoreName scoreName
+ * @param value value
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Score">https://wiki.vg/Protocol#Update_Score</a>
  */
 

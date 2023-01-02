@@ -7,15 +7,17 @@ import io.layercraft.packetlib.types.NBT
 /**
  * Chunk Data and Update Light | 0x21 | play | clientbound
  *
- * @property x x
- * @property z z
- * @property heightmaps heightmaps
- * @property chunkData chunkData
- * @property trustEdges trustEdges
- * @property skyLightMask skyLightMask
- * @property blockLightMask blockLightMask
- * @property emptySkyLightMask emptySkyLightMask
- * @property emptyBlockLightMask emptyBlockLightMask
+ * @param x x
+ * @param z z
+ * @param heightmaps heightmaps
+ * @param chunkData chunkData
+ * @param trustEdges trustEdges
+ * @param skyLightMask skyLightMask
+ * @param blockLightMask blockLightMask
+ * @param emptySkyLightMask emptySkyLightMask
+ * @param emptyBlockLightMask emptyBlockLightMask
+ * @param skyLight skyLight
+ * @param blockLight blockLight
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Chunk_Data_and_Update_Light">https://wiki.vg/Protocol#Chunk_Data_and_Update_Light</a>
  */
 
@@ -30,6 +32,8 @@ data class MapChunkPacket(
     val blockLightMask: List<Long>, // varint array
     val emptySkyLightMask: List<Long>, // varint array
     val emptyBlockLightMask: List<Long>, // varint array
+    val skyLight: List<UByte>, // varint array
+    val blockLight: List<UByte>, // varint array
 ) : ClientBoundPacket {
     companion object : PacketSerializer<MapChunkPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): MapChunkPacket {
@@ -42,8 +46,10 @@ data class MapChunkPacket(
             val blockLightMask = input.readVarIntArray { arrayInput -> arrayInput.readLong() }
             val emptySkyLightMask = input.readVarIntArray { arrayInput -> arrayInput.readLong() }
             val emptyBlockLightMask = input.readVarIntArray { arrayInput -> arrayInput.readLong() }
+            val skyLight = input.readVarIntArray { arrayInput -> arrayInput.readUByte() }
+            val blockLight = input.readVarIntArray { arrayInput -> arrayInput.readUByte() }
 
-            return MapChunkPacket(x, z, heightmaps, chunkData, trustEdges, skyLightMask, blockLightMask, emptySkyLightMask, emptyBlockLightMask)
+            return MapChunkPacket(x, z, heightmaps, chunkData, trustEdges, skyLightMask, blockLightMask, emptySkyLightMask, emptyBlockLightMask, skyLight, blockLight)
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: MapChunkPacket) {
@@ -56,6 +62,8 @@ data class MapChunkPacket(
             output.writeVarIntArray(value.blockLightMask) { arrayValue, arrayOutput -> arrayOutput.writeLong(arrayValue) }
             output.writeVarIntArray(value.emptySkyLightMask) { arrayValue, arrayOutput -> arrayOutput.writeLong(arrayValue) }
             output.writeVarIntArray(value.emptyBlockLightMask) { arrayValue, arrayOutput -> arrayOutput.writeLong(arrayValue) }
+            output.writeVarIntArray(value.skyLight) { arrayValue, arrayOutput -> arrayOutput.writeUByte(arrayValue) }
+            output.writeVarIntArray(value.blockLight) { arrayValue, arrayOutput -> arrayOutput.writeUByte(arrayValue) }
         }
     }
 }

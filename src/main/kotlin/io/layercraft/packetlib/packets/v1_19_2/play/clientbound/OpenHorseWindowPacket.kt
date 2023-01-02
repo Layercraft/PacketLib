@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Open Horse Screen | 0x1e | play | clientbound
  *
- * @property windowId windowId
- * @property nbSlots nbSlots
- * @property entityId entityId
+ * @param windowId windowId
+ * @param nbSlots nbSlots
+ * @param entityId entityId
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Open_Horse_Screen">https://wiki.vg/Protocol#Open_Horse_Screen</a>
  */
 

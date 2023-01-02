@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Chat Preview (serverbound) | 0x06 | play | serverbound
  *
- * @property query query
- * @property message message
+ * @param query query
+ * @param message message
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Chat_Preview_.28serverbound.29">https://wiki.vg/Protocol#Chat_Preview_.28serverbound.29</a>
  */
 

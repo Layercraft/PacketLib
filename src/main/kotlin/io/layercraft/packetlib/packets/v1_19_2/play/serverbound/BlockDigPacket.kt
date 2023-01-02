@@ -7,10 +7,10 @@ import io.layercraft.packetlib.types.Position
 /**
  * Player Action | 0x1d | play | serverbound
  *
- * @property status status
- * @property location location
- * @property face face
- * @property sequence sequence
+ * @param status status
+ * @param location location
+ * @param face face
+ * @param sequence sequence
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Player_Action">https://wiki.vg/Protocol#Player_Action</a>
  */
 

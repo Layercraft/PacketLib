@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Health | 0x55 | play | clientbound
  *
- * @property health health
- * @property food food
- * @property foodSaturation foodSaturation
+ * @param health health
+ * @param food food
+ * @param foodSaturation foodSaturation
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Health">https://wiki.vg/Protocol#Set_Health</a>
  */
 

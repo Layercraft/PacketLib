@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Game Event | 0x1d | play | clientbound
  *
- * @property reason reason
- * @property gameMode gameMode
+ * @param reason reason
+ * @param gameMode gameMode
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Game_Event">https://wiki.vg/Protocol#Game_Event</a>
  */
 

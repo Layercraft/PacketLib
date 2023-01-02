@@ -7,12 +7,12 @@ import io.layercraft.packetlib.types.Position
 /**
  * Program Jigsaw Block | 0x2c | play | serverbound
  *
- * @property location location
- * @property name name
- * @property target target
- * @property pool pool
- * @property finalState finalState
- * @property jointType jointType
+ * @param location location
+ * @param name name
+ * @param target target
+ * @param pool pool
+ * @param finalState finalState
+ * @param jointType jointType
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Program_Jigsaw_Block">https://wiki.vg/Protocol#Program_Jigsaw_Block</a>
  */
 

@@ -7,17 +7,17 @@ import io.layercraft.packetlib.types.Position
 /**
  * Respawn | 0x3e | play | clientbound
  *
- * @property dimension dimension
- * @property worldName worldName
- * @property hashedSeed hashedSeed
- * @property gamemode gamemode
- * @property previousGamemode previousGamemode
- * @property isDebug isDebug
- * @property isFlat isFlat
- * @property copyMetadata copyMetadata
+ * @param dimension dimension
+ * @param worldName worldName
+ * @param hashedSeed hashedSeed
+ * @param gamemode gamemode
+ * @param previousGamemode previousGamemode
+ * @param isDebug isDebug
+ * @param isFlat isFlat
+ * @param copyMetadata copyMetadata
  * @property hasDeath death is present
- * @property dimensionName dimensionName
- * @property location location
+ * @param dimensionName dimensionName
+ * @param location location
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Respawn">https://wiki.vg/Protocol#Respawn</a>
  */
 

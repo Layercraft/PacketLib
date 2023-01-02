@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Simulation Distance | 0x5a | play | clientbound
  *
- * @property distance distance
+ * @param distance distance
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Simulation_Distance">https://wiki.vg/Protocol#Set_Simulation_Distance</a>
  */
 

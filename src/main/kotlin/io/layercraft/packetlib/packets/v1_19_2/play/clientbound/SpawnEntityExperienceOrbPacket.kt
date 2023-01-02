@@ -7,11 +7,11 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Spawn Experience Orb | 0x01 | play | clientbound
  *
- * @property entityId entityId
- * @property x x
- * @property y y
- * @property z z
- * @property count count
+ * @param entityId entityId
+ * @param x x
+ * @param y y
+ * @param z z
+ * @param count count
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Spawn_Experience_Orb">https://wiki.vg/Protocol#Spawn_Experience_Orb</a>
  */
 

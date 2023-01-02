@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Render Distance | 0x4c | play | clientbound
  *
- * @property viewDistance viewDistance
+ * @param viewDistance viewDistance
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Render_Distance">https://wiki.vg/Protocol#Set_Render_Distance</a>
  */
 

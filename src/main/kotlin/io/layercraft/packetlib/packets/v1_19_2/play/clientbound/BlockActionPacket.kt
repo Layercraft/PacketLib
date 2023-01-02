@@ -7,10 +7,10 @@ import io.layercraft.packetlib.types.Position
 /**
  * Block Action | 0x08 | play | clientbound
  *
- * @property location location
- * @property byte1 byte1
- * @property byte2 byte2
- * @property blockId blockId
+ * @param location location
+ * @param byte1 byte1
+ * @param byte2 byte2
+ * @param blockId blockId
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Block_Action">https://wiki.vg/Protocol#Block_Action</a>
  */
 

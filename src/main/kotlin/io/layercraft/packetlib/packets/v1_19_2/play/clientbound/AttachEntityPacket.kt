@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Link Entities | 0x51 | play | clientbound
  *
- * @property entityId entityId
- * @property vehicleId vehicleId
+ * @param entityId entityId
+ * @param vehicleId vehicleId
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Link_Entities">https://wiki.vg/Protocol#Link_Entities</a>
  */
 

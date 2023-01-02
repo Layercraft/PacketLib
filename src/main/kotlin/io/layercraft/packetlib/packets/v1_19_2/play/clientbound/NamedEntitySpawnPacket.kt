@@ -7,13 +7,13 @@ import java.util.UUID
 /**
  * Spawn Player | 0x02 | play | clientbound
  *
- * @property entityId entityId
- * @property playerUUID playerUUID
- * @property x x
- * @property y y
- * @property z z
- * @property yaw yaw
- * @property pitch pitch
+ * @param entityId entityId
+ * @param playerUUID playerUUID
+ * @param x x
+ * @param y y
+ * @param z z
+ * @param yaw yaw
+ * @param pitch pitch
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Spawn_Player">https://wiki.vg/Protocol#Spawn_Player</a>
  */
 

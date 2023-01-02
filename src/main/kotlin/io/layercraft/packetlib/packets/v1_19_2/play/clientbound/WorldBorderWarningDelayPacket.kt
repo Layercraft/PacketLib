@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Border Warning Delay | 0x47 | play | clientbound
  *
- * @property warningTime warningTime
+ * @param warningTime warningTime
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Border_Warning_Delay">https://wiki.vg/Protocol#Set_Border_Warning_Delay</a>
  */
 

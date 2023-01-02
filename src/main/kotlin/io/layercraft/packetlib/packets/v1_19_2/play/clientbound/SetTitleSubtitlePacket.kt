@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Subtitle Text | 0x5b | play | clientbound
  *
- * @property text text
+ * @param text text
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Subtitle_Text">https://wiki.vg/Protocol#Set_Subtitle_Text</a>
  */
 

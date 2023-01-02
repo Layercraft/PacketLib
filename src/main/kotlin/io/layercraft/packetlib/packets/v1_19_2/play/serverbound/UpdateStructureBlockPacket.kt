@@ -7,22 +7,22 @@ import io.layercraft.packetlib.types.Position
 /**
  * Program Structure Block | 0x2d | play | serverbound
  *
- * @property location location
- * @property action action
- * @property mode mode
- * @property name name
- * @property offsetX offset_x
- * @property offsetY offset_y
- * @property offsetZ offset_z
- * @property sizeX size_x
- * @property sizeY size_y
- * @property sizeZ size_z
- * @property mirror mirror
- * @property rotation rotation
- * @property metadata metadata
- * @property integrity integrity
- * @property seed seed
- * @property flags flags
+ * @param location location
+ * @param action action
+ * @param mode mode
+ * @param name name
+ * @param offsetX offset_x
+ * @param offsetY offset_y
+ * @param offsetZ offset_z
+ * @param sizeX size_x
+ * @param sizeY size_y
+ * @param sizeZ size_z
+ * @param mirror mirror
+ * @param rotation rotation
+ * @param metadata metadata
+ * @param integrity integrity
+ * @param seed seed
+ * @param flags flags
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Program_Structure_Block">https://wiki.vg/Protocol#Program_Structure_Block</a>
  */
 

@@ -7,20 +7,20 @@ import java.util.UUID
 /**
  * Player Chat Message | 0x33 | play | clientbound
  *
- * @property senderUuid senderUuid
- * @property headerSignature headerSignature
- * @property plainMessage plainMessage
- * @property hasFormattedMessage formattedMessage is present
- * @property formattedMessage formattedMessage
- * @property timestamp timestamp
- * @property salt salt
- * @property hasUnsignedContent unsignedContent is present
- * @property unsignedContent unsignedContent
- * @property filterType filterType
- * @property type type
- * @property networkName networkName
- * @property hasNetworkTargetName networkTargetName is present
- * @property networkTargetName networkTargetName
+ * @param senderUuid senderUuid
+ * @param headerSignature headerSignature
+ * @param plainMessage plainMessage
+ * @param hasFormattedMessage formattedMessage is present
+ * @param formattedMessage formattedMessage
+ * @param timestamp timestamp
+ * @param salt salt
+ * @param hasUnsignedContent unsignedContent is present
+ * @param unsignedContent unsignedContent
+ * @param filterType filterType
+ * @param type type
+ * @param networkName networkName
+ * @param hasNetworkTargetName networkTargetName is present
+ * @param networkTargetName networkTargetName
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Player_Chat_Message">https://wiki.vg/Protocol#Player_Chat_Message</a>
  */
 

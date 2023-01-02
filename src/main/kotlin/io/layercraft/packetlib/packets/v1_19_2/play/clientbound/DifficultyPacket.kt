@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Change Difficulty | 0x0b | play | clientbound
  *
- * @property difficulty difficulty
- * @property difficultyLocked difficultyLocked
+ * @param difficulty difficulty
+ * @param difficultyLocked difficultyLocked
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Change_Difficulty">https://wiki.vg/Protocol#Change_Difficulty</a>
  */
 

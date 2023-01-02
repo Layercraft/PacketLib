@@ -7,14 +7,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Map Data | 0x26 | play | clientbound
  *
- * @property itemDamage itemDamage
- * @property scale scale
- * @property locked locked
- * @property columns columns
- * @property rows rows
- * @property x x
- * @property y y
- * @property data data
+ * @param itemDamage itemDamage
+ * @param scale scale
+ * @param locked locked
+ * @param columns columns
+ * @param rows rows
+ * @param x x
+ * @param y y
+ * @param data data
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Map_Data">https://wiki.vg/Protocol#Map_Data</a>
  */
 

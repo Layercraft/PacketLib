@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Open Book | 0x2c | play | clientbound
  *
- * @property hand hand
+ * @param hand hand
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Open_Book">https://wiki.vg/Protocol#Open_Book</a>
  */
 

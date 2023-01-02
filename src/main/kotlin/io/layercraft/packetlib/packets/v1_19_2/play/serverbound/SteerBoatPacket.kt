@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Paddle Boat | 0x19 | play | serverbound
  *
- * @property leftPaddle leftPaddle
- * @property rightPaddle rightPaddle
+ * @param leftPaddle leftPaddle
+ * @param rightPaddle rightPaddle
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Paddle_Boat">https://wiki.vg/Protocol#Paddle_Boat</a>
  */
 

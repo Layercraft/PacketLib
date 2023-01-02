@@ -7,14 +7,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Sound Effect | 0x60 | play | clientbound
  *
- * @property soundId soundId
- * @property soundCategory soundCategory
- * @property x x
- * @property y y
- * @property z z
- * @property volume volume
- * @property pitch pitch
- * @property seed seed
+ * @param soundId soundId
+ * @param soundCategory soundCategory
+ * @param x x
+ * @param y y
+ * @param z z
+ * @param volume volume
+ * @param pitch pitch
+ * @param seed seed
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Sound_Effect">https://wiki.vg/Protocol#Sound_Effect</a>
  */
 

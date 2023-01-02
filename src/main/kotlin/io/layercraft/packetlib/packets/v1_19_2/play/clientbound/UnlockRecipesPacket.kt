@@ -7,16 +7,16 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Update Recipe Book | 0x3a | play | clientbound
  *
- * @property action action
- * @property craftingBookOpen craftingBookOpen
- * @property filteringCraftable filteringCraftable
- * @property smeltingBookOpen smeltingBookOpen
- * @property filteringSmeltable filteringSmeltable
- * @property blastFurnaceOpen blastFurnaceOpen
- * @property filteringBlastFurnace filteringBlastFurnace
- * @property smokerBookOpen smokerBookOpen
- * @property filteringSmoker filteringSmoker
- * @property recipes1 recipes1
+ * @param action action
+ * @param craftingBookOpen craftingBookOpen
+ * @param filteringCraftable filteringCraftable
+ * @param smeltingBookOpen smeltingBookOpen
+ * @param filteringSmeltable filteringSmeltable
+ * @param blastFurnaceOpen blastFurnaceOpen
+ * @param filteringBlastFurnace filteringBlastFurnace
+ * @param smokerBookOpen smokerBookOpen
+ * @param filteringSmoker filteringSmoker
+ * @param recipes1 recipes1
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Recipe_Book">https://wiki.vg/Protocol#Update_Recipe_Book</a>
  */
 

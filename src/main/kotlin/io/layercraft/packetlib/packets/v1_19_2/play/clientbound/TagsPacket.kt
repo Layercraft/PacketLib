@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Update Tags | 0x6b | play | clientbound
  *
- * @property tags tags
+ * @param tags list of TagsPacketTags
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Tags">https://wiki.vg/Protocol#Update_Tags</a>
  */
 
@@ -35,9 +35,9 @@ data class TagsPacket(
 }
 
 /**
- * TagsPacketTags | tags
+ * TagsPacketTags
  *
- * @property tagType tagType
+ * @param tagType tagType
 */
 data class TagsPacketTags(
     val tagType: String,

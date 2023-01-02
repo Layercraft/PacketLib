@@ -7,13 +7,13 @@ import java.util.UUID
 /**
  * Login Start | 0x00 | login | serverbound
  *
- * @property username username
+ * @param username username
  * @property hasSignature signature is present
- * @property timestamp timestamp
- * @property publicKey publicKey
- * @property signature signature
- * @property hasPlayerUUID playerUUID is present
- * @property playerUUID playerUUID
+ * @param timestamp timestamp
+ * @param publicKey publicKey
+ * @param signature signature
+ * @param hasPlayerUUID playerUUID is present
+ * @param playerUUID playerUUID
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Login_Start">https://wiki.vg/Protocol#Login_Start</a>
  */
 

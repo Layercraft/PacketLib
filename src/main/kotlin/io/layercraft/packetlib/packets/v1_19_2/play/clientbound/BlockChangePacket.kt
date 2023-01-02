@@ -7,8 +7,8 @@ import io.layercraft.packetlib.types.Position
 /**
  * Block Update | 0x09 | play | clientbound
  *
- * @property location location
- * @property type type
+ * @param location location
+ * @param type type
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Block_Update">https://wiki.vg/Protocol#Block_Update</a>
  */
 

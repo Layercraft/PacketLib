@@ -7,13 +7,13 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Interact | 0x10 | play | serverbound
  *
- * @property target target
- * @property mouse mouse
- * @property x x
- * @property y y
- * @property z z
- * @property hand hand
- * @property sneaking sneaking
+ * @param target target
+ * @param mouse mouse
+ * @param x x
+ * @param y y
+ * @param z z
+ * @param hand hand
+ * @param sneaking sneaking
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Interact">https://wiki.vg/Protocol#Interact</a>
  */
 

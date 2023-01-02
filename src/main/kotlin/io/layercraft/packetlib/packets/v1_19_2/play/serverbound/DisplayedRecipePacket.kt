@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Seen Recipe | 0x22 | play | serverbound
  *
- * @property recipeId recipeId
+ * @param recipeId recipeId
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Seen_Recipe">https://wiki.vg/Protocol#Set_Seen_Recipe</a>
  */
 

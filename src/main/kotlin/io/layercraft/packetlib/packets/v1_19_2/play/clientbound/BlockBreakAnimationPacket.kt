@@ -7,9 +7,9 @@ import io.layercraft.packetlib.types.Position
 /**
  * Set Block Destroy Stage | 0x06 | play | clientbound
  *
- * @property entityId entityId
- * @property location location
- * @property destroyStage destroyStage
+ * @param entityId entityId
+ * @param location location
+ * @param destroyStage destroyStage
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Block_Destroy_Stage">https://wiki.vg/Protocol#Set_Block_Destroy_Stage</a>
  */
 

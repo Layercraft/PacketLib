@@ -7,12 +7,12 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Server Data | 0x42 | play | clientbound
  *
- * @property hasMotd motd is present
- * @property motd motd
- * @property hasIcon icon is present
- * @property icon icon
- * @property previewsChat previewsChat
- * @property enforcesSecureChat enforcesSecureChat
+ * @param hasMotd motd is present
+ * @param motd motd
+ * @param hasIcon icon is present
+ * @param icon icon
+ * @param previewsChat previewsChat
+ * @param enforcesSecureChat enforcesSecureChat
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Server_Data">https://wiki.vg/Protocol#Server_Data</a>
  */
 

@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Entity Animation (clientbound) | 0x03 | play | clientbound
  *
- * @property entityId entityId
- * @property animation animation
+ * @param entityId entityId
+ * @param animation animation
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Entity_Animation_.28clientbound.29">https://wiki.vg/Protocol#Entity_Animation_.28clientbound.29</a>
  */
 

@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Player Rotation | 0x16 | play | serverbound
  *
- * @property yaw yaw
- * @property pitch pitch
- * @property onGround onGround
+ * @param yaw yaw
+ * @param pitch pitch
+ * @param onGround onGround
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Player_Rotation">https://wiki.vg/Protocol#Set_Player_Rotation</a>
  */
 

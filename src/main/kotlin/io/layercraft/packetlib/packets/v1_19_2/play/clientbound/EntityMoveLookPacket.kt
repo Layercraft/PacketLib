@@ -7,13 +7,13 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Update Entity Position and Rotation | 0x29 | play | clientbound
  *
- * @property entityId entityId
- * @property dX dX
- * @property dY dY
- * @property dZ dZ
- * @property yaw yaw
- * @property pitch pitch
- * @property onGround onGround
+ * @param entityId entityId
+ * @param dX dX
+ * @param dY dY
+ * @param dZ dZ
+ * @param yaw yaw
+ * @param pitch pitch
+ * @param onGround onGround
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Entity_Position_and_Rotation">https://wiki.vg/Protocol#Update_Entity_Position_and_Rotation</a>
  */
 

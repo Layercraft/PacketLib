@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Remove Entity Effect | 0x3c | play | clientbound
  *
- * @property entityId entityId
- * @property effectId effectId
+ * @param entityId entityId
+ * @param effectId effectId
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Remove_Entity_Effect">https://wiki.vg/Protocol#Remove_Entity_Effect</a>
  */
 

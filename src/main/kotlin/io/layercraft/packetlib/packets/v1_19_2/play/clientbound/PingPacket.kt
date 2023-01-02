@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Ping (play) | 0x2f | play | clientbound
  *
- * @property id id
+ * @param id id
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Ping_.28play.29">https://wiki.vg/Protocol#Ping_.28play.29</a>
  */
 

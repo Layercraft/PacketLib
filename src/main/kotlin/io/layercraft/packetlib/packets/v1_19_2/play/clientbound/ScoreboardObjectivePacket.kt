@@ -7,10 +7,10 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Update Objectives | 0x56 | play | clientbound
  *
- * @property name name
- * @property action action
- * @property displayText displayText
- * @property type type
+ * @param name name
+ * @param action action
+ * @param displayText displayText
+ * @param type type
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Objectives">https://wiki.vg/Protocol#Update_Objectives</a>
  */
 

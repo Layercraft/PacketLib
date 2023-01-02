@@ -7,13 +7,13 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Look At | 0x38 | play | clientbound
  *
- * @property feetEyes feet_eyes
- * @property x x
- * @property y y
- * @property z z
- * @property isEntity isEntity
- * @property entityId entityId
- * @property entityFeetEyes entity_feet_eyes
+ * @param feetEyes feet_eyes
+ * @param x x
+ * @param y y
+ * @param z z
+ * @param isEntity isEntity
+ * @param entityId entityId
+ * @param entityFeetEyes entity_feet_eyes
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Look_At">https://wiki.vg/Protocol#Look_At</a>
  */
 

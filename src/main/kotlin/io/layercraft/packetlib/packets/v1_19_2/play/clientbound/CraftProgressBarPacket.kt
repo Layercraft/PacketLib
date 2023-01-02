@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Container Property | 0x12 | play | clientbound
  *
- * @property windowId windowId
- * @property property property
- * @property value value
+ * @param windowId windowId
+ * @param property property
+ * @param value value
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Container_Property">https://wiki.vg/Protocol#Set_Container_Property</a>
  */
 

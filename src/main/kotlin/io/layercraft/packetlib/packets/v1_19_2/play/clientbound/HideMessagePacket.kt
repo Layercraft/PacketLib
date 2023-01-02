@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Hide Message | 0x18 | play | clientbound
  *
- * @property signature signature
+ * @param signature signature
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Hide_Message">https://wiki.vg/Protocol#Hide_Message</a>
  */
 

@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Title Animation Times | 0x5e | play | clientbound
  *
- * @property fadeIn fadeIn
- * @property stay stay
- * @property fadeOut fadeOut
+ * @param fadeIn fadeIn
+ * @param stay stay
+ * @param fadeOut fadeOut
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Title_Animation_Times">https://wiki.vg/Protocol#Set_Title_Animation_Times</a>
  */
 

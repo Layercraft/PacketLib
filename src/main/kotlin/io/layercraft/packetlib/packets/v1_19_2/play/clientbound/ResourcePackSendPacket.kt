@@ -7,11 +7,11 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Resource Pack (clientbound) | 0x3d | play | clientbound
  *
- * @property url url
- * @property hash hash
- * @property forced forced
- * @property hasPromptMessage promptMessage is present
- * @property promptMessage promptMessage
+ * @param url url
+ * @param hash hash
+ * @param forced forced
+ * @param hasPromptMessage promptMessage is present
+ * @param promptMessage promptMessage
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Resource_Pack_.28clientbound.29">https://wiki.vg/Protocol#Resource_Pack_.28clientbound.29</a>
  */
 

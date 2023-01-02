@@ -7,16 +7,16 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Particle | 0x23 | play | clientbound
  *
- * @property particleId particleId
- * @property longDistance longDistance
- * @property x x
- * @property y y
- * @property z z
- * @property offsetX offsetX
- * @property offsetY offsetY
- * @property offsetZ offsetZ
- * @property particleData particleData
- * @property particles particles
+ * @param particleId particleId
+ * @param longDistance longDistance
+ * @param x x
+ * @param y y
+ * @param z z
+ * @param offsetX offsetX
+ * @param offsetY offsetY
+ * @param offsetZ offsetZ
+ * @param particleData particleData
+ * @param particles particles
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Particle_2">https://wiki.vg/Protocol#Particle_2</a>
  */
 

@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Use Item | 0x32 | play | serverbound
  *
- * @property hand hand
- * @property sequence sequence
+ * @param hand hand
+ * @param sequence sequence
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
  */
 

@@ -17,7 +17,6 @@ val ktlint by configurations.creating
 val outputDir = "${project.buildDir}/reports/ktlint/"
 val inputFiles = project.fileTree(mapOf("dir" to "src", "include" to "**/*.kt"))
 
-
 dependencies {
     ktlint("com.pinterest:ktlint:0.48.0") {
         attributes {
@@ -34,8 +33,6 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 }
-
-
 
 val ktlintCheck by tasks.creating(JavaExec::class) {
     inputs.files(inputFiles)

@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Pickup Item | 0x65 | play | clientbound
  *
- * @property collectedEntityId collectedEntityId
- * @property collectorEntityId collectorEntityId
- * @property pickupItemCount pickupItemCount
+ * @param collectedEntityId collectedEntityId
+ * @param collectorEntityId collectorEntityId
+ * @param pickupItemCount pickupItemCount
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Pickup_Item">https://wiki.vg/Protocol#Pickup_Item</a>
  */
 

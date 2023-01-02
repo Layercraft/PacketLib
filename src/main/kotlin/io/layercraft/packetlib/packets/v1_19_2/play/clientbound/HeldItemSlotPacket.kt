@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Held Item (clientbound) | 0x4a | play | clientbound
  *
- * @property slot slot
+ * @param slot slot
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Held_Item_.28clientbound.29">https://wiki.vg/Protocol#Set_Held_Item_.28clientbound.29</a>
  */
 

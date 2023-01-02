@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Player On Ground | 0x17 | play | serverbound
  *
- * @property onGround onGround
+ * @param onGround onGround
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Player_On_Ground">https://wiki.vg/Protocol#Set_Player_On_Ground</a>
  */
 

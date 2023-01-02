@@ -7,10 +7,10 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Player Position | 0x14 | play | serverbound
  *
- * @property x x
- * @property y y
- * @property z z
- * @property onGround onGround
+ * @param x x
+ * @param y y
+ * @param z z
+ * @param onGround onGround
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Player_Position">https://wiki.vg/Protocol#Set_Player_Position</a>
  */
 

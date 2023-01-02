@@ -7,9 +7,9 @@ import io.layercraft.packetlib.types.Position
 /**
  * Jigsaw Generate | 0x11 | play | serverbound
  *
- * @property location location
- * @property levels levels
- * @property keepJigsaws keepJigsaws
+ * @param location location
+ * @param levels levels
+ * @param keepJigsaws keepJigsaws
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Jigsaw_Generate">https://wiki.vg/Protocol#Jigsaw_Generate</a>
  */
 

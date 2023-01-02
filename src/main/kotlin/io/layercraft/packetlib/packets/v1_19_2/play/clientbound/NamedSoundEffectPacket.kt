@@ -7,14 +7,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Custom Sound Effect | 0x17 | play | clientbound
  *
- * @property soundName soundName
- * @property soundCategory soundCategory
- * @property x x
- * @property y y
- * @property z z
- * @property volume volume
- * @property pitch pitch
- * @property seed seed
+ * @param soundName soundName
+ * @param soundCategory soundCategory
+ * @param x x
+ * @param y y
+ * @param z z
+ * @param volume volume
+ * @param pitch pitch
+ * @param seed seed
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Custom_Sound_Effect">https://wiki.vg/Protocol#Custom_Sound_Effect</a>
  */
 

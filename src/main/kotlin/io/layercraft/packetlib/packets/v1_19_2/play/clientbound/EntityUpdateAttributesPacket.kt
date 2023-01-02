@@ -3,12 +3,12 @@ package io.layercraft.packetlib.packets.v1_19_2.play.clientbound
 import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
-
+import java.util.UUID
 /**
  * Update Attributes | 0x68 | play | clientbound
  *
- * @property entityId entityId
- * @property properties properties
+ * @param entityId entityId
+ * @param properties list of EntityUpdateAttributesPacketProperties
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Attributes">https://wiki.vg/Protocol#Update_Attributes</a>
  */
 
@@ -23,8 +23,15 @@ data class EntityUpdateAttributesPacket(
             val properties = input.readVarIntArray { arrayInput ->
                 val key = arrayInput.readString()
                 val value = arrayInput.readDouble()
+                val modifiers = arrayInput.readVarIntArray { arrayInput1 ->
+                    val uuid = arrayInput1.readUUID()
+                    val amount = arrayInput1.readDouble()
+                    val operation = arrayInput1.readByte()
 
-                return@readVarIntArray EntityUpdateAttributesPacketProperties(key, value)
+                    return@readVarIntArray EntityUpdateAttributesPacketModifiers(uuid, amount, operation)
+                }
+
+                return@readVarIntArray EntityUpdateAttributesPacketProperties(key, value, modifiers)
             }
 
             return EntityUpdateAttributesPacket(entityId, properties)
@@ -32,21 +39,43 @@ data class EntityUpdateAttributesPacket(
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityUpdateAttributesPacket) {
             output.writeVarInt(value.entityId)
+
             output.writeVarIntArray(value.properties) { arrayValue, arrayOutput ->
                 arrayOutput.writeString(arrayValue.key)
                 arrayOutput.writeDouble(arrayValue.value)
+
+                arrayOutput.writeVarIntArray(arrayValue.modifiers) { arrayValue1, arrayOutput1 ->
+                    arrayOutput1.writeUUID(arrayValue1.uuid)
+                    arrayOutput1.writeDouble(arrayValue1.amount)
+                    arrayOutput1.writeByte(arrayValue1.operation)
+                }
             }
         }
     }
 }
 
 /**
- * EntityUpdateAttributesPacketProperties | properties
+ * EntityUpdateAttributesPacketModifiers
  *
- * @property key key
- * @property value value
+ * @param uuid uuid
+ * @param amount amount
+ * @param operation operation
+*/
+data class EntityUpdateAttributesPacketModifiers(
+    val uuid: UUID,
+    val amount: Double,
+    val operation: Byte,
+)
+
+/**
+ * EntityUpdateAttributesPacketProperties
+ *
+ * @param key key
+ * @param value value
+ * @param modifiers list of EntityUpdateAttributesPacketModifiers
 */
 data class EntityUpdateAttributesPacketProperties(
     val key: String,
     val value: Double,
+    val modifiers: List<EntityUpdateAttributesPacketModifiers>, // varint array
 )

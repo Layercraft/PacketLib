@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Open Screen | 0x2d | play | clientbound
  *
- * @property windowId windowId
- * @property inventoryType inventoryType
- * @property windowTitle windowTitle
+ * @param windowId windowId
+ * @param inventoryType inventoryType
+ * @param windowTitle windowTitle
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Open_Screen">https://wiki.vg/Protocol#Open_Screen</a>
  */
 

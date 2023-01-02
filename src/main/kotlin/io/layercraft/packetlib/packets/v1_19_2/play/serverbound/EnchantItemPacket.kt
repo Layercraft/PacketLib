@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Click Container Button | 0x0a | play | serverbound
  *
- * @property windowId windowId
- * @property enchantment enchantment
+ * @param windowId windowId
+ * @param enchantment enchantment
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Click_Container_Button">https://wiki.vg/Protocol#Click_Container_Button</a>
  */
 

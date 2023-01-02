@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Confirm Teleportation | 0x00 | play | serverbound
  *
- * @property teleportId teleportId
+ * @param teleportId teleportId
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Confirm_Teleportation">https://wiki.vg/Protocol#Confirm_Teleportation</a>
  */
 

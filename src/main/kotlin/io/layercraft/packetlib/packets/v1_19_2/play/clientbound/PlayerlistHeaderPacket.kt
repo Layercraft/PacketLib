@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Tab List Header And Footer | 0x63 | play | clientbound
  *
- * @property header header
- * @property footer footer
+ * @param header header
+ * @param footer footer
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Tab_List_Header_And_Footer">https://wiki.vg/Protocol#Set_Tab_List_Header_And_Footer</a>
  */
 

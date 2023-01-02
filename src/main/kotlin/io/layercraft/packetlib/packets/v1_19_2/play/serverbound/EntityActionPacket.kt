@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Player Command | 0x1e | play | serverbound
  *
- * @property entityId entityId
- * @property actionId actionId
- * @property jumpBoost jumpBoost
+ * @param entityId entityId
+ * @param actionId actionId
+ * @param jumpBoost jumpBoost
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Player_Command">https://wiki.vg/Protocol#Player_Command</a>
  */
 

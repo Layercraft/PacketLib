@@ -7,13 +7,13 @@ import java.util.UUID
 /**
  * Boss Bar | 0x0a | play | clientbound
  *
- * @property entityUUID entityUUID
- * @property action action
- * @property title title
- * @property health health
- * @property color color
- * @property dividers dividers
- * @property flags flags
+ * @param entityUUID entityUUID
+ * @param action action
+ * @param title title
+ * @param health health
+ * @param color color
+ * @param dividers dividers
+ * @param flags flags
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Boss_Bar">https://wiki.vg/Protocol#Boss_Bar</a>
  */
 

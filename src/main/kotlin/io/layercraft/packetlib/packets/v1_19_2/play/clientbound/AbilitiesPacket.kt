@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Player Abilities (clientbound) | 0x31 | play | clientbound
  *
- * @property flags flags
- * @property flyingSpeed flyingSpeed
- * @property walkingSpeed walkingSpeed
+ * @param flags flags
+ * @param flyingSpeed flyingSpeed
+ * @param walkingSpeed walkingSpeed
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Player_Abilities_.28clientbound.29">https://wiki.vg/Protocol#Player_Abilities_.28clientbound.29</a>
  */
 

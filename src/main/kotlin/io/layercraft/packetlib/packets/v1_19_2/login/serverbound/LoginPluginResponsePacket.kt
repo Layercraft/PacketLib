@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Login Plugin Response | 0x02 | login | serverbound
  *
- * @property messageId messageId
- * @property hasData data is present
- * @property data data
+ * @param messageId messageId
+ * @param hasData data is present
+ * @param data data
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Login_Plugin_Response">https://wiki.vg/Protocol#Login_Plugin_Response</a>
  */
 

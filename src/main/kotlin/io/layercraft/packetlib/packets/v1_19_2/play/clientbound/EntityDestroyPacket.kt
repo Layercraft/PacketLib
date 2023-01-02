@@ -7,13 +7,13 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Remove Entities | 0x3b | play | clientbound
  *
- * @property entityIds entityIds
+ * @param entityIds entityIds
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Remove_Entities">https://wiki.vg/Protocol#Remove_Entities</a>
  */
 
 @MinecraftPacket(id = 0x3b, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class EntityDestroyPacket(
-    val entityIds: List<Int>, // varint array
+    val entityIds: List<Int>, // varint array of varint
 ) : ClientBoundPacket {
     companion object : PacketSerializer<EntityDestroyPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntityDestroyPacket {

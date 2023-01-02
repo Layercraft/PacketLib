@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Chat Preview (clientbound) | 0x0c | play | clientbound
  *
- * @property queryId queryId
- * @property hasMessage message is present
- * @property message message
+ * @param queryId queryId
+ * @param hasMessage message is present
+ * @param message message
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Chat_Preview_.28clientbound.29">https://wiki.vg/Protocol#Chat_Preview_.28clientbound.29</a>
  */
 

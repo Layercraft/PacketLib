@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Display Objective | 0x4f | play | clientbound
  *
- * @property position position
- * @property name name
+ * @param position position
+ * @param name name
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Display_Objective">https://wiki.vg/Protocol#Display_Objective</a>
  */
 

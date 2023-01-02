@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * System Chat Message | 0x62 | play | clientbound
  *
- * @property content content
- * @property isActionBar isActionBar
+ * @param content content
+ * @param isActionBar isActionBar
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#System_Chat_Message">https://wiki.vg/Protocol#System_Chat_Message</a>
  */
 

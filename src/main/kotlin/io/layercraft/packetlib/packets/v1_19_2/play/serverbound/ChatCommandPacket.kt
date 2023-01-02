@@ -7,13 +7,13 @@ import java.util.UUID
 /**
  * Chat Command | 0x04 | play | serverbound
  *
- * @property command command
- * @property timestamp timestamp
- * @property salt salt
- * @property argumentSignatures argumentSignatures
- * @property signedPreview signedPreview
+ * @param command command
+ * @param timestamp timestamp
+ * @param salt salt
+ * @param argumentSignatures list of ChatCommandPacketArgumentSignatures
+ * @param signedPreview signedPreview
  * @property hasLastMessage lastMessage is present
- * @property sender sender
+ * @param sender sender
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Chat_Command">https://wiki.vg/Protocol#Chat_Command</a>
  */
 
@@ -34,8 +34,9 @@ data class ChatCommandPacket(
             val salt = input.readLong()
             val argumentSignatures = input.readVarIntArray { arrayInput ->
                 val argumentName = arrayInput.readString()
+                val signature = arrayInput.readVarIntByteArray()
 
-                return@readVarIntArray ChatCommandPacketArgumentSignatures(argumentName)
+                return@readVarIntArray ChatCommandPacketArgumentSignatures(argumentName, signature)
             }
             val signedPreview = input.readBoolean()
             val hasLastMessage = input.readBoolean()
@@ -48,9 +49,12 @@ data class ChatCommandPacket(
             output.writeString(value.command)
             output.writeLong(value.timestamp)
             output.writeLong(value.salt)
+
             output.writeVarIntArray(value.argumentSignatures) { arrayValue, arrayOutput ->
                 arrayOutput.writeString(arrayValue.argumentName)
+                arrayOutput.writeVarIntByteArray(arrayValue.signature)
             }
+
             output.writeBoolean(value.signedPreview)
             output.writeBoolean(value.hasLastMessage)
             if (value.hasLastMessage) output.writeUUID(value.sender!!)
@@ -59,10 +63,12 @@ data class ChatCommandPacket(
 }
 
 /**
- * ChatCommandPacketArgumentSignatures | argumentSignatures
+ * ChatCommandPacketArgumentSignatures
  *
- * @property argumentName argumentName
+ * @param argumentName argumentName
+ * @param signature signature
 */
 data class ChatCommandPacketArgumentSignatures(
     val argumentName: String,
+    val signature: ByteArray,
 )

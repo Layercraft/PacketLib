@@ -7,15 +7,15 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Update Teams | 0x58 | play | clientbound
  *
- * @property team team
- * @property mode mode
- * @property name name
- * @property friendlyFire friendlyFire
- * @property nameTagVisibility nameTagVisibility
- * @property collisionRule collisionRule
- * @property formatting formatting
- * @property prefix prefix
- * @property suffix suffix
+ * @param team team
+ * @param mode mode
+ * @param name name
+ * @param friendlyFire friendlyFire
+ * @param nameTagVisibility nameTagVisibility
+ * @param collisionRule collisionRule
+ * @param formatting formatting
+ * @param prefix prefix
+ * @param suffix suffix
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Teams">https://wiki.vg/Protocol#Update_Teams</a>
  */
 

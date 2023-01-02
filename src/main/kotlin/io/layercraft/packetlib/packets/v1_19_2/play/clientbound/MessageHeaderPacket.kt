@@ -7,9 +7,9 @@ import java.util.UUID
 /**
  * Message Header | 0x32 | play | clientbound
  *
- * @property senderUuid senderUuid
- * @property headerSignature headerSignature
- * @property bodyDigest bodyDigest
+ * @param senderUuid senderUuid
+ * @param headerSignature headerSignature
+ * @param bodyDigest bodyDigest
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Message_Header">https://wiki.vg/Protocol#Message_Header</a>
  */
 

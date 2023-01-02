@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Select Advancements Tab | 0x41 | play | clientbound
  *
- * @property hasId id is present
- * @property id id
+ * @param hasId id is present
+ * @param id id
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Select_Advancements_Tab">https://wiki.vg/Protocol#Select_Advancements_Tab</a>
  */
 

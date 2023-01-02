@@ -7,14 +7,14 @@ import io.layercraft.packetlib.types.Position
 /**
  * Use Item On | 0x31 | play | serverbound
  *
- * @property hand hand
- * @property location location
- * @property direction direction
- * @property cursorX cursorX
- * @property cursorY cursorY
- * @property cursorZ cursorZ
- * @property insideBlock insideBlock
- * @property sequence sequence
+ * @param hand hand
+ * @param location location
+ * @param direction direction
+ * @param cursorX cursorX
+ * @param cursorY cursorY
+ * @param cursorZ cursorZ
+ * @param insideBlock insideBlock
+ * @param sequence sequence
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Use_Item_On">https://wiki.vg/Protocol#Use_Item_On</a>
  */
 

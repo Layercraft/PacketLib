@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Border Lerp Size | 0x45 | play | clientbound
  *
- * @property oldDiameter oldDiameter
- * @property newDiameter newDiameter
- * @property speed speed
+ * @param oldDiameter oldDiameter
+ * @param newDiameter newDiameter
+ * @param speed speed
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Border_Lerp_Size">https://wiki.vg/Protocol#Set_Border_Lerp_Size</a>
  */
 

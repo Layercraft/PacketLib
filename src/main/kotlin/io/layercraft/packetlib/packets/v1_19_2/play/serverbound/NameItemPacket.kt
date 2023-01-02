@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Rename Item | 0x23 | play | serverbound
  *
- * @property name name
+ * @param name name
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Rename_Item">https://wiki.vg/Protocol#Rename_Item</a>
  */
 

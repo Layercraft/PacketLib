@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Combat Death | 0x36 | play | clientbound
  *
- * @property playerId playerId
- * @property entityId entityId
- * @property message message
+ * @param playerId playerId
+ * @param entityId entityId
+ * @param message message
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Combat_Death">https://wiki.vg/Protocol#Combat_Death</a>
  */
 

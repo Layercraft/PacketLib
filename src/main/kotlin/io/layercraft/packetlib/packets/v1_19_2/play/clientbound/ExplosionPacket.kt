@@ -7,14 +7,14 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Explosion | 0x1b | play | clientbound
  *
- * @property x x
- * @property y y
- * @property z z
- * @property radius radius
- * @property affectedBlockOffsets affectedBlockOffsets
- * @property playerMotionX playerMotionX
- * @property playerMotionY playerMotionY
- * @property playerMotionZ playerMotionZ
+ * @param x x
+ * @param y y
+ * @param z z
+ * @param radius radius
+ * @param affectedBlockOffsets list of ExplosionPacketAffectedBlockOffsets
+ * @param playerMotionX playerMotionX
+ * @param playerMotionY playerMotionY
+ * @param playerMotionZ playerMotionZ
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Explosion">https://wiki.vg/Protocol#Explosion</a>
  */
 
@@ -54,11 +54,13 @@ data class ExplosionPacket(
             output.writeFloat(value.y)
             output.writeFloat(value.z)
             output.writeFloat(value.radius)
+
             output.writeVarIntArray(value.affectedBlockOffsets) { arrayValue, arrayOutput ->
                 arrayOutput.writeByte(arrayValue.x)
                 arrayOutput.writeByte(arrayValue.y)
                 arrayOutput.writeByte(arrayValue.z)
             }
+
             output.writeFloat(value.playerMotionX)
             output.writeFloat(value.playerMotionY)
             output.writeFloat(value.playerMotionZ)
@@ -67,11 +69,11 @@ data class ExplosionPacket(
 }
 
 /**
- * ExplosionPacketAffectedBlockOffsets | affectedBlockOffsets
+ * ExplosionPacketAffectedBlockOffsets
  *
- * @property x x
- * @property y y
- * @property z z
+ * @param x x
+ * @param y y
+ * @param z z
 */
 data class ExplosionPacketAffectedBlockOffsets(
     val x: Byte,

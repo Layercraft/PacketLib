@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Query Entity Tag | 0x0f | play | serverbound
  *
- * @property transactionId transactionId
- * @property entityId entityId
+ * @param transactionId transactionId
+ * @param entityId entityId
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Query_Entity_Tag">https://wiki.vg/Protocol#Query_Entity_Tag</a>
  */
 

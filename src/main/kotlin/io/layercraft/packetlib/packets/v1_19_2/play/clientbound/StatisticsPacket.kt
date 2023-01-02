@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Award Statistics | 0x04 | play | clientbound
  *
- * @property entries entries
+ * @param entries list of StatisticsPacketEntries
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Award_Statistics">https://wiki.vg/Protocol#Award_Statistics</a>
  */
 
@@ -39,11 +39,11 @@ data class StatisticsPacket(
 }
 
 /**
- * StatisticsPacketEntries | entries
+ * StatisticsPacketEntries
  *
- * @property categoryId categoryId
- * @property statisticId statisticId
- * @property value value
+ * @param categoryId categoryId
+ * @param statisticId statisticId
+ * @param value value
 */
 data class StatisticsPacketEntries(
     val categoryId: Int, // varint

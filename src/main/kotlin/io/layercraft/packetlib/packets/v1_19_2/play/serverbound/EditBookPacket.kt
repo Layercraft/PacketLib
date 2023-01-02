@@ -7,10 +7,10 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Edit Book | 0x0e | play | serverbound
  *
- * @property hand hand
- * @property pages pages
- * @property hasTitle title is present
- * @property title title
+ * @param hand hand
+ * @param pages pages
+ * @param hasTitle title is present
+ * @param title title
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Edit_Book">https://wiki.vg/Protocol#Edit_Book</a>
  */
 

@@ -7,13 +7,13 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Teleport Entity | 0x66 | play | clientbound
  *
- * @property entityId entityId
- * @property x x
- * @property y y
- * @property z z
- * @property yaw yaw
- * @property pitch pitch
- * @property onGround onGround
+ * @param entityId entityId
+ * @param x x
+ * @param y y
+ * @param z z
+ * @param yaw yaw
+ * @param pitch pitch
+ * @param onGround onGround
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Teleport_Entity">https://wiki.vg/Protocol#Teleport_Entity</a>
  */
 

@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Swing Arm | 0x2f | play | serverbound
  *
- * @property hand hand
+ * @param hand hand
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Swing_Arm">https://wiki.vg/Protocol#Swing_Arm</a>
  */
 

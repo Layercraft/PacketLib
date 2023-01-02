@@ -7,8 +7,8 @@ import io.layercraft.packetlib.types.Position
 /**
  * Set Default Spawn Position | 0x4d | play | clientbound
  *
- * @property location location
- * @property angle angle
+ * @param location location
+ * @param angle angle
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Default_Spawn_Position">https://wiki.vg/Protocol#Set_Default_Spawn_Position</a>
  */
 

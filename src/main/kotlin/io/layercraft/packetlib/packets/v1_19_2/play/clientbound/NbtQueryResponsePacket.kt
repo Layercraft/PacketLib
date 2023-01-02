@@ -7,8 +7,8 @@ import io.layercraft.packetlib.types.NBT
 /**
  * Tag Query Response | 0x64 | play | clientbound
  *
- * @property transactionId transactionId
- * @property nbt nbt
+ * @param transactionId transactionId
+ * @param nbt nbt
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Tag_Query_Response">https://wiki.vg/Protocol#Tag_Query_Response</a>
  */
 

@@ -8,9 +8,9 @@ import io.layercraft.packetlib.types.Position
 /**
  * Block Entity Data | 0x07 | play | clientbound
  *
- * @property location location
- * @property action action
- * @property nbtData nbtData
+ * @param location location
+ * @param action action
+ * @param nbtData nbtData
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Block_Entity_Data">https://wiki.vg/Protocol#Block_Entity_Data</a>
  */
 

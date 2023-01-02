@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Head Rotation | 0x3f | play | clientbound
  *
- * @property entityId entityId
- * @property headYaw headYaw
+ * @param entityId entityId
+ * @param headYaw headYaw
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Head_Rotation">https://wiki.vg/Protocol#Set_Head_Rotation</a>
  */
 

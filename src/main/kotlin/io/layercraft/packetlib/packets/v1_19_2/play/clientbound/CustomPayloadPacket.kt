@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Plugin Message (clientbound) | 0x16 | play | clientbound
  *
- * @property channel channel
- * @property data data
+ * @param channel channel
+ * @param data data
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Plugin_Message_.28clientbound.29">https://wiki.vg/Protocol#Plugin_Message_.28clientbound.29</a>
  */
 

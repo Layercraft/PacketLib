@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Display Chat Preview | 0x4e | play | clientbound
  *
- * @property shouldDisplayChatPreview should_display_chat_preview
+ * @param shouldDisplayChatPreview should_display_chat_preview
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Display_Chat_Preview">https://wiki.vg/Protocol#Set_Display_Chat_Preview</a>
  */
 

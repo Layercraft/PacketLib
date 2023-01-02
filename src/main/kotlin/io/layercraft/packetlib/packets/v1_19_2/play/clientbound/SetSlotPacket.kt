@@ -7,9 +7,9 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Container Slot | 0x13 | play | clientbound
  *
- * @property windowId windowId
- * @property stateId stateId
- * @property slot slot
+ * @param windowId windowId
+ * @param stateId stateId
+ * @param slot slot
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Container_Slot">https://wiki.vg/Protocol#Set_Container_Slot</a>
  */
 

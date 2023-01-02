@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Disconnect (login) | 0x00 | login | clientbound
  *
- * @property reason reason
+ * @param reason reason
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Disconnect_.28login.29">https://wiki.vg/Protocol#Disconnect_.28login.29</a>
  */
 

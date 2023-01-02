@@ -7,13 +7,13 @@ import java.util.UUID
 /**
  * Chat Message | 0x05 | play | serverbound
  *
- * @property message message
- * @property timestamp timestamp
- * @property salt salt
- * @property signature signature
- * @property signedPreview signedPreview
+ * @param message message
+ * @param timestamp timestamp
+ * @param salt salt
+ * @param signature signature
+ * @param signedPreview signedPreview
  * @property hasLastMessage lastMessage is present
- * @property lastMessageUser lastMessageUser
+ * @param lastMessageUser lastMessageUser
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Chat_Message">https://wiki.vg/Protocol#Chat_Message</a>
  */
 

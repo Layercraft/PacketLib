@@ -7,7 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Set Entity Metadata | 0x50 | play | clientbound
  *
- * @property entityId entityId
+ * @param entityId entityId
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Set_Entity_Metadata">https://wiki.vg/Protocol#Set_Entity_Metadata</a>
  */
 

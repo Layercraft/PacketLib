@@ -7,8 +7,8 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * End Combat | 0x34 | play | clientbound
  *
- * @property duration duration
- * @property entityId entityId
+ * @param duration duration
+ * @param entityId entityId
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#End_Combat">https://wiki.vg/Protocol#End_Combat</a>
  */
 

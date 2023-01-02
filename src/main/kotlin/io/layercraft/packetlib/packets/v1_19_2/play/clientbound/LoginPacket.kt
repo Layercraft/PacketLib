@@ -8,25 +8,25 @@ import io.layercraft.packetlib.types.Position
 /**
  * Login (play) | 0x25 | play | clientbound
  *
- * @property entityId entityId
- * @property isHardcore isHardcore
- * @property gameMode gameMode
- * @property previousGameMode previousGameMode
- * @property worldNames worldNames
- * @property dimensionCodec dimensionCodec
- * @property worldType worldType
- * @property worldName worldName
- * @property hashedSeed hashedSeed
- * @property maxPlayers maxPlayers
- * @property viewDistance viewDistance
- * @property simulationDistance simulationDistance
- * @property reducedDebugInfo reducedDebugInfo
- * @property enableRespawnScreen enableRespawnScreen
- * @property isDebug isDebug
- * @property isFlat isFlat
+ * @param entityId entityId
+ * @param isHardcore isHardcore
+ * @param gameMode gameMode
+ * @param previousGameMode previousGameMode
+ * @param worldNames worldNames
+ * @param dimensionCodec dimensionCodec
+ * @param worldType worldType
+ * @param worldName worldName
+ * @param hashedSeed hashedSeed
+ * @param maxPlayers maxPlayers
+ * @param viewDistance viewDistance
+ * @param simulationDistance simulationDistance
+ * @param reducedDebugInfo reducedDebugInfo
+ * @param enableRespawnScreen enableRespawnScreen
+ * @param isDebug isDebug
+ * @param isFlat isFlat
  * @property hasDeath death is present
- * @property dimensionName dimensionName
- * @property location location
+ * @param dimensionName dimensionName
+ * @param location location
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Login_.28play.29">https://wiki.vg/Protocol#Login_.28play.29</a>
  */
 
