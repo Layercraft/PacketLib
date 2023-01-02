@@ -36,10 +36,14 @@ data class PlayerInfoPacket(
                     2 -> arrayInput.readVarInt()
                     else -> null
                 }
-                val hasDisplayName = arrayInput.readBoolean()
+                val hasDisplayName = when (action) {
+                    0 -> arrayInput.readBoolean()
+                    3 -> arrayInput.readBoolean()
+                    else -> null
+                }
                 val displayName = when (action) {
-                    0 -> if (hasDisplayName) arrayInput.readString() else null
-                    3 -> if (hasDisplayName) arrayInput.readString() else null
+                    0 -> if (hasDisplayName!!) arrayInput.readString() else null
+                    3 -> if (hasDisplayName!!) arrayInput.readString() else null
                     else -> null
                 }
 
@@ -68,10 +72,14 @@ data class PlayerInfoPacket(
                     2 -> arrayOutput.writeVarInt(arrayValue.ping!!)
                     else -> {}
                 }
-                arrayOutput.writeBoolean(arrayValue.hasDisplayName)
                 when (value.action) {
-                    0 -> if (arrayValue.hasDisplayName) arrayOutput.writeString(arrayValue.displayName!!)
-                    3 -> if (arrayValue.hasDisplayName) arrayOutput.writeString(arrayValue.displayName!!)
+                    0 -> arrayOutput.writeBoolean(arrayValue.hasDisplayName!!)
+                    3 -> arrayOutput.writeBoolean(arrayValue.hasDisplayName!!)
+                    else -> {}
+                }
+                when (value.action) {
+                    0 -> if (arrayValue.hasDisplayName!!) arrayOutput.writeString(arrayValue.displayName!!)
+                    3 -> if (arrayValue.hasDisplayName!!) arrayOutput.writeString(arrayValue.displayName!!)
                     else -> {}
                 }
             }
@@ -86,7 +94,7 @@ data class PlayerInfoPacket(
  * @param name name
  * @param gamemode gamemode
  * @param ping ping
- * @param hasDisplayName displayName is present
+ * @param hasDisplayName hasDisplayName
  * @param displayName displayName
 */
 data class PlayerInfoPacketData(
@@ -94,6 +102,6 @@ data class PlayerInfoPacketData(
     val name: String?,
     val gamemode: Int?, // varint
     val ping: Int?, // varint
-    val hasDisplayName: Boolean,
+    val hasDisplayName: Boolean?,
     val displayName: String?,
 )
