@@ -39,7 +39,7 @@ data class AdvancementsPacket(
 
                     return@readVarIntArray AdvancementsPacketCriteria(key)
                 }
-                val requirements = arrayInput.readVarIntArray { arrayInput -> arrayInput.readString() }
+                val requirements = arrayInput.readVarIntArray { arrayInput1 -> arrayInput1.readVarIntArray { arrayInput -> arrayInput.readString() } }
 
                 return@readVarIntArray AdvancementsPacketAdvancementMapping(key, hasParentId, parentId, hasDisplayData, title, description, frameType, xCord, yCord, criteria, requirements)
             }
@@ -78,7 +78,7 @@ data class AdvancementsPacket(
                     arrayOutput.writeString(arrayValue.key)
                 }
 
-                arrayOutput.writeVarIntArray(arrayValue.requirements) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue) }
+                arrayOutput.writeVarIntArray(arrayValue.requirements) { arrayValue1, arrayOutput1 -> arrayOutput1.writeVarIntArray(arrayValue1) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue) } }
             }
 
             output.writeVarIntArray(value.identifiers) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue) }
@@ -131,7 +131,7 @@ data class AdvancementsPacketAdvancementMapping(
     val xCord: Float?,
     val yCord: Float?,
     val criteria: List<AdvancementsPacketCriteria>, // varint array
-    val requirements: List<String>, // varint array
+    val requirements: List<List<String>>, // varint array
 )
 
 /**

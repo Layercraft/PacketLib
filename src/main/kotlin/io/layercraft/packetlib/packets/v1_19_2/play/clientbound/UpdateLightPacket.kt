@@ -28,8 +28,8 @@ data class UpdateLightPacket(
     val blockLightMask: List<Long>, // varint array
     val emptySkyLightMask: List<Long>, // varint array
     val emptyBlockLightMask: List<Long>, // varint array
-    val skyLight: List<UByte>, // varint array
-    val blockLight: List<UByte>, // varint array
+    val skyLight: List<List<UByte>>, // varint array
+    val blockLight: List<List<UByte>>, // varint array
 ) : ClientBoundPacket {
     companion object : PacketSerializer<UpdateLightPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateLightPacket {
@@ -40,8 +40,8 @@ data class UpdateLightPacket(
             val blockLightMask = input.readVarIntArray { arrayInput -> arrayInput.readLong() }
             val emptySkyLightMask = input.readVarIntArray { arrayInput -> arrayInput.readLong() }
             val emptyBlockLightMask = input.readVarIntArray { arrayInput -> arrayInput.readLong() }
-            val skyLight = input.readVarIntArray { arrayInput -> arrayInput.readUByte() }
-            val blockLight = input.readVarIntArray { arrayInput -> arrayInput.readUByte() }
+            val skyLight = input.readVarIntArray { arrayInput1 -> arrayInput1.readVarIntArray { arrayInput -> arrayInput.readUByte() } }
+            val blockLight = input.readVarIntArray { arrayInput1 -> arrayInput1.readVarIntArray { arrayInput -> arrayInput.readUByte() } }
 
             return UpdateLightPacket(chunkX, chunkZ, trustEdges, skyLightMask, blockLightMask, emptySkyLightMask, emptyBlockLightMask, skyLight, blockLight)
         }
@@ -54,8 +54,8 @@ data class UpdateLightPacket(
             output.writeVarIntArray(value.blockLightMask) { arrayValue, arrayOutput -> arrayOutput.writeLong(arrayValue) }
             output.writeVarIntArray(value.emptySkyLightMask) { arrayValue, arrayOutput -> arrayOutput.writeLong(arrayValue) }
             output.writeVarIntArray(value.emptyBlockLightMask) { arrayValue, arrayOutput -> arrayOutput.writeLong(arrayValue) }
-            output.writeVarIntArray(value.skyLight) { arrayValue, arrayOutput -> arrayOutput.writeUByte(arrayValue) }
-            output.writeVarIntArray(value.blockLight) { arrayValue, arrayOutput -> arrayOutput.writeUByte(arrayValue) }
+            output.writeVarIntArray(value.skyLight) { arrayValue1, arrayOutput1 -> arrayOutput1.writeVarIntArray(arrayValue1) { arrayValue, arrayOutput -> arrayOutput.writeUByte(arrayValue) } }
+            output.writeVarIntArray(value.blockLight) { arrayValue1, arrayOutput1 -> arrayOutput1.writeVarIntArray(arrayValue1) { arrayValue, arrayOutput -> arrayOutput.writeUByte(arrayValue) } }
         }
     }
 }

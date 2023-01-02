@@ -469,7 +469,22 @@ data class {class_name}(
                 elif array_type == "array":
                     array_fields = array["type"][1]
                     return_value = self.generate_array(field_name, array_fields, infos, round)
-                    self.add_to_clazz_field(return_value, clazz)
+                    for field in return_value["fields"]:
+                        field_split = field.split(" ")
+                        clazz["fields"] += [f"val {field_split[1]} List<" + field_split[2].split(",")[0] + f">, // varint array"]
+                    for serialize in return_value["serialize"]:
+                        serialize_split = serialize.split(" ")
+                        round_str = f"{(round + 1)}" if (round + 1) > 0 else ""
+                        serialize_split_rest = " ".join(serialize_split[1:])
+                        clazz["serialize"] += [serialize_split[0] + " { " + f"arrayValue{round_str}, arrayOutput{round_str} -> arrayOutput{round_str}.writeVarIntArray(arrayValue{round_str}) " + serialize_split_rest + " }"]
+                    for deserialize in return_value["deserialize"]:
+                        deserialize_split = deserialize.split(" { ")
+                        round_str = f"{(round + 1)}" if (round + 1) > 0 else ""
+                        clazz["deserialize"] += [deserialize_split[0] + " { " + f"arrayInput{round_str} -> arrayInput{round_str}.readVarIntArray {{ " + deserialize_split[1] + " }"]
+                    clazz["var_list"] += return_value["var_list"]
+                    clazz["docs"] += return_value["docs"]
+                    clazz["other_imports"] += return_value["other_imports"]
+                    clazz["extra_classes"] += return_value["extra_classes"]
                 else:
                     raise Exception("Unknown array type")
         else:
