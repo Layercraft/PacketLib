@@ -1,5 +1,6 @@
 package io.layercraft.packetlib.serialization
 
+import io.layercraft.packetlib.types.ChunkBlockEntity
 import io.layercraft.packetlib.types.NBT
 import io.layercraft.packetlib.types.Position
 import io.layercraft.packetlib.utils.*
@@ -55,4 +56,6 @@ interface MinecraftProtocolSerializeInterface<O> {
     fun writeAngle(input: Float) = writeByte((input * 256f / 360f).toInt().toByte())
 
     fun writeNbt(input: NBT) = writeBytes(input)
+
+    fun writeChunkBlockEntity(input: ChunkBlockEntity) = ChunkBlockEntity.write(input, this)
 }

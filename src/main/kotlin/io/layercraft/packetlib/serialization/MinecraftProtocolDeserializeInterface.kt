@@ -1,5 +1,6 @@
 package io.layercraft.packetlib.serialization
 
+import io.layercraft.packetlib.types.ChunkBlockEntity
 import io.layercraft.packetlib.types.NBT
 import io.layercraft.packetlib.types.Position
 import io.layercraft.packetlib.utils.*
@@ -70,4 +71,6 @@ interface MinecraftProtocolDeserializeInterface<I> {
         }
         return list.toByteArray()
     }
+
+    fun readChunkBlockEntity(): ChunkBlockEntity = ChunkBlockEntity.read(this)
 }

@@ -102,6 +102,11 @@ kotlin_types_wrapper = {
         "serialize": "writePosition(%s)",
         "import": "import io.layercraft.packetlib.types.Position"
     },
+    "chunkBlockEntity": {
+        "type": "ChunkBlockEntity",
+        "deserialize": "readChunkBlockEntity()",
+        "serialize": "writeChunkBlockEntity(%s)",
+    },
     "entityMetadataLoop": "native",
     "topBitSetTerminatedArray": "native",
     "bitfield": "native",
@@ -109,7 +114,6 @@ kotlin_types_wrapper = {
     "entityMetadata": "native",
     "previousMessages": "native",
     "command_node": "native",
-    "chunkBlockEntity": "native",
     "tags": "native",
     "minecraft_smelting_format": "native",
     "ingredient": "native",
@@ -465,6 +469,7 @@ data class {class_name}(
                 array_type = array_type[0]
                 if array_type == "container":
                     return_value = self.generate_container_array(field_name, array, infos, round)
+                    print(return_value)
                     self.add_to_clazz_field(return_value, clazz)
                 elif array_type == "array":
                     array_fields = array["type"][1]

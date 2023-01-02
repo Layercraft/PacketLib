@@ -3,119 +3,6 @@ import os
 import requests
 import packet_generate_text
 
-kotlin_types_wrapper = {
-    "varint": {
-        "type": "Int",
-        "deserialize": "readVarInt()",
-        "serialize": "writeVarInt(%s)",
-        "comment": "varint"
-    },
-    "optvarint": {
-        "type": "Int?",
-        "deserialize": "readVarInt()",
-        "serialize": "writeVarInt(%s)"
-    },
-    "i8": {
-        "type": "Byte",
-        "deserialize": "readByte()",
-        "serialize": "writeByte(%s)"
-    },
-    "u8": {
-        "type": "UByte",
-        "deserialize": "readUByte()",
-        "serialize": "writeUByte(%s)"
-    },
-    "i16": {
-        "type": "Short",
-        "deserialize": "readShort()",
-        "serialize": "writeShort(%s)"
-    },
-    "u16": {
-        "type": "UShort",
-        "deserialize": "readUShort()",
-        "serialize": "writeUShort(%s)"
-    },
-    "i32": {
-        "type": "Int",
-        "deserialize": "readInt()",
-        "serialize": "writeInt(%s)"
-    },
-    "i64": {
-        "type": "Long",
-        "deserialize": "readLong()",
-        "serialize": "writeLong(%s)"
-    },
-    "bool": {
-        "type": "Boolean",
-        "deserialize": "readBoolean()",
-        "serialize": "writeBoolean(%s)"
-    },
-    "f32": {
-        "type": "Float",
-        "deserialize": "readFloat()",
-        "serialize": "writeFloat(%s)"
-    },
-    "f64": {
-        "type": "Double",
-        "deserialize": "readDouble()",
-        "serialize": "writeDouble(%s)"
-    },
-    "UUID": {
-        "type": "UUID",
-        "deserialize": "readUUID()",
-        "serialize": "writeUUID(%s)",
-        "import": "import java.util.UUID"
-    },
-    "string": {
-        "type": "String",
-        "deserialize": "readString()",
-        "serialize": "writeString(%s)"
-    },
-    "void": {
-        "type": "null",
-        "deserialize": "null",
-        "serialize": "null"
-    },
-    "array": "native",
-    "buffer": {
-        "type": "ByteArray",
-        "deserialize": "readVarIntByteArray()",
-        "serialize": "writeVarIntByteArray(%s)"
-    },
-    "restBuffer": {
-        "type": "ByteArray",
-        "deserialize": "readRemainingByteArray()",
-        "serialize": "writeRemainingByteArray(%s)"
-    },
-    "nbt": {
-        "type": "NBT",
-        "deserialize": "readNbt()",
-        "serialize": "writeNbt(%s)",
-        "import": "import io.layercraft.packetlib.types.NBT"
-    },
-    "optionalNbt": {
-        "type": "NBT",
-        "deserialize": "readNbt()",
-        "serialize": "writeNbt(%s)",
-        "import": "import io.layercraft.packetlib.types.NBT"
-    },
-    "position": {
-        "type": "Position",
-        "deserialize": "readPosition()",
-        "serialize": "writePosition(%s)",
-        "import": "import io.layercraft.packetlib.types.Position"
-    },
-    "entityMetadataLoop": "native",
-    "topBitSetTerminatedArray": "native",
-    "bitfield": "native",
-    "slot": "native",
-    "entityMetadata": "native",
-    "previousMessages": "native",
-    "command_node": "native",
-    "chunkBlockEntity": "native",
-    "tags": "native",
-}
-
 src = "src/main/kotlin"
 
 wikivg_url = "https://wiki.vg/index.php?title=Protocol"
@@ -128,15 +15,6 @@ version = data_url.split("/")[-2]
 version_underline = version.replace(".", "_")
 
 minecraft_codec = []
-
-runs = []
-
-
-def camel_case(s):
-    camel_case_str = re.sub(r"([-_])([a-zA-Z])",
-                            lambda m: m.group(2).upper(), s)
-    camel_case_str = camel_case_str[0].lower() + camel_case_str[1:]
-    return camel_case_str
 
 
 def codec_generate():
@@ -260,11 +138,6 @@ def packets(data: dict) -> list:
         packets_data += client_bound + server_bound
 
     return packets_data
-
-
-def add_run(source: str = "None"):
-    global runs
-    runs += [source]
 
 
 def wikivg_data(packet_id: str, state: str, direction: str) -> dict:
