@@ -1,18 +1,5 @@
 package io.layercraft.packetlib.types
 
-internal fun Double.toPositionInt(): Int = (this * 32.0).toInt()
-internal fun Int.toPositionDouble(): Double = this / 32.0
-
-fun Position(
-    x: Double,
-    y: Double,
-    z: Double,
-) = Position(
-    x.toPositionInt(),
-    y.toPositionInt(),
-    z.toPositionInt(),
-)
-
 /**
  * Position
  *
