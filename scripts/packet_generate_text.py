@@ -330,6 +330,7 @@ class PacketGeneratorNew:
         class_var_list += [field_var_name]
         docs_str = " | ".join(docs)
         class_docs += [f" * @param {field_var_name} {field_name} ({docs_str})"]
+        class_other_imports = ["import io.layercraft.packetlib.types.Bitfield"]
 
 
         return {
