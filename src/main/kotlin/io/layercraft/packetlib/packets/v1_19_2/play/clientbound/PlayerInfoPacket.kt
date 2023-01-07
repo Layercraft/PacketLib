@@ -46,8 +46,16 @@ data class PlayerInfoPacket(
                     3 -> if (hasDisplayName!!) arrayInput.readString() else null
                     else -> null
                 }
+                val hasTimestamp = when (action) {
+                    0 -> arrayInput.readBoolean()
+                    else -> null
+                }
+                val timestamp = when (action) {
+                    0 -> if (hasTimestamp!!) arrayInput.readLong() else null
+                    else -> null
+                }
 
-                return@readVarIntArray PlayerInfoPacketData(uuid, name, gamemode, ping, hasDisplayName, displayName)
+                return@readVarIntArray PlayerInfoPacketData(uuid, name, gamemode, ping, hasDisplayName, displayName, hasTimestamp, timestamp)
             }
 
             return PlayerInfoPacket(action, data)
@@ -82,6 +90,14 @@ data class PlayerInfoPacket(
                     3 -> if (arrayValue.hasDisplayName!!) arrayOutput.writeString(arrayValue.displayName!!)
                     else -> {}
                 }
+                when (value.action) {
+                    0 -> arrayOutput.writeBoolean(arrayValue.hasTimestamp!!)
+                    else -> {}
+                }
+                when (value.action) {
+                    0 -> if (arrayValue.hasTimestamp!!) arrayOutput.writeLong(arrayValue.timestamp!!)
+                    else -> {}
+                }
             }
         }
     }
@@ -96,6 +112,8 @@ data class PlayerInfoPacket(
  * @param ping ping
  * @param hasDisplayName hasDisplayName
  * @param displayName displayName
+ * @param hasTimestamp hasTimestamp
+ * @param timestamp timestamp
 */
 data class PlayerInfoPacketData(
     val uuid: UUID,
@@ -104,4 +122,6 @@ data class PlayerInfoPacketData(
     val ping: Int?, // varint
     val hasDisplayName: Boolean?,
     val displayName: String?,
+    val hasTimestamp: Boolean?,
+    val timestamp: Long?,
 )

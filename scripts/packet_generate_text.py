@@ -332,7 +332,6 @@ class PacketGeneratorNew:
         class_docs += [f" * @param {field_var_name} {field_name} ({docs_str})"]
         class_other_imports = ["import io.layercraft.packetlib.types.Bitfield"]
 
-
         return {
             "fields": class_fields,
             "serialize": class_serialize,
@@ -598,11 +597,13 @@ data class {class_name}(
                 if field_sub_type_name == "array":
                     print("Not supported yet")
                 elif field_sub_type_name == "switch":
-                    #return_value = self.generate_switch(field_name, field_type, infos)
+                    print(field_type)
+                    return_value = self.generate_switch(field_name, field_type, infos)
+                    self.add_to_clazz_field(return_value, clazz)
                     pass
                 else:
                     print(field_sub_type_name)
-                    #raise Exception("Not supported")
+                    # raise Exception("Not supported")
             else:
                 raise Exception("Not supported")
 
@@ -685,12 +686,12 @@ data class {class_name}(
                     kotlin_type_fix = kotlin_type
                     boolean_field_var_name = ("has" + field_var_name[0].upper() + field_var_name[1:])
 
-                    #Get last field
+                    # Get last field
                     if len(clazz["fields"]) >= 1 and boolean_field_var_name not in clazz["fields"][-1] or len(clazz["fields"]) == 0:
                         build_other_switch = {
                             "compareTo": "../" + compare_to_field,
                             "fields": {x: "bool" for x in fields.keys()},
-                         }
+                        }
 
                         return_value = self.generate_switch(boolean_field_var_name, build_other_switch, infos)
                         self.add_to_clazz_field(return_value, clazz)
@@ -701,8 +702,7 @@ data class {class_name}(
 
                 other_switch = True
                 other_switch_value = field_value
-                if field_value[0] == "container" or field_value[0] == "array" :
-                    print(field_value)
+                if field_value[0] == "container" or field_value[0] == "array":
                     for field_container in field_value[1]:
                         inside = False
                         for it in other_switch_value_dict:
@@ -717,8 +717,19 @@ data class {class_name}(
                                 if x["value"] == field_container:
                                     x["keys"] += [field]
                 elif field_value[0] == "option":
-                    pass
-                    #raise Exception(field_value)
+                    for field_container in field_value[1][1]:
+                        inside = False
+                        for it in other_switch_value_dict:
+                            if it["value"] == field_container:
+                                inside = True
+                                break
+
+                        if inside is False:
+                            other_switch_value_dict += [{"value": field_container, "keys": [field]}]
+                        else:
+                            for x in other_switch_value_dict:
+                                if x["value"] == field_container:
+                                    x["keys"] += [field]
                 else:
                     raise Exception(field_value)
 
@@ -742,45 +753,45 @@ data class {class_name}(
             elif other_switch_value_type == "array":
                 print("Not supported yet")
             elif other_switch_value_type == "option":
-                #print(other_switch_value_dict)
-                for field in other_switch_value_dict:
-                    field_info = field['value']
-                    field_keys = field['keys']
-                    #print(field_info)
-                    if type(field_info) is str or field_info == "{'countType': 'varint'}":
-                        continue
+                other_switch_value_type = other_switch_value[1][0]
+                if other_switch_value_type == "container":
+                    for field in other_switch_value_dict:
+                        field_info = field['value']
+                        field_keys = field['keys']
+                        if type(field_info) is str or field_info == "{'countType': 'varint'}":
+                            continue
 
-                    if type(field_info) is list:
-                        for field_sub in field_info:
-                            field_name = field_sub['name']
+                        if type(field_info) is list:
+                            for field_sub in field_info:
+                                field_name = field_sub['name']
+                                field_type = [
+                                    "option",
+                                    field_sub['type']
+                                ]
+
+                                build_other_switch = {
+                                    "compareTo": switch["compareTo"],
+                                    "fields": {x: field_type for x in field_keys}
+                                }
+
+                                return_value = self.generate_switch(field_name, build_other_switch, infos)
+                                self.add_to_clazz_field(return_value, clazz)
+
+                        else:
+                            field_name = field_info['name']
                             field_type = [
                                 "option",
-                                field_sub['type']
+                                field_info['type']
                             ]
 
                             build_other_switch = {
-                                "compareTo": compare_to_field,
+                                "compareTo": switch["compareTo"],
                                 "fields": {x: field_type for x in field_keys}
                             }
 
                             return_value = self.generate_switch(field_name, build_other_switch, infos)
                             self.add_to_clazz_field(return_value, clazz)
-                    else:
-                        field_name = field_info['name']
-                        field_type = [
-                            "option",
-                            field_info['type']
-                        ]
-
-                        build_other_switch = {
-                            "compareTo": compare_to_field,
-                            "fields": {x: field_type for x in field_keys}
-                        }
-
-                        return_value = self.generate_switch(field_name, build_other_switch, infos)
-                        self.add_to_clazz_field(return_value, clazz)
             else:
-                #print(other_switch_value_type)
                 raise Exception("Not supported")
             return clazz
 
