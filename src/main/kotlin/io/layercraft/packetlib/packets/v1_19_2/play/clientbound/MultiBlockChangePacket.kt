@@ -7,6 +7,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 /**
  * Update Section Blocks | 0x40 | play | clientbound
  *
+ * @param chunkCoordinates chunkCoordinates (Name: x, Size: 22, Signed: True | Name: z, Size: 22, Signed: True | Name: y, Size: 20, Signed: True)
  * @param suppressLightUpdates suppressLightUpdates
  * @param records records
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Section_Blocks">https://wiki.vg/Protocol#Update_Section_Blocks</a>
@@ -14,18 +15,21 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 @MinecraftPacket(id = 0x40, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class MultiBlockChangePacket(
+    val chunkCoordinates: Bitfield,
     val suppressLightUpdates: Boolean,
     val records: List<Int>, // varint array of varint
 ) : ClientBoundPacket {
     companion object : PacketSerializer<MultiBlockChangePacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): MultiBlockChangePacket {
+            val chunkCoordinates = Bitfield.valueOf(input.readBytes(64))
             val suppressLightUpdates = input.readBoolean()
             val records = input.readVarIntArray { arrayInput -> arrayInput.readVarInt() }
 
-            return MultiBlockChangePacket(suppressLightUpdates, records)
+            return MultiBlockChangePacket(chunkCoordinates, suppressLightUpdates, records)
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: MultiBlockChangePacket) {
+            output.writeBytes(value.chunkCoordinates.toByteArray())
             output.writeBoolean(value.suppressLightUpdates)
             output.writeVarIntArray(value.records) { arrayValue, arrayOutput -> arrayOutput.writeVarInt(arrayValue) }
         }
