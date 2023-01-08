@@ -11,21 +11,35 @@ import io.layercraft.packetlib.utils.stream.MinecraftInputStreamDeserialize
 import io.layercraft.packetlib.utils.stream.MinecraftOutputStreamSerialize
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
+import java.io.DataInputStream
+import java.io.DataOutputStream
 
 object TranslatorAPI {
 
     fun <T : Packet> decodeFromByteArray(bytes: ByteArray, serializer: PacketSerializer<T>): T {
-        val deserialize = MinecraftInputStreamDeserialize(ByteArrayInputStream(bytes))
-        return serializer.deserialize(deserialize)
+        val byteStream = ByteArrayInputStream(bytes)
+        val dataStream = DataInputStream(byteStream)
+        val deserialize = MinecraftInputStreamDeserialize(dataStream)
+
+        val result = serializer.deserialize(deserialize)
+
+        byteStream.close()
+        dataStream.close()
+        return result
     }
 
     fun <T : Packet> encodeToByteArray(value: T, serializer: PacketSerializer<T>): ByteArray {
         val byteStream = ByteArrayOutputStream()
-        val serialize = MinecraftOutputStreamSerialize(byteStream)
+        val dataStream = DataOutputStream(byteStream)
+        val serialize = MinecraftOutputStreamSerialize(dataStream)
 
         serializer.serialize(serialize, value)
 
-        return byteStream.toByteArray()
+        val result = byteStream.toByteArray()
+
+        byteStream.close()
+        dataStream.close()
+        return result
     }
 
     fun decodeFromInputWithCodec(codec: MinecraftCodec, input: MinecraftProtocolDeserializeInterface<*>, packetDirection: PacketDirection, packetState: PacketState, packetId: Int): Packet? {
