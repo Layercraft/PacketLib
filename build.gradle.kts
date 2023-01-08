@@ -56,7 +56,7 @@ val ktlintFormat by tasks.creating(JavaExec::class) {
 
 tasks.withType<KotlinCompile> {
     dependsOn(ktlintFormat)
-    kotlinOptions.jvmTarget = "19"
+    kotlinOptions.jvmTarget = "17"
     kotlinOptions.freeCompilerArgs = listOf("-Xuse-k2")
 }
 
