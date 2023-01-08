@@ -16,7 +16,7 @@ interface MinecraftProtocolDeserializeInterface<I> {
 
     val input: I
 
-    val remaining: Long
+    val remaining: Int
 
     fun readByte(): Byte
     fun readBytes(): ByteArray

@@ -1,4 +1,4 @@
-package io.layercraft.packetlib.utils
+package io.layercraft.packetlib.utils.bytebuffer
 
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 import java.nio.ByteBuffer

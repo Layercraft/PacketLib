@@ -1,5 +1,6 @@
 package io.layercraft.packetlib.utils
 
+import io.layercraft.packetlib.utils.bytebuffer.MinecraftByteBufferSerialize
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.nio.ByteBuffer

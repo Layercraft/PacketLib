@@ -1,11 +1,11 @@
-package io.layercraft.packetlib.utils
+package io.layercraft.packetlib.utils.bytebuffer
 
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import java.nio.ByteBuffer
 
 class MinecraftByteBufferDeserialize(override val input: ByteBuffer) : MinecraftProtocolDeserializeInterface<ByteBuffer> {
-    override val remaining: Long
-        get() = input.remaining().toLong()
+    override val remaining: Int
+        get() = input.remaining()
 
     override fun readByte(): Byte = input.get()
 
