@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.7.10"
+    kotlin("jvm") version "1.8.0"
     id("org.jetbrains.dokka") version "1.7.10"
     `maven-publish`
 }
@@ -56,7 +56,7 @@ val ktlintFormat by tasks.creating(JavaExec::class) {
 
 tasks.withType<KotlinCompile> {
     dependsOn(ktlintFormat)
-    kotlinOptions.jvmTarget = "17"
+    kotlinOptions.jvmTarget = "19"
     kotlinOptions.freeCompilerArgs = listOf("-Xuse-k2")
 }
 
