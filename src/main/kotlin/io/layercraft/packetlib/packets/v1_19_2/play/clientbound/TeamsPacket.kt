@@ -16,6 +16,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param formatting formatting
  * @param prefix prefix
  * @param suffix suffix
+ * @param players players
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Teams">https://wiki.vg/Protocol#Update_Teams</a>
  */
 
@@ -30,6 +31,7 @@ data class TeamsPacket(
     val formatting: Int?, // varint
     val prefix: String?,
     val suffix: String?,
+    val players: List<String>?,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<TeamsPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): TeamsPacket {
@@ -70,8 +72,14 @@ data class TeamsPacket(
                 2 -> input.readString()
                 else -> null
             }
+            val players = when (mode.toInt()) {
+                0 -> input.readVarIntArray { arrayInput -> arrayInput.readString() }
+                3 -> input.readVarIntArray { arrayInput -> arrayInput.readString() }
+                4 -> input.readVarIntArray { arrayInput -> arrayInput.readString() }
+                else -> null
+            }
 
-            return TeamsPacket(team, mode, name, friendlyFire, nameTagVisibility, collisionRule, formatting, prefix, suffix)
+            return TeamsPacket(team, mode, name, friendlyFire, nameTagVisibility, collisionRule, formatting, prefix, suffix, players)
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: TeamsPacket) {
@@ -110,6 +118,12 @@ data class TeamsPacket(
             when (value.mode.toInt()) {
                 0 -> output.writeString(value.suffix!!)
                 2 -> output.writeString(value.suffix!!)
+                else -> {}
+            }
+            when (value.mode.toInt()) {
+                0 -> output.writeVarIntArray(value.players!!) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue) }
+                3 -> output.writeVarIntArray(value.players!!) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue) }
+                4 -> output.writeVarIntArray(value.players!!) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue) }
                 else -> {}
             }
         }

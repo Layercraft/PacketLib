@@ -496,6 +496,9 @@ data class {class_name}(
             "extra_classes": []
         }
 
+        if "countType" not in array:
+            return clazz
+
         count_type = array["countType"]
         array_type = array["type"]
         array_type_type = type(array_type)
@@ -597,19 +600,22 @@ data class {class_name}(
                 if field_sub_type_name == "array":
                     print("Not supported yet")
                 elif field_sub_type_name == "switch":
-                    print(field_type)
                     return_value = self.generate_switch(field_name, field_type, infos)
                     self.add_to_clazz_field(return_value, clazz)
                     pass
+                elif field_sub_type_name == "bitfield":
+                    print("Not supported yet")
                 else:
-                    print(field_sub_type_name)
-                    # raise Exception("Not supported")
+                    raise Exception(f"Not supported yet: {field_sub_type_name}")
             else:
-                raise Exception("Not supported")
+                raise Exception(f"Not supported yet: {field_type_type}")
 
         return clazz
 
     def generate_switch(self, field_name: str, switch: dict, infos: dict) -> dict:
+        if type(switch) is list:
+            switch = switch[1]
+
         clazz = {
             "fields": [],
             "serialize": [],
@@ -625,6 +631,9 @@ data class {class_name}(
         info_serialize_value_var_type = infos["serialize_value_var_type"] if "serialize_value_var_type" in infos else "value"
 
         compare_to_field = switch["compareTo"].replace("../", "")
+        if "/" in compare_to_field:
+            return clazz
+
         compare_to_field_type = ""
         compare_to_field_var_name = camel_case(compare_to_field)
         compare_to_field_var_name_with_value = f"{info_serialize_value_var_type}.{compare_to_field_var_name}"
@@ -663,6 +672,9 @@ data class {class_name}(
             if field_value == ['buffer', {'countType': 'varint'}]:
                 field_value = "buffer"
 
+            if field_value == ['option', ['buffer', {'countType': 'varint'}]]:
+                field_value = ['option', 'buffer']
+
             field_type_type = type(field_value)
 
             if field_type_type is str:
@@ -700,9 +712,32 @@ data class {class_name}(
                     serialize += [f"{field} -> if ({info_serialize_value_var_type}.{boolean_field_var_name}!!) {info_serialize_var_name}.{kotlin_type['serialize'] % (info_serialize_value_var_type + '.' + field_var_name + '!!')}"]
                     continue
 
+                # Array?
+                if field_value[0] == "array":
+                    return_value = self.generate_array(field_name, field_value[1], infos, 1)
+                    if len(return_value["fields"]) > 0:
+                        fields_build = return_value["fields"][0].split(", // ", 1)
+                        fields_build_second = f" // {fields_build[1]}" if len(return_value["fields"]) > 1 else ""
+                        fields_build = fields_build[0] + f"?,{fields_build_second}"
+
+                        if fields_build not in clazz["fields"]:
+                            clazz["fields"] += [fields_build]
+                            clazz["other_imports"] += return_value["other_imports"]
+                            clazz["extra_classes"] += return_value["extra_classes"]
+                            clazz["var_list"] += return_value["var_list"]
+                            clazz["docs"] += return_value["docs"]
+
+                        deserialize_str = return_value['deserialize'][0].split(" = ", 1)[1]
+                        serialize_build = return_value['serialize'][0].split(") {", 1)
+                        serialize_str = serialize_build[0] + "!!) {" + serialize_build[1]
+
+                        deserialize += [f"{field} -> {deserialize_str}"]
+                        serialize += [f"{field} -> {serialize_str}"]
+                    continue
+
                 other_switch = True
                 other_switch_value = field_value
-                if field_value[0] == "container" or field_value[0] == "array":
+                if field_value[0] == "container":
                     for field_container in field_value[1]:
                         inside = False
                         for it in other_switch_value_dict:
@@ -750,16 +785,12 @@ data class {class_name}(
 
                     return_value = self.generate_switch(field_name, build_other_switch, infos)
                     self.add_to_clazz_field(return_value, clazz)
-            elif other_switch_value_type == "array":
-                print("Not supported yet")
             elif other_switch_value_type == "option":
                 other_switch_value_type = other_switch_value[1][0]
                 if other_switch_value_type == "container":
                     for field in other_switch_value_dict:
                         field_info = field['value']
                         field_keys = field['keys']
-                        if type(field_info) is str or field_info == "{'countType': 'varint'}":
-                            continue
 
                         if type(field_info) is list:
                             for field_sub in field_info:
@@ -876,7 +907,7 @@ data class {class_name}(
                     field_type = field[0]
                     field = field[1]
                     if field_type == "array":
-                        pass
+                        print("Option array not supported yet")
                     elif field_type == "container":
                         return_value = self.generate_option_container(field_name, field, infos)
                     else:
@@ -886,7 +917,6 @@ data class {class_name}(
             elif field_type == "buffer":
                 buffer_count_type = field["countType"]
                 if buffer_count_type == "varint":
-                    print("Buffer varint")
                     return_value = self.generate_basic_type(field_name, "buffer", infos)
                 else:
                     raise Exception("Not supported")

@@ -26,6 +26,17 @@ data class PlayerInfoPacket(
                     0 -> arrayInput.readString()
                     else -> null
                 }
+                val properties = when (action) {
+                    0 -> arrayInput.readVarIntArray { arrayInput1 ->
+                        val name = arrayInput1.readString()
+                        val value = arrayInput1.readString()
+                        val hasSignature = arrayInput1.readBoolean()
+                        val signature = if (hasSignature) arrayInput1.readString() else null
+
+                        return@readVarIntArray PlayerInfoPacketProperties(name, value, hasSignature, signature)
+                    }
+                    else -> null
+                }
                 val gamemode = when (action) {
                     0 -> arrayInput.readVarInt()
                     1 -> arrayInput.readVarInt()
@@ -54,8 +65,24 @@ data class PlayerInfoPacket(
                     0 -> if (hasTimestamp!!) arrayInput.readLong() else null
                     else -> null
                 }
+                val hasPublicKey = when (action) {
+                    0 -> arrayInput.readBoolean()
+                    else -> null
+                }
+                val publicKey = when (action) {
+                    0 -> if (hasPublicKey!!) arrayInput.readVarIntByteArray() else null
+                    else -> null
+                }
+                val hasSignature = when (action) {
+                    0 -> arrayInput.readBoolean()
+                    else -> null
+                }
+                val signature = when (action) {
+                    0 -> if (hasSignature!!) arrayInput.readVarIntByteArray() else null
+                    else -> null
+                }
 
-                return@readVarIntArray PlayerInfoPacketData(uuid, name, gamemode, ping, hasDisplayName, displayName, hasTimestamp, timestamp)
+                return@readVarIntArray PlayerInfoPacketData(uuid, name, properties, gamemode, ping, hasDisplayName, displayName, hasTimestamp, timestamp, hasPublicKey, publicKey, hasSignature, signature)
             }
 
             return PlayerInfoPacket(action, data)
@@ -68,6 +95,17 @@ data class PlayerInfoPacket(
                 arrayOutput.writeUUID(arrayValue.uuid)
                 when (value.action) {
                     0 -> arrayOutput.writeString(arrayValue.name!!)
+                    else -> {}
+                }
+                when (value.action) {
+                    0 ->
+                        arrayOutput.writeVarIntArray(arrayValue.properties!!) { arrayValue1, arrayOutput1 ->
+                            arrayOutput1.writeString(arrayValue1.name)
+                            arrayOutput1.writeString(arrayValue1.value)
+                            arrayOutput1.writeBoolean(arrayValue1.hasSignature)
+                            if (arrayValue1.hasSignature) arrayOutput1.writeString(arrayValue1.signature!!)
+                        }
+
                     else -> {}
                 }
                 when (value.action) {
@@ -98,30 +136,71 @@ data class PlayerInfoPacket(
                     0 -> if (arrayValue.hasTimestamp!!) arrayOutput.writeLong(arrayValue.timestamp!!)
                     else -> {}
                 }
+                when (value.action) {
+                    0 -> arrayOutput.writeBoolean(arrayValue.hasPublicKey!!)
+                    else -> {}
+                }
+                when (value.action) {
+                    0 -> if (arrayValue.hasPublicKey!!) arrayOutput.writeVarIntByteArray(arrayValue.publicKey!!)
+                    else -> {}
+                }
+                when (value.action) {
+                    0 -> arrayOutput.writeBoolean(arrayValue.hasSignature!!)
+                    else -> {}
+                }
+                when (value.action) {
+                    0 -> if (arrayValue.hasSignature!!) arrayOutput.writeVarIntByteArray(arrayValue.signature!!)
+                    else -> {}
+                }
             }
         }
     }
 }
 
 /**
+ * PlayerInfoPacketProperties
+ *
+ * @param name name
+ * @param value value
+ * @param hasSignature signature is present
+ * @param signature signature
+*/
+data class PlayerInfoPacketProperties(
+    val name: String,
+    val value: String,
+    val hasSignature: Boolean,
+    val signature: String?,
+)
+
+/**
  * PlayerInfoPacketData
  *
  * @param uuid uuid
  * @param name name
+ * @param properties list of PlayerInfoPacketProperties
  * @param gamemode gamemode
  * @param ping ping
  * @param hasDisplayName hasDisplayName
  * @param displayName displayName
  * @param hasTimestamp hasTimestamp
  * @param timestamp timestamp
+ * @param hasPublicKey hasPublicKey
+ * @param publicKey publicKey
+ * @param hasSignature hasSignature
+ * @param signature signature
 */
 data class PlayerInfoPacketData(
     val uuid: UUID,
     val name: String?,
+    val properties: List<PlayerInfoPacketProperties>?,
     val gamemode: Int?, // varint
     val ping: Int?, // varint
     val hasDisplayName: Boolean?,
     val displayName: String?,
     val hasTimestamp: Boolean?,
     val timestamp: Long?,
+    val hasPublicKey: Boolean?,
+    val publicKey: ByteArray?,
+    val hasSignature: Boolean?,
+    val signature: ByteArray?,
 )

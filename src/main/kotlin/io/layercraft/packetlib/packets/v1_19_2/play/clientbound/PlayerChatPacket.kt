@@ -17,6 +17,7 @@ import java.util.UUID
  * @param hasUnsignedContent unsignedContent is present
  * @param unsignedContent unsignedContent
  * @param filterType filterType
+ * @param filterTypeMask filterTypeMask
  * @param type type
  * @param networkName networkName
  * @param hasNetworkTargetName networkTargetName is present
@@ -36,6 +37,7 @@ data class PlayerChatPacket(
     val hasUnsignedContent: Boolean,
     val unsignedContent: String?,
     val filterType: Int, // varint
+    val filterTypeMask: List<Long>?,
     val type: Int, // varint
     val networkName: String,
     val hasNetworkTargetName: Boolean,
@@ -53,12 +55,16 @@ data class PlayerChatPacket(
             val hasUnsignedContent = input.readBoolean()
             val unsignedContent = if (hasUnsignedContent) input.readString() else null
             val filterType = input.readVarInt()
+            val filterTypeMask = when (filterType) {
+                2 -> input.readVarIntArray { arrayInput -> arrayInput.readLong() }
+                else -> null
+            }
             val type = input.readVarInt()
             val networkName = input.readString()
             val hasNetworkTargetName = input.readBoolean()
             val networkTargetName = if (hasNetworkTargetName) input.readString() else null
 
-            return PlayerChatPacket(senderUuid, headerSignature, plainMessage, hasFormattedMessage, formattedMessage, timestamp, salt, hasUnsignedContent, unsignedContent, filterType, type, networkName, hasNetworkTargetName, networkTargetName)
+            return PlayerChatPacket(senderUuid, headerSignature, plainMessage, hasFormattedMessage, formattedMessage, timestamp, salt, hasUnsignedContent, unsignedContent, filterType, filterTypeMask, type, networkName, hasNetworkTargetName, networkTargetName)
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: PlayerChatPacket) {
@@ -72,6 +78,10 @@ data class PlayerChatPacket(
             output.writeBoolean(value.hasUnsignedContent)
             if (value.hasUnsignedContent) output.writeString(value.unsignedContent!!)
             output.writeVarInt(value.filterType)
+            when (value.filterType) {
+                2 -> output.writeVarIntArray(value.filterTypeMask!!) { arrayValue, arrayOutput -> arrayOutput.writeLong(arrayValue) }
+                else -> {}
+            }
             output.writeVarInt(value.type)
             output.writeString(value.networkName)
             output.writeBoolean(value.hasNetworkTargetName)

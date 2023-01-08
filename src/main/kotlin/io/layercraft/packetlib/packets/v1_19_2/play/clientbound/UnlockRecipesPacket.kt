@@ -17,6 +17,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param smokerBookOpen smokerBookOpen
  * @param filteringSmoker filteringSmoker
  * @param recipes1 recipes1
+ * @param recipes2 recipes2
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Update_Recipe_Book">https://wiki.vg/Protocol#Update_Recipe_Book</a>
  */
 
@@ -32,6 +33,7 @@ data class UnlockRecipesPacket(
     val smokerBookOpen: Boolean,
     val filteringSmoker: Boolean,
     val recipes1: List<String>, // varint array
+    val recipes2: List<String>?,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<UnlockRecipesPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UnlockRecipesPacket {
@@ -45,8 +47,12 @@ data class UnlockRecipesPacket(
             val smokerBookOpen = input.readBoolean()
             val filteringSmoker = input.readBoolean()
             val recipes1 = input.readVarIntArray { arrayInput -> arrayInput.readString() }
+            val recipes2 = when (action) {
+                0 -> input.readVarIntArray { arrayInput -> arrayInput.readString() }
+                else -> null
+            }
 
-            return UnlockRecipesPacket(action, craftingBookOpen, filteringCraftable, smeltingBookOpen, filteringSmeltable, blastFurnaceOpen, filteringBlastFurnace, smokerBookOpen, filteringSmoker, recipes1)
+            return UnlockRecipesPacket(action, craftingBookOpen, filteringCraftable, smeltingBookOpen, filteringSmeltable, blastFurnaceOpen, filteringBlastFurnace, smokerBookOpen, filteringSmoker, recipes1, recipes2)
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: UnlockRecipesPacket) {
@@ -60,6 +66,10 @@ data class UnlockRecipesPacket(
             output.writeBoolean(value.smokerBookOpen)
             output.writeBoolean(value.filteringSmoker)
             output.writeVarIntArray(value.recipes1) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue) }
+            when (value.action) {
+                0 -> output.writeVarIntArray(value.recipes2!!) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue) }
+                else -> {}
+            }
         }
     }
 }
