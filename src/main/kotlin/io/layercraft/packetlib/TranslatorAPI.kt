@@ -7,39 +7,27 @@ import io.layercraft.packetlib.packets.PacketSerializer
 import io.layercraft.packetlib.packets.PacketState
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
-import io.layercraft.packetlib.utils.stream.MinecraftInputStreamDeserialize
-import io.layercraft.packetlib.utils.stream.MinecraftOutputStreamSerialize
-import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
-import java.io.DataInputStream
-import java.io.DataOutputStream
+import io.layercraft.packetlib.utils.bytebuffer.MinecraftByteBufferDeserialize
+import io.layercraft.packetlib.utils.bytebuffer.MinecraftByteBufferSerialize
+import java.nio.ByteBuffer
 
 object TranslatorAPI {
 
+    private const val MAX_PACKET_SIZE: Int = 2097151 // 3 bytes varint
+
     fun <T : Packet> decodeFromByteArray(bytes: ByteArray, serializer: PacketSerializer<T>): T {
-        val byteStream = ByteArrayInputStream(bytes)
-        val dataStream = DataInputStream(byteStream)
-        val deserialize = MinecraftInputStreamDeserialize(dataStream)
+        val byteBuffer = ByteBuffer.wrap(bytes)
+        val deserialize = MinecraftByteBufferDeserialize(byteBuffer)
 
-        val result = serializer.deserialize(deserialize)
-
-        byteStream.close()
-        dataStream.close()
-        return result
+        return serializer.deserialize(deserialize)
     }
 
     fun <T : Packet> encodeToByteArray(value: T, serializer: PacketSerializer<T>): ByteArray {
-        val byteStream = ByteArrayOutputStream()
-        val dataStream = DataOutputStream(byteStream)
-        val serialize = MinecraftOutputStreamSerialize(dataStream)
+        val byteBuffer = ByteBuffer.allocate(MAX_PACKET_SIZE)
+        val serialize = MinecraftByteBufferSerialize(byteBuffer)
 
         serializer.serialize(serialize, value)
-
-        val result = byteStream.toByteArray()
-
-        byteStream.close()
-        dataStream.close()
-        return result
+        return byteBuffer.array()
     }
 
     fun decodeFromInputWithCodec(codec: MinecraftCodec, input: MinecraftProtocolDeserializeInterface<*>, packetDirection: PacketDirection, packetState: PacketState, packetId: Int): Packet? {
