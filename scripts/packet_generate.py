@@ -6,10 +6,10 @@ import packet_generate_text
 src = "src/main/kotlin"
 
 wikivg_url = "https://wiki.vg/index.php?title=Protocol"
-wikivg_url_end = "&oldid=17873"
+wikivg_url_end = "&oldid=17932"
 wikivg_text = requests.get(wikivg_url + wikivg_url_end).text
 
-data_url = "https://raw.githubusercontent.com/PrismarineJS/minecraft-data/master/data/pc/1.19.2/protocol.json"
+data_url = "https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.19.3/protocol.json"
 
 version = data_url.split("/")[-2]
 version_underline = version.replace(".", "_")
@@ -230,7 +230,11 @@ class PacketGenerator:
 
         print(f"Generate: {self.package}.{self.class_name} ({self.id})")
 
-        fields = self.generate_fields()
+        try :
+            fields = self.generate_fields()
+        except Exception as e:
+            print(f"Error: {self.package}.{self.class_name} ({self.id})")
+            return "//TODO"
 
         class_fields_str = fields["class_fields_str"]
         class_serialize_str = fields["class_serialize_str"]
