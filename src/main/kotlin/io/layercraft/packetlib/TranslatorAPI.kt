@@ -27,7 +27,12 @@ object TranslatorAPI {
         val serialize = MinecraftByteBufferSerialize(byteBuffer)
 
         serializer.serialize(serialize, value)
-        return byteBuffer.array()
+
+        val size = byteBuffer.position()
+        val byteArray = ByteArray(size)
+        byteBuffer.get(0, byteArray, 0, size)
+
+        return byteArray
     }
 
     fun decodeFromInputWithCodec(codec: MinecraftCodec, input: MinecraftProtocolDeserializeInterface<*>, packetDirection: PacketDirection, packetState: PacketState, packetId: Int): Packet? {

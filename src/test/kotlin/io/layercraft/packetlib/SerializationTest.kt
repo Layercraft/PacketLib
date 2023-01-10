@@ -22,6 +22,36 @@ internal class SerializationTest {
     }
 
     @Test
+    fun `test many serialization`() {
+        val packet = SetProtocolPacket(ProtocolVersion.V1_19_2.protocolNumber, "localhost", (25565).toUShort(), 1)
+
+        val bytes = TranslatorAPI.encodeToByteArray(packet, SetProtocolPacket)
+        val decoded = TranslatorAPI.decodeFromByteArray(bytes, SetProtocolPacket)
+        val bytes2 = TranslatorAPI.encodeToByteArray(decoded, SetProtocolPacket)
+
+        Assertions.assertArrayEquals(bytes, bytes2)
+
+        val decoded2 = TranslatorAPI.decodeFromByteArray(bytes2, SetProtocolPacket)
+        val bytes3 = TranslatorAPI.encodeToByteArray(decoded2, SetProtocolPacket)
+
+        Assertions.assertArrayEquals(bytes2, bytes3)
+
+        val decoded3 = TranslatorAPI.decodeFromByteArray(bytes3, SetProtocolPacket)
+        val bytes4 = TranslatorAPI.encodeToByteArray(decoded3, SetProtocolPacket)
+
+        Assertions.assertArrayEquals(bytes3, bytes4)
+
+        val decoded4 = TranslatorAPI.decodeFromByteArray(bytes4, SetProtocolPacket)
+        val bytes5 = TranslatorAPI.encodeToByteArray(decoded4, SetProtocolPacket)
+
+        Assertions.assertArrayEquals(bytes4, bytes5)
+
+        val decoded5 = TranslatorAPI.decodeFromByteArray(bytes5, SetProtocolPacket)
+
+        Assertions.assertEquals(packet, decoded5)
+    }
+
+    @Test
     fun `test normal serialization from raw bytes`() {
         val rawPacket = byteArrayOf(-0x08, 0x05, 0x09, 0x6C, 0x6F, 0x63, 0x61, 0x6C, 0x68, 0x6F, 0x73, 0x74, 0x63, -0x23, 0x01) // export from wireshark
 
