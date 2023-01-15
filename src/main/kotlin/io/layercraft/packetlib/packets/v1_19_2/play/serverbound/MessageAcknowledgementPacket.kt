@@ -7,27 +7,31 @@ import java.util.UUID
 /**
  * Message Acknowledgment | 0x03 | play | serverbound
  *
- * @property hasLastMessage lastMessage is present
+ * @property hasLastRejectedMessage lastRejectedMessage is present
  * @param sender sender
+ * @param signature signature
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Message_Acknowledgment">https://wiki.vg/Protocol#Message_Acknowledgment</a>
  */
 
 @MinecraftPacket(id = 0x03, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class MessageAcknowledgementPacket(
-    val hasLastMessage: Boolean,
+    val hasLastRejectedMessage: Boolean,
     val sender: UUID?,
+    val signature: ByteArray?,
 ) : ServerBoundPacket {
     companion object : PacketSerializer<MessageAcknowledgementPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): MessageAcknowledgementPacket {
-            val hasLastMessage = input.readBoolean()
-            val sender = if (hasLastMessage) input.readUUID() else null
+            val hasLastRejectedMessage = input.readBoolean()
+            val sender = if (hasLastRejectedMessage) input.readUUID() else null
+            val signature = if (hasLastRejectedMessage) input.readVarIntByteArray() else null
 
-            return MessageAcknowledgementPacket(hasLastMessage, sender)
+            return MessageAcknowledgementPacket(hasLastRejectedMessage, sender, signature)
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: MessageAcknowledgementPacket) {
-            output.writeBoolean(value.hasLastMessage)
-            if (value.hasLastMessage) output.writeUUID(value.sender!!)
+            output.writeBoolean(value.hasLastRejectedMessage)
+            if (value.hasLastRejectedMessage) output.writeUUID(value.sender!!)
+            if (value.hasLastRejectedMessage) output.writeVarIntByteArray(value.signature!!)
         }
     }
 }

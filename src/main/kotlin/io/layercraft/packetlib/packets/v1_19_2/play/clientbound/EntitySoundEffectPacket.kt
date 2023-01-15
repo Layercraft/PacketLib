@@ -12,6 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param entityId entityId
  * @param volume volume
  * @param pitch pitch
+ * @param seed seed
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Entity_Sound_Effect">https://wiki.vg/Protocol#Entity_Sound_Effect</a>
  */
 
@@ -22,6 +23,7 @@ data class EntitySoundEffectPacket(
     val entityId: Int, // varint
     val volume: Float,
     val pitch: Float,
+    val seed: Long,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<EntitySoundEffectPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntitySoundEffectPacket {
@@ -30,8 +32,9 @@ data class EntitySoundEffectPacket(
             val entityId = input.readVarInt()
             val volume = input.readFloat()
             val pitch = input.readFloat()
+            val seed = input.readLong()
 
-            return EntitySoundEffectPacket(soundId, soundCategory, entityId, volume, pitch)
+            return EntitySoundEffectPacket(soundId, soundCategory, entityId, volume, pitch, seed)
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntitySoundEffectPacket) {
@@ -40,6 +43,7 @@ data class EntitySoundEffectPacket(
             output.writeVarInt(value.entityId)
             output.writeFloat(value.volume)
             output.writeFloat(value.pitch)
+            output.writeLong(value.seed)
         }
     }
 }

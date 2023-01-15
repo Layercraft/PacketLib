@@ -3,15 +3,34 @@ import os
 import requests
 import packet_generate_text
 
+versions = {
+    "1.19.3": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.19.3/protocol.json", "17932"),
+    "1.19.2": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.19.2/protocol.json", "17873"),
+    "1.19.1": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.19.1/protocol.json", "17873"),
+    "1.19": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.19/protocol.json", "17753"),
+    "1.18.2": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.18.1/protocol.json", "17499"),
+    "1.18.1": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.18.1/protocol.json", "17341"),
+    "1.18": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.18/protocol.json", "17341"),
+    "1.17.1": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.17.1/protocol.json", "16918"),
+    "1.17": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.17/protocol.json", "16866"),
+    "1.16.5": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.16.5/protocol.json", "16681"),
+    "1.16.4": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.16.4/protocol.json", "16317"),
+    "1.16.3": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.16.3/protocol.json", "16091"),
+    "1.16.2": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.16.2/protocol.json", "16001"),
+    "1.16.1": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.16.1/protocol.json", "15895"),
+    "1.16": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.16/protocol.json", "15878"),
+    "1.15.2": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.15.2/protocol.json", "16067"),
+    "custom": ("", "")
+}
+
 src = "src/main/kotlin"
+version = input("Version: ")
+data_url = versions[version][0]
+wikivg_url_end = "&oldid=" + versions[version][1]
 
 wikivg_url = "https://wiki.vg/index.php?title=Protocol"
-wikivg_url_end = "&oldid=17932"
 wikivg_text = requests.get(wikivg_url + wikivg_url_end).text
 
-data_url = "https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.19.3/protocol.json"
-
-version = data_url.split("/")[-2]
 version_underline = version.replace(".", "_")
 
 minecraft_codec = []

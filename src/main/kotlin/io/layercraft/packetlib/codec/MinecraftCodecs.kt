@@ -87,8 +87,6 @@ object MinecraftCodecs {
                     .registerClientBoundPacket(0x2f, io.layercraft.packetlib.packets.v1_19_2.play.clientbound.PingPacket::class, io.layercraft.packetlib.packets.v1_19_2.play.clientbound.PingPacket)
                     .registerClientBoundPacket(0x30, io.layercraft.packetlib.packets.v1_19_2.play.clientbound.CraftRecipeResponsePacket::class, io.layercraft.packetlib.packets.v1_19_2.play.clientbound.CraftRecipeResponsePacket)
                     .registerClientBoundPacket(0x31, io.layercraft.packetlib.packets.v1_19_2.play.clientbound.AbilitiesPacket::class, io.layercraft.packetlib.packets.v1_19_2.play.clientbound.AbilitiesPacket)
-                    .registerClientBoundPacket(0x32, io.layercraft.packetlib.packets.v1_19_2.play.clientbound.MessageHeaderPacket::class, io.layercraft.packetlib.packets.v1_19_2.play.clientbound.MessageHeaderPacket)
-                    .registerClientBoundPacket(0x33, io.layercraft.packetlib.packets.v1_19_2.play.clientbound.PlayerChatPacket::class, io.layercraft.packetlib.packets.v1_19_2.play.clientbound.PlayerChatPacket)
                     .registerClientBoundPacket(0x34, io.layercraft.packetlib.packets.v1_19_2.play.clientbound.EndCombatEventPacket::class, io.layercraft.packetlib.packets.v1_19_2.play.clientbound.EndCombatEventPacket)
                     .registerClientBoundPacket(0x35, io.layercraft.packetlib.packets.v1_19_2.play.clientbound.EnterCombatEventPacket::class, io.layercraft.packetlib.packets.v1_19_2.play.clientbound.EnterCombatEventPacket)
                     .registerClientBoundPacket(0x36, io.layercraft.packetlib.packets.v1_19_2.play.clientbound.DeathCombatEventPacket::class, io.layercraft.packetlib.packets.v1_19_2.play.clientbound.DeathCombatEventPacket)

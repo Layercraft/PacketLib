@@ -14,6 +14,7 @@ import java.util.UUID
  * @param signedPreview signedPreview
  * @property hasLastMessage lastMessage is present
  * @param sender sender
+ * @param signature signature
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Chat_Command">https://wiki.vg/Protocol#Chat_Command</a>
  */
 
@@ -26,6 +27,7 @@ data class ChatCommandPacket(
     val signedPreview: Boolean,
     val hasLastMessage: Boolean,
     val sender: UUID?,
+    val signature: ByteArray?,
 ) : ServerBoundPacket {
     companion object : PacketSerializer<ChatCommandPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ChatCommandPacket {
@@ -41,8 +43,9 @@ data class ChatCommandPacket(
             val signedPreview = input.readBoolean()
             val hasLastMessage = input.readBoolean()
             val sender = if (hasLastMessage) input.readUUID() else null
+            val signature = if (hasLastMessage) input.readVarIntByteArray() else null
 
-            return ChatCommandPacket(command, timestamp, salt, argumentSignatures, signedPreview, hasLastMessage, sender)
+            return ChatCommandPacket(command, timestamp, salt, argumentSignatures, signedPreview, hasLastMessage, sender, signature)
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ChatCommandPacket) {
@@ -58,6 +61,7 @@ data class ChatCommandPacket(
             output.writeBoolean(value.signedPreview)
             output.writeBoolean(value.hasLastMessage)
             if (value.hasLastMessage) output.writeUUID(value.sender!!)
+            if (value.hasLastMessage) output.writeVarIntByteArray(value.signature!!)
         }
     }
 }

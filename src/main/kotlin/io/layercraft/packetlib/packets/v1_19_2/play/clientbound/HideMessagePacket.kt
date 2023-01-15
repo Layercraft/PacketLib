@@ -13,17 +13,17 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 @MinecraftPacket(id = 0x18, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class HideMessagePacket(
-    val signature: List<UByte>, // varint array
+    val signature: ByteArray,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<HideMessagePacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): HideMessagePacket {
-            val signature = input.readVarIntArray { arrayInput -> arrayInput.readUByte() }
+            val signature = input.readVarIntByteArray()
 
             return HideMessagePacket(signature)
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: HideMessagePacket) {
-            output.writeVarIntArray(value.signature) { arrayValue, arrayOutput -> arrayOutput.writeUByte(arrayValue) }
+            output.writeVarIntByteArray(value.signature)
         }
     }
 }

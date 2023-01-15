@@ -1,9 +1,13 @@
 package io.layercraft.packetlib.packets.v1_19_2.play.serverbound
 
-import io.layercraft.packetlib.packets.*
+import io.layercraft.packetlib.packets.MinecraftPacket
+import io.layercraft.packetlib.packets.PacketDirection
+import io.layercraft.packetlib.packets.PacketSerializer
+import io.layercraft.packetlib.packets.PacketState
+import io.layercraft.packetlib.packets.ServerBoundPacket
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
-import java.util.UUID
+import java.util.*
 /**
  * Chat Message | 0x05 | play | serverbound
  *
@@ -12,8 +16,9 @@ import java.util.UUID
  * @param salt salt
  * @param signature signature
  * @param signedPreview signedPreview
- * @property hasLastMessage lastMessage is present
- * @param lastMessageUser lastMessageUser
+ * @property hasLastRejectedMessage lastRejectedMessage is present
+ * @param sender sender
+ * @param signature signature
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Chat_Message">https://wiki.vg/Protocol#Chat_Message</a>
  */
 
@@ -24,8 +29,9 @@ data class ChatMessagePacket(
     val salt: Long,
     val signature: ByteArray,
     val signedPreview: Boolean,
-    val hasLastMessage: Boolean,
-    val lastMessageUser: UUID?,
+    val hasLastRejectedMessage: Boolean,
+    val sender: UUID?,
+    val signature2: ByteArray?,
 ) : ServerBoundPacket {
     companion object : PacketSerializer<ChatMessagePacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ChatMessagePacket {
@@ -34,10 +40,11 @@ data class ChatMessagePacket(
             val salt = input.readLong()
             val signature = input.readVarIntByteArray()
             val signedPreview = input.readBoolean()
-            val hasLastMessage = input.readBoolean()
-            val lastMessageUser = if (hasLastMessage) input.readUUID() else null
+            val hasLastRejectedMessage = input.readBoolean()
+            val sender = if (hasLastRejectedMessage) input.readUUID() else null
+            val signature2 = if (hasLastRejectedMessage) input.readVarIntByteArray() else null
 
-            return ChatMessagePacket(message, timestamp, salt, signature, signedPreview, hasLastMessage, lastMessageUser)
+            return ChatMessagePacket(message, timestamp, salt, signature, signedPreview, hasLastRejectedMessage, sender, signature2)
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ChatMessagePacket) {
@@ -46,8 +53,9 @@ data class ChatMessagePacket(
             output.writeLong(value.salt)
             output.writeVarIntByteArray(value.signature)
             output.writeBoolean(value.signedPreview)
-            output.writeBoolean(value.hasLastMessage)
-            if (value.hasLastMessage) output.writeUUID(value.lastMessageUser!!)
+            output.writeBoolean(value.hasLastRejectedMessage)
+            if (value.hasLastRejectedMessage) output.writeUUID(value.sender!!)
+            if (value.hasLastRejectedMessage) output.writeVarIntByteArray(value.signature2!!)
         }
     }
 }

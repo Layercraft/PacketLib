@@ -26,12 +26,30 @@ data class DeclareRecipesPacket(
                     "minecraft:stonecutting" -> arrayInput.readString()
                     else -> null
                 }
+                val ingredients = when (type) {
+                    else -> null
+                }
+                val result = when (type) {
+                    else -> null
+                }
                 val width = when (type) {
                     "minecraft:crafting_shaped" -> arrayInput.readVarInt()
                     else -> null
                 }
                 val height = when (type) {
                     "minecraft:crafting_shaped" -> arrayInput.readVarInt()
+                    else -> null
+                }
+                val ingredients = when (type) {
+                    else -> null
+                }
+                val ingredient = when (type) {
+                    else -> null
+                }
+                val base = when (type) {
+                    else -> null
+                }
+                val addition = when (type) {
                     else -> null
                 }
 
@@ -52,11 +70,29 @@ data class DeclareRecipesPacket(
                     else -> {}
                 }
                 when (arrayValue.type) {
+                    else -> {}
+                }
+                when (arrayValue.type) {
+                    else -> {}
+                }
+                when (arrayValue.type) {
                     "minecraft:crafting_shaped" -> arrayOutput.writeVarInt(arrayValue.width!!)
                     else -> {}
                 }
                 when (arrayValue.type) {
                     "minecraft:crafting_shaped" -> arrayOutput.writeVarInt(arrayValue.height!!)
+                    else -> {}
+                }
+                when (arrayValue.type) {
+                    else -> {}
+                }
+                when (arrayValue.type) {
+                    else -> {}
+                }
+                when (arrayValue.type) {
+                    else -> {}
+                }
+                when (arrayValue.type) {
                     else -> {}
                 }
             }
