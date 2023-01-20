@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Set Creative Mode Slot | 0x2b | play | serverbound
  *
  * @param slot slot
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Set_Creative_Mode_Slot">https://wiki.vg/Protocol#Set_Creative_Mode_Slot</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Set_Creative_Mode_Slot">https://wiki.vg/Protocol#Set_Creative_Mode_Slot</a>
  */
 
 @MinecraftPacket(id = 0x2b, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

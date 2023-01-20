@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param y y
  * @param z z
  * @param onGround onGround
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Set_Player_Position">https://wiki.vg/Protocol#Set_Player_Position</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Set_Player_Position">https://wiki.vg/Protocol#Set_Player_Position</a>
  */
 
 @MinecraftPacket(id = 0x13, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

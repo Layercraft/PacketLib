@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Rename Item | 0x23 | play | serverbound
  *
  * @param name name
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Rename_Item">https://wiki.vg/Protocol#Rename_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Rename_Item">https://wiki.vg/Protocol#Rename_Item</a>
  */
 
 @MinecraftPacket(id = 0x23, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

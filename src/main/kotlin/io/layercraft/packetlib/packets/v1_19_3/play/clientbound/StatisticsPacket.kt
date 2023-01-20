@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Award Statistics | 0x04 | play | clientbound
  *
  * @param entries list of StatisticsPacketEntries
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Award_Statistics">https://wiki.vg/Protocol#Award_Statistics</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Award_Statistics">https://wiki.vg/Protocol#Award_Statistics</a>
  */
 
 @MinecraftPacket(id = 0x04, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param serverId serverId
  * @param publicKey publicKey
  * @param verifyToken verifyToken
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Encryption_Request">https://wiki.vg/Protocol#Encryption_Request</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Encryption_Request">https://wiki.vg/Protocol#Encryption_Request</a>
  */
 
 @MinecraftPacket(id = 0x01, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)

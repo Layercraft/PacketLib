@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Set Action Bar Text | 0x42 | play | clientbound
  *
  * @param text text
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Set_Action_Bar_Text">https://wiki.vg/Protocol#Set_Action_Bar_Text</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Set_Action_Bar_Text">https://wiki.vg/Protocol#Set_Action_Bar_Text</a>
  */
 
 @MinecraftPacket(id = 0x42, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

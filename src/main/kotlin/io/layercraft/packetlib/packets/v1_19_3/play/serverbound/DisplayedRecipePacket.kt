@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Set Seen Recipe | 0x22 | play | serverbound
  *
  * @param recipeId recipeId
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Set_Seen_Recipe">https://wiki.vg/Protocol#Set_Seen_Recipe</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Set_Seen_Recipe">https://wiki.vg/Protocol#Set_Seen_Recipe</a>
  */
 
 @MinecraftPacket(id = 0x22, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

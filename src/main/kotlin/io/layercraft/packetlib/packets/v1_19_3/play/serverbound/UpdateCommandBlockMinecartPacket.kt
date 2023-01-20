@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param entityId entityId
  * @param command command
  * @param trackOutput track_output
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Program_Command_Block_Minecart">https://wiki.vg/Protocol#Program_Command_Block_Minecart</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Program_Command_Block_Minecart">https://wiki.vg/Protocol#Program_Command_Block_Minecart</a>
  */
 
 @MinecraftPacket(id = 0x2a, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

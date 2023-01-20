@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Status Response | 0x00 | status | clientbound
  *
  * @param response response
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Status_Response">https://wiki.vg/Protocol#Status_Response</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Status_Response">https://wiki.vg/Protocol#Status_Response</a>
  */
 
 @MinecraftPacket(id = 0x00, state = PacketState.STATUS, direction = PacketDirection.CLIENTBOUND)

@@ -10,7 +10,7 @@ import java.util.UUID
  * @param username username
  * @param hasPlayerUUID playerUUID is present
  * @param playerUUID playerUUID
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Login_Start">https://wiki.vg/Protocol#Login_Start</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Login_Start">https://wiki.vg/Protocol#Login_Start</a>
  */
 
 @MinecraftPacket(id = 0x00, state = PacketState.LOGIN, direction = PacketDirection.SERVERBOUND)

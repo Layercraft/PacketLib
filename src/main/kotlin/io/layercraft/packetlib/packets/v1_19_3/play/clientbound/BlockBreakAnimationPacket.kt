@@ -10,7 +10,7 @@ import io.layercraft.packetlib.types.Position
  * @param entityId entityId
  * @param location location
  * @param destroyStage destroyStage
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Set_Block_Destroy_Stage">https://wiki.vg/Protocol#Set_Block_Destroy_Stage</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Set_Block_Destroy_Stage">https://wiki.vg/Protocol#Set_Block_Destroy_Stage</a>
  */
 
 @MinecraftPacket(id = 0x06, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

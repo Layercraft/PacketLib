@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Set Held Item | 0x49 | play | clientbound
  *
  * @param slot slot
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Set_Held_Item">https://wiki.vg/Protocol#Set_Held_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Set_Held_Item">https://wiki.vg/Protocol#Set_Held_Item</a>
  */
 
 @MinecraftPacket(id = 0x49, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

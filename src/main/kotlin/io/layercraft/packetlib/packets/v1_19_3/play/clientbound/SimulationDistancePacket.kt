@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Set Simulation Distance | 0x58 | play | clientbound
  *
  * @param distance distance
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Set_Simulation_Distance">https://wiki.vg/Protocol#Set_Simulation_Distance</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Set_Simulation_Distance">https://wiki.vg/Protocol#Set_Simulation_Distance</a>
  */
 
 @MinecraftPacket(id = 0x58, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

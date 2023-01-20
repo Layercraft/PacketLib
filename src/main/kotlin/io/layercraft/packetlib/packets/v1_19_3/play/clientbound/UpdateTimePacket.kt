@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @param age age
  * @param time time
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Update_Time">https://wiki.vg/Protocol#Update_Time</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Update_Time">https://wiki.vg/Protocol#Update_Time</a>
  */
 
 @MinecraftPacket(id = 0x5a, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

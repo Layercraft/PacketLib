@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param fadeIn fadeIn
  * @param stay stay
  * @param fadeOut fadeOut
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Set_Title_Animation_Times">https://wiki.vg/Protocol#Set_Title_Animation_Times</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Set_Title_Animation_Times">https://wiki.vg/Protocol#Set_Title_Animation_Times</a>
  */
 
 @MinecraftPacket(id = 0x5c, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

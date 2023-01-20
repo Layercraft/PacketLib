@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @param windowId windowId
  * @param enchantment enchantment
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Click_Container_Button">https://wiki.vg/Protocol#Click_Container_Button</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Click_Container_Button">https://wiki.vg/Protocol#Click_Container_Button</a>
  */
 
 @MinecraftPacket(id = 0x09, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

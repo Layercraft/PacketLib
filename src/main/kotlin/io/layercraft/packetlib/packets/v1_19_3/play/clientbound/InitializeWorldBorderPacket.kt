@@ -15,7 +15,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param portalTeleportBoundary portalTeleportBoundary
  * @param warningBlocks warningBlocks
  * @param warningTime warningTime
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Initialize_World_Border">https://wiki.vg/Protocol#Initialize_World_Border</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Initialize_World_Border">https://wiki.vg/Protocol#Initialize_World_Border</a>
  */
 
 @MinecraftPacket(id = 0x1e, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

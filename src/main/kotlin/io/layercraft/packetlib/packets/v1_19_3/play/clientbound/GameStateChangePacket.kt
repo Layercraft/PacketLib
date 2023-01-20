@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @param reason reason
  * @param gameMode gameMode
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Game_Event">https://wiki.vg/Protocol#Game_Event</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Game_Event">https://wiki.vg/Protocol#Game_Event</a>
  */
 
 @MinecraftPacket(id = 0x1c, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

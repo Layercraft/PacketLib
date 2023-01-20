@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param windowId windowId
  * @param nbSlots nbSlots
  * @param entityId entityId
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Open_Horse_Screen">https://wiki.vg/Protocol#Open_Horse_Screen</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Open_Horse_Screen">https://wiki.vg/Protocol#Open_Horse_Screen</a>
  */
 
 @MinecraftPacket(id = 0x1d, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

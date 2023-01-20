@@ -12,7 +12,7 @@ import io.layercraft.packetlib.types.Position
  * @param text2 text2
  * @param text3 text3
  * @param text4 text4
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Update_Sign">https://wiki.vg/Protocol#Update_Sign</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Update_Sign">https://wiki.vg/Protocol#Update_Sign</a>
  */
 
 @MinecraftPacket(id = 0x2e, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

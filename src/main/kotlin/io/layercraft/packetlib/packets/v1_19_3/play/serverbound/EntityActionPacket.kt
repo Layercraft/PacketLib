@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param entityId entityId
  * @param actionId actionId
  * @param jumpBoost jumpBoost
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Player_Command">https://wiki.vg/Protocol#Player_Command</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Player_Command">https://wiki.vg/Protocol#Player_Command</a>
  */
 
 @MinecraftPacket(id = 0x1d, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

@@ -8,7 +8,7 @@ import java.util.UUID
  * Teleport To Entity | 0x30 | play | serverbound
  *
  * @param target target
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Teleport_To_Entity">https://wiki.vg/Protocol#Teleport_To_Entity</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Teleport_To_Entity">https://wiki.vg/Protocol#Teleport_To_Entity</a>
  */
 
 @MinecraftPacket(id = 0x30, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

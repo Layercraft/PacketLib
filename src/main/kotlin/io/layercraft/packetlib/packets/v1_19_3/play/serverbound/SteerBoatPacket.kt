@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @param leftPaddle leftPaddle
  * @param rightPaddle rightPaddle
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17932#Paddle_Boat">https://wiki.vg/Protocol#Paddle_Boat</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Paddle_Boat">https://wiki.vg/Protocol#Paddle_Boat</a>
  */
 
 @MinecraftPacket(id = 0x18, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
