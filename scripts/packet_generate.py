@@ -4,7 +4,7 @@ import requests
 import packet_generate_text
 
 versions = {
-    "1.19.3": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.19.3/protocol.json", "17935"),
+    "1.19.3": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.19.3/protocol.json", "17964"),
     "1.19.2": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.19.2/protocol.json", "17873"),
     "1.19.1": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.19.1/protocol.json", "17873"),
     "1.19": ("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.19/protocol.json", "17753"),

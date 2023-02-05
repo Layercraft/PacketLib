@@ -13,17 +13,17 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 @MinecraftPacket(id = 0x28, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class HeldItemSlotPacket(
-    val slotId: Byte,
+    val slotId: Short,
 ) : ServerBoundPacket {
     companion object : PacketSerializer<HeldItemSlotPacket> {
         override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): HeldItemSlotPacket {
-            val slotId = input.readByte()
+            val slotId = input.readShort()
 
             return HeldItemSlotPacket(slotId)
         }
 
         override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: HeldItemSlotPacket) {
-            output.writeByte(value.slotId)
+            output.writeShort(value.slotId)
         }
     }
 }
