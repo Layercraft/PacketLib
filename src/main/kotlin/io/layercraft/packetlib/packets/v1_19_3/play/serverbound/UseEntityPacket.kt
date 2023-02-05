@@ -14,7 +14,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param z z
  * @param hand hand
  * @param sneaking sneaking
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Interact">https://wiki.vg/Protocol#Interact</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Interact">https://wiki.vg/Protocol#Interact</a>
  */
 
 @MinecraftPacket(id = 0x0f, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

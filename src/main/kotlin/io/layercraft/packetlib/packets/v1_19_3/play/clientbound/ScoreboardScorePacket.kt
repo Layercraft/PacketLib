@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param action action
  * @param scoreName scoreName
  * @param value value
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Update_Score">https://wiki.vg/Protocol#Update_Score</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Update_Score">https://wiki.vg/Protocol#Update_Score</a>
  */
 
 @MinecraftPacket(id = 0x57, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

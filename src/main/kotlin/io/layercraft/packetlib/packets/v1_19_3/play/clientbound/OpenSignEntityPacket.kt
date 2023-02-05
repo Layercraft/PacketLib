@@ -8,7 +8,7 @@ import io.layercraft.packetlib.types.Position
  * Open Sign Editor | 0x2d | play | clientbound
  *
  * @param location location
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Open_Sign_Editor">https://wiki.vg/Protocol#Open_Sign_Editor</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Open_Sign_Editor">https://wiki.vg/Protocol#Open_Sign_Editor</a>
  */
 
 @MinecraftPacket(id = 0x2d, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

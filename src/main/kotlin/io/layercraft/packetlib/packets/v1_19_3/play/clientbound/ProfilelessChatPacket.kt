@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param name name
  * @param hasTarget target is present
  * @param target target
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Disguised_Chat_Message">https://wiki.vg/Protocol#Disguised_Chat_Message</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Disguised_Chat_Message">https://wiki.vg/Protocol#Disguised_Chat_Message</a>
  */
 
 @MinecraftPacket(id = 0x18, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

@@ -7,7 +7,7 @@ import java.util.UUID
 /**
  * Message Acknowledgment | 0x03 | play | serverbound
  *
- * @property hasLastRejectedMessage lastRejectedMessage is present
+ * @param hasLastRejectedMessage lastRejectedMessage is present
  * @param sender sender
  * @param signature signature
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Message_Acknowledgment">https://wiki.vg/Protocol#Message_Acknowledgment</a>

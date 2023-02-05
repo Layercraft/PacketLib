@@ -8,7 +8,7 @@ import java.util.UUID
  * Login Start | 0x00 | login | serverbound
  *
  * @param username username
- * @property hasSignature signature is present
+ * @param hasSignature signature is present
  * @param timestamp timestamp
  * @param publicKey publicKey
  * @param signature signature

@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param pages pages
  * @param hasTitle title is present
  * @param title title
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Edit_Book">https://wiki.vg/Protocol#Edit_Book</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Edit_Book">https://wiki.vg/Protocol#Edit_Book</a>
  */
 
 @MinecraftPacket(id = 0x0d, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

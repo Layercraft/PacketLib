@@ -11,7 +11,7 @@ import java.util.UUID
  * @param expireTime expireTime
  * @param publicKey publicKey
  * @param signature signature
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Player_Session">https://wiki.vg/Protocol#Player_Session</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Player_Session">https://wiki.vg/Protocol#Player_Session</a>
  */
 
 @MinecraftPacket(id = 0x20, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

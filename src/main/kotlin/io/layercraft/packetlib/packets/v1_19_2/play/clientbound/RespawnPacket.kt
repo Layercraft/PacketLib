@@ -15,7 +15,7 @@ import io.layercraft.packetlib.types.Position
  * @param isDebug isDebug
  * @param isFlat isFlat
  * @param copyMetadata copyMetadata
- * @property hasDeath death is present
+ * @param hasDeath death is present
  * @param dimensionName dimensionName
  * @param location location
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Respawn">https://wiki.vg/Protocol#Respawn</a>

@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param primaryEffect primary_effect
  * @param hasSecondaryEffect secondary_effect is present
  * @param secondaryEffect secondary_effect
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Set_Beacon_Effect">https://wiki.vg/Protocol#Set_Beacon_Effect</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Set_Beacon_Effect">https://wiki.vg/Protocol#Set_Beacon_Effect</a>
  */
 
 @MinecraftPacket(id = 0x27, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

@@ -12,7 +12,7 @@ import java.util.UUID
  * @param salt salt
  * @param argumentSignatures list of ChatCommandPacketArgumentSignatures
  * @param signedPreview signedPreview
- * @property hasLastRejectedMessage lastRejectedMessage is present
+ * @param hasLastRejectedMessage lastRejectedMessage is present
  * @param sender sender
  * @param signature signature
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Chat_Command">https://wiki.vg/Protocol#Chat_Command</a>

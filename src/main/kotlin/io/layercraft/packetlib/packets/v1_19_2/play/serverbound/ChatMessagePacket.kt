@@ -1,13 +1,9 @@
 package io.layercraft.packetlib.packets.v1_19_2.play.serverbound
 
-import io.layercraft.packetlib.packets.MinecraftPacket
-import io.layercraft.packetlib.packets.PacketDirection
-import io.layercraft.packetlib.packets.PacketSerializer
-import io.layercraft.packetlib.packets.PacketState
-import io.layercraft.packetlib.packets.ServerBoundPacket
+import io.layercraft.packetlib.packets.*
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
-import java.util.*
+import java.util.UUID
 /**
  * Chat Message | 0x05 | play | serverbound
  *
@@ -16,7 +12,7 @@ import java.util.*
  * @param salt salt
  * @param signature signature
  * @param signedPreview signedPreview
- * @property hasLastRejectedMessage lastRejectedMessage is present
+ * @param hasLastRejectedMessage lastRejectedMessage is present
  * @param sender sender
  * @param signature signature
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17873#Chat_Message">https://wiki.vg/Protocol#Chat_Message</a>

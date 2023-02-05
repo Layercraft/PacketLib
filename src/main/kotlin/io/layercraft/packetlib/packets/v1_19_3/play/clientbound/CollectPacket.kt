@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param collectedEntityId collectedEntityId
  * @param collectorEntityId collectorEntityId
  * @param pickupItemCount pickupItemCount
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Pickup_Item">https://wiki.vg/Protocol#Pickup_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Pickup_Item">https://wiki.vg/Protocol#Pickup_Item</a>
  */
 
 @MinecraftPacket(id = 0x63, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

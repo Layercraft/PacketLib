@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param windowId windowId
  * @param stateId stateId
  * @param slot slot
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Set_Container_Slot">https://wiki.vg/Protocol#Set_Container_Slot</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Set_Container_Slot">https://wiki.vg/Protocol#Set_Container_Slot</a>
  */
 
 @MinecraftPacket(id = 0x12, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

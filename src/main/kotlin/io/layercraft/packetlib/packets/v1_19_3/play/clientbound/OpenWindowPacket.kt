@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param windowId windowId
  * @param inventoryType inventoryType
  * @param windowTitle windowTitle
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Open_Screen">https://wiki.vg/Protocol#Open_Screen</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Open_Screen">https://wiki.vg/Protocol#Open_Screen</a>
  */
 
 @MinecraftPacket(id = 0x2c, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

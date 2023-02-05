@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Remove Entities | 0x3a | play | clientbound
  *
  * @param entityIds entityIds
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Remove_Entities">https://wiki.vg/Protocol#Remove_Entities</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Remove_Entities">https://wiki.vg/Protocol#Remove_Entities</a>
  */
 
 @MinecraftPacket(id = 0x3a, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

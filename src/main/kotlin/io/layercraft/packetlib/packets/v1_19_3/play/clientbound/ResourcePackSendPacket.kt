@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param forced forced
  * @param hasPromptMessage promptMessage is present
  * @param promptMessage promptMessage
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Resource_Pack">https://wiki.vg/Protocol#Resource_Pack</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Resource_Pack">https://wiki.vg/Protocol#Resource_Pack</a>
  */
 
 @MinecraftPacket(id = 0x3c, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

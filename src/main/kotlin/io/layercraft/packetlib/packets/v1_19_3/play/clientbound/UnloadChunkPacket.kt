@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @param chunkX chunkX
  * @param chunkZ chunkZ
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Unload_Chunk">https://wiki.vg/Protocol#Unload_Chunk</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Unload_Chunk">https://wiki.vg/Protocol#Unload_Chunk</a>
  */
 
 @MinecraftPacket(id = 0x1b, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

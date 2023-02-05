@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Clear Titles | 0x0c | play | clientbound
  *
  * @param reset reset
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Clear_Titles">https://wiki.vg/Protocol#Clear_Titles</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Clear_Titles">https://wiki.vg/Protocol#Clear_Titles</a>
  */
 
 @MinecraftPacket(id = 0x0c, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

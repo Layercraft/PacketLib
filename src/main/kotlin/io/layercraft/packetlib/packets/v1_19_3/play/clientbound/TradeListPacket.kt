@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param experience experience
  * @param isRegularVillager isRegularVillager
  * @param canRestock canRestock
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Merchant_Offers">https://wiki.vg/Protocol#Merchant_Offers</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Merchant_Offers">https://wiki.vg/Protocol#Merchant_Offers</a>
  */
 
 @MinecraftPacket(id = 0x26, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

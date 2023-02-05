@@ -581,7 +581,7 @@ data class {class_name}(
         clazz["deserialize"] += [f"val {parent_field_boolean_var_name} = {info_deserialize_var_name}.readBoolean()"]
         clazz["serialize"] += [f"{info_serialize_var_name}.writeBoolean({info_serialize_value_var_type}.{parent_field_boolean_var_name})"]
         clazz["var_list"] += [parent_field_boolean_var_name]
-        clazz["docs"] += [f" * @property {parent_field_boolean_var_name} {parent_field_name} is present"]
+        clazz["docs"] += [f" * @param {parent_field_boolean_var_name} {parent_field_name} is present"]
 
         for field in container:
             field_name = field['name']

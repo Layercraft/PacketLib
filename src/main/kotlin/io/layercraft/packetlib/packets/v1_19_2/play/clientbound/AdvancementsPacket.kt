@@ -111,7 +111,7 @@ data class AdvancementsPacketCriteria(
  * @param key key
  * @param hasParentId parentId is present
  * @param parentId parentId
- * @property hasDisplayData displayData is present
+ * @param hasDisplayData displayData is present
  * @param title title
  * @param description description
  * @param frameType frameType

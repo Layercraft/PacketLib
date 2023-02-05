@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param dY dY
  * @param dZ dZ
  * @param onGround onGround
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Update_Entity_Position">https://wiki.vg/Protocol#Update_Entity_Position</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Update_Entity_Position">https://wiki.vg/Protocol#Update_Entity_Position</a>
  */
 
 @MinecraftPacket(id = 0x27, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

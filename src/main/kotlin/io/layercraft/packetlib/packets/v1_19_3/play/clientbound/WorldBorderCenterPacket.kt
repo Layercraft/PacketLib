@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @param x x
  * @param z z
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17935#Set_Border_Center">https://wiki.vg/Protocol#Set_Border_Center</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Set_Border_Center">https://wiki.vg/Protocol#Set_Border_Center</a>
  */
 
 @MinecraftPacket(id = 0x43, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
