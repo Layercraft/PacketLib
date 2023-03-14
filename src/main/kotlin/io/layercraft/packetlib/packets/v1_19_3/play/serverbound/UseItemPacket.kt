@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @param hand hand
  * @param sequence sequence
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Use_Item">https://wiki.vg/Protocol#Use_Item</a>
  */
 
 @MinecraftPacket(id = 0x32, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

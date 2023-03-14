@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @param entityId entityId
  * @param effectId effectId
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Remove_Entity_Effect">https://wiki.vg/Protocol#Remove_Entity_Effect</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Remove_Entity_Effect">https://wiki.vg/Protocol#Remove_Entity_Effect</a>
  */
 
 @MinecraftPacket(id = 0x3b, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

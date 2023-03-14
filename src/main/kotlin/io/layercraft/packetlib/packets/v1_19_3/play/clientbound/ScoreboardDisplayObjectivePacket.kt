@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @param position position
  * @param name name
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Display_Objective">https://wiki.vg/Protocol#Display_Objective</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Display_Objective">https://wiki.vg/Protocol#Display_Objective</a>
  */
 
 @MinecraftPacket(id = 0x4d, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

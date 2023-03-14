@@ -13,7 +13,7 @@ import io.layercraft.packetlib.types.Position
  * @param pool pool
  * @param finalState finalState
  * @param jointType jointType
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Program_Jigsaw_Block">https://wiki.vg/Protocol#Program_Jigsaw_Block</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Program_Jigsaw_Block">https://wiki.vg/Protocol#Program_Jigsaw_Block</a>
  */
 
 @MinecraftPacket(id = 0x2c, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

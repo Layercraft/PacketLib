@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Acknowledge Block Change | 0x05 | play | clientbound
  *
  * @param sequenceId sequenceId
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Acknowledge_Block_Change">https://wiki.vg/Protocol#Acknowledge_Block_Change</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Acknowledge_Block_Change">https://wiki.vg/Protocol#Acknowledge_Block_Change</a>
  */
 
 @MinecraftPacket(id = 0x05, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

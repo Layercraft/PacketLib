@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Status Request | 0x00 | status | serverbound
  *
 
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Status_Request">https://wiki.vg/Protocol#Status_Request</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Status_Request">https://wiki.vg/Protocol#Status_Request</a>
  */
 
 @MinecraftPacket(id = 0x00, state = PacketState.STATUS, direction = PacketDirection.SERVERBOUND)

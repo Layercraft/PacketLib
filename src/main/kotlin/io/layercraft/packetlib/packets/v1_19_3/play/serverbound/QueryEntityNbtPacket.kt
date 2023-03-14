@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @param transactionId transactionId
  * @param entityId entityId
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Query_Entity_Tag">https://wiki.vg/Protocol#Query_Entity_Tag</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Query_Entity_Tag">https://wiki.vg/Protocol#Query_Entity_Tag</a>
  */
 
 @MinecraftPacket(id = 0x0e, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

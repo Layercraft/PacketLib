@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @param sharedSecret sharedSecret
  * @param verifyToken verifyToken
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Encryption_Response">https://wiki.vg/Protocol#Encryption_Response</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Encryption_Response">https://wiki.vg/Protocol#Encryption_Response</a>
  */
 
 @MinecraftPacket(id = 0x01, state = PacketState.LOGIN, direction = PacketDirection.SERVERBOUND)

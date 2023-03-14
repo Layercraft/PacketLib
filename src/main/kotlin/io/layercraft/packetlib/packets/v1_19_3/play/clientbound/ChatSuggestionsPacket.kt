@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @param action action
  * @param entries entries
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Chat_Suggestions">https://wiki.vg/Protocol#Chat_Suggestions</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Chat_Suggestions">https://wiki.vg/Protocol#Chat_Suggestions</a>
  */
 
 @MinecraftPacket(id = 0x14, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

@@ -11,7 +11,7 @@ import io.layercraft.packetlib.types.Position
  * @param location location
  * @param face face
  * @param sequence sequence
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Player_Action">https://wiki.vg/Protocol#Player_Action</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Player_Action">https://wiki.vg/Protocol#Player_Action</a>
  */
 
 @MinecraftPacket(id = 0x1c, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

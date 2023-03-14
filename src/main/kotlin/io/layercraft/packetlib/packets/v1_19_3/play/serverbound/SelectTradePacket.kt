@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Select Trade | 0x26 | play | serverbound
  *
  * @param slot slot
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Select_Trade">https://wiki.vg/Protocol#Select_Trade</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Select_Trade">https://wiki.vg/Protocol#Select_Trade</a>
  */
 
 @MinecraftPacket(id = 0x26, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

@@ -16,7 +16,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param emptyBlockLightMask emptyBlockLightMask
  * @param skyLight skyLight
  * @param blockLight blockLight
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Update_Light">https://wiki.vg/Protocol#Update_Light</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Update_Light">https://wiki.vg/Protocol#Update_Light</a>
  */
 
 @MinecraftPacket(id = 0x23, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

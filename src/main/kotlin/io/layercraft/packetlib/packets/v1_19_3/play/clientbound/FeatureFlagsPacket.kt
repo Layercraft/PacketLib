@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Feature Flags | 0x67 | play | clientbound
  *
  * @param features features
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Feature_Flags">https://wiki.vg/Protocol#Feature_Flags</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Feature_Flags">https://wiki.vg/Protocol#Feature_Flags</a>
  */
 
 @MinecraftPacket(id = 0x67, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

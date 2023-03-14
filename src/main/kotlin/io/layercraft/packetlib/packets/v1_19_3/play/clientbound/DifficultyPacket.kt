@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @param difficulty difficulty
  * @param difficultyLocked difficultyLocked
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Change_Difficulty">https://wiki.vg/Protocol#Change_Difficulty</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Change_Difficulty">https://wiki.vg/Protocol#Change_Difficulty</a>
  */
 
 @MinecraftPacket(id = 0x0b, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

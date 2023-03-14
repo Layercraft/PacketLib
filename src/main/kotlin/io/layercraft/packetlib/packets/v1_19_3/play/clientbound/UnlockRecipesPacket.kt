@@ -18,7 +18,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param filteringSmoker filteringSmoker
  * @param recipes1 recipes1
  * @param recipes2 recipes2
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Update_Recipe_Book">https://wiki.vg/Protocol#Update_Recipe_Book</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Update_Recipe_Book">https://wiki.vg/Protocol#Update_Recipe_Book</a>
  */
 
 @MinecraftPacket(id = 0x39, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

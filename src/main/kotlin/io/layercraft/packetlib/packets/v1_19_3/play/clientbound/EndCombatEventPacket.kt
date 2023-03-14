@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @param duration duration
  * @param entityId entityId
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#End_Combat">https://wiki.vg/Protocol#End_Combat</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#End_Combat">https://wiki.vg/Protocol#End_Combat</a>
  */
 
 @MinecraftPacket(id = 0x32, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

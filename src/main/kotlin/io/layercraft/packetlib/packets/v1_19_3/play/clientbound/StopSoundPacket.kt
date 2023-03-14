@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param flags flags
  * @param source source
  * @param sound sound
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Stop_Sound">https://wiki.vg/Protocol#Stop_Sound</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Stop_Sound">https://wiki.vg/Protocol#Stop_Sound</a>
  */
 
 @MinecraftPacket(id = 0x5f, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

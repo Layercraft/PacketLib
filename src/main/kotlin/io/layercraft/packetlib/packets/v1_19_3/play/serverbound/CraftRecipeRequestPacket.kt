@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param windowId windowId
  * @param recipe recipe
  * @param makeAll makeAll
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Place_Recipe">https://wiki.vg/Protocol#Place_Recipe</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Place_Recipe">https://wiki.vg/Protocol#Place_Recipe</a>
  */
 
 @MinecraftPacket(id = 0x1a, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

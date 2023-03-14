@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Ping (play) | 0x2e | play | clientbound
  *
  * @param id id
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Ping_.28play.29">https://wiki.vg/Protocol#Ping_.28play.29</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Ping_.28play.29">https://wiki.vg/Protocol#Ping_.28play.29</a>
  */
 
 @MinecraftPacket(id = 0x2e, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

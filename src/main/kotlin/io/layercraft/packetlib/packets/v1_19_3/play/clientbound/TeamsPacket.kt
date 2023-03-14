@@ -17,7 +17,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param prefix prefix
  * @param suffix suffix
  * @param players players
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Update_Teams">https://wiki.vg/Protocol#Update_Teams</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Update_Teams">https://wiki.vg/Protocol#Update_Teams</a>
  */
 
 @MinecraftPacket(id = 0x56, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

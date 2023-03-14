@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Set Border Warning Delay | 0x46 | play | clientbound
  *
  * @param warningTime warningTime
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Set_Border_Warning_Delay">https://wiki.vg/Protocol#Set_Border_Warning_Delay</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Set_Border_Warning_Delay">https://wiki.vg/Protocol#Set_Border_Warning_Delay</a>
  */
 
 @MinecraftPacket(id = 0x46, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

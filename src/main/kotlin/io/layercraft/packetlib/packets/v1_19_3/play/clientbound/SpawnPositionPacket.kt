@@ -9,7 +9,7 @@ import io.layercraft.packetlib.types.Position
  *
  * @param location location
  * @param angle angle
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Set_Default_Spawn_Position">https://wiki.vg/Protocol#Set_Default_Spawn_Position</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Set_Default_Spawn_Position">https://wiki.vg/Protocol#Set_Default_Spawn_Position</a>
  */
 
 @MinecraftPacket(id = 0x4c, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

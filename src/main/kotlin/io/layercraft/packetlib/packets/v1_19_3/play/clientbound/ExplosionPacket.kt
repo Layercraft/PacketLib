@@ -15,7 +15,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param playerMotionX playerMotionX
  * @param playerMotionY playerMotionY
  * @param playerMotionZ playerMotionZ
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Explosion">https://wiki.vg/Protocol#Explosion</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Explosion">https://wiki.vg/Protocol#Explosion</a>
  */
 
 @MinecraftPacket(id = 0x1a, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

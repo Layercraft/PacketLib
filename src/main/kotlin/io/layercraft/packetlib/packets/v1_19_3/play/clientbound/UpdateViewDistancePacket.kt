@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Set Render Distance | 0x4b | play | clientbound
  *
  * @param viewDistance viewDistance
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=17964#Set_Render_Distance">https://wiki.vg/Protocol#Set_Render_Distance</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Set_Render_Distance">https://wiki.vg/Protocol#Set_Render_Distance</a>
  */
 
 @MinecraftPacket(id = 0x4b, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
