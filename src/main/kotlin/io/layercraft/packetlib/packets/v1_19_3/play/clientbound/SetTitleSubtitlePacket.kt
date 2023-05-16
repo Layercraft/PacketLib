@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Set Subtitle Text | 0x59 | play | clientbound
  *
  * @param text text
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Set_Subtitle_Text">https://wiki.vg/Protocol#Set_Subtitle_Text</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Set_Subtitle_Text">https://wiki.vg/Protocol#Set_Subtitle_Text</a>
  */
 
 @MinecraftPacket(id = 0x59, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param action action
  * @param displayText displayText
  * @param type type
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Update_Objectives">https://wiki.vg/Protocol#Update_Objectives</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Update_Objectives">https://wiki.vg/Protocol#Update_Objectives</a>
  */
 
 @MinecraftPacket(id = 0x54, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param hasIcon icon is present
  * @param icon icon
  * @param enforcesSecureChat enforcesSecureChat
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Server_Data">https://wiki.vg/Protocol#Server_Data</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Server_Data">https://wiki.vg/Protocol#Server_Data</a>
  */
 
 @MinecraftPacket(id = 0x41, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

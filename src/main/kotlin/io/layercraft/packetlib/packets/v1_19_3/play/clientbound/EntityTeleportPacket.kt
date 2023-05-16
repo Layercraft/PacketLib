@@ -14,7 +14,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param yaw yaw
  * @param pitch pitch
  * @param onGround onGround
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Teleport_Entity">https://wiki.vg/Protocol#Teleport_Entity</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Teleport_Entity">https://wiki.vg/Protocol#Teleport_Entity</a>
  */
 
 @MinecraftPacket(id = 0x64, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

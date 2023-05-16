@@ -12,7 +12,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param z z
  * @param yaw yaw
  * @param pitch pitch
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Move_Vehicle_2">https://wiki.vg/Protocol#Move_Vehicle_2</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Move_Vehicle_2">https://wiki.vg/Protocol#Move_Vehicle_2</a>
  */
 
 @MinecraftPacket(id = 0x17, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

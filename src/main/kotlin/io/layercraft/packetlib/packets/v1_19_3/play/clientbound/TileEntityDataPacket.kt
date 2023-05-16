@@ -11,7 +11,7 @@ import io.layercraft.packetlib.types.Position
  * @param location location
  * @param action action
  * @param nbtData nbtData
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Block_Entity_Data">https://wiki.vg/Protocol#Block_Entity_Data</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Block_Entity_Data">https://wiki.vg/Protocol#Block_Entity_Data</a>
  */
 
 @MinecraftPacket(id = 0x07, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

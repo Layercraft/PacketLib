@@ -8,7 +8,7 @@ import java.util.UUID
  * Player Info Remove | 0x35 | play | clientbound
  *
  * @param players players
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Player_Info_Remove">https://wiki.vg/Protocol#Player_Info_Remove</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Player_Info_Remove">https://wiki.vg/Protocol#Player_Info_Remove</a>
  */
 
 @MinecraftPacket(id = 0x35, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

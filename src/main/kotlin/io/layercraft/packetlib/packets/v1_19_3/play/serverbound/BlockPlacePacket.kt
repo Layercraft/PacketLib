@@ -15,7 +15,7 @@ import io.layercraft.packetlib.types.Position
  * @param cursorZ cursorZ
  * @param insideBlock insideBlock
  * @param sequence sequence
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Use_Item_On">https://wiki.vg/Protocol#Use_Item_On</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Use_Item_On">https://wiki.vg/Protocol#Use_Item_On</a>
  */
 
 @MinecraftPacket(id = 0x31, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

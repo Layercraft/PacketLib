@@ -10,7 +10,7 @@ import java.util.UUID
  * @param uuid uuid
  * @param username username
  * @param properties list of SuccessPacketProperties
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Login_Success">https://wiki.vg/Protocol#Login_Success</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Login_Success">https://wiki.vg/Protocol#Login_Success</a>
  */
 
 @MinecraftPacket(id = 0x02, state = PacketState.LOGIN, direction = PacketDirection.CLIENTBOUND)

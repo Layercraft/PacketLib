@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Enter Combat | 0x33 | play | clientbound
  *
 
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Enter_Combat">https://wiki.vg/Protocol#Enter_Combat</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Enter_Combat">https://wiki.vg/Protocol#Enter_Combat</a>
  */
 
 @MinecraftPacket(id = 0x33, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

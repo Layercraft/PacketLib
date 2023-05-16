@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param bookId bookId
  * @param bookOpen bookOpen
  * @param filterActive filterActive
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Change_Recipe_Book_Settings">https://wiki.vg/Protocol#Change_Recipe_Book_Settings</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Change_Recipe_Book_Settings">https://wiki.vg/Protocol#Change_Recipe_Book_Settings</a>
  */
 
 @MinecraftPacket(id = 0x21, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

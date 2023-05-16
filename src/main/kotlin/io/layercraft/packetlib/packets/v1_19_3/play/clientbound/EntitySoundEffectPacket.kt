@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param volume volume
  * @param pitch pitch
  * @param seed seed
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Entity_Sound_Effect">https://wiki.vg/Protocol#Entity_Sound_Effect</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Entity_Sound_Effect">https://wiki.vg/Protocol#Entity_Sound_Effect</a>
  */
 
 @MinecraftPacket(id = 0x5d, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

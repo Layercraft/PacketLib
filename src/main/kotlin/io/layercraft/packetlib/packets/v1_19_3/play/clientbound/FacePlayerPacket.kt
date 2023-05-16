@@ -14,7 +14,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param isEntity isEntity
  * @param entityId entityId
  * @param entityFeetEyes entity_feet_eyes
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Look_At">https://wiki.vg/Protocol#Look_At</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Look_At">https://wiki.vg/Protocol#Look_At</a>
  */
 
 @MinecraftPacket(id = 0x37, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Player Abilities | 0x1b | play | serverbound
  *
  * @param flags flags
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Player_Abilities_2">https://wiki.vg/Protocol#Player_Abilities_2</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Player_Abilities_2">https://wiki.vg/Protocol#Player_Abilities_2</a>
  */
 
 @MinecraftPacket(id = 0x1b, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

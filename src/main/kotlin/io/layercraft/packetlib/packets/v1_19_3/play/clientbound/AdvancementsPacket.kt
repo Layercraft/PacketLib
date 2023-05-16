@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param advancementMapping list of AdvancementsPacketAdvancementMapping
  * @param identifiers identifiers
  * @param progressMapping list of AdvancementsPacketProgressMapping
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Update_Advancements">https://wiki.vg/Protocol#Update_Advancements</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Update_Advancements">https://wiki.vg/Protocol#Update_Advancements</a>
  */
 
 @MinecraftPacket(id = 0x65, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

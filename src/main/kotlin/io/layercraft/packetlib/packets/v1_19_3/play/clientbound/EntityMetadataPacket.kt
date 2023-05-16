@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Set Entity Metadata | 0x4e | play | clientbound
  *
  * @param entityId entityId
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Set_Entity_Metadata">https://wiki.vg/Protocol#Set_Entity_Metadata</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Set_Entity_Metadata">https://wiki.vg/Protocol#Set_Entity_Metadata</a>
  */
 
 @MinecraftPacket(id = 0x4e, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

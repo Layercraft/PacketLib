@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param yaw yaw
  * @param pitch pitch
  * @param onGround onGround
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Set_Player_Rotation">https://wiki.vg/Protocol#Set_Player_Rotation</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Set_Player_Rotation">https://wiki.vg/Protocol#Set_Player_Rotation</a>
  */
 
 @MinecraftPacket(id = 0x15, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

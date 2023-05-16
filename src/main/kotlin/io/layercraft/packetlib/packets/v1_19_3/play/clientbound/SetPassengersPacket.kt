@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @param entityId entityId
  * @param passengers passengers
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Set_Passengers">https://wiki.vg/Protocol#Set_Passengers</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Set_Passengers">https://wiki.vg/Protocol#Set_Passengers</a>
  */
 
 @MinecraftPacket(id = 0x55, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

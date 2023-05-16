@@ -20,7 +20,7 @@ import io.layercraft.packetlib.types.NBT
  * @param emptyBlockLightMask emptyBlockLightMask
  * @param skyLight skyLight
  * @param blockLight blockLight
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Chunk_Data_and_Update_Light">https://wiki.vg/Protocol#Chunk_Data_and_Update_Light</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Chunk_Data_and_Update_Light">https://wiki.vg/Protocol#Chunk_Data_and_Update_Light</a>
  */
 
 @MinecraftPacket(id = 0x20, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Keep Alive | 0x11 | play | serverbound
  *
  * @param keepAliveId keepAliveId
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Keep_Alive_2">https://wiki.vg/Protocol#Keep_Alive_2</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Keep_Alive_2">https://wiki.vg/Protocol#Keep_Alive_2</a>
  */
 
 @MinecraftPacket(id = 0x11, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

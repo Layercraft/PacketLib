@@ -13,7 +13,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param mouseButton mouseButton
  * @param mode mode
  * @param changedSlots list of WindowClickPacketChangedSlots
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18043#Click_Container">https://wiki.vg/Protocol#Click_Container</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Click_Container">https://wiki.vg/Protocol#Click_Container</a>
  */
 
 @MinecraftPacket(id = 0x0a, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
