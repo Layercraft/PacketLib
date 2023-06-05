@@ -164,7 +164,53 @@ dependencies {
 
 </details>
 
-## Usage
+## Serialization Implementations
+
+### Included Implementations
+- [ByteBuffer (Java)](https://docs.oracle.com/javase/8/docs/api/java/nio/ByteBuffer.html) -> MinecraftByteBufferSerialize / MinecraftByteBufferDeserialize
+- [InputStream (Java)](https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html) -> MinecraftInputStreamSerialize / MinecraftInputStreamDeserialize
+
+### Write your own
+To write your own implementation, you need to implement the following interfaces:
+- MinecraftProtocolSerializeInterface
+- MinecraftProtocolDeserializeInterface
+
+So you can use your implementation with the MinecraftCodec. e.g.: Netty, Okio, ...
+
+## Example Implementation
+
+```kotlin
+object TranslatorAPI {
+
+    fun <T : Packet> decodeFromByteArray(bytes: ByteArray, serializer: PacketSerializer<T>): T {
+        val byteBuffer = ByteBuffer.wrap(bytes)
+        val deserialize = MinecraftByteBufferDeserialize(byteBuffer)
+
+        return serializer.deserialize(deserialize)
+    }
+
+    fun <T : Packet> encodeToByteArray(value: T, serializer: PacketSerializer<T>): ByteArray {
+        val byteBuffer = ByteBuffer.allocate(MAX_PACKET_SIZE)
+        val serialize = MinecraftByteBufferSerialize(byteBuffer)
+
+        serializer.serialize(serialize, value)
+
+        val size = byteBuffer.position()
+        val byteArray = ByteArray(size)
+        byteBuffer.get(0, byteArray, 0, size)
+
+        return byteArray
+    }
+
+    fun decodeFromInputWithCodec(codec: MinecraftCodec, input: MinecraftProtocolDeserializeInterface<*>, packetDirection: PacketDirection, packetState: PacketState, packetId: Int): Packet? {
+        return codec.getCodecPacket(packetDirection, packetState, packetId)?.packetSerializer?.deserialize(input)
+    }
+
+    fun encodeToOutputWithCodec(codec: MinecraftCodec, output: MinecraftProtocolSerializeInterface<*>, value: Packet) {
+        codec.getCodecPacketFromPacket(value)?.packetSerializer?.serialize(output, value)
+    }
+}
+```
 
 Serialize a packet to a byte array:
 
