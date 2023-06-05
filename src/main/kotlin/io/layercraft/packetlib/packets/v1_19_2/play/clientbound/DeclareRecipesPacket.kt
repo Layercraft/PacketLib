@@ -26,30 +26,12 @@ data class DeclareRecipesPacket(
                     "minecraft:stonecutting" -> arrayInput.readString()
                     else -> null
                 }
-                val ingredients = when (type) {
-                    else -> null
-                }
-                val result = when (type) {
-                    else -> null
-                }
                 val width = when (type) {
                     "minecraft:crafting_shaped" -> arrayInput.readVarInt()
                     else -> null
                 }
                 val height = when (type) {
                     "minecraft:crafting_shaped" -> arrayInput.readVarInt()
-                    else -> null
-                }
-                val ingredients = when (type) {
-                    else -> null
-                }
-                val ingredient = when (type) {
-                    else -> null
-                }
-                val base = when (type) {
-                    else -> null
-                }
-                val addition = when (type) {
                     else -> null
                 }
 

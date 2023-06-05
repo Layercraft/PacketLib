@@ -1,10 +1,13 @@
 package io.layercraft.packetlib.packets
 
+import io.layercraft.packetlib.codec.MinecraftCodec
 import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
 import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
 
 interface Packet {
     val bound: PacketDirection
+
+    fun codecPacket(codec: MinecraftCodec) = codec.getCodecPacketFromPacket(this)
 }
 
 interface ServerBoundPacket : Packet {
@@ -26,13 +29,9 @@ interface PacketSerializer<T> where T : Packet {
 annotation class MinecraftPacket(val id: Int, val state: PacketState, val direction: PacketDirection)
 
 enum class PacketDirection {
-    SERVERBOUND,
-    CLIENTBOUND,
+    SERVERBOUND, CLIENTBOUND,
 }
 
 enum class PacketState {
-    HANDSHAKING,
-    STATUS,
-    LOGIN,
-    PLAY,
+    HANDSHAKING, STATUS, LOGIN, PLAY,
 }

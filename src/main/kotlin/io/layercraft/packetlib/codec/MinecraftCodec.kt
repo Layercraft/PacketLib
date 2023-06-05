@@ -2,7 +2,7 @@ package io.layercraft.packetlib.codec
 
 import io.layercraft.packetlib.data.ProtocolVersion
 import io.layercraft.packetlib.packets.*
-import java.util.EnumMap
+import java.util.*
 import kotlin.reflect.KClass
 class MinecraftCodec private constructor(
     val protocolVersion: ProtocolVersion,
@@ -38,6 +38,10 @@ class MinecraftCodec private constructor(
 
     fun <T : Packet> getCodecPacketFromPacket(packet: T): MinecraftCodecPacket<T>? {
         return list.find { it.packet == packet::class } as MinecraftCodecPacket<T>?
+    }
+
+    fun copy(protocolVersion: ProtocolVersion): MinecraftCodec {
+        return MinecraftCodec(protocolVersion, packets)
     }
 
     companion object {

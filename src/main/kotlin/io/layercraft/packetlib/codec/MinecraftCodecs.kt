@@ -380,4 +380,6 @@ object MinecraftCodecs {
                     .registerServerBoundPacket(0x31, io.layercraft.packetlib.packets.v1_19_3.play.serverbound.BlockPlacePacket::class, io.layercraft.packetlib.packets.v1_19_3.play.serverbound.BlockPlacePacket)
                     .registerServerBoundPacket(0x32, io.layercraft.packetlib.packets.v1_19_3.play.serverbound.UseItemPacket::class, io.layercraft.packetlib.packets.v1_19_3.play.serverbound.UseItemPacket),
             )
+
+    val V1_19_4: MinecraftCodec = this.V1_19_3.copy(ProtocolVersion.V1_19_4)
 }
