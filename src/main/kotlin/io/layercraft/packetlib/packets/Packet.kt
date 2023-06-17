@@ -12,3 +12,11 @@ interface PacketSerializer<T> where T : Packet {
 
     fun serialize(output: MCProtocolSerializer<*>, value: T)
 }
+
+interface PacketPart
+
+interface PacketPartSerializer<T> where T : PacketPart {
+    fun deserialize(input: MCProtocolDeserializer<*>): T
+
+    fun serialize(output: MCProtocolSerializer<*>, value: T)
+}

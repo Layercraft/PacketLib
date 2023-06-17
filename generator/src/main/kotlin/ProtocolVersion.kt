@@ -1,4 +1,4 @@
-enum class ProtocolVersions(val url: String, val versionId: String) {
+enum class ProtocolVersion(val url: String, private val wikiVgVersionId: String) {
     // V1_20("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.20/protocol.json", "18067"),
     V1_19_3("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.19.3/protocol.json", "18067"),
     V1_19_2("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.19.2/protocol.json", "17873"),
@@ -18,7 +18,7 @@ enum class ProtocolVersions(val url: String, val versionId: String) {
     V1_15_2("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.15.2/protocol.json", "16067"),
     ;
 
-    val wikiVgUrl = "https://wiki.vg/index.php?title=Protocol&oldid=$versionId"
+    val wikiVgUrl = "https://wiki.vg/index.php?title=Protocol&oldid=$wikiVgVersionId"
     val packageVersion = name.lowercase()
 
     companion object {
