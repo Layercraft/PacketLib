@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Particle | 0x22 | play | clientbound
@@ -20,7 +20,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Particle_2">https://wiki.vg/Protocol#Particle_2</a>
  */
 
-@MinecraftPacket(id = 0x22, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class WorldParticlesPacket(
     val particleId: Int, // varint
     val longDistance: Boolean,
@@ -34,7 +33,7 @@ data class WorldParticlesPacket(
     val particles: Int,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<WorldParticlesPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): WorldParticlesPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): WorldParticlesPacket {
             val particleId = input.readVarInt()
             val longDistance = input.readBoolean()
             val x = input.readDouble()
@@ -49,7 +48,7 @@ data class WorldParticlesPacket(
             return WorldParticlesPacket(particleId, longDistance, x, y, z, offsetX, offsetY, offsetZ, particleData, particles)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: WorldParticlesPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: WorldParticlesPacket) {
             output.writeVarInt(value.particleId)
             output.writeBoolean(value.longDistance)
             output.writeDouble(value.x)

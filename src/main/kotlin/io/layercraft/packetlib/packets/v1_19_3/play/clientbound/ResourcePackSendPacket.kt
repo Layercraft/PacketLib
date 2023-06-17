@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Resource Pack | 0x3c | play | clientbound
@@ -15,7 +15,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Resource_Pack">https://wiki.vg/Protocol#Resource_Pack</a>
  */
 
-@MinecraftPacket(id = 0x3c, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class ResourcePackSendPacket(
     val url: String,
     val hash: String,
@@ -24,7 +23,7 @@ data class ResourcePackSendPacket(
     val promptMessage: String?,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<ResourcePackSendPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ResourcePackSendPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): ResourcePackSendPacket {
             val url = input.readString()
             val hash = input.readString()
             val forced = input.readBoolean()
@@ -34,7 +33,7 @@ data class ResourcePackSendPacket(
             return ResourcePackSendPacket(url, hash, forced, hasPromptMessage, promptMessage)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ResourcePackSendPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: ResourcePackSendPacket) {
             output.writeString(value.url)
             output.writeString(value.hash)
             output.writeBoolean(value.forced)

@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Stop Sound | 0x5f | play | clientbound
@@ -13,14 +13,13 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Stop_Sound">https://wiki.vg/Protocol#Stop_Sound</a>
  */
 
-@MinecraftPacket(id = 0x5f, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class StopSoundPacket(
     val flags: Byte,
     val source: Int?, // varint
     val sound: String?,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<StopSoundPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): StopSoundPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): StopSoundPacket {
             val flags = input.readByte()
             val source = when (flags.toInt()) {
                 3 -> input.readVarInt()
@@ -36,7 +35,7 @@ data class StopSoundPacket(
             return StopSoundPacket(flags, source, sound)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: StopSoundPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: StopSoundPacket) {
             output.writeByte(value.flags)
             when (value.flags.toInt()) {
                 3 -> output.writeVarInt(value.source!!)

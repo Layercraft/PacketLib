@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 import io.layercraft.packetlib.types.NBT
 /**
  * Entity Effect | 0x68 | play | clientbound
@@ -17,7 +17,6 @@ import io.layercraft.packetlib.types.NBT
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Entity_Effect">https://wiki.vg/Protocol#Entity_Effect</a>
  */
 
-@MinecraftPacket(id = 0x68, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class EntityEffectPacket(
     val entityId: Int, // varint
     val effectId: Int, // varint
@@ -28,7 +27,7 @@ data class EntityEffectPacket(
     val factorCodec: NBT?,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<EntityEffectPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntityEffectPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): EntityEffectPacket {
             val entityId = input.readVarInt()
             val effectId = input.readVarInt()
             val amplifier = input.readByte()
@@ -40,7 +39,7 @@ data class EntityEffectPacket(
             return EntityEffectPacket(entityId, effectId, amplifier, duration, hideParticles, hasFactorCodec, factorCodec)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityEffectPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: EntityEffectPacket) {
             output.writeVarInt(value.entityId)
             output.writeVarInt(value.effectId)
             output.writeByte(value.amplifier)

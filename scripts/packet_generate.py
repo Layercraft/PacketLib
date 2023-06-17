@@ -24,7 +24,8 @@ versions = {
 }
 
 src = "src/main/kotlin"
-version = input("Version: ")
+# First Argument: Version
+version = "custom" if len(os.sys.argv) < 2 else os.sys.argv[1]
 data_url = versions[version][0]
 wikivg_url_end = "&oldid=" + versions[version][1]
 
@@ -47,10 +48,9 @@ def codec_generate():
         package_string = packet["package"]
         status = packet["status"]
         id = packet["id"]
+        direction_string = "clientBound" if packet["direction"] == "clientbound" else "serverBound"
 
-        direction_string = "registerClientBoundPacket" if packet[
-                                                              "direction"] == "clientbound" else "registerServerBoundPacket"
-        add_text = f"""                    .{direction_string}({id}, {package_string}.{class_name}::class, {package_string}.{class_name}) \n"""
+        add_text = f"""                    {direction_string}({id}, {package_string}.{class_name}::class, {package_string}.{class_name}) \n"""
 
         if status == "handshaking":
             handshaking_text += add_text
@@ -61,25 +61,30 @@ def codec_generate():
         elif status == "play":
             play_text += add_text
 
+    handshaking_text = handshaking_text[:-1]
+    login_text = login_text[:-1]
+    status_text = status_text[:-1]
+    play_text = play_text[:-1]
+
     text = f"""
     val V{version_underline}: MinecraftCodec =
-        MinecraftCodec.create(ProtocolVersion.V{version_underline})
-            .registerPacketRegistry(
-                PacketState.HANDSHAKING,
-                MinecraftCodecRegistry.create()
-{handshaking_text})
-            .registerPacketRegistry(
-                PacketState.LOGIN,
-                MinecraftCodecRegistry.create()
-{login_text})
-            .registerPacketRegistry(
-                PacketState.STATUS,
-                MinecraftCodecRegistry.create()
-{status_text})
-            .registerPacketRegistry(
-                PacketState.PLAY,
-                MinecraftCodecRegistry.create()
-{play_text})
+        codec(ProtocolVersion.V{version_underline}) {{
+            packets(PacketState.HANDSHAKING) {{
+{handshaking_text}
+            }}
+
+            packets(PacketState.LOGIN) {{
+{login_text}
+            }}
+
+            packets(PacketState.STATUS) {{
+{status_text}
+            }}
+
+            packets(PacketState.PLAY) {{
+{play_text}
+            }}
+        }}
     """
 
     # write to codec.kt.tmp file
@@ -276,8 +281,8 @@ class PacketGenerator:
         class_str = f"""package {self.package}
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 {class_other_imports_str}
 /**
  * {wikivg_name} | {id} | {status} | {direction}
@@ -286,18 +291,17 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol{wikivg_url_end}#{wikivg_id}">https://wiki.vg/Protocol#{wikivg_id}</a>
  */
 
-@MinecraftPacket(id = {id}, state = PacketState.{status.upper()}, direction = PacketDirection.{direction.upper()})
 {"data" if len(class_fields_str) > 1 else ""} class {class_name}(
     {class_fields_str}
 ) : {direction_interface} {{
     companion object : PacketSerializer<{class_name}> {{
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): {class_name} {{
+        override fun deserialize(input: MCProtocolDeserializer<*>): {class_name} {{
             {class_deserialize_str}
 
             return {class_name}({class_var_list_str})
         }}
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: {class_name}) {{
+        override fun serialize(output: MCProtocolSerializer<*>, value: {class_name}) {{
             {class_serialize_str}
         }}
     }}

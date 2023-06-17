@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Update Score | 0x57 | play | clientbound
@@ -14,7 +14,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Update_Score">https://wiki.vg/Protocol#Update_Score</a>
  */
 
-@MinecraftPacket(id = 0x57, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class ScoreboardScorePacket(
     val itemName: String,
     val action: Int, // varint
@@ -22,7 +21,7 @@ data class ScoreboardScorePacket(
     val value: Int?, // varint
 ) : ClientBoundPacket {
     companion object : PacketSerializer<ScoreboardScorePacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ScoreboardScorePacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): ScoreboardScorePacket {
             val itemName = input.readString()
             val action = input.readVarInt()
             val scoreName = input.readString()
@@ -34,7 +33,7 @@ data class ScoreboardScorePacket(
             return ScoreboardScorePacket(itemName, action, scoreName, value)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ScoreboardScorePacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: ScoreboardScorePacket) {
             output.writeString(value.itemName)
             output.writeVarInt(value.action)
             output.writeString(value.scoreName)

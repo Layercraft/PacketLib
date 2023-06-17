@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Map Data | 0x25 | play | clientbound
@@ -18,7 +18,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Map_Data">https://wiki.vg/Protocol#Map_Data</a>
  */
 
-@MinecraftPacket(id = 0x25, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class MapPacket(
     val itemDamage: Int, // varint
     val scale: Byte,
@@ -30,7 +29,7 @@ data class MapPacket(
     val data: ByteArray?,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<MapPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): MapPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): MapPacket {
             val itemDamage = input.readVarInt()
             val scale = input.readByte()
             val locked = input.readBoolean()
@@ -55,7 +54,7 @@ data class MapPacket(
             return MapPacket(itemDamage, scale, locked, columns, rows, x, y, data)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: MapPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: MapPacket) {
             output.writeVarInt(value.itemDamage)
             output.writeByte(value.scale)
             output.writeBoolean(value.locked)

@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 import java.util.UUID
 /**
  * Spawn Entity | 0x00 | play | clientbound
@@ -23,7 +23,6 @@ import java.util.UUID
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Spawn_Entity">https://wiki.vg/Protocol#Spawn_Entity</a>
  */
 
-@MinecraftPacket(id = 0x00, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class SpawnEntityPacket(
     val entityId: Int, // varint
     val objectUUID: UUID,
@@ -40,7 +39,7 @@ data class SpawnEntityPacket(
     val velocityZ: Short,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<SpawnEntityPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnEntityPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): SpawnEntityPacket {
             val entityId = input.readVarInt()
             val objectUUID = input.readUUID()
             val type = input.readVarInt()
@@ -58,7 +57,7 @@ data class SpawnEntityPacket(
             return SpawnEntityPacket(entityId, objectUUID, type, x, y, z, pitch, yaw, headPitch, objectData, velocityX, velocityY, velocityZ)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SpawnEntityPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: SpawnEntityPacket) {
             output.writeVarInt(value.entityId)
             output.writeUUID(value.objectUUID)
             output.writeVarInt(value.type)

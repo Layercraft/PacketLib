@@ -1,8 +1,6 @@
 package io.layercraft.packetlib
 
 import io.layercraft.packetlib.types.Position
-import io.layercraft.packetlib.utils.bytebuffer.MinecraftByteBufferDeserialize
-import io.layercraft.packetlib.utils.bytebuffer.MinecraftByteBufferSerialize
 import org.junit.jupiter.api.Assertions.assertArrayEquals
 import org.junit.jupiter.api.Test
 import java.nio.ByteBuffer

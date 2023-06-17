@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.serverbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Keep Alive | 0x11 | play | serverbound
@@ -11,18 +11,17 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Keep_Alive_2">https://wiki.vg/Protocol#Keep_Alive_2</a>
  */
 
-@MinecraftPacket(id = 0x11, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class KeepAlivePacket(
     val keepAliveId: Long,
 ) : ServerBoundPacket {
     companion object : PacketSerializer<KeepAlivePacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): KeepAlivePacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): KeepAlivePacket {
             val keepAliveId = input.readLong()
 
             return KeepAlivePacket(keepAliveId)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: KeepAlivePacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: KeepAlivePacket) {
             output.writeLong(value.keepAliveId)
         }
     }

@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Look At | 0x37 | play | clientbound
@@ -17,7 +17,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Look_At">https://wiki.vg/Protocol#Look_At</a>
  */
 
-@MinecraftPacket(id = 0x37, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class FacePlayerPacket(
     val feetEyes: Int, // varint
     val x: Double,
@@ -28,7 +27,7 @@ data class FacePlayerPacket(
     val entityFeetEyes: String?,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<FacePlayerPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): FacePlayerPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): FacePlayerPacket {
             val feetEyes = input.readVarInt()
             val x = input.readDouble()
             val y = input.readDouble()
@@ -46,7 +45,7 @@ data class FacePlayerPacket(
             return FacePlayerPacket(feetEyes, x, y, z, isEntity, entityId, entityFeetEyes)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: FacePlayerPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: FacePlayerPacket) {
             output.writeVarInt(value.feetEyes)
             output.writeDouble(value.x)
             output.writeDouble(value.y)

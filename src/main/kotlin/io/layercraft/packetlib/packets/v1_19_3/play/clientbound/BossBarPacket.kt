@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 import java.util.UUID
 /**
  * Boss Bar | 0x0a | play | clientbound
@@ -17,7 +17,6 @@ import java.util.UUID
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Boss_Bar">https://wiki.vg/Protocol#Boss_Bar</a>
  */
 
-@MinecraftPacket(id = 0x0a, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class BossBarPacket(
     val entityUUID: UUID,
     val action: Int, // varint
@@ -28,7 +27,7 @@ data class BossBarPacket(
     val flags: UByte?,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<BossBarPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): BossBarPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): BossBarPacket {
             val entityUUID = input.readUUID()
             val action = input.readVarInt()
             val title = when (action) {
@@ -60,7 +59,7 @@ data class BossBarPacket(
             return BossBarPacket(entityUUID, action, title, health, color, dividers, flags)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: BossBarPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: BossBarPacket) {
             output.writeUUID(value.entityUUID)
             output.writeVarInt(value.action)
             when (value.action) {

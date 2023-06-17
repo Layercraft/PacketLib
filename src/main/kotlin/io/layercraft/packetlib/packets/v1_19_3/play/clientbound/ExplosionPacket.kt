@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Explosion | 0x1a | play | clientbound
@@ -18,7 +18,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Explosion">https://wiki.vg/Protocol#Explosion</a>
  */
 
-@MinecraftPacket(id = 0x1a, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class ExplosionPacket(
     val x: Double,
     val y: Double,
@@ -30,7 +29,7 @@ data class ExplosionPacket(
     val playerMotionZ: Float,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<ExplosionPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ExplosionPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): ExplosionPacket {
             val x = input.readDouble()
             val y = input.readDouble()
             val z = input.readDouble()
@@ -40,7 +39,7 @@ data class ExplosionPacket(
                 val y = arrayInput.readByte()
                 val z = arrayInput.readByte()
 
-                return@readVarIntArray ExplosionPacketAffectedBlockOffsets(x, y, z)
+                ExplosionPacketAffectedBlockOffsets(x, y, z)
             }
             val playerMotionX = input.readFloat()
             val playerMotionY = input.readFloat()
@@ -49,7 +48,7 @@ data class ExplosionPacket(
             return ExplosionPacket(x, y, z, radius, affectedBlockOffsets, playerMotionX, playerMotionY, playerMotionZ)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ExplosionPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: ExplosionPacket) {
             output.writeDouble(value.x)
             output.writeDouble(value.y)
             output.writeDouble(value.z)

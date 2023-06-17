@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 import io.layercraft.packetlib.types.Position
 /**
  * Respawn | 0x3d | play | clientbound
@@ -21,7 +21,6 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Respawn">https://wiki.vg/Protocol#Respawn</a>
  */
 
-@MinecraftPacket(id = 0x3d, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class RespawnPacket(
     val dimension: String,
     val worldName: String,
@@ -36,7 +35,7 @@ data class RespawnPacket(
     val location: Position?,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<RespawnPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): RespawnPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): RespawnPacket {
             val dimension = input.readString()
             val worldName = input.readString()
             val hashedSeed = input.readLong()
@@ -52,7 +51,7 @@ data class RespawnPacket(
             return RespawnPacket(dimension, worldName, hashedSeed, gamemode, previousGamemode, isDebug, isFlat, copyMetadata, hasDeath, dimensionName, location)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: RespawnPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: RespawnPacket) {
             output.writeString(value.dimension)
             output.writeString(value.worldName)
             output.writeLong(value.hashedSeed)

@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Update Entity Position | 0x27 | play | clientbound
@@ -15,7 +15,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Update_Entity_Position">https://wiki.vg/Protocol#Update_Entity_Position</a>
  */
 
-@MinecraftPacket(id = 0x27, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class RelEntityMovePacket(
     val entityId: Int, // varint
     val dX: Short,
@@ -24,7 +23,7 @@ data class RelEntityMovePacket(
     val onGround: Boolean,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<RelEntityMovePacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): RelEntityMovePacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): RelEntityMovePacket {
             val entityId = input.readVarInt()
             val dX = input.readShort()
             val dY = input.readShort()
@@ -34,7 +33,7 @@ data class RelEntityMovePacket(
             return RelEntityMovePacket(entityId, dX, dY, dZ, onGround)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: RelEntityMovePacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: RelEntityMovePacket) {
             output.writeVarInt(value.entityId)
             output.writeShort(value.dX)
             output.writeShort(value.dY)

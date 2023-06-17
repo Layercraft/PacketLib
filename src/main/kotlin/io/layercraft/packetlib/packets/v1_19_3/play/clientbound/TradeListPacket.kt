@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Merchant Offers | 0x26 | play | clientbound
@@ -16,7 +16,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Merchant_Offers">https://wiki.vg/Protocol#Merchant_Offers</a>
  */
 
-@MinecraftPacket(id = 0x26, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class TradeListPacket(
     val windowId: Int, // varint
     val trades: List<TradeListPacketTrades>, // varint array
@@ -26,7 +25,7 @@ data class TradeListPacket(
     val canRestock: Boolean,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<TradeListPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): TradeListPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): TradeListPacket {
             val windowId = input.readVarInt()
             val trades = input.readVarIntArray { arrayInput ->
                 val tradeDisabled = arrayInput.readBoolean()
@@ -37,7 +36,7 @@ data class TradeListPacket(
                 val priceMultiplier = arrayInput.readFloat()
                 val demand = arrayInput.readInt()
 
-                return@readVarIntArray TradeListPacketTrades(tradeDisabled, nbTradeUses, maximumNbTradeUses, xp, specialPrice, priceMultiplier, demand)
+                TradeListPacketTrades(tradeDisabled, nbTradeUses, maximumNbTradeUses, xp, specialPrice, priceMultiplier, demand)
             }
             val villagerLevel = input.readVarInt()
             val experience = input.readVarInt()
@@ -47,7 +46,7 @@ data class TradeListPacket(
             return TradeListPacket(windowId, trades, villagerLevel, experience, isRegularVillager, canRestock)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: TradeListPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: TradeListPacket) {
             output.writeVarInt(value.windowId)
 
             output.writeVarIntArray(value.trades) { arrayValue, arrayOutput ->

@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Set Container Property | 0x11 | play | clientbound
@@ -13,14 +13,13 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Set_Container_Property">https://wiki.vg/Protocol#Set_Container_Property</a>
  */
 
-@MinecraftPacket(id = 0x11, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class CraftProgressBarPacket(
     val windowId: UByte,
     val property: Short,
     val value: Short,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<CraftProgressBarPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): CraftProgressBarPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): CraftProgressBarPacket {
             val windowId = input.readUByte()
             val property = input.readShort()
             val value = input.readShort()
@@ -28,7 +27,7 @@ data class CraftProgressBarPacket(
             return CraftProgressBarPacket(windowId, property, value)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: CraftProgressBarPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: CraftProgressBarPacket) {
             output.writeUByte(value.windowId)
             output.writeShort(value.property)
             output.writeShort(value.value)

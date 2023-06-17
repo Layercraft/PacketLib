@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 import io.layercraft.packetlib.types.Position
 /**
  * Block Action | 0x08 | play | clientbound
@@ -14,7 +14,6 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Block_Action">https://wiki.vg/Protocol#Block_Action</a>
  */
 
-@MinecraftPacket(id = 0x08, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class BlockActionPacket(
     val location: Position,
     val byte1: UByte,
@@ -22,7 +21,7 @@ data class BlockActionPacket(
     val blockId: Int, // varint
 ) : ClientBoundPacket {
     companion object : PacketSerializer<BlockActionPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): BlockActionPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): BlockActionPacket {
             val location = input.readPosition()
             val byte1 = input.readUByte()
             val byte2 = input.readUByte()
@@ -31,7 +30,7 @@ data class BlockActionPacket(
             return BlockActionPacket(location, byte1, byte2, blockId)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: BlockActionPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: BlockActionPacket) {
             output.writePosition(value.location)
             output.writeUByte(value.byte1)
             output.writeUByte(value.byte2)

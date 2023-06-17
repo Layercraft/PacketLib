@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Spawn Experience Orb | 0x01 | play | clientbound
@@ -15,7 +15,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Spawn_Experience_Orb">https://wiki.vg/Protocol#Spawn_Experience_Orb</a>
  */
 
-@MinecraftPacket(id = 0x01, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class SpawnEntityExperienceOrbPacket(
     val entityId: Int, // varint
     val x: Double,
@@ -24,7 +23,7 @@ data class SpawnEntityExperienceOrbPacket(
     val count: Short,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<SpawnEntityExperienceOrbPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SpawnEntityExperienceOrbPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): SpawnEntityExperienceOrbPacket {
             val entityId = input.readVarInt()
             val x = input.readDouble()
             val y = input.readDouble()
@@ -34,7 +33,7 @@ data class SpawnEntityExperienceOrbPacket(
             return SpawnEntityExperienceOrbPacket(entityId, x, y, z, count)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SpawnEntityExperienceOrbPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: SpawnEntityExperienceOrbPacket) {
             output.writeVarInt(value.entityId)
             output.writeDouble(value.x)
             output.writeDouble(value.y)

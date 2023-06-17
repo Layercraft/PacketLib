@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Update Advancements | 0x65 | play | clientbound
@@ -14,7 +14,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Update_Advancements">https://wiki.vg/Protocol#Update_Advancements</a>
  */
 
-@MinecraftPacket(id = 0x65, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class AdvancementsPacket(
     val reset: Boolean,
     val advancementMapping: List<AdvancementsPacketAdvancementMapping>, // varint array
@@ -22,7 +21,7 @@ data class AdvancementsPacket(
     val progressMapping: List<AdvancementsPacketProgressMapping>, // varint array
 ) : ClientBoundPacket {
     companion object : PacketSerializer<AdvancementsPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): AdvancementsPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): AdvancementsPacket {
             val reset = input.readBoolean()
             val advancementMapping = input.readVarIntArray { arrayInput ->
                 val key = arrayInput.readString()
@@ -37,11 +36,11 @@ data class AdvancementsPacket(
                 val criteria = arrayInput.readVarIntArray { arrayInput ->
                     val key = arrayInput.readString()
 
-                    return@readVarIntArray AdvancementsPacketCriteria(key)
+                    AdvancementsPacketCriteria(key)
                 }
                 val requirements = arrayInput.readVarIntArray { arrayInput1 -> arrayInput1.readVarIntArray { arrayInput -> arrayInput.readString() } }
 
-                return@readVarIntArray AdvancementsPacketAdvancementMapping(key, hasParentId, parentId, hasDisplayData, title, description, frameType, xCord, yCord, criteria, requirements)
+                AdvancementsPacketAdvancementMapping(key, hasParentId, parentId, hasDisplayData, title, description, frameType, xCord, yCord, criteria, requirements)
             }
             val identifiers = input.readVarIntArray { arrayInput -> arrayInput.readString() }
             val progressMapping = input.readVarIntArray { arrayInput ->
@@ -51,16 +50,16 @@ data class AdvancementsPacket(
                     val hasCriterionProgress = arrayInput1.readBoolean()
                     val criterionProgress = if (hasCriterionProgress) arrayInput1.readLong() else null
 
-                    return@readVarIntArray AdvancementsPacketValue(criterionIdentifier, hasCriterionProgress, criterionProgress)
+                    AdvancementsPacketValue(criterionIdentifier, hasCriterionProgress, criterionProgress)
                 }
 
-                return@readVarIntArray AdvancementsPacketProgressMapping(key, value)
+                AdvancementsPacketProgressMapping(key, value)
             }
 
             return AdvancementsPacket(reset, advancementMapping, identifiers, progressMapping)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: AdvancementsPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: AdvancementsPacket) {
             output.writeBoolean(value.reset)
 
             output.writeVarIntArray(value.advancementMapping) { arrayValue, arrayOutput ->

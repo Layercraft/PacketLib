@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Update Teams | 0x56 | play | clientbound
@@ -20,7 +20,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Update_Teams">https://wiki.vg/Protocol#Update_Teams</a>
  */
 
-@MinecraftPacket(id = 0x56, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class TeamsPacket(
     val team: String,
     val mode: Byte,
@@ -34,7 +33,7 @@ data class TeamsPacket(
     val players: List<String>?,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<TeamsPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): TeamsPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): TeamsPacket {
             val team = input.readString()
             val mode = input.readByte()
             val name = when (mode.toInt()) {
@@ -82,7 +81,7 @@ data class TeamsPacket(
             return TeamsPacket(team, mode, name, friendlyFire, nameTagVisibility, collisionRule, formatting, prefix, suffix, players)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: TeamsPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: TeamsPacket) {
             output.writeString(value.team)
             output.writeByte(value.mode)
             when (value.mode.toInt()) {

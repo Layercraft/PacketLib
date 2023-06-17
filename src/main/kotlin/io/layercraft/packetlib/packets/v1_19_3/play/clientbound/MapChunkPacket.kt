@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 import io.layercraft.packetlib.types.ChunkBlockEntity
 import io.layercraft.packetlib.types.NBT
 /**
@@ -23,7 +23,6 @@ import io.layercraft.packetlib.types.NBT
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Chunk_Data_and_Update_Light">https://wiki.vg/Protocol#Chunk_Data_and_Update_Light</a>
  */
 
-@MinecraftPacket(id = 0x20, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class MapChunkPacket(
     val x: Int,
     val z: Int,
@@ -39,7 +38,7 @@ data class MapChunkPacket(
     val blockLight: List<List<UByte>>, // varint array
 ) : ClientBoundPacket {
     companion object : PacketSerializer<MapChunkPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): MapChunkPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): MapChunkPacket {
             val x = input.readInt()
             val z = input.readInt()
             val heightmaps = input.readNbt()
@@ -56,7 +55,7 @@ data class MapChunkPacket(
             return MapChunkPacket(x, z, heightmaps, chunkData, blockEntities, trustEdges, skyLightMask, blockLightMask, emptySkyLightMask, emptyBlockLightMask, skyLight, blockLight)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: MapChunkPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: MapChunkPacket) {
             output.writeInt(value.x)
             output.writeInt(value.z)
             output.writeNbt(value.heightmaps)

@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * End Combat | 0x32 | play | clientbound
@@ -12,20 +12,19 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#End_Combat">https://wiki.vg/Protocol#End_Combat</a>
  */
 
-@MinecraftPacket(id = 0x32, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class EndCombatEventPacket(
     val duration: Int, // varint
     val entityId: Int,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<EndCombatEventPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EndCombatEventPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): EndCombatEventPacket {
             val duration = input.readVarInt()
             val entityId = input.readInt()
 
             return EndCombatEventPacket(duration, entityId)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EndCombatEventPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: EndCombatEventPacket) {
             output.writeVarInt(value.duration)
             output.writeInt(value.entityId)
         }

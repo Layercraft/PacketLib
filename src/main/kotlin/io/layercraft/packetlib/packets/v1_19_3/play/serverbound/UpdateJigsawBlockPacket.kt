@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.serverbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 import io.layercraft.packetlib.types.Position
 /**
  * Program Jigsaw Block | 0x2c | play | serverbound
@@ -16,7 +16,6 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Program_Jigsaw_Block">https://wiki.vg/Protocol#Program_Jigsaw_Block</a>
  */
 
-@MinecraftPacket(id = 0x2c, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class UpdateJigsawBlockPacket(
     val location: Position,
     val name: String,
@@ -26,7 +25,7 @@ data class UpdateJigsawBlockPacket(
     val jointType: String,
 ) : ServerBoundPacket {
     companion object : PacketSerializer<UpdateJigsawBlockPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateJigsawBlockPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): UpdateJigsawBlockPacket {
             val location = input.readPosition()
             val name = input.readString()
             val target = input.readString()
@@ -37,7 +36,7 @@ data class UpdateJigsawBlockPacket(
             return UpdateJigsawBlockPacket(location, name, target, pool, finalState, jointType)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateJigsawBlockPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: UpdateJigsawBlockPacket) {
             output.writePosition(value.location)
             output.writeString(value.name)
             output.writeString(value.target)

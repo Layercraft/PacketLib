@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.serverbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 import io.layercraft.packetlib.types.Position
 /**
  * Use Item On | 0x31 | play | serverbound
@@ -18,7 +18,6 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Use_Item_On">https://wiki.vg/Protocol#Use_Item_On</a>
  */
 
-@MinecraftPacket(id = 0x31, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class BlockPlacePacket(
     val hand: Int, // varint
     val location: Position,
@@ -30,7 +29,7 @@ data class BlockPlacePacket(
     val sequence: Int, // varint
 ) : ServerBoundPacket {
     companion object : PacketSerializer<BlockPlacePacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): BlockPlacePacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): BlockPlacePacket {
             val hand = input.readVarInt()
             val location = input.readPosition()
             val direction = input.readVarInt()
@@ -43,7 +42,7 @@ data class BlockPlacePacket(
             return BlockPlacePacket(hand, location, direction, cursorX, cursorY, cursorZ, insideBlock, sequence)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: BlockPlacePacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: BlockPlacePacket) {
             output.writeVarInt(value.hand)
             output.writePosition(value.location)
             output.writeVarInt(value.direction)

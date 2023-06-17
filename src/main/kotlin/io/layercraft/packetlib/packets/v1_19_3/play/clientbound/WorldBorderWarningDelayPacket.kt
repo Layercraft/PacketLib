@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Set Border Warning Delay | 0x46 | play | clientbound
@@ -11,18 +11,17 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Set_Border_Warning_Delay">https://wiki.vg/Protocol#Set_Border_Warning_Delay</a>
  */
 
-@MinecraftPacket(id = 0x46, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class WorldBorderWarningDelayPacket(
     val warningTime: Int, // varint
 ) : ClientBoundPacket {
     companion object : PacketSerializer<WorldBorderWarningDelayPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): WorldBorderWarningDelayPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): WorldBorderWarningDelayPacket {
             val warningTime = input.readVarInt()
 
             return WorldBorderWarningDelayPacket(warningTime)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: WorldBorderWarningDelayPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: WorldBorderWarningDelayPacket) {
             output.writeVarInt(value.warningTime)
         }
     }

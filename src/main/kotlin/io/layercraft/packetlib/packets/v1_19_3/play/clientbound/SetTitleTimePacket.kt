@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Set Title Animation Times | 0x5c | play | clientbound
@@ -13,14 +13,13 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Set_Title_Animation_Times">https://wiki.vg/Protocol#Set_Title_Animation_Times</a>
  */
 
-@MinecraftPacket(id = 0x5c, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class SetTitleTimePacket(
     val fadeIn: Int,
     val stay: Int,
     val fadeOut: Int,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<SetTitleTimePacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SetTitleTimePacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): SetTitleTimePacket {
             val fadeIn = input.readInt()
             val stay = input.readInt()
             val fadeOut = input.readInt()
@@ -28,7 +27,7 @@ data class SetTitleTimePacket(
             return SetTitleTimePacket(fadeIn, stay, fadeOut)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SetTitleTimePacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: SetTitleTimePacket) {
             output.writeInt(value.fadeIn)
             output.writeInt(value.stay)
             output.writeInt(value.fadeOut)

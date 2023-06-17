@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.serverbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Client Information | 0x07 | play | serverbound
@@ -18,7 +18,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Client_Information">https://wiki.vg/Protocol#Client_Information</a>
  */
 
-@MinecraftPacket(id = 0x07, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class SettingsPacket(
     val locale: String,
     val viewDistance: Byte,
@@ -30,7 +29,7 @@ data class SettingsPacket(
     val enableServerListing: Boolean,
 ) : ServerBoundPacket {
     companion object : PacketSerializer<SettingsPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SettingsPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): SettingsPacket {
             val locale = input.readString()
             val viewDistance = input.readByte()
             val chatFlags = input.readVarInt()
@@ -43,7 +42,7 @@ data class SettingsPacket(
             return SettingsPacket(locale, viewDistance, chatFlags, chatColors, skinParts, mainHand, enableTextFiltering, enableServerListing)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SettingsPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: SettingsPacket) {
             output.writeString(value.locale)
             output.writeByte(value.viewDistance)
             output.writeVarInt(value.chatFlags)

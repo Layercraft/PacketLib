@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.serverbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Set Player Position | 0x13 | play | serverbound
@@ -14,7 +14,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Set_Player_Position">https://wiki.vg/Protocol#Set_Player_Position</a>
  */
 
-@MinecraftPacket(id = 0x13, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class PositionPacket(
     val x: Double,
     val y: Double,
@@ -22,7 +21,7 @@ data class PositionPacket(
     val onGround: Boolean,
 ) : ServerBoundPacket {
     companion object : PacketSerializer<PositionPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): PositionPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): PositionPacket {
             val x = input.readDouble()
             val y = input.readDouble()
             val z = input.readDouble()
@@ -31,7 +30,7 @@ data class PositionPacket(
             return PositionPacket(x, y, z, onGround)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: PositionPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: PositionPacket) {
             output.writeDouble(value.x)
             output.writeDouble(value.y)
             output.writeDouble(value.z)

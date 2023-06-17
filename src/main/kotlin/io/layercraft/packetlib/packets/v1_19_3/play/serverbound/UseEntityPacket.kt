@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.serverbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Interact | 0x0f | play | serverbound
@@ -17,7 +17,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Interact">https://wiki.vg/Protocol#Interact</a>
  */
 
-@MinecraftPacket(id = 0x0f, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class UseEntityPacket(
     val target: Int, // varint
     val mouse: Int, // varint
@@ -28,7 +27,7 @@ data class UseEntityPacket(
     val sneaking: Boolean,
 ) : ServerBoundPacket {
     companion object : PacketSerializer<UseEntityPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UseEntityPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): UseEntityPacket {
             val target = input.readVarInt()
             val mouse = input.readVarInt()
             val x = when (mouse) {
@@ -53,7 +52,7 @@ data class UseEntityPacket(
             return UseEntityPacket(target, mouse, x, y, z, hand, sneaking)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: UseEntityPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: UseEntityPacket) {
             output.writeVarInt(value.target)
             output.writeVarInt(value.mouse)
             when (value.mouse) {

@@ -1,56 +1,31 @@
 package io.layercraft.packetlib
 
-import io.layercraft.packetlib.codec.MinecraftCodec
-import io.layercraft.packetlib.packets.MinecraftPacket
-import io.layercraft.packetlib.packets.PacketDirection
-import org.junit.jupiter.api.Test
+import io.layercraft.packetlib.codec.Codec
+import io.layercraft.packetlib.codec.MinecraftCodecs
+import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.MethodSource
 import kotlin.test.assertTrue
-import io.layercraft.packetlib.codec.MinecraftCodecs as MC
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class PacketIdCheck {
 
-    @Test
-    fun `check if all ids are same in registry and in packet class`() {
-        val codecs = listOf(MC.V1_19_2, MC.V1_19_3)
-        codecs.forEach { checkCodec(it) }
+    @ParameterizedTest
+    @MethodSource("generator")
+    fun `check if all packets have the right name`(codec: Codec) {
+        checkCodec(codec)
     }
 
-    private fun checkCodec(codec: MinecraftCodec) {
+    private fun generator() = arrayOf(MinecraftCodecs.V1_19_3, MinecraftCodecs.V1_19_4)
+
+    private fun checkCodec(codec: Codec) {
         codec.packets.forEach { (state, registry) ->
-            registry.clientPacketMap.forEach { (id, packet) ->
-                val annotation = packet.packet.annotations.filterIsInstance<MinecraftPacket>().first()
-
-                assert(annotation.id == id) {
-                    "Packet ${packet.packet.simpleName} has id ${annotation.id} in annotation, but $id in registry"
-                }
-
-                assert(annotation.state == state) {
-                    "Packet ${packet.packet.simpleName} has state ${annotation.state} in annotation, but $state in registry"
-                }
-
-                assert(annotation.direction == PacketDirection.SERVERBOUND) {
-                    "Packet ${packet.packet.simpleName} has direction ${annotation.direction} in annotation, but ${PacketDirection.CLIENTBOUND} in registry"
-                }
-
+            registry.clientPacketMap.forEach { (_, packet) ->
                 val qualifiedName = packet.packet.qualifiedName!!
                 assertTrue { qualifiedName.contains(state.name, ignoreCase = true) }
             }
 
-            registry.serverPacketMap.forEach { (id, packet) ->
-                val annotation = packet.packet.annotations.filterIsInstance<MinecraftPacket>().first()
-
-                assert(annotation.id == id) {
-                    "Packet ${packet.packet.simpleName} has id ${annotation.id} in annotation, but $id in registry"
-                }
-
-                assert(annotation.state == state) {
-                    "Packet ${packet.packet.simpleName} has state ${annotation.state} in annotation, but $state in registry"
-                }
-
-                assert(annotation.direction == PacketDirection.CLIENTBOUND) {
-                    "Packet ${packet.packet.simpleName} has direction ${annotation.direction} in annotation, but ${PacketDirection.SERVERBOUND} in registry"
-                }
-
+            registry.serverPacketMap.forEach { (_, packet) ->
                 val qualifiedName = packet.packet.qualifiedName!!
                 assertTrue { qualifiedName.contains(state.name, ignoreCase = true) }
             }

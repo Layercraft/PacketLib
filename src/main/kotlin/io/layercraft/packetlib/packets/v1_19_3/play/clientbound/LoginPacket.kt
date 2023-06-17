@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 import io.layercraft.packetlib.types.NBT
 import io.layercraft.packetlib.types.Position
 /**
@@ -30,7 +30,6 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Login_.28play.29">https://wiki.vg/Protocol#Login_.28play.29</a>
  */
 
-@MinecraftPacket(id = 0x24, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class LoginPacket(
     val entityId: Int,
     val isHardcore: Boolean,
@@ -53,7 +52,7 @@ data class LoginPacket(
     val location: Position?,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<LoginPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): LoginPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): LoginPacket {
             val entityId = input.readInt()
             val isHardcore = input.readBoolean()
             val gameMode = input.readUByte()
@@ -77,7 +76,7 @@ data class LoginPacket(
             return LoginPacket(entityId, isHardcore, gameMode, previousGameMode, worldNames, dimensionCodec, worldType, worldName, hashedSeed, maxPlayers, viewDistance, simulationDistance, reducedDebugInfo, enableRespawnScreen, isDebug, isFlat, hasDeath, dimensionName, location)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: LoginPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: LoginPacket) {
             output.writeInt(value.entityId)
             output.writeBoolean(value.isHardcore)
             output.writeUByte(value.gameMode)

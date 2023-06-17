@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Update Light | 0x23 | play | clientbound
@@ -19,7 +19,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Update_Light">https://wiki.vg/Protocol#Update_Light</a>
  */
 
-@MinecraftPacket(id = 0x23, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class UpdateLightPacket(
     val chunkX: Int, // varint
     val chunkZ: Int, // varint
@@ -32,7 +31,7 @@ data class UpdateLightPacket(
     val blockLight: List<List<UByte>>, // varint array
 ) : ClientBoundPacket {
     companion object : PacketSerializer<UpdateLightPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateLightPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): UpdateLightPacket {
             val chunkX = input.readVarInt()
             val chunkZ = input.readVarInt()
             val trustEdges = input.readBoolean()
@@ -46,7 +45,7 @@ data class UpdateLightPacket(
             return UpdateLightPacket(chunkX, chunkZ, trustEdges, skyLightMask, blockLightMask, emptySkyLightMask, emptyBlockLightMask, skyLight, blockLight)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateLightPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: UpdateLightPacket) {
             output.writeVarInt(value.chunkX)
             output.writeVarInt(value.chunkZ)
             output.writeBoolean(value.trustEdges)

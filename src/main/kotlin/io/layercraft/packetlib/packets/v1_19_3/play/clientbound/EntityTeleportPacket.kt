@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Teleport Entity | 0x64 | play | clientbound
@@ -17,7 +17,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Teleport_Entity">https://wiki.vg/Protocol#Teleport_Entity</a>
  */
 
-@MinecraftPacket(id = 0x64, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class EntityTeleportPacket(
     val entityId: Int, // varint
     val x: Double,
@@ -28,7 +27,7 @@ data class EntityTeleportPacket(
     val onGround: Boolean,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<EntityTeleportPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntityTeleportPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): EntityTeleportPacket {
             val entityId = input.readVarInt()
             val x = input.readDouble()
             val y = input.readDouble()
@@ -40,7 +39,7 @@ data class EntityTeleportPacket(
             return EntityTeleportPacket(entityId, x, y, z, yaw, pitch, onGround)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityTeleportPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: EntityTeleportPacket) {
             output.writeVarInt(value.entityId)
             output.writeDouble(value.x)
             output.writeDouble(value.y)

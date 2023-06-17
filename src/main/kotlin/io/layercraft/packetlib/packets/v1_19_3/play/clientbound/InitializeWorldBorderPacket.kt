@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Initialize World Border | 0x1e | play | clientbound
@@ -18,7 +18,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Initialize_World_Border">https://wiki.vg/Protocol#Initialize_World_Border</a>
  */
 
-@MinecraftPacket(id = 0x1e, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class InitializeWorldBorderPacket(
     val x: Double,
     val z: Double,
@@ -30,7 +29,7 @@ data class InitializeWorldBorderPacket(
     val warningTime: Int, // varint
 ) : ClientBoundPacket {
     companion object : PacketSerializer<InitializeWorldBorderPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): InitializeWorldBorderPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): InitializeWorldBorderPacket {
             val x = input.readDouble()
             val z = input.readDouble()
             val oldDiameter = input.readDouble()
@@ -43,7 +42,7 @@ data class InitializeWorldBorderPacket(
             return InitializeWorldBorderPacket(x, z, oldDiameter, newDiameter, speed, portalTeleportBoundary, warningBlocks, warningTime)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: InitializeWorldBorderPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: InitializeWorldBorderPacket) {
             output.writeDouble(value.x)
             output.writeDouble(value.z)
             output.writeDouble(value.oldDiameter)

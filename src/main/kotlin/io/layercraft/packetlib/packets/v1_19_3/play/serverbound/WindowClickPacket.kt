@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.serverbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Click Container | 0x0a | play | serverbound
@@ -16,7 +16,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Click_Container">https://wiki.vg/Protocol#Click_Container</a>
  */
 
-@MinecraftPacket(id = 0x0a, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class WindowClickPacket(
     val windowId: UByte,
     val stateId: Int, // varint
@@ -26,7 +25,7 @@ data class WindowClickPacket(
     val changedSlots: List<WindowClickPacketChangedSlots>, // varint array
 ) : ServerBoundPacket {
     companion object : PacketSerializer<WindowClickPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): WindowClickPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): WindowClickPacket {
             val windowId = input.readUByte()
             val stateId = input.readVarInt()
             val slot = input.readShort()
@@ -35,13 +34,13 @@ data class WindowClickPacket(
             val changedSlots = input.readVarIntArray { arrayInput ->
                 val location = arrayInput.readShort()
 
-                return@readVarIntArray WindowClickPacketChangedSlots(location)
+                WindowClickPacketChangedSlots(location)
             }
 
             return WindowClickPacket(windowId, stateId, slot, mouseButton, mode, changedSlots)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: WindowClickPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: WindowClickPacket) {
             output.writeUByte(value.windowId)
             output.writeVarInt(value.stateId)
             output.writeShort(value.slot)

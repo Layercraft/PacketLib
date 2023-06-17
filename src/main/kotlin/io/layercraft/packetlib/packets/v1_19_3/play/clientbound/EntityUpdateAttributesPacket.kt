@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 import java.util.UUID
 /**
  * Update Attributes | 0x66 | play | clientbound
@@ -12,13 +12,12 @@ import java.util.UUID
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Update_Attributes">https://wiki.vg/Protocol#Update_Attributes</a>
  */
 
-@MinecraftPacket(id = 0x66, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class EntityUpdateAttributesPacket(
     val entityId: Int, // varint
     val properties: List<EntityUpdateAttributesPacketProperties>, // varint array
 ) : ClientBoundPacket {
     companion object : PacketSerializer<EntityUpdateAttributesPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntityUpdateAttributesPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): EntityUpdateAttributesPacket {
             val entityId = input.readVarInt()
             val properties = input.readVarIntArray { arrayInput ->
                 val key = arrayInput.readString()
@@ -28,16 +27,16 @@ data class EntityUpdateAttributesPacket(
                     val amount = arrayInput1.readDouble()
                     val operation = arrayInput1.readByte()
 
-                    return@readVarIntArray EntityUpdateAttributesPacketModifiers(uuid, amount, operation)
+                    EntityUpdateAttributesPacketModifiers(uuid, amount, operation)
                 }
 
-                return@readVarIntArray EntityUpdateAttributesPacketProperties(key, value, modifiers)
+                EntityUpdateAttributesPacketProperties(key, value, modifiers)
             }
 
             return EntityUpdateAttributesPacket(entityId, properties)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityUpdateAttributesPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: EntityUpdateAttributesPacket) {
             output.writeVarInt(value.entityId)
 
             output.writeVarIntArray(value.properties) { arrayValue, arrayOutput ->

@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Award Statistics | 0x04 | play | clientbound
@@ -11,24 +11,23 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Award_Statistics">https://wiki.vg/Protocol#Award_Statistics</a>
  */
 
-@MinecraftPacket(id = 0x04, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class StatisticsPacket(
     val entries: List<StatisticsPacketEntries>, // varint array
 ) : ClientBoundPacket {
     companion object : PacketSerializer<StatisticsPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): StatisticsPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): StatisticsPacket {
             val entries = input.readVarIntArray { arrayInput ->
                 val categoryId = arrayInput.readVarInt()
                 val statisticId = arrayInput.readVarInt()
                 val value = arrayInput.readVarInt()
 
-                return@readVarIntArray StatisticsPacketEntries(categoryId, statisticId, value)
+                StatisticsPacketEntries(categoryId, statisticId, value)
             }
 
             return StatisticsPacket(entries)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: StatisticsPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: StatisticsPacket) {
             output.writeVarIntArray(value.entries) { arrayValue, arrayOutput ->
                 arrayOutput.writeVarInt(arrayValue.categoryId)
                 arrayOutput.writeVarInt(arrayValue.statisticId)

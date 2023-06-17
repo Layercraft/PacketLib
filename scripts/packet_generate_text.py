@@ -418,7 +418,7 @@ data class {class_name}(
         class_deserialize_str = f"""val {field_name} = {info_deserialize_var_name}.readVarIntArray {{ arrayInput{round_str} ->
                 {extra_class_deserialize_str}
 
-                return@readVarIntArray {class_name}({extra_class_fields_str})
+                {class_name}({extra_class_fields_str})
             }}"""
 
         return class_deserialize_str

@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.serverbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Place Recipe | 0x1a | play | serverbound
@@ -13,14 +13,13 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Place_Recipe">https://wiki.vg/Protocol#Place_Recipe</a>
  */
 
-@MinecraftPacket(id = 0x1a, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class CraftRecipeRequestPacket(
     val windowId: Byte,
     val recipe: String,
     val makeAll: Boolean,
 ) : ServerBoundPacket {
     companion object : PacketSerializer<CraftRecipeRequestPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): CraftRecipeRequestPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): CraftRecipeRequestPacket {
             val windowId = input.readByte()
             val recipe = input.readString()
             val makeAll = input.readBoolean()
@@ -28,7 +27,7 @@ data class CraftRecipeRequestPacket(
             return CraftRecipeRequestPacket(windowId, recipe, makeAll)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: CraftRecipeRequestPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: CraftRecipeRequestPacket) {
             output.writeByte(value.windowId)
             output.writeString(value.recipe)
             output.writeBoolean(value.makeAll)

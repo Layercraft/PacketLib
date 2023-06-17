@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Update Entity Position and Rotation | 0x28 | play | clientbound
@@ -17,7 +17,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Update_Entity_Position_and_Rotation">https://wiki.vg/Protocol#Update_Entity_Position_and_Rotation</a>
  */
 
-@MinecraftPacket(id = 0x28, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class EntityMoveLookPacket(
     val entityId: Int, // varint
     val dX: Short,
@@ -28,7 +27,7 @@ data class EntityMoveLookPacket(
     val onGround: Boolean,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<EntityMoveLookPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntityMoveLookPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): EntityMoveLookPacket {
             val entityId = input.readVarInt()
             val dX = input.readShort()
             val dY = input.readShort()
@@ -40,7 +39,7 @@ data class EntityMoveLookPacket(
             return EntityMoveLookPacket(entityId, dX, dY, dZ, yaw, pitch, onGround)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityMoveLookPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: EntityMoveLookPacket) {
             output.writeVarInt(value.entityId)
             output.writeShort(value.dX)
             output.writeShort(value.dY)

@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.serverbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Player Command | 0x1d | play | serverbound
@@ -13,14 +13,13 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Player_Command">https://wiki.vg/Protocol#Player_Command</a>
  */
 
-@MinecraftPacket(id = 0x1d, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class EntityActionPacket(
     val entityId: Int, // varint
     val actionId: Int, // varint
     val jumpBoost: Int, // varint
 ) : ServerBoundPacket {
     companion object : PacketSerializer<EntityActionPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EntityActionPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): EntityActionPacket {
             val entityId = input.readVarInt()
             val actionId = input.readVarInt()
             val jumpBoost = input.readVarInt()
@@ -28,7 +27,7 @@ data class EntityActionPacket(
             return EntityActionPacket(entityId, actionId, jumpBoost)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EntityActionPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: EntityActionPacket) {
             output.writeVarInt(value.entityId)
             output.writeVarInt(value.actionId)
             output.writeVarInt(value.jumpBoost)

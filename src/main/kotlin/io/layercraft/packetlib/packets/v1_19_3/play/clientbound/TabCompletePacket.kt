@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Command Suggestions Response | 0x0d | play | clientbound
@@ -14,7 +14,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Command_Suggestions_Response">https://wiki.vg/Protocol#Command_Suggestions_Response</a>
  */
 
-@MinecraftPacket(id = 0x0d, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class TabCompletePacket(
     val transactionId: Int, // varint
     val start: Int, // varint
@@ -22,7 +21,7 @@ data class TabCompletePacket(
     val matches: List<TabCompletePacketMatches>, // varint array
 ) : ClientBoundPacket {
     companion object : PacketSerializer<TabCompletePacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): TabCompletePacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): TabCompletePacket {
             val transactionId = input.readVarInt()
             val start = input.readVarInt()
             val length = input.readVarInt()
@@ -31,13 +30,13 @@ data class TabCompletePacket(
                 val hasTooltip = arrayInput.readBoolean()
                 val tooltip = if (hasTooltip) arrayInput.readString() else null
 
-                return@readVarIntArray TabCompletePacketMatches(match, hasTooltip, tooltip)
+                TabCompletePacketMatches(match, hasTooltip, tooltip)
             }
 
             return TabCompletePacket(transactionId, start, length, matches)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: TabCompletePacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: TabCompletePacket) {
             output.writeVarInt(value.transactionId)
             output.writeVarInt(value.start)
             output.writeVarInt(value.length)

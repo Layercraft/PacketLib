@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Move Vehicle | 0x2a | play | clientbound
@@ -15,7 +15,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Move_Vehicle">https://wiki.vg/Protocol#Move_Vehicle</a>
  */
 
-@MinecraftPacket(id = 0x2a, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class VehicleMovePacket(
     val x: Double,
     val y: Double,
@@ -24,7 +23,7 @@ data class VehicleMovePacket(
     val pitch: Float,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<VehicleMovePacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): VehicleMovePacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): VehicleMovePacket {
             val x = input.readDouble()
             val y = input.readDouble()
             val z = input.readDouble()
@@ -34,7 +33,7 @@ data class VehicleMovePacket(
             return VehicleMovePacket(x, y, z, yaw, pitch)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: VehicleMovePacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: VehicleMovePacket) {
             output.writeDouble(value.x)
             output.writeDouble(value.y)
             output.writeDouble(value.z)

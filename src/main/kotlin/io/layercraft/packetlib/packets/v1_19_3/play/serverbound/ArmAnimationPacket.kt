@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.serverbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Swing Arm | 0x2f | play | serverbound
@@ -11,18 +11,17 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Swing_Arm">https://wiki.vg/Protocol#Swing_Arm</a>
  */
 
-@MinecraftPacket(id = 0x2f, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class ArmAnimationPacket(
     val hand: Int, // varint
 ) : ServerBoundPacket {
     companion object : PacketSerializer<ArmAnimationPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ArmAnimationPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): ArmAnimationPacket {
             val hand = input.readVarInt()
 
             return ArmAnimationPacket(hand)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ArmAnimationPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: ArmAnimationPacket) {
             output.writeVarInt(value.hand)
         }
     }

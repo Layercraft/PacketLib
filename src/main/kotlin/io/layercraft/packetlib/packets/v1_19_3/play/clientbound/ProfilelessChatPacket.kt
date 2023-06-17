@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Disguised Chat Message | 0x18 | play | clientbound
@@ -15,7 +15,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Disguised_Chat_Message">https://wiki.vg/Protocol#Disguised_Chat_Message</a>
  */
 
-@MinecraftPacket(id = 0x18, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class ProfilelessChatPacket(
     val message: String,
     val type: Int, // varint
@@ -24,7 +23,7 @@ data class ProfilelessChatPacket(
     val target: String?,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<ProfilelessChatPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): ProfilelessChatPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): ProfilelessChatPacket {
             val message = input.readString()
             val type = input.readVarInt()
             val name = input.readString()
@@ -34,7 +33,7 @@ data class ProfilelessChatPacket(
             return ProfilelessChatPacket(message, type, name, hasTarget, target)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: ProfilelessChatPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: ProfilelessChatPacket) {
             output.writeString(value.message)
             output.writeVarInt(value.type)
             output.writeString(value.name)

@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.serverbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Edit Book | 0x0d | play | serverbound
@@ -14,7 +14,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Edit_Book">https://wiki.vg/Protocol#Edit_Book</a>
  */
 
-@MinecraftPacket(id = 0x0d, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class EditBookPacket(
     val hand: Int, // varint
     val pages: List<String>, // varint array
@@ -22,7 +21,7 @@ data class EditBookPacket(
     val title: String?,
 ) : ServerBoundPacket {
     companion object : PacketSerializer<EditBookPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): EditBookPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): EditBookPacket {
             val hand = input.readVarInt()
             val pages = input.readVarIntArray { arrayInput -> arrayInput.readString() }
             val hasTitle = input.readBoolean()
@@ -31,7 +30,7 @@ data class EditBookPacket(
             return EditBookPacket(hand, pages, hasTitle, title)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: EditBookPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: EditBookPacket) {
             output.writeVarInt(value.hand)
             output.writeVarIntArray(value.pages) { arrayValue, arrayOutput -> arrayOutput.writeString(arrayValue) }
             output.writeBoolean(value.hasTitle)

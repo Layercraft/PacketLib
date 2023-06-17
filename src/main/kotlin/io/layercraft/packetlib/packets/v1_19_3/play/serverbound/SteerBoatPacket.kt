@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.serverbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Paddle Boat | 0x18 | play | serverbound
@@ -12,20 +12,19 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Paddle_Boat">https://wiki.vg/Protocol#Paddle_Boat</a>
  */
 
-@MinecraftPacket(id = 0x18, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class SteerBoatPacket(
     val leftPaddle: Boolean,
     val rightPaddle: Boolean,
 ) : ServerBoundPacket {
     companion object : PacketSerializer<SteerBoatPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): SteerBoatPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): SteerBoatPacket {
             val leftPaddle = input.readBoolean()
             val rightPaddle = input.readBoolean()
 
             return SteerBoatPacket(leftPaddle, rightPaddle)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: SteerBoatPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: SteerBoatPacket) {
             output.writeBoolean(value.leftPaddle)
             output.writeBoolean(value.rightPaddle)
         }

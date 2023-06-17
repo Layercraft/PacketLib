@@ -1,6 +1,8 @@
 package io.layercraft.packetlib.utils
 
-import io.layercraft.packetlib.utils.bytebuffer.MinecraftByteBufferSerialize
+import io.layercraft.packetlib.MinecraftByteBufferSerialize
+import io.layercraft.packetlib.types.MinecraftVarIntUtils
+import io.layercraft.packetlib.types.MinecraftVarLongUtils
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.nio.ByteBuffer

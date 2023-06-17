@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.serverbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Set Player Position and Rotation | 0x14 | play | serverbound
@@ -16,7 +16,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Set_Player_Position_and_Rotation">https://wiki.vg/Protocol#Set_Player_Position_and_Rotation</a>
  */
 
-@MinecraftPacket(id = 0x14, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class PositionLookPacket(
     val x: Double,
     val y: Double,
@@ -26,7 +25,7 @@ data class PositionLookPacket(
     val onGround: Boolean,
 ) : ServerBoundPacket {
     companion object : PacketSerializer<PositionLookPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): PositionLookPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): PositionLookPacket {
             val x = input.readDouble()
             val y = input.readDouble()
             val z = input.readDouble()
@@ -37,7 +36,7 @@ data class PositionLookPacket(
             return PositionLookPacket(x, y, z, yaw, pitch, onGround)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: PositionLookPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: PositionLookPacket) {
             output.writeDouble(value.x)
             output.writeDouble(value.y)
             output.writeDouble(value.z)

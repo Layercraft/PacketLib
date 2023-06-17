@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.serverbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 import io.layercraft.packetlib.types.Position
 /**
  * Program Structure Block | 0x2d | play | serverbound
@@ -26,7 +26,6 @@ import io.layercraft.packetlib.types.Position
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Program_Structure_Block">https://wiki.vg/Protocol#Program_Structure_Block</a>
  */
 
-@MinecraftPacket(id = 0x2d, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)
 data class UpdateStructureBlockPacket(
     val location: Position,
     val action: Int, // varint
@@ -46,7 +45,7 @@ data class UpdateStructureBlockPacket(
     val flags: UByte,
 ) : ServerBoundPacket {
     companion object : PacketSerializer<UpdateStructureBlockPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UpdateStructureBlockPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): UpdateStructureBlockPacket {
             val location = input.readPosition()
             val action = input.readVarInt()
             val mode = input.readVarInt()
@@ -67,7 +66,7 @@ data class UpdateStructureBlockPacket(
             return UpdateStructureBlockPacket(location, action, mode, name, offsetX, offsetY, offsetZ, sizeX, sizeY, sizeZ, mirror, rotation, metadata, integrity, seed, flags)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: UpdateStructureBlockPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: UpdateStructureBlockPacket) {
             output.writePosition(value.location)
             output.writeVarInt(value.action)
             output.writeVarInt(value.mode)

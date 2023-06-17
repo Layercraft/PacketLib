@@ -1,8 +1,8 @@
 package io.layercraft.packetlib.packets.v1_19_3.play.clientbound
 
 import io.layercraft.packetlib.packets.*
-import io.layercraft.packetlib.serialization.MinecraftProtocolDeserializeInterface
-import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
+import io.layercraft.packetlib.serialization.MCProtocolDeserializer
+import io.layercraft.packetlib.serialization.MCProtocolSerializer
 
 /**
  * Update Recipe Book | 0x39 | play | clientbound
@@ -21,7 +21,6 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Update_Recipe_Book">https://wiki.vg/Protocol#Update_Recipe_Book</a>
  */
 
-@MinecraftPacket(id = 0x39, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
 data class UnlockRecipesPacket(
     val action: Int, // varint
     val craftingBookOpen: Boolean,
@@ -36,7 +35,7 @@ data class UnlockRecipesPacket(
     val recipes2: List<String>?,
 ) : ClientBoundPacket {
     companion object : PacketSerializer<UnlockRecipesPacket> {
-        override fun deserialize(input: MinecraftProtocolDeserializeInterface<*>): UnlockRecipesPacket {
+        override fun deserialize(input: MCProtocolDeserializer<*>): UnlockRecipesPacket {
             val action = input.readVarInt()
             val craftingBookOpen = input.readBoolean()
             val filteringCraftable = input.readBoolean()
@@ -55,7 +54,7 @@ data class UnlockRecipesPacket(
             return UnlockRecipesPacket(action, craftingBookOpen, filteringCraftable, smeltingBookOpen, filteringSmeltable, blastFurnaceOpen, filteringBlastFurnace, smokerBookOpen, filteringSmoker, recipes1, recipes2)
         }
 
-        override fun serialize(output: MinecraftProtocolSerializeInterface<*>, value: UnlockRecipesPacket) {
+        override fun serialize(output: MCProtocolSerializer<*>, value: UnlockRecipesPacket) {
             output.writeVarInt(value.action)
             output.writeBoolean(value.craftingBookOpen)
             output.writeBoolean(value.filteringCraftable)
