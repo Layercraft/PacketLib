@@ -1,6 +1,6 @@
 enum class ProtocolVersions(val url: String, val versionId: String) {
     // V1_20("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.20/protocol.json", "18067"),
-    V1_19_3("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.19.3/protocol.json", "18071"),
+    V1_19_3("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.19.3/protocol.json", "18067"),
     V1_19_2("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.19.2/protocol.json", "17873"),
     V1_19_1("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.19.1/protocol.json", "17873"),
     V1_19("https://raw.githubusercontent.com/Layercraft/minecraft-data/master/data/pc/1.19/protocol.json", "17753"),
