@@ -10,7 +10,7 @@ import io.layercraft.packetlib.types.Bitfield
  * @param chunkCoordinates chunkCoordinates (Name: x, Size: 22, Signed: True | Name: z, Size: 22, Signed: True | Name: y, Size: 20, Signed: True)
  * @param suppressLightUpdates suppressLightUpdates
  * @param records records
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Update_Section_Blocks">https://wiki.vg/Protocol#Update_Section_Blocks</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Update_Section_Blocks">https://wiki.vg/Protocol#Update_Section_Blocks</a>
  */
 
 @MinecraftPacket(id = 0x3f, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @param channel channel
  * @param data data
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Plugin_Message">https://wiki.vg/Protocol#Plugin_Message</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Plugin_Message">https://wiki.vg/Protocol#Plugin_Message</a>
  */
 
 @MinecraftPacket(id = 0x15, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

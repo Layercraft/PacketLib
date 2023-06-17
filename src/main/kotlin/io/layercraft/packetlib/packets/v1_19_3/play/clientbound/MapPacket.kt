@@ -15,7 +15,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param x x
  * @param y y
  * @param data data
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Map_Data">https://wiki.vg/Protocol#Map_Data</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Map_Data">https://wiki.vg/Protocol#Map_Data</a>
  */
 
 @MinecraftPacket(id = 0x25, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

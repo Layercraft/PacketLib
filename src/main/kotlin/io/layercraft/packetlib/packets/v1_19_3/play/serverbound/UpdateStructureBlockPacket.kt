@@ -23,7 +23,7 @@ import io.layercraft.packetlib.types.Position
  * @param integrity integrity
  * @param seed seed
  * @param flags flags
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Program_Structure_Block">https://wiki.vg/Protocol#Program_Structure_Block</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Program_Structure_Block">https://wiki.vg/Protocol#Program_Structure_Block</a>
  */
 
 @MinecraftPacket(id = 0x2d, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

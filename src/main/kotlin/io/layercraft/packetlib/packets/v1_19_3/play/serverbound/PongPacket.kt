@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Pong (play) | 0x1f | play | serverbound
  *
  * @param id id
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Pong_.28play.29">https://wiki.vg/Protocol#Pong_.28play.29</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Pong_.28play.29">https://wiki.vg/Protocol#Pong_.28play.29</a>
  */
 
 @MinecraftPacket(id = 0x1f, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

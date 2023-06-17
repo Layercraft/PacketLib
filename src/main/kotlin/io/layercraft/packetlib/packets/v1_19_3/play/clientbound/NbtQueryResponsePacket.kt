@@ -9,7 +9,7 @@ import io.layercraft.packetlib.types.NBT
  *
  * @param transactionId transactionId
  * @param nbt nbt
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Tag_Query_Response">https://wiki.vg/Protocol#Tag_Query_Response</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Tag_Query_Response">https://wiki.vg/Protocol#Tag_Query_Response</a>
  */
 
 @MinecraftPacket(id = 0x62, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

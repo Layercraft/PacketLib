@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Message Acknowledgment | 0x03 | play | serverbound
  *
  * @param count count
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Message_Acknowledgment">https://wiki.vg/Protocol#Message_Acknowledgment</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Message_Acknowledgment">https://wiki.vg/Protocol#Message_Acknowledgment</a>
  */
 
 @MinecraftPacket(id = 0x03, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

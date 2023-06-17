@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Open Book | 0x2b | play | clientbound
  *
  * @param hand hand
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Open_Book">https://wiki.vg/Protocol#Open_Book</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Open_Book">https://wiki.vg/Protocol#Open_Book</a>
  */
 
 @MinecraftPacket(id = 0x2b, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

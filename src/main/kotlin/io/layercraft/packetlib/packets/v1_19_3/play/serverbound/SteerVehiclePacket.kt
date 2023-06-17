@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param sideways sideways
  * @param forward forward
  * @param jump jump
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Player_Input">https://wiki.vg/Protocol#Player_Input</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Player_Input">https://wiki.vg/Protocol#Player_Input</a>
  */
 
 @MinecraftPacket(id = 0x1e, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

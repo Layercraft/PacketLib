@@ -10,7 +10,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param messageId messageId
  * @param hasData data is present
  * @param data data
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Login_Plugin_Response">https://wiki.vg/Protocol#Login_Plugin_Response</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Login_Plugin_Response">https://wiki.vg/Protocol#Login_Plugin_Response</a>
  */
 
 @MinecraftPacket(id = 0x02, state = PacketState.LOGIN, direction = PacketDirection.SERVERBOUND)

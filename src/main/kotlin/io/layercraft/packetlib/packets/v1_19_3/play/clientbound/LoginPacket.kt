@@ -27,7 +27,7 @@ import io.layercraft.packetlib.types.Position
  * @param hasDeath death is present
  * @param dimensionName dimensionName
  * @param location location
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Login_.28play.29">https://wiki.vg/Protocol#Login_.28play.29</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Login_.28play.29">https://wiki.vg/Protocol#Login_.28play.29</a>
  */
 
 @MinecraftPacket(id = 0x24, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

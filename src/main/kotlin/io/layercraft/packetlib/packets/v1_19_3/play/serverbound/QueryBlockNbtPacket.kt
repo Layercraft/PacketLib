@@ -9,7 +9,7 @@ import io.layercraft.packetlib.types.Position
  *
  * @param transactionId transactionId
  * @param location location
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Query_Block_Entity_Tag">https://wiki.vg/Protocol#Query_Block_Entity_Tag</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Query_Block_Entity_Tag">https://wiki.vg/Protocol#Query_Block_Entity_Tag</a>
  */
 
 @MinecraftPacket(id = 0x01, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

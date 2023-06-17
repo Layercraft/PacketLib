@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Update Tags | 0x6a | play | clientbound
  *
  * @param tags list of TagsPacketTags
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Update_Tags">https://wiki.vg/Protocol#Update_Tags</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Update_Tags">https://wiki.vg/Protocol#Update_Tags</a>
  */
 
 @MinecraftPacket(id = 0x6a, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

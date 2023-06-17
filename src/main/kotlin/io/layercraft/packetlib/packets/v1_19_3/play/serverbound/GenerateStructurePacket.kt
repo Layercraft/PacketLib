@@ -10,7 +10,7 @@ import io.layercraft.packetlib.types.Position
  * @param location location
  * @param levels levels
  * @param keepJigsaws keepJigsaws
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Jigsaw_Generate">https://wiki.vg/Protocol#Jigsaw_Generate</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Jigsaw_Generate">https://wiki.vg/Protocol#Jigsaw_Generate</a>
  */
 
 @MinecraftPacket(id = 0x10, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

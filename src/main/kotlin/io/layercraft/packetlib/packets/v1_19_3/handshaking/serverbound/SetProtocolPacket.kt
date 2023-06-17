@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param serverHost serverHost
  * @param serverPort serverPort
  * @param nextState nextState
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Handshake">https://wiki.vg/Protocol#Handshake</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Handshake">https://wiki.vg/Protocol#Handshake</a>
  */
 
 @MinecraftPacket(id = 0x00, state = PacketState.HANDSHAKING, direction = PacketDirection.SERVERBOUND)

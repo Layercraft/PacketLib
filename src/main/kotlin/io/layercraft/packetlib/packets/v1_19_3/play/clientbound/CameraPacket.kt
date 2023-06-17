@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Set Camera | 0x48 | play | clientbound
  *
  * @param cameraId cameraId
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Set_Camera">https://wiki.vg/Protocol#Set_Camera</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Set_Camera">https://wiki.vg/Protocol#Set_Camera</a>
  */
 
 @MinecraftPacket(id = 0x48, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

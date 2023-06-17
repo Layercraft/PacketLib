@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Set Title Text | 0x5b | play | clientbound
  *
  * @param text text
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Set_Title_Text">https://wiki.vg/Protocol#Set_Title_Text</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Set_Title_Text">https://wiki.vg/Protocol#Set_Title_Text</a>
  */
 
 @MinecraftPacket(id = 0x5b, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

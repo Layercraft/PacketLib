@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Legacy Server List Ping | 0xfe | handshaking | serverbound
  *
  * @param payload payload
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Legacy_Server_List_Ping">https://wiki.vg/Protocol#Legacy_Server_List_Ping</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Legacy_Server_List_Ping">https://wiki.vg/Protocol#Legacy_Server_List_Ping</a>
  */
 
 @MinecraftPacket(id = 0xfe, state = PacketState.HANDSHAKING, direction = PacketDirection.SERVERBOUND)

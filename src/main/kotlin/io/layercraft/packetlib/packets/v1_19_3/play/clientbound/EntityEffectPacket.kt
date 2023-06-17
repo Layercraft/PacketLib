@@ -14,7 +14,7 @@ import io.layercraft.packetlib.types.NBT
  * @param hideParticles hideParticles
  * @param hasFactorCodec factorCodec is present
  * @param factorCodec factorCodec
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Entity_Effect">https://wiki.vg/Protocol#Entity_Effect</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Entity_Effect">https://wiki.vg/Protocol#Entity_Effect</a>
  */
 
 @MinecraftPacket(id = 0x68, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

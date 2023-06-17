@@ -11,7 +11,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * @param start start
  * @param length length
  * @param matches list of TabCompletePacketMatches
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Command_Suggestions_Response">https://wiki.vg/Protocol#Command_Suggestions_Response</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Command_Suggestions_Response">https://wiki.vg/Protocol#Command_Suggestions_Response</a>
  */
 
 @MinecraftPacket(id = 0x0d, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

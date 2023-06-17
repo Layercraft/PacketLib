@@ -11,7 +11,7 @@ import io.layercraft.packetlib.types.Position
  * @param location location
  * @param data data
  * @param global global
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#World_Event">https://wiki.vg/Protocol#World_Event</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#World_Event">https://wiki.vg/Protocol#World_Event</a>
  */
 
 @MinecraftPacket(id = 0x21, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

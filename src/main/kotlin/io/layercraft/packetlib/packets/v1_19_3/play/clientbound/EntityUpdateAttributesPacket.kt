@@ -9,7 +9,7 @@ import java.util.UUID
  *
  * @param entityId entityId
  * @param properties list of EntityUpdateAttributesPacketProperties
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Update_Attributes">https://wiki.vg/Protocol#Update_Attributes</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Update_Attributes">https://wiki.vg/Protocol#Update_Attributes</a>
  */
 
 @MinecraftPacket(id = 0x66, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

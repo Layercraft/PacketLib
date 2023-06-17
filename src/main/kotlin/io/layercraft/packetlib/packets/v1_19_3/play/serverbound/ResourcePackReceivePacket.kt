@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Resource Pack | 0x24 | play | serverbound
  *
  * @param result result
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Resource_Pack_2">https://wiki.vg/Protocol#Resource_Pack_2</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Resource_Pack_2">https://wiki.vg/Protocol#Resource_Pack_2</a>
  */
 
 @MinecraftPacket(id = 0x24, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

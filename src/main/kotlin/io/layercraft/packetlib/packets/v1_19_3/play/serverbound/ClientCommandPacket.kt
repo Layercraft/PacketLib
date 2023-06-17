@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Client Command | 0x06 | play | serverbound
  *
  * @param actionId actionId
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Client_Command">https://wiki.vg/Protocol#Client_Command</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Client_Command">https://wiki.vg/Protocol#Client_Command</a>
  */
 
 @MinecraftPacket(id = 0x06, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @param hasId id is present
  * @param id id
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Select_Advancements_Tab">https://wiki.vg/Protocol#Select_Advancements_Tab</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Select_Advancements_Tab">https://wiki.vg/Protocol#Select_Advancements_Tab</a>
  */
 
 @MinecraftPacket(id = 0x40, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

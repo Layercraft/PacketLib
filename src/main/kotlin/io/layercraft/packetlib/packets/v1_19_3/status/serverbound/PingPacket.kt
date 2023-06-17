@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Ping Request | 0x01 | status | serverbound
  *
  * @param time time
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Ping_Request">https://wiki.vg/Protocol#Ping_Request</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Ping_Request">https://wiki.vg/Protocol#Ping_Request</a>
  */
 
 @MinecraftPacket(id = 0x01, state = PacketState.STATUS, direction = PacketDirection.SERVERBOUND)

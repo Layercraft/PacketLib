@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @param entityId entityId
  * @param vehicleId vehicleId
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Link_Entities">https://wiki.vg/Protocol#Link_Entities</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Link_Entities">https://wiki.vg/Protocol#Link_Entities</a>
  */
 
 @MinecraftPacket(id = 0x4f, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

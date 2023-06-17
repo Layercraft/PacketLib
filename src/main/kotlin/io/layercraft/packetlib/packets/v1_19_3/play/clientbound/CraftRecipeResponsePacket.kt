@@ -9,7 +9,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  *
  * @param windowId windowId
  * @param recipe recipe
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Place_Ghost_Recipe">https://wiki.vg/Protocol#Place_Ghost_Recipe</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Place_Ghost_Recipe">https://wiki.vg/Protocol#Place_Ghost_Recipe</a>
  */
 
 @MinecraftPacket(id = 0x2f, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Swing Arm | 0x2f | play | serverbound
  *
  * @param hand hand
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Swing_Arm">https://wiki.vg/Protocol#Swing_Arm</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Swing_Arm">https://wiki.vg/Protocol#Swing_Arm</a>
  */
 
 @MinecraftPacket(id = 0x2f, state = PacketState.PLAY, direction = PacketDirection.SERVERBOUND)

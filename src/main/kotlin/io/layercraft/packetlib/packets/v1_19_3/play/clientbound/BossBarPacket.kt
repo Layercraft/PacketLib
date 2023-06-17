@@ -14,7 +14,7 @@ import java.util.UUID
  * @param color color
  * @param dividers dividers
  * @param flags flags
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Boss_Bar">https://wiki.vg/Protocol#Boss_Bar</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Boss_Bar">https://wiki.vg/Protocol#Boss_Bar</a>
  */
 
 @MinecraftPacket(id = 0x0a, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)

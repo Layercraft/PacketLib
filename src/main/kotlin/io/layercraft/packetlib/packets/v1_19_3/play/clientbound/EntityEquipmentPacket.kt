@@ -8,7 +8,7 @@ import io.layercraft.packetlib.serialization.MinecraftProtocolSerializeInterface
  * Set Equipment | 0x51 | play | clientbound
  *
  * @param entityId entityId
- * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18071#Set_Equipment">https://wiki.vg/Protocol#Set_Equipment</a>
+ * @see <a href="https://wiki.vg/index.php?title=Protocol&oldid=18067#Set_Equipment">https://wiki.vg/Protocol#Set_Equipment</a>
  */
 
 @MinecraftPacket(id = 0x51, state = PacketState.PLAY, direction = PacketDirection.CLIENTBOUND)
