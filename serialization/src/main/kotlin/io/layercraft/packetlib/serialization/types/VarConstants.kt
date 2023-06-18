@@ -1,0 +1,8 @@
+package io.layercraft.packetlib.serialization.types
+
+const val MINECRAFT_VAR_NUMBER_SEGMENT_BITS = 0x7F
+const val MINECRAFT_VAR_NUMBER_CONTINUE_BIT = 0x80
+
+const val MINECRAFT_MAX_STRING_LENGTH = 32767
+const val MINECRAFT_MAX_CHAT_LENGTH = 262144
+const val MINECRAFT_MAX_IDENTIFIER_LENGTH = 32767

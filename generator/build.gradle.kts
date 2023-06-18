@@ -1,14 +1,9 @@
 plugins {
-    kotlin("jvm") version "1.8.20"
     kotlin("plugin.serialization") version "1.8.21"
 }
 
 group = "io.layercraft"
 version = "1.0.0"
-
-repositories {
-    mavenCentral()
-}
 
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
@@ -16,6 +11,8 @@ dependencies {
 
     implementation("io.ktor:ktor-client-core:2.3.1")
     implementation("io.ktor:ktor-client-java:2.3.1")
+
+    implementation(project(":types"))
 
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
