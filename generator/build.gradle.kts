@@ -30,4 +30,9 @@ tasks.register<JavaExec>("generateCode") {
     dependsOn("compileKotlin")
     mainClass.set("GenerateCodeKt")
     classpath = sourceSets["main"].runtimeClasspath
+    args("1.19.3")
+    doLast {
+        println("Generated code in ${project.projectDir}/src/main/kotlin")
+        this.dependsOn("ktlintFormat")
+    }
 }

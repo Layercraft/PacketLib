@@ -1,10 +1,10 @@
 package fields
 
-import com.squareup.kotlinpoet.PropertySpec
+import com.squareup.kotlinpoet.ParameterSpec
 
 @FieldType("test-field")
 object TestField: Field{
-    override fun addClassFields(fieldInfo: FieldInfo): List<PropertySpec> {
+    override fun addClassFields(fieldInfo: FieldInfo): List<ParameterSpec> {
         TODO("Not yet implemented")
     }
 

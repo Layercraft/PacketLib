@@ -1,14 +1,15 @@
 package fields
 
 import PacketData
-import com.squareup.kotlinpoet.PropertySpec
+import com.squareup.kotlinpoet.ParameterSpec
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonPrimitive
+import java.util.*
 import java.util.regex.Pattern
 
 interface Field {
-    fun addClassFields(fieldInfo: FieldInfo): List<PropertySpec>
+    fun addClassFields(fieldInfo: FieldInfo): List<ParameterSpec>
     fun addClassSerialize(fieldInfo: FieldInfo): List<String>
     fun addClassDeserialize(fieldInfo: FieldInfo): List<String>
     fun addClassVarList(fieldInfo: FieldInfo): List<String>
@@ -32,7 +33,7 @@ fun camelCase(s: String): String {
     val m = p.matcher(s)
     val sb = StringBuilder()
     while (m.find()) {
-        m.appendReplacement(sb, m.group(2).toUpperCase())
+        m.appendReplacement(sb, m.group(2).uppercase(Locale.getDefault()))
     }
     m.appendTail(sb)
     val camelCaseStr = sb.toString()

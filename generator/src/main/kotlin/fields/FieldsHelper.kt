@@ -1,6 +1,8 @@
 package fields
 
 import com.squareup.kotlinpoet.FileSpec
+import com.squareup.kotlinpoet.FunSpec
+import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonPrimitive
@@ -31,7 +33,17 @@ object FieldsHelper {
             val type = fieldInfo.typeJson.content
             val field = get(type)
 
-            ctx.packetClass.addProperties(field.addClassFields(fieldInfo))
+            val constructor = FunSpec.constructorBuilder()
+
+            val classFields = field.addClassFields(fieldInfo)
+
+            classFields.forEach {
+                constructor.addParameter(it)
+
+                ctx.packetClass.addProperty(PropertySpec.builder(it.name, it.type).initializer(it.name).build())
+            }
+
+            ctx.packetClass.primaryConstructor(constructor.build())
 
 
 

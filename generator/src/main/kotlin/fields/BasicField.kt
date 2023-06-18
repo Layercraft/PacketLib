@@ -1,6 +1,6 @@
 package fields
 
-import com.squareup.kotlinpoet.PropertySpec
+import com.squareup.kotlinpoet.ParameterSpec
 import com.squareup.kotlinpoet.asTypeName
 import kotlin.reflect.KClass
 
@@ -12,8 +12,9 @@ abstract class BasicField(
     private val optional: Boolean = false,
 ) : Field {
 
-    override fun addClassFields(fieldInfo: FieldInfo): List<PropertySpec> {
-        return listOf(PropertySpec.Companion.builder(fieldInfo.varName, clazz::class.asTypeName().copy(nullable = optional)).build())
+    override fun addClassFields(fieldInfo: FieldInfo): List<ParameterSpec> {
+        val type = clazz.asTypeName().copy(nullable = optional)
+        return listOf(ParameterSpec.builder(fieldInfo.varName, type).build())
     }
 
     override fun addClassSerialize(fieldInfo: FieldInfo): List<String> {
