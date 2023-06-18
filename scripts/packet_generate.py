@@ -258,6 +258,7 @@ class PacketGenerator:
             fields = self.generate_fields()
         except Exception as e:
             print(f"Error: {self.package}.{self.class_name} ({self.id})")
+            print(e)
             return "//TODO"
 
         class_fields_str = fields["class_fields_str"]

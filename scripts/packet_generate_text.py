@@ -118,6 +118,8 @@ kotlin_types_wrapper = {
     "tags": "native",
     "minecraft_smelting_format": "native",
     "ingredient": "native",
+    "game_profile": "native",
+    "chat_session": "native",
 }
 
 
@@ -916,8 +918,12 @@ data class {class_name}(
                     raise Exception("Unknown option type")
             elif field_type == "buffer":
                 buffer_count_type = field["countType"]
+                buffer_count = field["count"]
                 if buffer_count_type == "varint":
                     return_value = self.generate_basic_type(field_name, "buffer", infos)
+                # If the count is a fixed value, we can generate a fixed buffer
+                elif type(buffer_count) is int:
+                    print("Fixed buffer not supported yet")
                 else:
                     raise Exception("Not supported")
             elif field_type == "switch":
