@@ -1,12 +1,14 @@
 package fields
 
+import PacketData
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
 import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.jsonObject
 
 object FieldsHelper {
 
@@ -28,37 +30,36 @@ object FieldsHelper {
         return fields[name] ?: error("Field $name not found")
     }
 
-    fun generateField(ctx: GenerationContext, fieldInfo: FieldInfo) {
-        if (fieldInfo.typeJson is JsonPrimitive) {
-            val type = fieldInfo.typeJson.content
-            val field = get(type)
+    fun generateClass(ctx: GenerationContext, packetData: PacketData) {
+        val constructorBuilder = FunSpec.constructorBuilder()
 
-            val constructor = FunSpec.constructorBuilder()
+        for (fieldJson in packetData.fields) {
+            val fieldInfo = generateFieldInfo(packetData, fieldJson.jsonObject)
+            if (fieldInfo.typeJson is JsonPrimitive) {
+                val type = fieldInfo.typeJson.content
+                val field = get(type)
 
-            val classFields = field.addClassFields(fieldInfo)
+                val classFields = field.addClassFields(fieldInfo)
 
-            classFields.forEach {
-                constructor.addParameter(it)
+                classFields.forEach {
+                    constructorBuilder.addParameter(it)
+                    ctx.packetClass.addProperty(PropertySpec.builder(it.name, it.type).initializer(it.name).build())
+                }
 
-                ctx.packetClass.addProperty(PropertySpec.builder(it.name, it.type).initializer(it.name).build())
+            } else if (fieldInfo.typeJson is JsonArray) {
+                TODO()
             }
-
-            ctx.packetClass.primaryConstructor(constructor.build())
-
-
-
-        } else if (fieldInfo.typeJson is JsonArray) {
-            val type = fieldInfo.typeJson[0].jsonPrimitive.content
-
-            if (type == "option") {
-                generateField(ctx, fieldInfo.copy(
-                    typeJson = fieldInfo.typeJson[1],
-                    optional = true,
-                ))
-                return
-            }
-            val field = get(type)
         }
+
+        val constructor = constructorBuilder.build()
+        ctx.packetClass.primaryConstructor(constructor)
+    }
+
+    private fun generateFieldInfo(packetData: PacketData, jsonObject: JsonObject): FieldInfo {
+        return FieldInfo(
+            jsonObject = jsonObject,
+            packet = packetData,
+        )
     }
 }
 

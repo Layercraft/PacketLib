@@ -2,7 +2,6 @@
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.KModifier
 import com.squareup.kotlinpoet.TypeSpec
-import fields.FieldInfo
 import fields.FieldsHelper
 import fields.GenerationContext
 import kotlinx.coroutines.runBlocking
@@ -29,20 +28,11 @@ class PacketsGenerator(
 
             val ctx = GenerationContext(file, clazz)
 
-            for (field in packet.fields) {
-                FieldsHelper.generateField(ctx, generateFieldInfo(packet, field.jsonObject))
-            }
+            FieldsHelper.generateClass(ctx, packet)
 
             file.addType(clazz.build())
             file.build().writeTo(System.out)
         }
-    }
-
-    private fun generateFieldInfo(packetData: PacketData, jsonObject: JsonObject): FieldInfo {
-        return FieldInfo(
-            jsonObject = jsonObject,
-            packet = packetData,
-        )
     }
 
     private fun getPackets(jsonObject: JsonObject): List<PacketData> {

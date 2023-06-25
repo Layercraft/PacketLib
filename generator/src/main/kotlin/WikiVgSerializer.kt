@@ -17,9 +17,6 @@ class WikiVgSerializer(
         bodyTextMatcher.group(1)
     }
 
-
-
-
     fun get(packetId: String, state: PacketGeneratorState, direction: PacketGeneratorDirection): WikiVgData {
         val directionConverted = if (direction == PacketGeneratorDirection.CLIENT_BOUND) "Client" else "Server"
         val stateCapitalized = state.state.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
