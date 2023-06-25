@@ -3,7 +3,7 @@ import java.util.*
 import java.util.regex.Pattern
 
 class WikiVgSerializer(
-    private val protocolVersion: ProtocolVersion
+    private val protocolVersion: ProtocolVersion,
 ) {
 
     private val wikiVgData: String = runBlocking {
@@ -34,12 +34,11 @@ class WikiVgSerializer(
 
         return WikiVgData(protocolVersion, id, name)
     }
-
 }
 
 data class WikiVgData(
     val protocolVersion: ProtocolVersion,
     val id: String,
     val name: String,
-    val url : String = protocolVersion.wikiVgUrl + "#$id"
+    val url: String = protocolVersion.wikiVgUrl + "#$id",
 )

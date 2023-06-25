@@ -19,19 +19,19 @@ abstract class BasicField(
 
     override fun addClassSerialize(fieldInfo: FieldInfo): List<String> {
         return listOf(
-            "${fieldInfo.serializerVariableName}.${serialize.replace("%s", fieldInfo.varName)}"
+            "${fieldInfo.serializerVariableName}.${serialize.replace("%s", fieldInfo.varName)}",
         )
     }
 
     override fun addClassDeserialize(fieldInfo: FieldInfo): List<String> {
         return listOf(
-            "${fieldInfo.name} = ${fieldInfo.deserializerVariableName}.${deserialize.replace("%s", fieldInfo.varName)}"
+            "${fieldInfo.name} = ${fieldInfo.deserializerVariableName}.${deserialize.replace("%s", fieldInfo.varName)}",
         )
     }
 
     override fun addClassVarList(fieldInfo: FieldInfo): List<String> {
         return listOf(
-            "val ${fieldInfo.name}: ${clazz.simpleName}, // $classVarListComment"
+            "val ${fieldInfo.name}: ${clazz.simpleName}, // $classVarListComment",
         )
     }
 

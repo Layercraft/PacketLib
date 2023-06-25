@@ -19,18 +19,20 @@ interface MCProtocolDeserializer<I> {
     val remaining: Int
 
     fun readByte(): Byte
-    fun readBytes(): ByteArray
+    fun readBytes(): ByteArray = readBytes(remaining)
     fun readBytes(n: Int): ByteArray
 
-    fun readBoolean(): Boolean
+    fun readBoolean(): Boolean = readByte() != 0.toByte()
     fun readInt(): Int
     fun readLong(): Long
     fun readShort(): Short
     fun readFloat(): Float
     fun readDouble(): Double
 
-    fun readUByte(): UByte
-    fun readUShort(): UShort
+    fun readUByte(): UByte = readByte().toUByte()
+    fun readUShort(): UShort = readShort().toUShort()
+    fun readUInt(): UInt = readInt().toUInt()
+    fun readULong(): ULong = readLong().toULong()
 
     fun readVarInt(): Int = VarIntSerializer.readVarInt(this)
     fun readVarLong(): Long = VarLongSerializer.readVarLong(this)

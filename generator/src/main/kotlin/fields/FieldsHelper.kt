@@ -12,18 +12,18 @@ import kotlinx.serialization.json.jsonObject
 
 object FieldsHelper {
 
-    private val fields: Map<String, Field> = register()
+    private lateinit var fields: Map<String, Field>
 
     fun register(): Map<String, Field> {
         val classes: List<Field> = listOf(
             TestField,
         ) + BasicFields.ALL
 
-        val fieldTypes = classes.associateBy { it::class.java.getAnnotation(FieldType::class.java)?: error("Field ${it::class.java.name} has no FieldType annotation") }
+        val fieldTypes = classes.associateBy { it::class.java.getAnnotation(FieldType::class.java) ?: error("Field ${it::class.java.name} has no FieldType annotation") }
 
-        println("Found ${fieldTypes.size} field types with names: ${fieldTypes.keys.map { it.name }}")
+        fields = fieldTypes.mapKeys { it.key.name }
 
-        return fieldTypes.mapKeys { it.key.name }
+        return fields
     }
 
     fun get(name: String): Field {
@@ -45,7 +45,6 @@ object FieldsHelper {
                     constructorBuilder.addParameter(it)
                     ctx.packetClass.addProperty(PropertySpec.builder(it.name, it.type).initializer(it.name).build())
                 }
-
             } else if (fieldInfo.typeJson is JsonArray) {
                 TODO()
             }

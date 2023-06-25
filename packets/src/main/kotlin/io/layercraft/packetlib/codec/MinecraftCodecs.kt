@@ -2,6 +2,4 @@
 
 package io.layercraft.packetlib.codec
 
-object MinecraftCodecs {
-
-}
+object MinecraftCodecs

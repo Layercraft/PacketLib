@@ -19,15 +19,17 @@ interface MCProtocolSerializer<O> {
     fun writeByte(input: Byte)
     fun writeBytes(input: ByteArray)
 
-    fun writeBoolean(input: Boolean)
+    fun writeBoolean(input: Boolean) = writeByte(if (input) 1 else 0)
     fun writeInt(input: Int)
     fun writeLong(input: Long)
     fun writeShort(input: Short)
     fun writeFloat(input: Float)
     fun writeDouble(input: Double)
 
-    fun writeUByte(input: UByte)
-    fun writeUShort(input: UShort)
+    fun writeUByte(input: UByte) = writeByte(input.toByte())
+    fun writeUShort(input: UShort) = writeShort(input.toShort())
+    fun writeUInt(input: UInt) = writeInt(input.toInt())
+    fun writeULong(input: ULong) = writeLong(input.toLong())
 
     fun writeVarInt(input: Int) = VarIntSerializer.writeVarInt(input, this)
     fun writeVarLong(input: Long) = VarLongSerializer.writeVarLong(input, this)

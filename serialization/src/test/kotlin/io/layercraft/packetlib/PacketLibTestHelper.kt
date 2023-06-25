@@ -36,19 +36,11 @@ class MinecraftByteBufferDeserialize(override val input: ByteBuffer) : MCProtoco
 
     override fun readByte(): Byte = input.get()
 
-    override fun readBytes(): ByteArray {
-        val bytes = ByteArray(input.remaining())
-        input.get(bytes)
-        return bytes
-    }
-
     override fun readBytes(n: Int): ByteArray {
         val bytes = ByteArray(n)
         input.get(bytes)
         return bytes
     }
-
-    override fun readBoolean(): Boolean = input.get() == 1.toByte()
 
     override fun readInt(): Int = input.int
 
@@ -59,10 +51,6 @@ class MinecraftByteBufferDeserialize(override val input: ByteBuffer) : MCProtoco
     override fun readFloat(): Float = input.float
 
     override fun readDouble(): Double = input.double
-
-    override fun readUByte(): UByte = input.get().toUByte()
-
-    override fun readUShort(): UShort = input.short.toUShort()
 }
 
 class MinecraftByteBufferSerialize(override val output: ByteBuffer) : MCProtocolSerializer<ByteBuffer> {
@@ -72,10 +60,6 @@ class MinecraftByteBufferSerialize(override val output: ByteBuffer) : MCProtocol
 
     override fun writeBytes(input: ByteArray) {
         output.put(input)
-    }
-
-    override fun writeBoolean(input: Boolean) {
-        output.put(if (input) 1.toByte() else 0.toByte())
     }
 
     override fun writeInt(input: Int) {
@@ -96,13 +80,5 @@ class MinecraftByteBufferSerialize(override val output: ByteBuffer) : MCProtocol
 
     override fun writeDouble(input: Double) {
         output.putDouble(input)
-    }
-
-    override fun writeUByte(input: UByte) {
-        output.put(input.toByte())
-    }
-
-    override fun writeUShort(input: UShort) {
-        output.putShort(input.toShort())
     }
 }

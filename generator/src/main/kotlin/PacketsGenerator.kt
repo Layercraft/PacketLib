@@ -17,6 +17,15 @@ class PacketsGenerator(
 
     fun generate() {
         val packets = getPackets(packetData)
+        val types = getTypes(packetData).map { it.name }
+        val registeredTypes = FieldsHelper.register().map { it.key }
+        val missingTypes = types.filter { !registeredTypes.contains(it) }
+
+        println("Found ${packets.size} packets and ${types.size} types")
+        println("Missing types: $missingTypes")
+        if (missingTypes.isNotEmpty()) {
+            error("Missing types")
+        }
 
         for (packet in packets) {
             val packagePath = "io.layercraft.packetlib.packets.${protocolVersion.packageVersion}.${packet.state.name.lowercase()}.${packet.direction.name.replace("_", "").lowercase()}"
@@ -36,7 +45,6 @@ class PacketsGenerator(
     }
 
     private fun getPackets(jsonObject: JsonObject): List<PacketData> {
-        val types = jsonObject["types"]!!.jsonObject
         val handshaking = "handshaking" to jsonObject["handshaking"]!!.jsonObject
         val status = "status" to jsonObject["status"]!!.jsonObject
         val login = "login" to jsonObject["login"]!!.jsonObject
@@ -50,6 +58,12 @@ class PacketsGenerator(
         ).flatMap { transformPackets(it.first, it.second) }
     }
 
+    private fun getTypes(jsonObject: JsonObject): List<PacketType> {
+        return jsonObject["types"]!!.jsonObject.map {
+            PacketType(name = it.key, it.value)
+        }
+    }
+
     private fun transformPackets(state: String, jsonObject: JsonObject): List<PacketData> {
         val toClient = jsonObject["toClient"]!!.jsonObject["types"]!!.jsonObject
         val toServer = jsonObject["toServer"]!!.jsonObject["types"]!!.jsonObject
@@ -61,30 +75,29 @@ class PacketsGenerator(
         val packetData = getPacketInfoLayer(jsonObject["packet"]!!.jsonArray)
 
         val packets = jsonObject.filter { it.key != "packet" }.map { entry ->
-                val name = entry.key
-                val packet = entry.value.jsonArray[1].jsonArray
-                val packetInfoLayer = packetData.first { it.className == name }
+            val name = entry.key
+            val packet = entry.value.jsonArray[1].jsonArray
+            val packetInfoLayer = packetData.first { it.className == name }
 
-                val id = packetInfoLayer.id.replaceFirst("0x", "").toInt(16)
-                val direction = PacketGeneratorDirection.fromString(direction)
-                val state = PacketGeneratorState.fromString(state)
+            val id = packetInfoLayer.id.replaceFirst("0x", "").toInt(16)
+            val direction = PacketGeneratorDirection.fromString(direction)
+            val state = PacketGeneratorState.fromString(state)
 
-                val wikiVgData = wikiVgSerializer.get(packetInfoLayer.id, state, direction)
+            val wikiVgData = wikiVgSerializer.get(packetInfoLayer.id, state, direction)
 
-                PacketData(
-                    id = id,
-                    direction = direction,
-                    state = state,
-                    fields = packet,
-                    wikiVgData = wikiVgData,
-                    name = packetInfoLayer.name,
-                    className = packetInfoLayer.className,
-                )
-            }
+            PacketData(
+                id = id,
+                direction = direction,
+                state = state,
+                fields = packet,
+                wikiVgData = wikiVgData,
+                name = packetInfoLayer.name,
+                className = packetInfoLayer.className,
+            )
+        }
 
         return packets
     }
-
 
     private fun getPacketInfoLayer(packetData: JsonArray): List<PacketInfoLayer> {
         val second = packetData[1].jsonArray
@@ -97,9 +110,7 @@ class PacketsGenerator(
 
             PacketInfoLayer(id, name, className)
         }
-
     }
-
 }
 
 data class PacketInfoLayer(
@@ -124,7 +135,8 @@ enum class PacketGeneratorDirection(
     val direction: String,
 ) {
     CLIENT_BOUND("toClient"),
-    SERVER_BOUND("toServer");
+    SERVER_BOUND("toServer"),
+    ;
 
     companion object {
         fun fromString(direction: String): PacketGeneratorDirection {
@@ -144,3 +156,8 @@ enum class PacketGeneratorState(
         }
     }
 }
+
+data class PacketType(
+    val name: String,
+    val data: JsonElement,
+)

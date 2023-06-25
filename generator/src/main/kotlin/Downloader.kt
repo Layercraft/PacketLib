@@ -14,5 +14,4 @@ object Downloader {
     suspend fun getWikiVgPage(protocolVersions: ProtocolVersion): String = client.get(protocolVersions.wikiVgUrl).bodyAsText()
 
     suspend fun getProtocolSpec(protocolVersions: ProtocolVersion): JsonObject = client.get(protocolVersions.url).bodyAsText().let { Json.parseToJsonElement(it).jsonObject }
-
 }
