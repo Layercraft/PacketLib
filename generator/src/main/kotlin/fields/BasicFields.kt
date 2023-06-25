@@ -11,6 +11,10 @@ object BasicFields {
         @FieldType("optvarint")
         object : BasicField(Int::class, "writeVarInt(%s)", "readVarInt()", "optvarint", optional = true) {}
 
+    val VARLONG =
+        @FieldType("varlong")
+        object : BasicField(Long::class, "writeVarLong(%s)", "readVarLong()", "varlong") {}
+
     val I8 =
         @FieldType("i8")
         object : BasicField(Byte::class, "writeByte(%s)", "readByte()") {}
@@ -31,9 +35,17 @@ object BasicFields {
         @FieldType("i32")
         object : BasicField(Int::class, "writeInt(%s)", "readInt()") {}
 
+    val U32 =
+        @FieldType("u32")
+        object : BasicField(UInt::class, "writeUInt(%s)", "readUInt()") {}
+
     val I64 =
         @FieldType("i64")
         object : BasicField(Long::class, "writeLong(%s)", "readLong()") {}
+
+    val U64 =
+        @FieldType("u64")
+        object : BasicField(ULong::class, "writeULong(%s)", "readULong()") {}
 
     val F32 =
         @FieldType("f32")
@@ -55,6 +67,10 @@ object BasicFields {
         @FieldType("string")
         object : BasicField(String::class, "writeString(%s)", "readString()") {}
 
+    val PSTRING =
+        @FieldType("pstring")
+        object : BasicField(String::class, "writeString(%s)", "readString()") {}
+
     val REST_BUFFER =
         @FieldType("restBuffer")
         object : BasicField(ByteArray::class, "writeRemainingByteArray(%s)", "readRemainingByteArray()", "restBuffer") {}
@@ -66,17 +82,21 @@ object BasicFields {
     val ALL: List<Field> = listOf(
         VARINT,
         OPT_VARINT,
+        VARLONG,
         I8,
         U8,
         I16,
         U16,
         I32,
+        U32,
         I64,
+        U64,
         F32,
         F64,
         BOOL,
         UUID,
         STRING,
+        PSTRING,
         REST_BUFFER,
         NBT,
     )
