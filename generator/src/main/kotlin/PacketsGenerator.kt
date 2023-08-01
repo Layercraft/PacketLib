@@ -45,17 +45,12 @@ class PacketsGenerator(
     }
 
     private fun getPackets(jsonObject: JsonObject): List<PacketData> {
-        val handshaking = "handshaking" to jsonObject["handshaking"]!!.jsonObject
-        val status = "status" to jsonObject["status"]!!.jsonObject
-        val login = "login" to jsonObject["login"]!!.jsonObject
-        val play = "play" to jsonObject["play"]!!.jsonObject
+        val keysList = listOf("handshaking", "status", "login", "play")
 
-        return listOf(
-            handshaking,
-            status,
-            login,
-            play,
-        ).flatMap { transformPackets(it.first, it.second) }
+        return keysList.flatMap { key ->
+            val data = key to jsonObject[key]!!.jsonObject
+            transformPackets(data.first, data.second)
+        }
     }
 
     private fun getTypes(jsonObject: JsonObject): List<PacketType> {
@@ -71,8 +66,10 @@ class PacketsGenerator(
         return iterateThrowPackets(state, "toClient", toClient) + iterateThrowPackets(state, "toServer", toServer)
     }
 
-    private fun iterateThrowPackets(state: String, direction: String, jsonObject: JsonObject): List<PacketData> {
+    private fun iterateThrowPackets(stateStr: String, directionStr: String, jsonObject: JsonObject): List<PacketData> {
         val packetData = getPacketInfoLayer(jsonObject["packet"]!!.jsonArray)
+        val direction = PacketGeneratorDirection.fromString(directionStr)
+        val state = PacketGeneratorState.fromString(stateStr)
 
         val packets = jsonObject.filter { it.key != "packet" }.map { entry ->
             val name = entry.key
@@ -80,8 +77,6 @@ class PacketsGenerator(
             val packetInfoLayer = packetData.first { it.className == name }
 
             val id = packetInfoLayer.id.replaceFirst("0x", "").toInt(16)
-            val direction = PacketGeneratorDirection.fromString(direction)
-            val state = PacketGeneratorState.fromString(state)
 
             val wikiVgData = wikiVgSerializer.get(packetInfoLayer.id, state, direction)
 
