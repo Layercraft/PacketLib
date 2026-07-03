@@ -13,13 +13,13 @@ class Codec internal constructor(
 ) {
 
     private val list: List<CodecPacket<out Packet>> by lazy {
-        packets.values.flatMap { it.clientPacketMap.values }.toList() + packets.values.flatMap { it.serverPacketMap.values }.toList()
+        packets.values.flatMap { it.clientBoundPackets.values } + packets.values.flatMap { it.serverBoundPackets.values }
     }
 
     fun getCodecPacket(packetDirection: PacketDirection, packetState: PacketState, packetId: Int): CodecPacket<*>? {
         return when (packetDirection) {
-            PacketDirection.CLIENTBOUND -> packets[packetState]?.serverPacketMap?.get(packetId)
-            PacketDirection.SERVERBOUND -> packets[packetState]?.clientPacketMap?.get(packetId)
+            PacketDirection.CLIENTBOUND -> packets[packetState]?.clientBoundPackets?.get(packetId)
+            PacketDirection.SERVERBOUND -> packets[packetState]?.serverBoundPackets?.get(packetId)
         }
     }
 
@@ -34,15 +34,15 @@ class Codec internal constructor(
 }
 
 class CodecRegistry internal constructor(
-    val clientPacketMap: HashMap<Int, CodecPacket<out ServerBoundPacket>> = HashMap(),
-    val serverPacketMap: HashMap<Int, CodecPacket<out ClientBoundPacket>> = HashMap(),
+    val clientBoundPackets: HashMap<Int, CodecPacket<out ClientBoundPacket>> = HashMap(),
+    val serverBoundPackets: HashMap<Int, CodecPacket<out ServerBoundPacket>> = HashMap(),
 ) {
     fun <T : ClientBoundPacket> clientBound(packetId: Int, packet: KClass<T>, packetSerializer: PacketSerializer<T>) {
-        serverPacketMap[packetId] = CodecPacket(packetId, packet, packetSerializer)
+        clientBoundPackets[packetId] = CodecPacket(packetId, packet, packetSerializer)
     }
 
     fun <T : ServerBoundPacket> serverBound(packetId: Int, packet: KClass<T>, packetSerializer: PacketSerializer<T>) {
-        clientPacketMap[packetId] = CodecPacket(packetId, packet, packetSerializer)
+        serverBoundPackets[packetId] = CodecPacket(packetId, packet, packetSerializer)
     }
 }
 
@@ -65,5 +65,5 @@ enum class PacketDirection {
 }
 
 enum class PacketState {
-    HANDSHAKING, STATUS, LOGIN, PLAY,
+    HANDSHAKING, STATUS, LOGIN, CONFIGURATION, PLAY,
 }

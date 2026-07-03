@@ -25,6 +25,8 @@ interface MCProtocolSerializer<O> {
 
     fun writeUByte(input: UByte)
     fun writeUShort(input: UShort)
+    fun writeUInt(input: UInt) = writeInt(input.toInt())
+    fun writeULong(input: ULong) = writeLong(input.toLong())
 
     fun writeVarInt(input: Int) = MinecraftVarIntUtils.writeVarInt(input, this)
     fun writeVarLong(input: Long) = MinecraftVarLongUtils.writeVarLong(input, this)
@@ -46,6 +48,9 @@ interface MCProtocolSerializer<O> {
     fun <T> writeRemainingArray(input: List<T>, encoder: (value: T, output: MCProtocolSerializer<O>) -> Unit) = input.forEach { encoder(it, this) }
 
     fun writePosition(input: Position) = writeLong(Position.positionToLong(input))
+
+    /** Position encoding used before 1.14. */
+    fun writeLegacyPosition(input: Position) = writeLong(Position.legacyPositionToLong(input))
     fun writeUUID(input: UUID) {
         writeLong(input.mostSignificantBits)
         writeLong(input.leastSignificantBits)
@@ -53,6 +58,11 @@ interface MCProtocolSerializer<O> {
     fun writeAngle(input: Float) = writeByte((input * 256f / 360f).toInt().toByte())
 
     fun writeNbt(input: NBT) = writeBytes(input)
+    fun writeOptionalNbt(input: NBT?) = if (input == null) writeByte(0) else writeBytes(input)
+
+    /** Network NBT without a root tag name (1.20.2+). */
+    fun writeAnonymousNbt(input: NBT) = writeBytes(input)
+    fun writeAnonymousOptionalNbt(input: NBT?) = if (input == null) writeByte(0) else writeBytes(input)
 
     fun writeChunkBlockEntity(input: ChunkBlockEntity) = ChunkBlockEntity.write(input, this)
 }

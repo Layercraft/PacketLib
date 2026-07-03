@@ -16,18 +16,20 @@ class PacketIdCheck {
         checkCodec(codec)
     }
 
-    private fun generator() = arrayOf(MinecraftCodecs.V1_19_3, MinecraftCodecs.V1_19_4)
+    private fun generator() = MinecraftCodecs.ALL.values.toTypedArray()
 
     private fun checkCodec(codec: Codec) {
         codec.packets.forEach { (state, registry) ->
-            registry.clientPacketMap.forEach { (_, packet) ->
+            registry.clientBoundPackets.forEach { (_, packet) ->
                 val qualifiedName = packet.packet.qualifiedName!!
                 assertTrue { qualifiedName.contains(state.name, ignoreCase = true) }
+                assertTrue { qualifiedName.contains("clientbound") }
             }
 
-            registry.serverPacketMap.forEach { (_, packet) ->
+            registry.serverBoundPackets.forEach { (_, packet) ->
                 val qualifiedName = packet.packet.qualifiedName!!
                 assertTrue { qualifiedName.contains(state.name, ignoreCase = true) }
+                assertTrue { qualifiedName.contains("serverbound") }
             }
         }
     }

@@ -28,6 +28,8 @@ interface MCProtocolDeserializer<I> {
 
     fun readUByte(): UByte
     fun readUShort(): UShort
+    fun readUInt(): UInt = readInt().toUInt()
+    fun readULong(): ULong = readLong().toULong()
 
     fun readVarInt(): Int = MinecraftVarIntUtils.readVarInt(this)
     fun readVarLong(): Long = MinecraftVarLongUtils.readVarLong(this)
@@ -54,20 +56,18 @@ interface MCProtocolDeserializer<I> {
     }
 
     fun readPosition(): Position = Position.longToPosition(readLong())
+
+    /** Position encoding used before 1.14. */
+    fun readLegacyPosition(): Position = Position.longToLegacyPosition(readLong())
     fun readUUID(): UUID = UUID(readLong(), readLong())
     fun readAngle(): Float = (readByte() * 360.0f / 256f)
 
-    fun readNbt(): NBT {
-        val list: MutableList<Byte> = mutableListOf()
-        while (true) {
-            val type = readByte()
-            list.add(type)
-            if (type == 0.toByte()) {
-                break
-            }
-        }
-        return list.toByteArray()
-    }
+    fun readNbt(): NBT = NbtCodec.readNamed(this)
+    fun readOptionalNbt(): NBT? = NbtCodec.readOptionalNamed(this)
+
+    /** Network NBT without a root tag name (1.20.2+). */
+    fun readAnonymousNbt(): NBT = NbtCodec.readAnonymous(this)
+    fun readAnonymousOptionalNbt(): NBT? = NbtCodec.readOptionalAnonymous(this)
 
     fun readChunkBlockEntity(): ChunkBlockEntity = ChunkBlockEntity.read(this)
 }

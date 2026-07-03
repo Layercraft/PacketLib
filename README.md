@@ -1,19 +1,52 @@
 [![](https://jitpack.io/v/Layercraft/PacketLib.svg)](https://jitpack.io/#Layercraft/PacketLib)
 [![Java CI with Gradle](https://github.com/Layercraft/PacketLib/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/Layercraft/PacketLib/actions/workflows/gradle-build.yml)
 [![Gradle Publish](https://github.com/Layercraft/PacketLib/actions/workflows/gradle-publish.yml/badge.svg)](https://github.com/Layercraft/PacketLib/actions/workflows/gradle-publish.yml)
-[![Deploy Dokka KDocs with GitHub Pages](https://github.com/Layercraft/PacketLib/actions/workflows/kdocs.yml/badge.svg)](https://github.com/Layercraft/PacketLib/actions/workflows/kdocs.yml)
 
-# PacketLib - A library for serializing Minecraft Packets typesafe in Kotlin
+# PacketLib - Type-safe Minecraft protocol packets for Kotlin
 
-KDocs: [PacketLib KDocs](https://packetlib.kdocs.layercraft.io/)
+Type-safe, auto-generated Minecraft protocol packets in Kotlin — for **every release version from 1.7 to 1.21.11**
+(55 versions, 43 distinct protocol definitions, ~7200 packet classes).
 
-Type Safe generated Minecraft Protocol Packets in Kotlin.
-For current versions: 1.19.3(also 1.19.4).
-But some complex Packets are not implemented yet.
+The packets are generated with [KotlinPoet](https://square.github.io/kotlinpoet/) from
+[PrismarineJS/minecraft-data](https://github.com/PrismarineJS/minecraft-data).
+Most packets are fully typed data classes with generated serializers; packets that use protocol
+constructs that cannot be expressed in a typed way (entity metadata, particles, registry holders, ...)
+fall back to a `raw: ByteArray` payload so every packet of every version still round-trips correctly.
 
-### Prewords
-Special Thanks to [wiki.vg](https://wiki.vg) for the protocol documentation.
-And to [PrismarineJS/minecraft-data](https://github.com/PrismarineJS/minecraft-data) for the protocol data as json.
+## Usage
+
+Every version has a codec in `MinecraftCodecs`:
+
+```kotlin
+val codec = MinecraftCodecs.V1_20_1
+// or dynamically:
+val codec = MinecraftCodecs.fromProtocolVersion(ProtocolVersion.fromProtocolNumber(763)!!)
+
+val codecPacket = codec.getCodecPacket(PacketDirection.SERVERBOUND, PacketState.HANDSHAKING, 0x00)
+```
+
+Packets are plain data classes with a companion `PacketSerializer`:
+
+```kotlin
+import io.layercraft.packetlib.packets.v1_20.handshaking.serverbound.SetProtocolPacket
+
+val packet = SetProtocolPacket(763, "localhost", 25565u, 1)
+SetProtocolPacket.serialize(output, packet)
+val decoded = SetProtocolPacket.deserialize(input)
+```
+
+`input`/`output` are your implementations of `MCProtocolDeserializer` / `MCProtocolSerializer`
+(see the example implementations: https://gist.github.com/Newspicel/54184b844dee00a4f351e58de033e071).
+
+## Regenerating the packets
+
+The `:generator` module downloads the protocol definitions from minecraft-data (cached in
+`generator/.cache`) and regenerates all packet classes, codecs and the `ProtocolVersion` enum:
+
+```bash
+./gradlew :generator:run                      # all release versions
+./gradlew :generator:run -PmcVersions=1.20.1  # only specific versions
+```
 
 ## Repo
 
@@ -28,7 +61,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.layercraft:packetlib:0.0.23")
+    implementation("com.github.layercraft:packetlib:<version>")
 }
 ```
 
@@ -43,7 +76,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.github.layercraft:packetlib:0.0.23'
+    implementation 'com.github.layercraft:packetlib:<version>'
 }
 ```
 
@@ -67,7 +100,7 @@ dependencies {
         <dependency>
             <groupId>com.github.layercraft</groupId>
             <artifactId>packetlib</artifactId>
-            <version>0.0.23</version>
+            <version>&lt;version&gt;</version>
         </dependency>
     </dependencies>
     ...
@@ -84,7 +117,7 @@ dependencies {
 ```kotlin
 repositories {
     maven {
-        url = uri("https://maven.pkg.github.com/Layercraft/Translator-API")
+        url = uri("https://maven.pkg.github.com/Layercraft/PacketLib")
         credentials {
             username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
             password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
@@ -93,82 +126,13 @@ repositories {
 }
 
 dependencies {
-    implementation("io.layercraft.connector:translator-api:0.0.23")
+    implementation("io.layercraft.connector:packetlib:<version>")
 }
 ```
 
 </details>
 
+## Thanks
 
-<details>
-<summary>Gradle Groovy</summary>
-
-```groovy
-repositories {
-    maven {
-        url = 'https://maven.pkg.github.com/Layercraft/Translator-API'
-        credentials {
-            username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-            password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
-        }
-    }
-}
-
-dependencies {
-    compile 'io.layercraft.connector:translator-api:0.0.23'
-}
-```
-
-</details>
-
-<details>
-<summary>Maven</summary>
-
-```xml
-
-<project>
-    ...
-    <repositories>
-        <repository>
-            <id>Translator-API</id>
-            <url>https://maven.pkg.github.com/Layercraft/Translator-API</url>
-        </repository>
-    </repositories>
-    ...
-    <dependencies>
-        <dependency>
-            <groupId>io.layercraft.connector</groupId>
-            <artifactId>translator-api</artifactId>
-            <version>0.0.23</version>
-        </dependency>
-    </dependencies>
-    ...
-</project>
-```
-
-Settings.xml
-
-```xml
-
-<settings>
-    ...
-    <servers>
-        <server>
-            <id>Translator-API</id>
-            <username>USERNAME</username>
-            <password>TOKEN</password>
-        </server>
-    </servers>
-    ...
-</settings>
-```
-
-</details>
-
-
-## Serialization Implementations
-
-There are no more default implementations for serialization in this library, so you have to write your own.
-But here are some old example implementations: https://gist.github.com/Newspicel/54184b844dee00a4f351e58de033e071
-
-So you need to implement the `MCProtocolSerializer` interface and the `MCProtocolDeserializer` interface. Then just get your Packet over the `MinecraftCodecs` and serialize it.
+- [PrismarineJS/minecraft-data](https://github.com/PrismarineJS/minecraft-data) for the protocol data
+- [minecraft.wiki](https://minecraft.wiki/w/Java_Edition_protocol) (formerly wiki.vg) for the protocol documentation

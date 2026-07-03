@@ -1,6 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.8.20"
-    id("org.jetbrains.dokka") version "1.8.10"
+    alias(libs.plugins.kotlin.jvm)
     `maven-publish`
 }
 
@@ -14,8 +13,8 @@ repositories {
 dependencies {
     testImplementation(kotlin("reflect"))
     testImplementation(kotlin("test"))
-    testImplementation(kotlin("test-junit5"))
-    testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")
+    testImplementation(libs.junit.jupiter)
+    testRuntimeOnly(libs.junit.platform.launcher)
 }
 
 tasks.test {

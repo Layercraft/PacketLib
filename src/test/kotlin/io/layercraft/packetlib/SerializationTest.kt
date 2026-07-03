@@ -85,7 +85,6 @@ internal class SerializationTest {
     fun `test serialization with custom serializer`() {
         val packet = LoginStartPacket(
             "Newspicel",
-            true,
             UUID.randomUUID(),
         )
 
@@ -94,7 +93,6 @@ internal class SerializationTest {
         val decoded = TranslatorAPI.decodeFromByteArray(bytes, LoginStartPacket)
 
         Assertions.assertEquals(packet.username, decoded.username)
-        Assertions.assertEquals(packet.hasPlayerUUID, decoded.hasPlayerUUID)
         Assertions.assertEquals(packet.playerUUID, decoded.playerUUID)
     }
 }
